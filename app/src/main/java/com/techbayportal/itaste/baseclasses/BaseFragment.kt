@@ -9,7 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import com.techbayportal.itaste.ui.activity.MainActivity
+import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import com.techbayportal.itaste.SharedViewModel
 
 

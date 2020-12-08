@@ -9,14 +9,14 @@
 
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.activity.MainViewModel" />
+            type="com.techbayportal.itaste.ui.activities.mainactivity.MainViewModel" />
 
     </data>
 
     <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.MainActivity">
+    tools:context=".ui.activities.mainactivity.MainActivity">
 
 
     <androidx.fragment.app.FragmentContainerView

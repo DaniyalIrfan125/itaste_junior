@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.activity
+package com.techbayportal.itaste.ui.activities.mainactivity
 
 import android.os.Bundle
 import android.view.View
