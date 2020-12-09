@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/signup_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/signup_graph"
+    app:startDestination="@id/loginFragment">
 
+    <fragment
+        android:id="@+id/welcomefragment"
+        android:name="com.techbayportal.itaste.ui.fragments.welcomefragment.Welcomefragment"
+        android:label="Welcomefragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.loginfragment.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:destination="@id/forgotPasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.forgotpasswordfragment.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_otpverificationFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:destination="@id/otpverificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/otpverificationFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.otpverificationfragment.OtpverificationFragment"
+        android:label="OtpverificationFragment" >
+        <action
+            android:id="@+id/action_otpverificationFragment_to_changePasswordFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.changepasswordfragment.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
 </navigation>

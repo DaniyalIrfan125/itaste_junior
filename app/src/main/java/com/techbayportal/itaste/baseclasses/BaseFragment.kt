@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import com.techbayportal.itaste.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
+
 
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
