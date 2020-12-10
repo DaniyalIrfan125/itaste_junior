@@ -21,13 +21,6 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
         get() = BR.viewModel
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
-
-    }
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
@@ -42,12 +35,25 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
                 .navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
 
         })
+
+        mViewModel.onSignUpClicked.observe(this, androidx.lifecycle.Observer {
+            Navigation.findNavController(ed_enterUserName)
+                .navigate(R.id.action_loginFragment_to_signUpFragment)
+        })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+
+    override fun onStop() {
+        super.onStop()
+
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
 }

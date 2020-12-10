@@ -11,9 +11,9 @@ class LoginViewModel @ViewModelInject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-    val onLoginClicked = SingleLiveEvent<Void>()
-    val onForgotPasswordClicked = SingleLiveEvent<Void>()
-
+    val onLoginClicked = SingleLiveEvent<Any>()
+    val onForgotPasswordClicked = SingleLiveEvent<Any>()
+    val onSignUpClicked = SingleLiveEvent<Any>()
 
     fun onLoginClicked() {
         onLoginClicked.call()
@@ -21,6 +21,10 @@ class LoginViewModel @ViewModelInject constructor(
 
     fun onForgotPasswordClicked() {
         onForgotPasswordClicked.call()
+    }
+
+    fun onSignUpClicked() {
+        onSignUpClicked.call()
     }
 
     fun onContinueAsGuestClicked() {

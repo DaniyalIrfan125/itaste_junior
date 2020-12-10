@@ -19,6 +19,13 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -48,4 +55,8 @@
         android:id="@+id/changePasswordFragment"
         android:name="com.techbayportal.itaste.ui.fragments.changepasswordfragment.ChangePasswordFragment"
         android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.signupfragment.SignUpFragment"
+        android:label="SignUpFragment" />
 </navigation>
