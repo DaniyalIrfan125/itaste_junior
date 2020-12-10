@@ -12,6 +12,7 @@
     <color name="colorBlack">#000000</color>
     <color name="colorErrorRed">#d41818</color>
     <color name="colorGrey">#e1e1e1</color>
+    <color name="colorGreyCircle">#ababab</color>
 
 
 </resources>
