@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/signup_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/signUpVendorFragment">
 
     <fragment
         android:id="@+id/welcomefragment"
@@ -59,4 +59,8 @@
         android:id="@+id/signUpFragment"
         android:name="com.techbayportal.itaste.ui.fragments.signupfragment.SignUpFragment"
         android:label="SignUpFragment" />
+    <fragment
+        android:id="@+id/signUpVendorFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.signupvendorfragment.SignUpVendorFragment"
+        android:label="SignUpVendorFragment" />
 </navigation>
