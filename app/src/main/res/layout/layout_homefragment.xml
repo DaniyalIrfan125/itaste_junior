@@ -32,47 +32,62 @@
                 android:src="@drawable/icon_home_menu" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_90sdp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_home_banner" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_margin="@dimen/_7sdp"
-                android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <ImageView
-                    android:layout_width="@dimen/_10sdp"
-                    android:layout_height="@dimen/_10sdp"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/icon_home_clock" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:lineSpacingExtra="2sp"
-                    android:text="00: 58: 00"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="13sp" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_home_banner" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_10sdp"
+                            android:layout_gravity="center_vertical"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/icon_home_clock" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:lineSpacingExtra="2sp"
+                            android:text="00: 58: 00"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_home"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:reverseLayout="true"
+                    app:stackFromEnd="true" />
+
             </LinearLayout>
-        </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:reverseLayout="true"
-            app:stackFromEnd="true" />
+        </androidx.core.widget.NestedScrollView>
+
 
     </LinearLayout>
 </layout>
