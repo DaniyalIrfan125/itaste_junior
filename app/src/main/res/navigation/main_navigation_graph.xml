@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/savedPostsFragment">
+    app:startDestination="@id/searchFragment">
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.techbayportal.itaste.ui.fragments.homefragment.HomeFragment"
@@ -19,4 +19,8 @@
         android:id="@+id/savedPostsFragment"
         android:name="com.techbayportal.itaste.ui.fragments.savedpostsfragment.SavedPostsFragment"
         android:label="SavedPostsFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.searchfragment.SearchFragment"
+        android:label="SearchFragment" />
 </navigation>

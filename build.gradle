@@ -19,6 +19,9 @@ allprojects {
     repositories {
         maven { url "https://jitpack.io" }
         google()
+        maven{
+            url "https://dl.bintray.com/infideap2/Drawer-Behavior"
+        }
         jcenter()
     }
 }

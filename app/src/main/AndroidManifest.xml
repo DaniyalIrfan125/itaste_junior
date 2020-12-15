@@ -15,9 +15,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.activities.signupactivity.SignupActivity">
 
-
         </activity>
         <activity android:name=".ui.activities.mainactivity.MainActivity">
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
