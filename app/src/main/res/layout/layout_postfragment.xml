@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.techbayportal.itaste.ui.fragments.postfragment.PostViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_80sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/img_food_first" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:letterSpacing="-0.01"
+                        android:lineSpacingExtra="3sp"
+                        android:text="caption"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <EditText
+                        android:id="@+id/ed_enterUserName"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_38sdp"
+                        android:backgroundTint="@color/color_darkGrey"
+                        android:fontFamily="@font/roboto_light"
+                        android:hint="Write something about the picture..."
+                        android:singleLine="true"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/titleTextColorBlack"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="3sp"
+                android:text="Add price"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="14sp" />
+
+            <EditText
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:backgroundTint="@color/color_darkGrey"
+                android:fontFamily="@font/roboto_light"
+                android:hint="Enter desired price"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/titleTextColorBlack"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="3sp"
+                android:text="How long it took you to cook this?"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="14sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_38sdp"
+                android:backgroundTint="@color/color_darkGrey"
+                android:fontFamily="@font/roboto_light"
+                android:hint="Enter valid time"
+                android:singleLine="true"
+                android:textColor="@color/colorBlack"
+                android:textColorHint="@color/titleTextColorBlack"
+                android:textSize="13sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+                tools:listitem="@layout/item_timeduration" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="3sp"
+                android:text="Choose Category"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="14sp" />
+
+            <RadioGroup
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:orientation='vertical'>
+
+                <RadioButton
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Turkish Food"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="14sp" />
+
+
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Arabian Food"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="14sp" />
+
+                <RadioButton
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Chinese"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="14sp" />
+
+
+                <RadioButton
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Hot Beverages"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="14sp" />
+
+                <RadioButton
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Fast Food"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="14sp" />
+
+
+                <RadioButton
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Arabian Food"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="14sp" />
+
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="3sp"
+                android:text="Add location"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
+                app:layoutManager="com.google.android.flexbox.FlexboxLayoutManager"
+                tools:listitem="@layout/item_timeduration" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="2sp"
+                    android:text="Advanced Settings"
+                    android:textColor="@color/colorOrange"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_10sdp"
+                    android:layout_height="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:src="@drawable/icon_arrow_down" />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_10sdp" />
+
+
+                <TextView
+                    android:id="@+id/tv_commentsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="2sp"
+                    android:text="Comments"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_commentsText"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:letterSpacing="-0.01"
+                    android:lineSpacingExtra="3sp"
+                    android:text="Once you turn it off, no one can comment
+on this post."
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="10sp" />
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>
