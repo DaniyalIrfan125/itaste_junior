@@ -9,20 +9,276 @@
             type="com.techbayportal.itaste.ui.fragments.searchfragment.SearchViewModel" />
     </data>
 
-    <!--    <com.psoffritti.slidingpanel.SlidingPanel-->
-    <!--        android:id="@+id/sliding_panel"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:elevation="4dp"-->
-    <!--        app:nonSlidingView="@id/fit_to_screen_view"-->
-    <!--        app:orientation="horizontal"-->
-    <!--        app:slidingView="@id/sliding_view">-->
 
-
-    <RelativeLayout
-        android:id="@+id/sliding_view"
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipeRevealLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:background="@color/topbar_greyColor"
+        android:nestedScrollingEnabled="true"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+        <LinearLayout
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.2"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:lineSpacingExtra="2sp"
+                        android:text="Search Filter"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:letterSpacing="-0.03"
+                        android:lineSpacingExtra="3sp"
+                        android:text="Search according to you area, you can set filters to what best suits you."
+                        android:textAlignment="textStart"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="16sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:lineSpacingExtra="-4sp"
+                            android:text="Distance"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:lineSpacingExtra="-4sp"
+                            android:text="5- 6 Km"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
+
+                    <SeekBar
+                        android:id="@+id/seekBar_luminosite"
+                        style="@style/MySeekBar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:progress="50" />
+
+                    <RadioGroup
+                        android:id="@+id/groupradio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation='vertical'>
+
+                        <RadioButton
+
+                            android:id="@+id/radia_id1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Deliverable"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+
+                        <RadioButton
+                            android:id="@+id/radia_id4"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Not Deliverable"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+                    </RadioGroup>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:lineSpacingExtra="-4sp"
+                        android:text="Or Choose by Area"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_27sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/spinner_background_search"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/titleTextColorBlack" />
+
+                    <Spinner
+                        android:id="@+id/spinner_city"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_27sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/spinner_background_search"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/titleTextColorBlack" />
+
+                    <Spinner
+                        android:id="@+id/spinner_area"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_27sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@drawable/spinner_background_search"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/colorBlack"
+                        android:textColorHint="@color/titleTextColorBlack" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:lineSpacingExtra="-4sp"
+                        android:text="Food Category"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                    <RadioGroup
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation='vertical'>
+
+                        <RadioButton
+
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Turkish Food"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+
+                        <RadioButton
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Arabian Food"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+                        <RadioButton
+
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Chinese"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+
+                        <RadioButton
+
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Hot Beverages"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+                        <RadioButton
+
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Fast Food"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+
+                        <RadioButton
+
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Arabian Food"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+
+                    </RadioGroup>
+
+
+                    <com.balysv.materialripple.MaterialRippleLayout
+                        android:id="@+id/ripple"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        app:mrl_rippleColor="@color/colorLightOrange">
+
+                        <Button
+                            android:id="@+id/btn_login"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:background="@drawable/btn_curve_orange"
+                            android:fontFamily="@font/roboto_bold"
+                            android:lineSpacingExtra="@dimen/_3sdp"
+                            android:text="Apply"
+                            android:textAllCaps="true"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp">
+
+                        </Button>
+                    </com.balysv.materialripple.MaterialRippleLayout>
+                </LinearLayout>
+
+            </ScrollView>
+
+
+        </LinearLayout>
+
+
+        <!-- Your main layout here -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,315 +352,9 @@
                 android:id="@+id/recycler_searchposts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/_10sdp" />
+                android:orientation="vertical" />
 
         </LinearLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
-
-        <!--        <com.psoffritti.slidingpanel.SlidingPanel-->
-        <!--            xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--            xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--     -->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-
-        <!--            app:orientation="horizontal"-->
-        <!--            app:nonSlidingView="@id/non_sliding_view"-->
-        <!--            app:slidingView="@id/sliding_view"-->
-        <!--            app:elevation="4dp" >-->
-
-
-        <!--            <TextView-->
-        <!--                android:id="@+id/sliding_view"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:gravity="center"-->
-        <!--                android:text="sliding view"-->
-        <!--                android:background="#e57373" />-->
-
-        <!--        </com.psoffritti.slidingpanel.SlidingPanel>-->
-
-
-        <LinearLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.2"
-                android:background="@color/colorWhite"
-                android:orientation="vertical">
-
-                <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/_10sdp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_15sdp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_bold"
-                            android:lineSpacingExtra="2sp"
-                            android:text="Search Filter"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:letterSpacing="-0.03"
-                            android:lineSpacingExtra="3sp"
-                            android:text="Search according to you area, you can set filters to what best suits you."
-                            android:textAlignment="textStart"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:lineSpacingExtra="-4sp"
-                                android:text="Distance"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:fontFamily="@font/roboto_regular"
-                                android:lineSpacingExtra="-4sp"
-                                android:text="5- 6 Km"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="18sp" />
-                        </RelativeLayout>
-
-                        <SeekBar
-                            android:id="@+id/seekBar_luminosite"
-                            style="@style/MySeekBar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:progress="50" />
-
-                        <RadioGroup
-                            android:id="@+id/groupradio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:orientation='vertical'>
-
-                            <RadioButton
-                                android:id="@+id/radia_id1"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Deliverable"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-
-
-                            <RadioButton
-                                android:id="@+id/radia_id4"
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Not Deliverable"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-                        </RadioGroup>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:lineSpacingExtra="-4sp"
-                            android:text="Or Choose by Area"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="18sp" />
-
-                        <Spinner
-                            android:id="@+id/spinner_country"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_27sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:background="@drawable/spinner_background_search"
-                            android:fontFamily="@font/roboto_regular"
-                            android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/titleTextColorBlack" />
-
-                        <Spinner
-                            android:id="@+id/spinner_city"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_27sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:background="@drawable/spinner_background_search"
-                            android:fontFamily="@font/roboto_regular"
-                            android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/titleTextColorBlack" />
-
-                        <Spinner
-                            android:id="@+id/spinner_area"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_27sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:background="@drawable/spinner_background_search"
-                            android:fontFamily="@font/roboto_regular"
-                            android:textColor="@color/colorBlack"
-                            android:textColorHint="@color/titleTextColorBlack" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:lineSpacingExtra="-4sp"
-                            android:text="Food Category"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-
-                        <RadioGroup
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:orientation='vertical'>
-
-                            <RadioButton
-
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Turkish Food"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-
-
-                            <RadioButton
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Arabian Food"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-
-                            <RadioButton
-
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Chinese"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-
-
-                            <RadioButton
-
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Hot Beverages"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-
-                            <RadioButton
-
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Fast Food"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-
-
-                            <RadioButton
-
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_regular"
-                                android:text="Arabian Food"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textSize="16sp" />
-
-
-                        </RadioGroup>
-
-
-                        <com.balysv.materialripple.MaterialRippleLayout
-                            android:id="@+id/ripple"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginEnd="@dimen/_5sdp"
-                            android:layout_marginBottom="@dimen/_5sdp"
-                            app:mrl_rippleColor="@color/colorLightOrange">
-
-                            <Button
-                                android:id="@+id/btn_login"
-                                android:layout_width="match_parent"
-                                android:layout_height="@dimen/_30sdp"
-                                android:layout_margin="@dimen/_5sdp"
-                                android:background="@drawable/btn_curve_orange"
-                                android:fontFamily="@font/roboto_bold"
-                                android:lineSpacingExtra="@dimen/_3sdp"
-                                android:text="Apply"
-                                android:textAllCaps="true"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="16sp">
-
-                            </Button>
-                        </com.balysv.materialripple.MaterialRippleLayout>
-                    </LinearLayout>
-
-                </ScrollView>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-    </RelativeLayout>
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/fit_to_screen_view"-->
-    <!--            android:layout_width="@dimen/_120sdp"-->
-    <!--            android:layout_height="150dp"-->
-
-    <!--            android:background="#af4448"-->
-    <!--            android:gravity="center"-->
-    <!--            android:layout_gravity="start"-->
-    <!--            android:text="non sliding view" />-->
-
-    <!--    </com.psoffritti.slidingpanel.SlidingPanel>-->
 </layout>

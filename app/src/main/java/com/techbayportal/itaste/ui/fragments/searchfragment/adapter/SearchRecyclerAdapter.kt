@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.flexbox.AlignSelf
-import com.google.android.flexbox.FlexboxLayoutManager
 import com.techbayportal.itaste.R
 
 
@@ -45,12 +43,9 @@ class SearchRecyclerAdapter(private val list: List<Int>, val context: Context) :
 
         fun bind(int: Int) {
 
+        //    imageViewProduct!!.layoutParams = SpanLayoutParams(SpanSize(width, height))
+            Glide.with(context).asDrawable() .load(int).into(imageViewProduct!!)
 
-            Glide.with(context).asDrawable().load(int).into(imageViewProduct!!)
-            val lp = imageViewProduct!!.layoutParams
-            if (lp is FlexboxLayoutManager.LayoutParams) {
-                lp.flexGrow = 1f
-            }
 //            Picasso.get()
 //                .load(int)
 //                .fit()
