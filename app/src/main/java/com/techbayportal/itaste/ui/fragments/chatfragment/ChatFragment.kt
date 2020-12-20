@@ -30,5 +30,4 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>() 
        // Toast.makeText(context, "ItemClicked", Toast.LENGTH_SHORT).show()
     }
 
-
 }
