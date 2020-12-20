@@ -6,14 +6,14 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.accountdeleted.AccountDeletedViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.accountdeletedfragment.AccountDeletedViewModel" />
 
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.accountdeleted.AccountDeletedFragment">
+    tools:context=".ui.fragments.accountdeletedfragment.AccountDeletedFragment">
 
     <LinearLayout
         android:id="@+id/ll_back_button"

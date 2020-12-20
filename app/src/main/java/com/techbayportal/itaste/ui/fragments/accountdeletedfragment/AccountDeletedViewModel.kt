@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.fragments.accountdeleted
+package com.techbayportal.itaste.ui.fragments.accountdeletedfragment
 
 import com.techbayportal.itaste.baseclasses.BaseViewModel
 

@@ -67,7 +67,7 @@
         tools:layout="@layout/fragment_delete_account" />
     <fragment
         android:id="@+id/accountDeletedFragment"
-        android:name="com.techbayportal.itaste.ui.fragments.accountdeleted.AccountDeletedFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.accountdeletedfragment.AccountDeletedFragment"
         android:label="fragment_account_deleted"
         tools:layout="@layout/fragment_account_deleted" />
     <fragment
