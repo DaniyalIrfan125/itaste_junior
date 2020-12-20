@@ -15,17 +15,12 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.dialog.MaterialDialogs
 import com.techbayportal.itaste.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_delete_account.*
 import kotlinx.android.synthetic.main.layout_report_bug.*
 
-
+@AndroidEntryPoint
 class ReportBugFragment : DialogFragment() {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +38,5 @@ class ReportBugFragment : DialogFragment() {
         })
         return rootView
     }
-
-
-
 
 }
