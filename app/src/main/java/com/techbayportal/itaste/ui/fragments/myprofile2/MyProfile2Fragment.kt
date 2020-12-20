@@ -1,26 +1,19 @@
 package com.techbayportal.itaste.ui.fragments.myprofile2
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.databinding.FragmentMyProfile2Binding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class MyProfile2Fragment : BaseFragment<FragmentMyProfile2Binding, MyProfile2ViewModel>() {
+    override val layoutId: Int
+        get() = R.layout.fragment_my_profile2
+    override val viewModel: Class<MyProfile2ViewModel>
+        get() = MyProfile2ViewModel::class.java
+    override val bindingVariable: Int
+        get() = BR.viewModel
 
 
-class MyProfile2Fragment : Fragment() {
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_profile2, container, false)
-    }
 }
