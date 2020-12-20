@@ -122,9 +122,9 @@
         tools:layout="@layout/fragment_direct_messages" />
     <fragment
         android:id="@+id/message3Fragment"
-        android:name="com.techbayportal.itaste.ui.fragments.message3.Message3Fragment"
+        android:name="com.techbayportal.itaste.ui.fragments.chatfragment.ChatFragment"
         android:label="fragment_message3"
-        tools:layout="@layout/fragment_message3" />
+        tools:layout="@layout/fragment_chat" />
     <fragment
         android:id="@+id/newMessageFragment"
         android:name="com.techbayportal.itaste.ui.fragments.newmessagefragment.NewMessageFragment"

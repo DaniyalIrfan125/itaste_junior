@@ -8,13 +8,13 @@
 
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.message3.ChatViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.chatfragment.ChatFragmentViewModel" />
 
     </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.message3.Message3Fragment">
+    tools:context=".ui.fragments.chatfragment.ChatFragment">
 
     <RelativeLayout
         android:id="@+id/relative_top"
