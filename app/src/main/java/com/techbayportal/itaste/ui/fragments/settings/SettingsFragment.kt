@@ -5,26 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.databinding.FragmentSettingsBinding
 
 
+class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
+    override val layoutId: Int
+        get() = R.layout.fragment_settings
+    override val viewModel: Class<SettingsViewModel>
+        get() = SettingsViewModel::class.java
+    override val bindingVariable: Int
+        get() = BR.viewModel
 
-
-class SettingsFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_settings, container, false)
-
-        return view
-    }
 
 }
