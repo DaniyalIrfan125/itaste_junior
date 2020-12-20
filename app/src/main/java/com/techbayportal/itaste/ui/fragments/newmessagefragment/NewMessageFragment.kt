@@ -9,7 +9,9 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.FragmentMessageNewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewMessageFragment : BaseFragment<FragmentMessageNewBinding, NewMessageViewModel>() {
 
     override val layoutId: Int
