@@ -87,7 +87,7 @@
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/changeLanguageFragment"
-        android:name="com.techbayportal.itaste.ui.fragments.changelanguage.ChangeLanguageFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.changelanguagefragment.ChangeLanguageFragment"
         android:label="fragment_change_language"
         tools:layout="@layout/fragment_change_language" />
     <fragment

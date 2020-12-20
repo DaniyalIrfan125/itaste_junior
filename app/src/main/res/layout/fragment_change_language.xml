@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.changelanguage.ChangeLangaugeViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.changelanguagefragment.ChangeLanguageViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.changelanguage.ChangeLanguageFragment">
+    tools:context=".ui.fragments.changelanguagefragment.ChangeLanguageFragment">
 
     <RelativeLayout
         android:id="@+id/relative_top"
