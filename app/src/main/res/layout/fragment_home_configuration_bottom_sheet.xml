@@ -7,12 +7,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.home3.Home3ViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragmentViewModel" />
     </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.home3.Home3Fragment">
+    tools:context=".ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment">
 
     <LinearLayout
         android:id="@+id/ll_top"
