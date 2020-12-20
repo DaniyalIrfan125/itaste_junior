@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/message3Fragment">
 
     <fragment
         android:id="@+id/welcomefragment"
@@ -59,4 +60,73 @@
         android:id="@+id/signUpFragment"
         android:name="com.techbayportal.itaste.ui.fragments.signupfragment.SignUpFragment"
         android:label="SignUpFragment" />
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.deleteaccount.DeleteAccountFragment"
+        android:label="fragment_delete_account"
+        tools:layout="@layout/fragment_delete_account" />
+    <fragment
+        android:id="@+id/accountDeletedFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.accountdeleted.AccountDeletedFragment"
+        android:label="fragment_account_deleted"
+        tools:layout="@layout/fragment_account_deleted" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.myprofile.MyProfileFragment"
+        android:label="fragment_my_profile"
+        tools:layout="@layout/fragment_my_profile" />
+    <fragment
+        android:id="@+id/noNotificationFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.notification.NotificationFragment"
+        android:label="fragment_no_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/changeLanguageFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.changelanguage.ChangeLanguageFragment"
+        android:label="fragment_change_language"
+        tools:layout="@layout/fragment_change_language" />
+    <fragment
+        android:id="@+id/blokedAccounts1Fragment"
+        android:name="com.techbayportal.itaste.ui.fragments.blockedaccounts1.BlockedAccounts1Fragment"
+        android:label="fragment_bloked_accounts1"
+        tools:layout="@layout/fragment_bloked_accounts1" />
+    <fragment
+        android:id="@+id/myProfile1Fragment"
+        android:name="com.techbayportal.itaste.ui.fragments.myprofile1.MyProfile1Fragment"
+        android:label="fragment_my_profile1"
+        tools:layout="@layout/fragment_my_profile1" />
+    <dialog
+        android:id="@+id/reportBugFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.reportabug.ReportBugFragment"
+        android:label="fragment_report_bug"
+        tools:layout="@layout/fragment_report_bug" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.contactus.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/postDetailsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.postdetails.PostDetailsFragment"
+        android:label="fragment_post_details"
+        tools:layout="@layout/fragment_post_details" />
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.messages.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/message1Fragment"
+        android:name="com.techbayportal.itaste.ui.fragments.message1.Message1Fragment"
+        android:label="Message1Fragment" />
+    <fragment
+        android:id="@+id/message3Fragment"
+        android:name="com.techbayportal.itaste.ui.fragments.message3.Message3Fragment"
+        android:label="fragment_message3"
+        tools:layout="@layout/fragment_message3" />
 </navigation>

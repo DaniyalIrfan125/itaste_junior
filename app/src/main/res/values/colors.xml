@@ -13,6 +13,15 @@
     <color name="colorErrorRed">#d41818</color>
     <color name="colorGrey">#e1e1e1</color>
     <color name="colorGreyCircle">#ababab</color>
+    <color name="colorGreyView">#a1a1a1</color>
+    <color name="colorAlertBox">#eeeeee</color>
+    <color name="colorBlockBtnBg">#dfdfdf</color>
+    <color name="colorCommentGrey">#8f8f8f</color>
+    <color name="colorChatBg">#f8f8f8</color>
+    <color name="colorGreen">#34b100</color>
+    <color name="colorChatGray">#dedede</color>
+    <color name="colorChatDetailGray">#4e4e4e</color>
+
 
 
 </resources>
