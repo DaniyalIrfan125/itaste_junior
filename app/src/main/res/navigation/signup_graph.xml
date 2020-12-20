@@ -97,9 +97,9 @@
         tools:layout="@layout/fragment_bloked_accounts" />
     <fragment
         android:id="@+id/myProfile1Fragment"
-        android:name="com.techbayportal.itaste.ui.fragments.myprofile1.MyProfile1Fragment"
+        android:name="com.techbayportal.itaste.ui.fragments.vendorprofilefragment.VendorProfileFragment"
         android:label="fragment_my_profile1"
-        tools:layout="@layout/fragment_my_profile1" />
+        tools:layout="@layout/fragment_vendor_profile" />
     <dialog
         android:id="@+id/reportBugFragment"
         android:name="com.techbayportal.itaste.ui.fragments.reportabug.ReportBugFragment"

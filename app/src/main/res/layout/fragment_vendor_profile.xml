@@ -12,7 +12,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.myprofile1.MyProfile1Fragment">
+    tools:context=".ui.fragments.vendorprofilefragment.VendorProfileFragment">
 
     <RelativeLayout
         android:id="@+id/relative_top"
