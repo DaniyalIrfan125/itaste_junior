@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.fragments.settings
+package com.techbayportal.itaste.ui.fragments.settingsfragment
 
 
 import com.techbayportal.itaste.BR
@@ -8,13 +8,11 @@ import com.techbayportal.itaste.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsViewModel>() {
+class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsFragmentViewModel>() {
     override val layoutId: Int
         get() = R.layout.fragment_settings
-    override val viewModel: Class<SettingsViewModel>
-        get() = SettingsViewModel::class.java
+    override val viewModel: Class<SettingsFragmentViewModel>
+        get() = SettingsFragmentViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
-
-
 }

@@ -7,12 +7,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.settings.SettingsViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.settingsfragment.SettingsFragmentViewModel" />
     </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.settings.SettingsFragment">
+    tools:context=".ui.fragments.settingsfragment.SettingsFragment">
 
 
     <RelativeLayout
