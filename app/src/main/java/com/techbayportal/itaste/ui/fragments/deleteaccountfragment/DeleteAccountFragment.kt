@@ -1,10 +1,5 @@
-package com.techbayportal.itaste.ui.fragments.deleteaccount
+package com.techbayportal.itaste.ui.fragments.deleteaccountfragment
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment

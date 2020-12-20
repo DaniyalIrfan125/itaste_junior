@@ -7,12 +7,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.deleteaccount.DeleteAccountViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.deleteaccountfragment.DeleteAccountViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.deleteaccount.DeleteAccountFragment">
+    tools:context=".ui.fragments.deleteaccountfragment.DeleteAccountFragment">
 
     <LinearLayout
         android:id="@+id/ll_back_button"
