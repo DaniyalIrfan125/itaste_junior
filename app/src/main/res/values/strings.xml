@@ -9,4 +9,8 @@
     <string name="delete_icon">Delete Icon</string>
     <string name="back_icon">Back Icon</string>
     <string name="blocked_accounts">Blocked Accounts</string>
+    <string name="change_language">Change Language</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="save_changes">Save Changes</string>
 </resources>

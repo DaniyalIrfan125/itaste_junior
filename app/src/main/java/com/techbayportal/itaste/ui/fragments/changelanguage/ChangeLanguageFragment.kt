@@ -5,22 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.databinding.FragmentChangeLanguageBinding
 
-class ChangeLanguageFragment : Fragment() {
+class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding, ChangeLangaugeViewModel>() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_language, container, false)
-    }
+    override val layoutId: Int
+        get() = R.layout.fragment_change_language
+    override val viewModel: Class<ChangeLangaugeViewModel>
+        get() = ChangeLangaugeViewModel::class.java
+    override val bindingVariable: Int
+        get() = BR.viewModel
 
 }
