@@ -21,7 +21,8 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_25sdp"
-            android:src="@drawable/icon_backarrow" />
+            android:src="@drawable/icon_backarrow"
+            android:contentDescription="@string/back_icon"/>
     </LinearLayout>
 
     <LinearLayout
@@ -35,12 +36,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_back_button">
 
-
         <ImageView
             android:layout_width="@dimen/_65sdp"
             android:layout_height="@dimen/_65sdp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/group_722" />
+            android:src="@drawable/group_722"
+            android:contentDescription="@string/delete_icon"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -49,7 +50,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="5sp"
-            android:text="Delete Account"
+            android:text="@string/delete_account"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/titleTextColorBlack"
@@ -63,7 +64,7 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="3sp"
-            android:text="Are you sure you want to delete your account? Once you confirm you won't be able to log in without creating a new account."
+            android:text="@string/are_you_sure_you_want_to_delete_your_account_once_you_confirm_you_won_t_be_able_to_log_in_without_creating_a_new_account"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp" />
@@ -77,7 +78,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
-
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/rippleConfirm"
@@ -99,12 +99,12 @@
                 android:background="@drawable/btn_curve_orange"
                 android:fontFamily="@font/roboto_bold"
                 android:lineSpacingExtra="@dimen/_3sdp"
-                android:text="CONFIRM"
+                android:text="@string/confirm"
                 android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp">
-
             </Button>
+
         </com.balysv.materialripple.MaterialRippleLayout>
 
         <com.balysv.materialripple.MaterialRippleLayout
@@ -112,7 +112,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
-
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_30sdp"
             app:mrl_rippleColor="@color/colorLightOrange">
@@ -128,14 +127,12 @@
                 android:background="@drawable/btn_curve_simple"
                 android:fontFamily="@font/roboto_bold"
                 android:lineSpacingExtra="@dimen/_3sdp"
-                android:text="CANCEL"
+                android:text="@string/cancel"
                 android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp">
-
             </Button>
+
         </com.balysv.materialripple.MaterialRippleLayout>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
