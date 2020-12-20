@@ -36,7 +36,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="vertical">
 
                     <TextView
@@ -296,8 +296,8 @@
                     android:layout_height="@dimen/_32sdp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:layout_toLeftOf="@+id/img_filter"
+                    android:layout_marginEnd="@dimen/_7sdp"
+                    android:layout_toStartOf="@+id/img_filter"
                     android:background="@drawable/ed_blackboundary">
 
 
@@ -338,8 +338,8 @@
 
                 <ImageView
                     android:id="@+id/img_filter"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="@dimen/_5sdp"

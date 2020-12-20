@@ -1,7 +1,9 @@
 package com.techbayportal.itaste.ui.fragments.loginfragment
 
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
@@ -21,6 +23,12 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
         get() = BR.viewModel
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    }
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()

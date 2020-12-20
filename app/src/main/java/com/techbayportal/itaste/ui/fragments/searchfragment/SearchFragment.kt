@@ -2,8 +2,7 @@ package com.techbayportal.itaste.ui.fragments.searchfragment
 
 import android.os.Bundle
 import android.view.View
-import com.arasthel.spannedgridlayoutmanager.SpanSize
-import com.arasthel.spannedgridlayoutmanager.SpannedGridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
@@ -59,38 +58,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             context!!
         )
 
-        val spannedGridLayoutManager = SpannedGridLayoutManager(
-            orientation = SpannedGridLayoutManager.Orientation.VERTICAL,
-            spans = 3
-        )
-        recycler_searchposts.layoutManager = spannedGridLayoutManager
-
-
-var  count = 0
-        spannedGridLayoutManager.spanSizeLookup =
-            SpannedGridLayoutManager.SpanSizeLookup { position ->
-                if(position>1){
-                    SpanSize(3,3)
-                }else{
-                    SpanSize(2,2)
-
-                }
-          //      when (position) {
-//                    count++
-
-//                    2 ->
-//                        SpanSize(2, 2)
-//                    else -> SpanSize(1, 1)
-//
-//                    //                position % 7 == 1 ->
-                    //                    SpanSize(2, 2)
-                    //                else ->
-                    //                    SpanSize(1, 1)
-                    //            }
-        //        }
-            }
-
-        spannedGridLayoutManager.itemOrderIsStable = true
+        recycler_searchposts.layoutManager = LinearLayoutManager(context)
 
 
     }
