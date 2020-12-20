@@ -102,7 +102,7 @@
         tools:layout="@layout/fragment_user_profile" />
     <dialog
         android:id="@+id/reportBugFragment"
-        android:name="com.techbayportal.itaste.ui.fragments.reportabug.ReportBugFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDialogFragment"
         android:label="fragment_report_bug"
         tools:layout="@layout/fragment_report_bug" />
     <fragment

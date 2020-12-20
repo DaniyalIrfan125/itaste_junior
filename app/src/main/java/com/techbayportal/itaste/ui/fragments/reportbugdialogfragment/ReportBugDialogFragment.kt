@@ -1,32 +1,24 @@
-package com.techbayportal.itaste.ui.fragments.reportabug
+package com.techbayportal.itaste.ui.fragments.reportbugdialogfragment
 
-import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
-import com.google.android.material.dialog.MaterialDialogs
 import com.techbayportal.itaste.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_delete_account.*
-import kotlinx.android.synthetic.main.layout_report_bug.*
+import kotlinx.android.synthetic.main.fragment_report_bug.*
 
 @AndroidEntryPoint
-class ReportBugFragment : DialogFragment() {
+class ReportBugDialogFragment : DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-         var rootView = inflater.inflate(R.layout.layout_report_bug, container, false)
+         var rootView = inflater.inflate(R.layout.fragment_report_bug, container, false)
 
         btn_Cancel.setOnClickListener(View.OnClickListener {
             dismiss()
