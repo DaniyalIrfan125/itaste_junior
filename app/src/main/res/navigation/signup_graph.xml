@@ -92,9 +92,9 @@
         tools:layout="@layout/fragment_change_language" />
     <fragment
         android:id="@+id/blokedAccounts1Fragment"
-        android:name="com.techbayportal.itaste.ui.fragments.blockedaccounts1.BlockedAccounts1Fragment"
+        android:name="com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.BlockedAccountsFragment"
         android:label="fragment_bloked_accounts1"
-        tools:layout="@layout/fragment_bloked_accounts1" />
+        tools:layout="@layout/fragment_bloked_accounts" />
     <fragment
         android:id="@+id/myProfile1Fragment"
         android:name="com.techbayportal.itaste.ui.fragments.myprofile1.MyProfile1Fragment"

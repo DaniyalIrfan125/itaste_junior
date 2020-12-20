@@ -8,13 +8,13 @@
 
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.blockedaccounts1.BlockedAccounts1ViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.BlockedAccountsViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.blockedaccounts1.BlockedAccounts1Fragment">
+        tools:context=".ui.fragments.blockedaccountsfragment.BlockedAccountsFragment">
 
         <RelativeLayout
             android:id="@+id/relative_top"
@@ -64,7 +64,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/rvBlockedAccounts"
-                tools:listitem="@layout/item_blocked_accounts_users"
+                tools:listitem="@layout/item_blocked_accounts"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>
