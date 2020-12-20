@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.myprofile2.MyProfile2ViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.vendorprofilefragment.VendorProfileViewModel" />
     </data>
 
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.myprofile2.MyProfile2Fragment">
+    tools:context=".ui.fragments.vendorprofilefragment.VendorProfileFragment">
 
     <RelativeLayout
         android:id="@+id/relative_top"
