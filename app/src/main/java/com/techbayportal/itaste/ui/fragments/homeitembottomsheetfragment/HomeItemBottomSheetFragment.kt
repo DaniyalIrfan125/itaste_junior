@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.fragments.homeitembottomsheet
+package com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment
 
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R

@@ -6,12 +6,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.homeitembottomsheet.HomeItemBottomSheetFragment" />
+            type="com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment.HomeItemBottomSheetFragment" />
     </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.homeitembottomsheet.HomeItemBottomSheetFragment">
+    tools:context=".ui.fragments.homeitembottomsheetfragment.HomeItemBottomSheetFragment">
 
     <LinearLayout
         android:id="@+id/ll_top"
