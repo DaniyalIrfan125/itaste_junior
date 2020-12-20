@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.fragments.messages.adapter
+package com.techbayportal.itaste.ui.fragments.directmessagesfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.databinding.ItemMessageListItemBinding
-import com.techbayportal.itaste.databinding.ItemProfileCommentBinding
-import com.techbayportal.itaste.ui.fragments.messages.itemClickListener.UserMessageRvItemClickListener
+import com.techbayportal.itaste.ui.fragments.directmessagesfragment.itemClickListener.DirectMessagesRvItemClickListener
 
-class UserMessagesItemAdapter (val onClickListener: UserMessageRvItemClickListener): RecyclerView.Adapter<UserMessagesItemAdapter.ViewHolderClass>() {
+class DirectMessagesAdapter (val onClickListener: DirectMessagesRvItemClickListener): RecyclerView.Adapter<DirectMessagesAdapter.ViewHolderClass>() {
 
     inner class ViewHolderClass(private val itemBinding: ItemMessageListItemBinding): RecyclerView.ViewHolder(itemBinding.root) {
         fun bindData() {
