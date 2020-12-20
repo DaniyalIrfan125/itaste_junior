@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.fragments.myprofile
+package com.techbayportal.itaste.ui.fragments.myprofilefragment
 
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R

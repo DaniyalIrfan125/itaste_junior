@@ -7,12 +7,12 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.myprofile.MyProfileViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.myprofilefragment.MyProfileViewModel" />
     </data>
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.myprofile.MyProfileFragment">
+    tools:context=".ui.fragments.myprofilefragment.MyProfileFragment">
 
     <RelativeLayout
         android:id="@+id/relative_top"
