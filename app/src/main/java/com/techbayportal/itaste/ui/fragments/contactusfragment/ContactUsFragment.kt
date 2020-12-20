@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.fragments.contactus
+package com.techbayportal.itaste.ui.fragments.contactusfragment
 
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R

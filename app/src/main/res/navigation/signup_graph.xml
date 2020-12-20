@@ -107,7 +107,7 @@
         tools:layout="@layout/fragment_report_bug" />
     <fragment
         android:id="@+id/contactUsFragment"
-        android:name="com.techbayportal.itaste.ui.fragments.contactus.ContactUsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsFragment"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
     <fragment

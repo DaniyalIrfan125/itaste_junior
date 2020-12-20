@@ -7,13 +7,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.contactus.ContactUsFragment" />
+            type="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsFragment" />
     </data>
 
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.contactus.ContactUsFragment">
+    tools:context=".ui.fragments.contactusfragment.ContactUsFragment">
 
     <RelativeLayout
         android:id="@+id/relative_top"

@@ -4,7 +4,9 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.FragmentChangeLanguageBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChangeLanguageFragment : BaseFragment<FragmentChangeLanguageBinding, ChangeLanguageViewModel>() {
 
     override val layoutId: Int
