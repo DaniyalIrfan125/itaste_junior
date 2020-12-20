@@ -6,9 +6,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.databinding.ItemBlockedAccountsBinding
-import com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.itemclicklistener.BlockedAccounts1RvClickListener
+import com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.itemclicklistener.BlockedAccountsRvClickListener
 
-class BlockedAccountsAdapter(val onClickListener: BlockedAccounts1RvClickListener): RecyclerView.Adapter<BlockedAccountsAdapter.ViewHolderClass>() {
+class BlockedAccountsAdapter(val onClickListener: BlockedAccountsRvClickListener): RecyclerView.Adapter<BlockedAccountsAdapter.ViewHolderClass>() {
 
     inner class ViewHolderClass(private val itemBinding: ItemBlockedAccountsBinding):RecyclerView.ViewHolder(itemBinding.root) {
         fun bindData() {

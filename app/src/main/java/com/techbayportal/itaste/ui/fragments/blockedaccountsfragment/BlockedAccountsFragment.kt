@@ -8,11 +8,11 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.FragmentBlokedAccountsBinding
 import com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.adapter.BlockedAccountsAdapter
-import com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.itemclicklistener.BlockedAccounts1RvClickListener
+import com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.itemclicklistener.BlockedAccountsRvClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BlockedAccountsFragment : BaseFragment<FragmentBlokedAccountsBinding, BlockedAccountsViewModel>(), BlockedAccounts1RvClickListener {
+class BlockedAccountsFragment : BaseFragment<FragmentBlokedAccountsBinding, BlockedAccountsViewModel>(), BlockedAccountsRvClickListener {
 
     override val layoutId: Int
         get() = R.layout.fragment_bloked_accounts
