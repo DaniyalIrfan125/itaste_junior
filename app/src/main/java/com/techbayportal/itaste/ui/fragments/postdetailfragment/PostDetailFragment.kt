@@ -1,25 +1,24 @@
-package com.techbayportal.itaste.ui.fragments.postdetails
+package com.techbayportal.itaste.ui.fragments.postdetailfragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
-import com.techbayportal.itaste.databinding.FragmentPostDetailsBinding
-import com.techbayportal.itaste.ui.fragments.postdetails.adapter.PostCommentsAdapter
-import com.techbayportal.itaste.ui.fragments.postdetails.itemClickListener.PostCommentsRvClickListener
-import kotlinx.android.synthetic.main.fragment_post_details.*
+import com.techbayportal.itaste.databinding.FragmentPostDetailBinding
+import com.techbayportal.itaste.ui.fragments.postdetailfragment.adapter.PostCommentsAdapter
+import com.techbayportal.itaste.ui.fragments.postdetailfragment.itemclicklistener.PostCommentsRvClickListener
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_post_detail.*
 
-
-class PostDetailsFragment : BaseFragment<FragmentPostDetailsBinding, PostDetailViewModel>(), PostCommentsRvClickListener {
+@AndroidEntryPoint
+class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFragmentViewModel>(), PostCommentsRvClickListener {
 
     override val layoutId: Int
-        get() = R.layout.fragment_post_details
-    override val viewModel: Class<PostDetailViewModel>
-        get() = PostDetailViewModel::class.java
+        get() = R.layout.fragment_post_detail
+    override val viewModel: Class<PostDetailFragmentViewModel>
+        get() = PostDetailFragmentViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
 

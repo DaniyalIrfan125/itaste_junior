@@ -112,9 +112,9 @@
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/postDetailsFragment"
-        android:name="com.techbayportal.itaste.ui.fragments.postdetails.PostDetailsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.postdetailfragment.PostDetailFragment"
         android:label="fragment_post_details"
-        tools:layout="@layout/fragment_post_details" />
+        tools:layout="@layout/fragment_post_detail" />
     <fragment
         android:id="@+id/messageFragment"
         android:name="com.techbayportal.itaste.ui.fragments.messages.MessageFragment"

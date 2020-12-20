@@ -1,4 +1,4 @@
-package com.techbayportal.itaste.ui.fragments.postdetails.adapter
+package com.techbayportal.itaste.ui.fragments.postdetailfragment.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.databinding.ItemProfileCommentBinding
-import com.techbayportal.itaste.ui.fragments.postdetails.itemClickListener.PostCommentsRvClickListener
+import com.techbayportal.itaste.ui.fragments.postdetailfragment.itemclicklistener.PostCommentsRvClickListener
 
 class PostCommentsAdapter (val onClickListener: PostCommentsRvClickListener): RecyclerView.Adapter<PostCommentsAdapter.ViewHolderClass>() {
 
