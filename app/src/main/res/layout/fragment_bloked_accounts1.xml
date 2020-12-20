@@ -27,7 +27,8 @@
                 android:layout_height="@dimen/_15sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/_15sdp"
-                android:src="@drawable/icon_backarrow" />
+                android:src="@drawable/icon_backarrow"
+                android:contentDescription="@string/back_icon"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,7 +39,7 @@
                 android:layout_alignParentBottom="true"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="Blocked Accounts"
+                android:text="@string/blocked_accounts"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="22sp">
 

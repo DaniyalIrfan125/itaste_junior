@@ -13,7 +13,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".ui.fragments.accountdeleted.AccountDeletedFragment">
 
     <LinearLayout
@@ -124,7 +123,6 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp">
-
             </Button>
         </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -133,7 +131,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_20sdp"
-
             android:layout_marginEnd="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_30sdp"
             app:mrl_rippleColor="@color/colorLightOrange">
@@ -156,8 +153,6 @@
 
             </Button>
         </com.balysv.materialripple.MaterialRippleLayout>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
