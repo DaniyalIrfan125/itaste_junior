@@ -8,13 +8,13 @@
 
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.notification.NotificationViewModel" />
+            type="com.techbayportal.itaste.ui.fragments.notificationfragment.NotificationFragmentViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".ui.fragments.notification.NotificationFragment">
+    tools:context=".ui.fragments.notificationfragment.NotificationFragment">
 
     <RelativeLayout
         android:id="@+id/relative_top"

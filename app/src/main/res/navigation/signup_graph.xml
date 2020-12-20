@@ -82,7 +82,7 @@
         tools:layout="@layout/fragment_my_profile" />
     <fragment
         android:id="@+id/noNotificationFragment"
-        android:name="com.techbayportal.itaste.ui.fragments.notification.NotificationFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.notificationfragment.NotificationFragment"
         android:label="fragment_no_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
