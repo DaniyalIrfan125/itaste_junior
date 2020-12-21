@@ -56,7 +56,7 @@
                         android:layout_margin="@dimen/_3sdp"
                         android:elevation="@dimen/_3sdp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/datingprofile_2_900_x_600"
+                        android:src="@drawable/icon_male_dp"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         tools:layout_editor_absoluteX="116dp"
                         tools:layout_editor_absoluteY="61dp" />
