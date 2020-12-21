@@ -210,7 +210,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129"
+                            android:src="@drawable/icon_forward_arrow"
                             android:visibility="invisible" />
                     </LinearLayout>
 
