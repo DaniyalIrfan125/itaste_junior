@@ -197,7 +197,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/path_1177" />
+                            android:src="@drawable/icon_bookmark" />
 
 
                         <TextView
