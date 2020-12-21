@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_graph"
-    app:startDestination="@id/newMessageFragment">
+    app:startDestination="@id/homeConfigurationBottomSheetFragment">
 
     <fragment
         android:id="@+id/welcomefragment"
@@ -129,4 +129,8 @@
         android:id="@+id/newMessageFragment"
         android:name="com.techbayportal.itaste.ui.fragments.newmessagefragment.NewMessageFragment"
         android:label="NewMessageFragment" />
+    <dialog
+        android:id="@+id/homeConfigurationBottomSheetFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment"
+        android:label="HomeConfigurationBottomSheetFragment" />
 </navigation>
