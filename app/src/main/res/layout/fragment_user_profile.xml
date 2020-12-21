@@ -56,7 +56,7 @@
                         android:layout_margin="@dimen/_3sdp"
                         android:elevation="@dimen/_3sdp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/beautiful_photo_girl_dp"
+                        android:src="@drawable/icon_user_dp"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         tools:layout_editor_absoluteX="116dp"
                         tools:layout_editor_absoluteY="61dp" />
@@ -109,7 +109,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_708" />
+                            android:src="@drawable/icon_person" />
 
 
                         <TextView
@@ -150,7 +150,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_708" />
+                            android:src="@drawable/icon_person" />
 
 
                         <TextView
@@ -191,7 +191,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_662" />
+                            android:src="@drawable/icon_premium_orange" />
 
 
                         <TextView
@@ -210,7 +210,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129"
+                            android:src="@drawable/icon_forward_arrow"
                             android:visibility="invisible" />
                     </LinearLayout>
 

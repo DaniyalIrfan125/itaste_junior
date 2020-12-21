@@ -57,7 +57,7 @@
                         android:layout_margin="@dimen/_3sdp"
                         android:elevation="@dimen/_3sdp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/beautiful_photo_girl_dp"
+                        android:src="@drawable/icon_user_dp"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         tools:layout_editor_absoluteX="116dp"
                         tools:layout_editor_absoluteY="61dp" />
@@ -111,7 +111,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_652" />
+                            android:src="@drawable/icon_cart" />
 
 
                         <TextView
@@ -130,7 +130,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View
@@ -154,7 +154,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_624" />
+                            android:src="@drawable/icon_black_lock" />
 
 
                         <TextView
@@ -173,7 +173,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View
@@ -197,7 +197,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/path_1177" />
+                            android:src="@drawable/icon_bookmark" />
 
 
                         <TextView
@@ -216,7 +216,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View
@@ -239,7 +239,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
-                            android:src="@drawable/group_632" />
+                            android:src="@drawable/icon_notification" />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -279,7 +279,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
-                            android:src="@drawable/path_1195" />
+                            android:src="@drawable/icon_dark" />
 
 
                         <TextView
@@ -322,7 +322,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_649" />
+                            android:src="@drawable/icon_config" />
 
 
                         <TextView
@@ -341,7 +341,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View
@@ -365,7 +365,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_631" />
+                            android:src="@drawable/icon_delete" />
 
 
                         <TextView
@@ -384,7 +384,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View
@@ -408,7 +408,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/path_1191" />
+                            android:src="@drawable/icon_block" />
 
 
                         <TextView
@@ -427,7 +427,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View
@@ -451,7 +451,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_273" />
+                            android:src="@drawable/icon_power_off" />
 
 
                         <TextView
@@ -470,7 +470,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View
@@ -494,7 +494,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_662" />
+                            android:src="@drawable/icon_premium_orange" />
 
 
                         <TextView
@@ -513,7 +513,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
-                            android:src="@drawable/group_129" />
+                            android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
 
                     <View

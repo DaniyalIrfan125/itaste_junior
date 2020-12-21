@@ -17,7 +17,7 @@
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/datingprofile_2_900_x_600"
+            android:src="@drawable/icon_male_dp"
             app:layout_constraintBottom_toBottomOf="@id/clMessage"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -52,7 +52,7 @@
                 android:layout_width="105dp"
                 android:layout_height="105dp"
 
-                android:src="@drawable/dummy1"
+                android:src="@drawable/icon_egg_bread_img"
 
                 />
             </androidx.cardview.widget.CardView>

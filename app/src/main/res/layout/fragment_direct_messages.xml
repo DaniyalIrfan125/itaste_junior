@@ -85,7 +85,7 @@
                             android:layout_height="@dimen/_14sdp"
                             android:layout_gravity="center"
                             android:scaleType="fitXY"
-                            android:src="@drawable/group_233"
+                            android:src="@drawable/icon_edit"
                             android:text="Unblock"
                             android:textAllCaps="false" />
 
@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_curve_gray"
                 android:queryHint="dsadas"
-                android:searchIcon="@drawable/path_1">
+                android:searchIcon="@drawable/icon_search">
 
             </SearchView>
 
@@ -182,7 +182,7 @@
                         android:layout_width="99dp"
                         android:layout_height="83dp"
                         android:layout_gravity="center_horizontal"
-                        android:src="@drawable/group_725" />
+                        android:src="@drawable/icon_chat_img" />
 
                     <TextView
                         android:layout_width="wrap_content"
