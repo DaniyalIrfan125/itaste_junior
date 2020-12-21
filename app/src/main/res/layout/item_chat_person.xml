@@ -33,7 +33,7 @@
                     android:layout_margin="@dimen/_3sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/beautiful_photo_girl_dp"
+                    android:src="@drawable/icon_user_dp"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
