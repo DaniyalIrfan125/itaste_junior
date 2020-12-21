@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_curve_gray"
                 android:queryHint="dsadas"
-                android:searchIcon="@drawable/path_1">
+                android:searchIcon="@drawable/icon_search">
 
             </SearchView>
 
