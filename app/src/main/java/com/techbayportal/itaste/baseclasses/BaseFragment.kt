@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -20,7 +21,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     lateinit var sharedViewModel: SharedViewModel
 
     private var mActivity: BaseActivity<*, *>? = null
-    private lateinit var mViewDataBinding: T
+    lateinit var mViewDataBinding: T
     protected lateinit var mViewModel: V
 
     abstract val layoutId: Int
@@ -92,5 +93,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     open fun hideProgressBar() {
         (activity as MainActivity).hideProgressBar()
+    }
+
+    open fun openSoftKeyboard(context: Context, view: View) {
+        view.requestFocus()
+        // open the soft keyboard
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
     }
 }
