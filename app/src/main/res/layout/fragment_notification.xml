@@ -103,7 +103,7 @@
             android:layout_height="@dimen/_10sdp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="@dimen/_52sdp"
-            android:src="@drawable/group_229" />
+            android:src="@drawable/icon_bell_small_three" />
 
         <ImageView
             android:layout_width="@dimen/_15sdp"
@@ -111,7 +111,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="@dimen/_40sdp"
             android:layout_marginTop="-4dp"
-            android:src="@drawable/group_228" />
+            android:src="@drawable/icon_bell_small_two" />
 
         <ImageView
             android:layout_width="@dimen/_20sdp"
@@ -119,7 +119,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="@dimen/_25sdp"
             android:layout_marginTop="-4dp"
-            android:src="@drawable/group_227" />
+            android:src="@drawable/icon_bell_small_one" />
 
 
         <ImageView
@@ -127,7 +127,7 @@
             android:layout_height="@dimen/_65sdp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="-15dp"
-            android:src="@drawable/group_226" />
+            android:src="@drawable/icon_bell" />
 
         <TextView
             android:layout_width="wrap_content"

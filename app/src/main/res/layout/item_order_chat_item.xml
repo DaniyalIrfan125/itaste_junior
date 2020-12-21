@@ -52,7 +52,7 @@
                 android:layout_width="105dp"
                 android:layout_height="105dp"
 
-                android:src="@drawable/dummy1"
+                android:src="@drawable/icon_egg_bread_img"
 
                 />
             </androidx.cardview.widget.CardView>

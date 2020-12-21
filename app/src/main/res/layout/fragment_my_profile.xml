@@ -111,7 +111,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_652" />
+                            android:src="@drawable/icon_cart" />
 
 
                         <TextView
@@ -154,7 +154,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_624" />
+                            android:src="@drawable/icon_black_lock" />
 
 
                         <TextView
@@ -239,7 +239,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
-                            android:src="@drawable/group_632" />
+                            android:src="@drawable/icon_notification" />
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -279,7 +279,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.1"
-                            android:src="@drawable/path_1195" />
+                            android:src="@drawable/icon_dark" />
 
 
                         <TextView
@@ -322,7 +322,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_649" />
+                            android:src="@drawable/icon_config" />
 
 
                         <TextView
@@ -365,7 +365,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_631" />
+                            android:src="@drawable/icon_delete" />
 
 
                         <TextView
@@ -408,7 +408,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/path_1191" />
+                            android:src="@drawable/icon_block" />
 
 
                         <TextView
@@ -451,7 +451,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_273" />
+                            android:src="@drawable/icon_power_off" />
 
 
                         <TextView
@@ -494,7 +494,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_662" />
+                            android:src="@drawable/icon_premium_orange" />
 
 
                         <TextView

@@ -48,7 +48,7 @@
             android:layout_width="@dimen/_65sdp"
             android:layout_height="@dimen/_65sdp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/group_722"
+            android:src="@drawable/icon_delete_img"
             android:contentDescription="@string/delete_icon"/>
 
         <TextView

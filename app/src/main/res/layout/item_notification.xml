@@ -83,7 +83,7 @@
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
-                    android:src="@drawable/photo_1490457843367_34_b_21_b_6_ccd_85"
+                    android:src="@drawable/icon_pancake"
                     android:text="Unblock"
 
                     android:textAllCaps="false" />

@@ -97,7 +97,7 @@
                         android:text="Jumeirah JLT, Dubai, UAE"
                         android:textSize="12sp"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:drawableStart="@drawable/group_31">
+                        android:drawableStart="@drawable/icon_pin_location">
 
                     </TextView>
 
@@ -115,7 +115,7 @@
                         android:layout_height="4dp"
                         android:layout_gravity="center"
                         android:scaleType="fitXY"
-                        android:src="@drawable/group_38"
+                        android:src="@drawable/icon_more_three_dots"
                         android:text="Unblock"
                         android:textAllCaps="false" />
 
@@ -154,7 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/dummy1">
+                        android:src="@drawable/icon_egg_bread_img">
 
                     </ImageView>
                 </RelativeLayout>
@@ -182,7 +182,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_marginEnd="@dimen/_10sdp"
-                            android:src="@drawable/group_23" />
+                            android:src="@drawable/icon_like_heart" />
 
                         <ImageView
                             android:id="@+id/ivComment"
@@ -199,7 +199,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:scaleType="fitXY"
-                            android:src="@drawable/path_1220" />
+                            android:src="@drawable/icon_send" />
                     </LinearLayout>
 
                     <LinearLayout

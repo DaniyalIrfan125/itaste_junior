@@ -109,7 +109,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_708" />
+                            android:src="@drawable/icon_person" />
 
 
                         <TextView
@@ -150,7 +150,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_708" />
+                            android:src="@drawable/icon_person" />
 
 
                         <TextView
@@ -191,7 +191,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
-                            android:src="@drawable/group_662" />
+                            android:src="@drawable/icon_premium_orange" />
 
 
                         <TextView
