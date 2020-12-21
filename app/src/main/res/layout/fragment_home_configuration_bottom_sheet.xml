@@ -230,7 +230,7 @@
                 android:layout_margin="@dimen/_3sdp"
                 android:elevation="@dimen/_3sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/flag_3_d_round_250"
+                android:src="@drawable/icon_flag_saudi"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 tools:layout_editor_absoluteX="116dp"
                 tools:layout_editor_absoluteY="61dp" />
@@ -242,7 +242,7 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 android:elevation="@dimen/_3sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/flag_3_d_round_250"
+                android:src="@drawable/icon_flag_saudi"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                 tools:layout_editor_absoluteX="116dp"
                 tools:layout_editor_absoluteY="61dp" />
@@ -254,7 +254,7 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/flag_3_d_round_250"
+                    android:src="@drawable/icon_flag_saudi"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
@@ -266,7 +266,7 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/flag_3_d_round_250"
+                    android:src="@drawable/icon_flag_saudi"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
@@ -278,7 +278,7 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/flag_3_d_round_250"
+                    android:src="@drawable/icon_flag_saudi"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
@@ -290,7 +290,7 @@
                     android:layout_marginRight="@dimen/_10sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/flag_3_d_round_250"
+                    android:src="@drawable/icon_flag_saudi"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
