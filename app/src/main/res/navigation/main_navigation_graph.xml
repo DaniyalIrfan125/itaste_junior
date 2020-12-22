@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/searchFragment">
+    app:startDestination="@id/homeItemBottomSheetFragment">
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.techbayportal.itaste.ui.fragments.homefragment.HomeFragment"
@@ -31,4 +31,8 @@
         android:id="@+id/postFragment"
         android:name="com.techbayportal.itaste.ui.fragments.postfragment.PostFragment"
         android:label="CartFragment" />
+    <dialog
+        android:id="@+id/homeItemBottomSheetFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment.HomeItemBottomSheetFragment"
+        android:label="HomeItemBottomSheetFragment" />
 </navigation>
