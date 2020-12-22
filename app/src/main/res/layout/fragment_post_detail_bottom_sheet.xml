@@ -13,23 +13,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.postdetailbottomsheetfragment.PostDetailBottomSheetFragment">
-
     <LinearLayout
         android:id="@+id/ll_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@drawable/bg_alert_box">
-
-
+        android:background="@drawable/bg_alert_box"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_25sdp"
             android:layout_marginEnd="@dimen/_25sdp"
             android:orientation="vertical">
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,9 +34,6 @@
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:orientation="horizontal"
                 android:gravity="center">
-
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -48,14 +42,11 @@
                     android:text="Edit Post"
                     android:textColor="@color/colorBlack"
                     android:textSize="14sp" />
-
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@color/colorGreyView">
-
             </View>
 
         </LinearLayout>
