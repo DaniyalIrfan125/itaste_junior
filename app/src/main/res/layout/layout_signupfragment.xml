@@ -93,11 +93,12 @@
                             android:weightSum="2">
 
                             <EditText
+                                android:id="@+id/ed_firstName"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:layout_weight="1"
-                                android:background="@drawable/ed_blackboundary"
+                                android:background="@drawable/ed_states"
                                 android:fontFamily="@font/roboto_regular"
                                 android:hint="First Name"
                                 android:imeOptions="actionNext"
@@ -110,11 +111,12 @@
 
 
                             <EditText
+                                android:id="@+id/ed_lastName"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_weight="1"
-                                android:background="@drawable/ed_blackboundary"
+                                android:background="@drawable/ed_states"
                                 android:fontFamily="@font/roboto_regular"
                                 android:hint="Last Name"
                                 android:imeOptions="actionNext"
@@ -128,22 +130,23 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tv_errorName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Error!"
                             android:textColor="@color/colorErrorRed"
                             android:textSize="12sp"
                             android:visibility="gone" />
 
 
                         <EditText
+                            android:id="@+id/ed_userName"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_38sdp"
                             android:layout_marginTop="@dimen/_12sdp"
-                            android:background="@drawable/ed_blackboundary"
+                            android:background="@drawable/ed_states"
                             android:fontFamily="@font/roboto_regular"
                             android:hint="Set User name"
                             android:imeOptions="actionNext"
@@ -155,6 +158,7 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/tv_errorUsername"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
@@ -167,10 +171,11 @@
 
 
                         <EditText
+                            android:id="@+id/ed_email"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_38sdp"
                             android:layout_marginTop="@dimen/_12sdp"
-                            android:background="@drawable/ed_blackboundary"
+                            android:background="@drawable/ed_states"
                             android:fontFamily="@font/roboto_regular"
                             android:hint="Enter your email"
                             android:imeOptions="actionNext"
@@ -182,12 +187,12 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/tv_errorEmail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Error!"
                             android:textColor="@color/colorErrorRed"
                             android:textSize="12sp"
                             android:visibility="gone" />
@@ -204,7 +209,7 @@
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:layout_weight="0.6"
-                                android:background="@drawable/ed_blackboundary"
+                                android:background="@drawable/ed_states"
                                 android:fontFamily="@font/roboto_regular"
                                 android:hint="+971"
                                 android:imeOptions="actionNext"
@@ -217,6 +222,7 @@
 
 
                             <EditText
+                                android:id="@+id/ed_phoneNumber"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_marginStart="@dimen/_5sdp"
@@ -224,6 +230,7 @@
                                 android:background="@drawable/ed_blackboundary"
                                 android:fontFamily="@font/roboto_regular"
                                 android:hint="0555 5555"
+                                android:inputType="phone"
                                 android:imeOptions="actionNext"
                                 android:paddingStart="@dimen/_20sdp"
                                 android:paddingEnd="@dimen/_20sdp"
@@ -236,22 +243,23 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tv_errorPhoneNumber"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Error!"
                             android:textColor="@color/colorErrorRed"
                             android:textSize="12sp"
                             android:visibility="gone" />
 
 
                         <EditText
+                            android:id="@+id/ed_setPassword"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_38sdp"
                             android:layout_marginTop="@dimen/_12sdp"
-                            android:background="@drawable/ed_blackboundary"
+                            android:background="@drawable/ed_states"
                             android:fontFamily="@font/roboto_regular"
                             android:hint="Set Password"
                             android:imeOptions="actionNext"
@@ -263,21 +271,22 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/tv_errorSetPassword"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Error!"
                             android:textColor="@color/colorErrorRed"
                             android:textSize="12sp"
                             android:visibility="gone" />
 
                         <EditText
+                            android:id="@+id/ed_confirmPassword"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_38sdp"
                             android:layout_marginTop="@dimen/_12sdp"
-                            android:background="@drawable/ed_blackboundary"
+                            android:background="@drawable/ed_states"
                             android:fontFamily="@font/roboto_regular"
                             android:hint="Confirm Password"
                             android:imeOptions="actionNext"
@@ -289,12 +298,12 @@
                             android:textSize="13sp" />
 
                         <TextView
+                            android:id="@+id/tv_errorConfirmPassword"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:fontFamily="@font/roboto_medium"
-                            android:text="Error!"
                             android:textColor="@color/colorErrorRed"
                             android:textSize="12sp"
                             android:visibility="gone" />
