@@ -93,23 +93,24 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/tv_userNameError"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="Error!"
                         android:textColor="@color/colorErrorRed"
                         android:textSize="12sp"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                     <EditText
+                        android:id="@+id/ed_password"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_38sdp"
                         android:layout_marginStart="@dimen/_25sdp"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="@dimen/_25sdp"
-                        android:background="@drawable/ed_blackboundary"
+                        android:background="@drawable/ed_states"
                         android:fontFamily="@font/roboto_regular"
                         android:hint="Enter Password"
                         android:imeOptions="actionNext"
@@ -121,12 +122,12 @@
                         android:textSize="13sp" />
 
                     <TextView
+                        android:id="@+id/tv_passwordError"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_40sdp"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="Error!"
                         android:textColor="@color/colorErrorRed"
                         android:textSize="12sp"
                         android:visibility="gone" />
