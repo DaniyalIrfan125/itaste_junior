@@ -325,7 +325,8 @@
                             android:text="Sign Up"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
-                            android:textSize="16sp">
+                            android:textSize="16sp"
+                            android:onClick="@{()->viewModel.onSignUpButtonClicked()}">
 
                         </Button>
                     </com.balysv.materialripple.MaterialRippleLayout>

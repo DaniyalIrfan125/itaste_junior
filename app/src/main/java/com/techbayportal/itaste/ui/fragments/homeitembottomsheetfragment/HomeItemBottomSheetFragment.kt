@@ -10,6 +10,7 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.FragmentHomeItemBottomSheetBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_post_detail_bottom_sheet.*
 
 @AndroidEntryPoint
 class HomeItemBottomSheetFragment : BottomSheetDialogFragment() {
@@ -27,6 +28,14 @@ class HomeItemBottomSheetFragment : BottomSheetDialogFragment() {
         var view = inflater.inflate(R.layout.fragment_home_item_bottom_sheet, container, false)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btn_cancel.setOnClickListener(View.OnClickListener {
+            dismiss()
+        })
     }
 
 

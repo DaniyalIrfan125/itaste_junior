@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
-import com.techbayportal.itaste.baseclasses.BaseFragment
-import com.techbayportal.itaste.databinding.FragmentPostDetailBottomSheetBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_post_detail_bottom_sheet.*
 
 @AndroidEntryPoint
 class PostDetailBottomSheetFragment : BottomSheetDialogFragment() {
@@ -27,6 +25,14 @@ class PostDetailBottomSheetFragment : BottomSheetDialogFragment() {
         var view = inflater.inflate(R.layout.fragment_post_detail_bottom_sheet, container, false)
 
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btn_cancel.setOnClickListener(View.OnClickListener {
+            dismiss()
+        })
     }
 
 

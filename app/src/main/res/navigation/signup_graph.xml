@@ -5,10 +5,6 @@
     app:startDestination="@id/loginFragment">
 
     <fragment
-        android:id="@+id/welcomefragment"
-        android:name="com.techbayportal.itaste.ui.fragments.welcomefragment.Welcomefragment"
-        android:label="Welcomefragment" />
-    <fragment
         android:id="@+id/loginFragment"
         android:name="com.techbayportal.itaste.ui.fragments.loginfragment.LoginFragment"
         android:label="LoginFragment" >
@@ -20,12 +16,12 @@
             app:popExitAnim="@anim/exit_to_right"
             app:destination="@id/forgotPasswordFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_signUpFragment"
+            android:id="@+id/action_loginFragment_to_selectAccountTypeFragment2"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/selectAccountTypeFragment2" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
@@ -58,9 +54,33 @@
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.techbayportal.itaste.ui.fragments.signupfragment.SignUpFragment"
-        android:label="SignUpFragment" />
+        android:label="SignUpFragment" >
+        <action
+            android:id="@+id/action_signUpFragment_to_signupConfigurationsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:destination="@id/signupConfigurationsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpVendorFragment"
         android:name="com.techbayportal.itaste.ui.fragments.signupvendorfragment.SignUpVendorFragment"
         android:label="SignUpVendorFragment" />
+    <fragment
+        android:id="@+id/signupConfigurationsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.signupconfigurationsfragment.SignupConfigurationsFragment"
+        android:label="SignupConfigurationsFragment" />
+    <fragment
+        android:id="@+id/selectAccountTypeFragment2"
+        android:name="com.techbayportal.itaste.ui.fragments.selectaccounttypefragment.SelectAccountTypeFragment"
+        android:label="SelectAccountTypeFragment" >
+        <action
+            android:id="@+id/action_selectAccountTypeFragment2_to_signUpFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:destination="@id/signUpFragment" />
+    </fragment>
 </navigation>

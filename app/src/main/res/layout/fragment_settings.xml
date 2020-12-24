@@ -61,7 +61,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-
                 <LinearLayout
                     android:id="@+id/linear"
                     android:layout_width="match_parent"
@@ -70,23 +69,20 @@
                     android:layout_marginEnd="@dimen/_25sdp"
                     android:orientation="vertical">
 
-
                     <LinearLayout
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
                         <ImageView
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
                             android:layout_weight="0.6"
                             android:src="@drawable/icon_info" />
-
 
                         <TextView
                             android:layout_width="match_parent"
@@ -115,17 +111,17 @@
                     </View>
 
                     <LinearLayout
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
                         <ImageView
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
                             android:src="@drawable/icon_language" />
@@ -158,18 +154,18 @@
                     </View>
 
                     <LinearLayout
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
                         <ImageView
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
+
                             android:layout_weight="0.6"
                             android:src="@drawable/icon_detail_document" />
 
@@ -187,7 +183,6 @@
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
                             android:src="@drawable/icon_forward_arrow" />
@@ -201,10 +196,11 @@
                     </View>
 
                     <LinearLayout
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
@@ -244,18 +240,17 @@
                     </View>
 
                     <LinearLayout
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
                         <ImageView
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
                             android:layout_weight="0.6"
                             android:src="@drawable/icon_about" />
 
@@ -273,7 +268,6 @@
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
                             android:src="@drawable/icon_forward_arrow" />
@@ -287,17 +281,17 @@
                     </View>
 
                     <LinearLayout
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
                         <ImageView
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
                             android:src="@drawable/icon_shout" />
@@ -316,8 +310,6 @@
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
                             android:layout_weight="0.4"
                             android:src="@drawable/icon_forward_arrow" />
                     </LinearLayout>
@@ -330,17 +322,17 @@
                     </View>
 
                     <LinearLayout
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:gravity="center"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
                         <ImageView
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.6"
                             android:src="@drawable/icon_power_off" />
@@ -359,7 +351,6 @@
                         <ImageView
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
                             android:layout_gravity="center"
                             android:layout_weight="0.4"
                             android:src="@drawable/icon_forward_arrow" />
@@ -376,7 +367,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_15sdp"
-
                         android:orientation="horizontal"
                         android:weightSum="2">
 
@@ -421,13 +411,8 @@ what others are on to."
                         android:textSize="15sp"
                         android:layout_marginBottom="@dimen/_20sdp"/>
 
-
-
                 </LinearLayout>
-
             </LinearLayout>
-
-
         </RelativeLayout>
     </ScrollView>
 </RelativeLayout>

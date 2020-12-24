@@ -3,6 +3,8 @@ package com.techbayportal.itaste.ui.fragments.postdetailfragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
@@ -21,6 +23,34 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         get() = PostDetailFragmentViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
+
+    override fun subscribeToNavigationLiveData() {
+        super.subscribeToNavigationLiveData()
+
+        mViewModel.onVendorProfileHeaderClicked.observe(this, Observer {
+            Navigation.findNavController(ll_dp)
+                .navigate(R.id.action_postDetailFragment_to_profileFragment)
+        })
+
+        mViewModel.onSendButtonClicked.observe(this, Observer {
+            Navigation.findNavController(iv_Chat)
+                .navigate(R.id.action_postDetailFragment_to_chatFragment2)
+        })
+
+        mViewModel.onBackButtonClicked.observe(this, Observer {
+            Navigation.findNavController(img_back).popBackStack()
+        })
+
+        mViewModel.onEditPostButtonClicked.observe(this, Observer {
+            Navigation.findNavController(btn_edit_post)
+                .navigate(R.id.action_postDetailFragment_to_postFragment)
+        })
+
+        mViewModel.onMoreButtonClicked.observe(this, Observer {
+            Navigation.findNavController(ll_more)
+                .navigate(R.id.action_postDetailFragment_to_postDetailBottomSheetFragment)
+        })
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

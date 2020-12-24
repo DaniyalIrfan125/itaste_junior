@@ -13,8 +13,13 @@ class SignUpFragmentViewModel @ViewModelInject constructor(
 
 
     val onBackButtonClicked = SingleLiveEvent<Any>()
+    val onSignUpButtonClicked = SingleLiveEvent<Any>()
 
     fun onBackButtonClicked() {
         onBackButtonClicked
+    }
+
+    fun onSignUpButtonClicked(){
+        onSignUpButtonClicked.call()
     }
 }

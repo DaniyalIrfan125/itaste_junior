@@ -228,7 +228,7 @@
             app:mrl_rippleColor="@color/colorLightOrange">
 
             <Button
-                android:id="@+id/btn_confirm"
+                android:id="@+id/btn_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="6dp"

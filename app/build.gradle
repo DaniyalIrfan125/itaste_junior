@@ -29,8 +29,15 @@ android {
         }
     }
 
-    dataBinding {
-        enabled true
+    android {
+
+        buildFeatures {
+
+            dataBinding = true
+
+            // for view binding:
+            // viewBinding = true
+        }
     }
 
     // Compile options

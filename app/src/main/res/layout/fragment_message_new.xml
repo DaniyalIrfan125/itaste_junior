@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.techbayportal.itaste.ui.fragments.newmessagefragment.NewMessageViewModel" />
@@ -22,14 +23,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <ImageView
+            <LinearLayout
                 android:id="@+id/img_back"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:src="@drawable/icon_backarrow" />
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onBackButtonClicked()}">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/icon_backarrow" />
+
+            </LinearLayout>
 
 
             <RelativeLayout
@@ -45,7 +51,7 @@
                     android:layout_height="66dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_10sdp"
+
                     android:layout_marginEnd="@dimen/_15sdp"
                     android:orientation="horizontal"
                     android:weightSum="10">
@@ -65,16 +71,17 @@
                             android:gravity="center"
                             android:text="New Message"
                             android:textColor="@color/colorBlack"
-                            android:textSize="22sp">
-                        </TextView>
+                            android:textSize="22sp"></TextView>
 
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_cancel"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:onClick="@{()->viewModel.onCancelClicked()}">
 
                         <TextView
                             android:id="@+id/tvCancel"
@@ -95,50 +102,50 @@
 
         </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relative_top">
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relative_top"
-        android:layout_above="@+id/linearLayout"
-        android:layout_marginStart="@dimen/_25sdp"
-        android:layout_marginEnd="@dimen/_25sdp"
-        app:layout_constraintTop_toBottomOf="@+id/relative_top">
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative_top">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/linearLayout"
+                android:layout_below="@+id/relative_top"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_25sdp"
+                app:layout_constraintTop_toBottomOf="@+id/relative_top">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_bold"
-                    android:text="To"
-                    android:textColor="@color/titleTextColorBlack"
-                    android:textSize="20sp">
-
-                </TextView>
-
-                <EditText
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/transparent"
-                    android:fontFamily="@font/roboto_regular"
-                    android:hint="Search"
-                    android:textSize="20sp">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                </EditText>
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="To"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="20sp">
 
-        </RelativeLayout>
-    </ScrollView>
+                    </TextView>
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:fontFamily="@font/roboto_regular"
+                        android:hint="Search"
+                        android:textSize="20sp">
+
+                    </EditText>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </ScrollView>
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -153,8 +160,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <include layout="@layout/layout_write_message">
-            </include>
+            <include layout="@layout/layout_write_message"></include>
 
         </LinearLayout>
 

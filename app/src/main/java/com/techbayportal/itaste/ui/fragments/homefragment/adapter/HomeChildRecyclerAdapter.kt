@@ -1,13 +1,17 @@
 package com.techbayportal.itaste.ui.fragments.homefragment.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.databinding.ItemHomeRecyclerImageBinding
+import com.techbayportal.itaste.ui.fragments.homefragment.HomeFragment
+import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
 
 class HomeChildRecyclerAdapter(private val list: List<Int>) :
     RecyclerView.Adapter<HomeChildRecyclerAdapter.ViewHolder>() {

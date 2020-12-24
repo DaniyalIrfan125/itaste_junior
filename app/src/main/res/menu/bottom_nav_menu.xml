@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/homeFragment"
+        android:enabled="true"
         android:icon="@drawable/icon_home"
         android:orderInCategory="1"
         android:title=""
@@ -10,7 +11,8 @@
 
 
     <item
-        android:id="@+id/notificationsFragment"
+        android:id="@+id/notificationFragment"
+        android:enabled="true"
         android:icon="@drawable/icon_notifications"
         android:orderInCategory="1"
         android:title=""
@@ -18,6 +20,7 @@
 
     <item
         android:id="@+id/searchFragment"
+        android:enabled="true"
         android:icon="@drawable/icon_search"
         android:orderInCategory="1"
         android:title=""
@@ -25,14 +28,16 @@
 
 
     <item
-        android:id="@+id/chatFragment"
+        android:id="@+id/directMessagesFragment"
+        android:enabled="true"
         android:icon="@drawable/icon_chat"
         android:orderInCategory="3"
         android:title=""
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/myProfileFragment"
+        android:enabled="true"
         android:icon="@drawable/icon_bottom_profile"
         android:orderInCategory="2"
         android:title=""

@@ -2,11 +2,33 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_navigation_graph"
-    app:startDestination="@id/postDetailBottomSheetFragment">
+    app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.techbayportal.itaste.ui.fragments.homefragment.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_homeConfigurationBottomSheetFragment"
+            app:destination="@id/homeConfigurationBottomSheetFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
     <fragment
         android:id="@+id/choosePakageFragment"
         android:name="com.techbayportal.itaste.ui.fragments.choosepackagefragment.ChoosePakageFragment"
@@ -39,4 +61,206 @@
         android:id="@+id/postDetailBottomSheetFragment"
         android:name="com.techbayportal.itaste.ui.fragments.postdetailbottomsheetfragment.PostDetailBottomSheetFragment"
         android:label="PostDetailBottomSheetFragment" />
+    <dialog
+        android:id="@+id/homeConfigurationBottomSheetFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment"
+        android:label="HomeConfigurationBottomSheetFragment" />
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.postdetailfragment.PostDetailFragment"
+        android:label="PostDetailFragment" >
+        <action
+            android:id="@+id/action_postDetailFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_postDetailFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_postDetailFragment_to_postFragment"
+            app:destination="@id/postFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_postDetailFragment_to_postDetailBottomSheetFragment"
+            app:destination="@id/postDetailBottomSheetFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment2"
+        android:name="com.techbayportal.itaste.ui.fragments.chatfragment.ChatFragment"
+        android:label="ChatFragment"
+        />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.notificationfragment.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/directMessagesFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.directmessagesfragment.DirectMessagesFragment"
+        android:label="DirectMessagesFragment" >
+        <action
+            android:id="@+id/action_directMessagesFragment_to_newMessageFragment"
+            app:destination="@id/newMessageFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/myProfileFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.myprofilefragment.MyProfileFragment"
+        android:label="MyProfileFragment" >
+        <action
+            android:id="@+id/action_myProfileFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_savedPostsFragment"
+            app:destination="@id/savedPostsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_reportBugDialogFragment"
+            app:destination="@id/reportBugDialogFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_deleteAccountFragment"
+            app:destination="@id/deleteAccountFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_blockedAccountsFragment"
+            app:destination="@id/blockedAccountsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_changeExistingPasswordFragment"
+            app:destination="@id/changeExistingPasswordFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_welcomefragment"
+            app:destination="@id/welcomefragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.userprofilefragment.UserProfileFragment"
+        android:label="UserProfileFragment" />
+    <dialog
+        android:id="@+id/reportBugDialogFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDialogFragment"
+        android:label="ReportBugDialogFragment" />
+    <fragment
+        android:id="@+id/deleteAccountFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.deleteaccountfragment.DeleteAccountFragment"
+        android:label="DeleteAccountFragment" >
+        <action
+            android:id="@+id/action_deleteAccountFragment_to_accountDeletedFragment"
+            app:destination="@id/accountDeletedFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/accountDeletedFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.accountdeletedfragment.AccountDeletedFragment"
+        android:label="AccountDeletedFragment" >
+        <action
+            android:id="@+id/action_accountDeletedFragment_to_selectAccountTypeFragment"
+            app:destination="@id/selectAccountTypeFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_accountDeletedFragment_to_signup_graph"
+            app:destination="@id/signup_graph"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/selectAccountTypeFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.selectaccounttypefragment.SelectAccountTypeFragment"
+        android:label="SelectAccountTypeFragment" />
+    <fragment
+        android:id="@+id/blockedAccountsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.BlockedAccountsFragment"
+        android:label="BlockedAccountsFragment" />
+    <fragment
+        android:id="@+id/newMessageFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.newmessagefragment.NewMessageFragment"
+        android:label="NewMessageFragment" />
+    <fragment
+        android:id="@+id/changeExistingPasswordFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.changeexistingpasswordfragment.ChangeExistingPasswordFragment"
+        android:label="ChangeExistingPasswordFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.settingsfragment.SettingsFragment"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_changeLanguageFragment"
+            app:destination="@id/changeLanguageFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/changeLanguageFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.changelanguagefragment.ChangeLanguageFragment"
+        android:label="ChangeLanguageFragment" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsFragment"
+        android:label="ContactUsFragment" />
+    <include app:graph="@navigation/signup_graph" />
+    <fragment
+        android:id="@+id/welcomefragment"
+        android:name="com.techbayportal.itaste.ui.fragments.welcomefragment.Welcomefragment"
+        android:label="Welcomefragment" />
 </navigation>

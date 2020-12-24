@@ -1,6 +1,7 @@
 package com.techbayportal.itaste.ui.fragments.signupfragment
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
@@ -26,6 +27,12 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
         mViewModel.onBackButtonClicked.observe(this, Observer {
             Navigation.findNavController(img_back).popBackStack()
+        })
+
+        mViewModel.onSignUpButtonClicked.observe(this, Observer {
+            Navigation.findNavController(btn_changePassword)
+                .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)
+            Toast.makeText(context, "Sign up", Toast.LENGTH_SHORT).show()
         })
     }
 

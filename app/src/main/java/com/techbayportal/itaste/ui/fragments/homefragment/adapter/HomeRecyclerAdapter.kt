@@ -5,14 +5,22 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.techbayportal.itaste.R
-import kotlinx.android.synthetic.main.layout_homefragment.*
+import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.databinding.ItemHomeRecyclerImageBinding
+import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
 
 class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
     RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
+
+    private var onClickListener: HomeRvClickListener? = null
+
+    fun setOnEntryClickListener(onEntryClickListener: HomeRvClickListener?) {
+        onClickListener = onEntryClickListener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -39,15 +47,26 @@ class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
         private var tv_profileName: TextView? = null
         private var tv_address: TextView? = null
         private var recyclerView: RecyclerView? = null
+        private  var img_dots : ImageView? = null
 
         init {
             img_profile = itemView.findViewById(R.id.img_profile)
             tv_profileName = itemView.findViewById(R.id.tv_profileName)
             tv_address = itemView.findViewById(R.id.tv_address)
             recyclerView = itemView.findViewById(R.id.recycler_images)
+            img_dots = itemView.findViewById(R.id.img_dots)
         }
 
         fun bind(int: Int) {
+
+            img_profile?.setOnClickListener {
+                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV)
+            }
+
+            img_dots?.setOnClickListener {
+                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS)
+            }
+
 
             recyclerView!!.adapter = HomeChildRecyclerAdapter(
                 listOf<Int>(
@@ -63,6 +82,7 @@ class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
 
             recyclerView!!.layoutManager =      LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+            itemView
 
         }
 

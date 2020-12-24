@@ -19,17 +19,22 @@
         <RelativeLayout
             android:id="@+id/relative_top"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/_50sdp"
             android:layout_marginBottom="@dimen/_5sdp">
+
+            <LinearLayout
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
 
             <ImageView
-                android:id="@+id/img_back"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/_15sdp"
-                android:src="@drawable/icon_backarrow" />
+                android:src="@drawable/icon_backarrow"/>
+            </LinearLayout>
 
 
             <RelativeLayout
@@ -45,9 +50,7 @@
                     android:layout_height="66dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_15sdp"
-
                     android:orientation="horizontal"
                     android:weightSum="10">
 
@@ -74,10 +77,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_new_message"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:onClick="@{()->viewModel.onNewMessageIconClicked()}">
 
                         <ImageView
                             android:id="@+id/outlinedButton"
@@ -149,8 +154,8 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/linear"
                 android:layout_marginTop="7dp"
-                tools:listitem="@layout/item_message_list_item"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_message_list_item">
 
             </androidx.recyclerview.widget.RecyclerView>
 

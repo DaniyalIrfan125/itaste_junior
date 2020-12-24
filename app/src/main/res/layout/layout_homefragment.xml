@@ -18,18 +18,22 @@
             android:layout_height="@dimen/_60sdp">
 
             <ImageView
+                android:id="@+id/iv_icon"
+                android:onClick="@{()->viewModel.tempClicked()}"
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:src="@drawable/app_icon" />
 
             <ImageView
+                android:id="@+id/iv_home_configuration"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_17sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:src="@drawable/icon_home_menu" />
+                android:src="@drawable/icon_home_menu"
+                android:onClick="@{()->viewModel.onHomeConfigButtonClicked()}"/>
         </RelativeLayout>
 
         <androidx.core.widget.NestedScrollView

@@ -14,24 +14,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.deleteaccountfragment.DeleteAccountFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_back_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_50sdp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/btn_back"
+            android:id="@+id/img_back"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_centerVertical="true"
             android:src="@drawable/icon_backarrow"
-            android:contentDescription="@string/back_icon"/>
-    </LinearLayout>
+            android:contentDescription="@string/back_icon"
+            android:onClick="@{()->viewModel.onBackButtonClicked()}"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_middle"
@@ -98,6 +99,7 @@
 
             <Button
                 android:id="@+id/btn_confirm"
+                android:onClick="@{()->viewModel.onConfirmButtonClicked()}"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="6dp"
@@ -126,6 +128,7 @@
 
             <Button
                 android:id="@+id/btn_Cancel"
+                android:onClick="@{()->viewModel.onCancelButtonClicked()}"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="6dp"

@@ -110,13 +110,15 @@
                             android:layout_width="@dimen/_70sdp"
                             android:layout_height="@dimen/_70sdp"
                             android:layout_centerHorizontal="true"
-                            android:background="@drawable/item_circle_grey">
+                            android:background="@drawable/item_circle_grey"
+                            android:onClick="@{()->viewModel.onDarkModeButtonClicked()}">
 
                             <ImageView
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_centerInParent="true"
-                                android:src="@drawable/icon_moon" />
+                                android:src="@drawable/icon_moon"
+                                />
 
                         </RelativeLayout>
 
@@ -143,7 +145,8 @@
                             android:layout_width="@dimen/_70sdp"
                             android:layout_height="@dimen/_70sdp"
                             android:layout_centerHorizontal="true"
-                            android:background="@drawable/item_circleorangelayout">
+                            android:background="@drawable/item_circleorangelayout"
+                            android:onClick="@{()->viewModel.onLightModeButtonClicked()}">
 
                             <ImageView
                                 android:layout_width="@dimen/_35sdp"
@@ -228,7 +231,8 @@
                     android:text="Next"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack"
-                    android:textSize="16sp">
+                    android:textSize="16sp"
+                    android:onClick="@{()->viewModel.onNextButtonClicked()}">
 
                 </Button>
             </com.balysv.materialripple.MaterialRippleLayout>

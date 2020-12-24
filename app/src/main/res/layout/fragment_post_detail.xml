@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.techbayportal.itaste.ui.fragments.postdetailfragment.PostDetailFragmentViewModel" />
@@ -11,289 +12,304 @@
     </data>
 
 
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.postdetailfragment.PostDetailFragment">
-
     <RelativeLayout
-        android:id="@+id/relative_top"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginBottom="@dimen/_5sdp">
-
-
-        <ImageView
-            android:id="@+id/img_back"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:src="@drawable/icon_backarrow" />
-
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.postdetailfragment.PostDetailFragment">
 
         <RelativeLayout
-            android:id="@+id/rvNotificationItem"
+            android:id="@+id/relative_top"
             android:layout_width="match_parent"
             android:layout_height="66dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="0dp"
-            android:layout_toEndOf="@+id/img_back">
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp">
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="66dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_15sdp"
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
-                android:orientation="horizontal"
-                android:weightSum="10">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2.5"
-                    android:gravity="center_vertical">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/sivInfluancerImage"
-                        android:layout_width="66dp"
-                        android:layout_height="66dp"
-                        android:layout_margin="@dimen/_3sdp"
-                        android:elevation="@dimen/_3sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/icon_male_dp"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                        tools:layout_editor_absoluteX="116dp"
-                        tools:layout_editor_absoluteY="61dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="7"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_regular"
-                        android:text="Ed Tamer"
-                        android:textColor="@color/colorBlack"
-                        android:textSize="19sp"
-                        >
-
-                    </TextView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="Jumeirah JLT, Dubai, UAE"
-                        android:textSize="12sp"
-                        android:drawablePadding="@dimen/_5sdp"
-                        android:drawableStart="@drawable/icon_pin_location">
-
-                    </TextView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/outlinedButton"
-                        android:layout_width="16dp"
-                        android:layout_height="4dp"
-                        android:layout_gravity="center"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/icon_more_three_dots"
-                        android:text="Unblock"
-                        android:textAllCaps="false" />
-
-                </LinearLayout>
-
-
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_backarrow" />
             </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rvNotificationItem"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="0dp"
+                android:layout_toEndOf="@+id/img_back">
+
+                <LinearLayout
+                    android:id="@+id/ll_header_vendor_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="66dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"
+                        android:gravity="center_vertical"
+                        android:onClick="@{()->viewModel.onVendorProfileHeaderClicked()}">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/sivInfluancerImage"
+                            android:layout_width="66dp"
+                            android:layout_height="66dp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:elevation="@dimen/_3sdp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/icon_male_dp"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                            tools:layout_editor_absoluteX="116dp"
+                            tools:layout_editor_absoluteY="61dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="7"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Ed Tamer"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="19sp">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/icon_pin_location"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="Jumeirah JLT, Dubai, UAE"
+                            android:textSize="12sp">
+
+                        </TextView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_more"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:gravity="center"
+                        android:onClick="@{()->viewModel.onMoreButtonClicked()}">
+
+                        <ImageView
+                            android:id="@+id/outlinedButton"
+                            android:layout_width="16dp"
+                            android:layout_height="4dp"
+                            android:layout_gravity="center"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/icon_more_three_dots"
+                            android:text="Unblock"
+                            android:textAllCaps="false" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
 
         </RelativeLayout>
 
-
-    </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/relative_top"
-        android:fillViewport="true">
-
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relative_top"
+            android:fillViewport="true">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="414dp"
-                    android:layout_below="@+id/relative_top"
-                    android:layout_marginTop="0dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/icon_egg_bread_img">
-
-                    </ImageView>
-                </RelativeLayout>
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/llOptions"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="414dp"
+                        android:layout_below="@+id/relative_top"
+                        android:layout_marginTop="0dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/icon_egg_bread_img">
+
+                        </ImageView>
+                    </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="28dp"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:id="@+id/llOptions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="match_parent"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:src="@drawable/icon_like_heart" />
 
-                        <ImageView
-                            android:id="@+id/ivComment"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="match_parent"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/_10sdp"
-                            android:src="@drawable/speech_bubble" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="@dimen/_25sdp"
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:src="@drawable/icon_like_heart" />
+
+                            <ImageView
+                                android:id="@+id/ivComment"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:src="@drawable/speech_bubble" />
+
+                            <ImageView
+                                android:id="@+id/iv_Chat"
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:onClick="@{()->viewModel.onSendButtonClicked()}"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/icon_send" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/icon_send" />
+                            android:gravity="end">
+
+                            <com.balysv.materialripple.MaterialRippleLayout
+                                android:id="@+id/rippleConfirm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                app:mrl_rippleColor="@color/colorLightOrange">
+
+                                <Button
+                                    android:id="@+id/btn_edit_post"
+                                    android:layout_width="110dp"
+                                    android:layout_height="34dp"
+                                    android:layout_gravity="end"
+                                    android:layout_marginEnd="2dp"
+                                    android:background="@drawable/btn_curve_small"
+                                    android:onClick="@{()->viewModel.onEditPostButtonClicked()}"
+                                    android:text="Edit Post"
+                                    android:textAllCaps="false" />
+                            </com.balysv.materialripple.MaterialRippleLayout>
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="end">
 
-                        <com.balysv.materialripple.MaterialRippleLayout
-                            android:id="@+id/rippleConfirm"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="2h ago"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="10sp">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:id="@+id/llTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
-                            app:mrl_rippleColor="@color/colorLightOrange">
+                            android:layout_marginBottom="@dimen/_1sdp"
+                            android:orientation="horizontal">
 
-                            <Button
-                                android:layout_width="110dp"
-                                android:layout_height="34dp"
-                                android:layout_gravity="end"
-                                android:layout_marginEnd="2dp"
-                                android:background="@drawable/btn_curve_small"
-                                android:text="Edit Post"
-                                android:textAllCaps="false" />
-                        </com.balysv.materialripple.MaterialRippleLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="Pancakes with dried berries"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp">
 
-                    </LinearLayout>
+                            </TextView>
 
-                </LinearLayout>
+                        </LinearLayout>
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="end">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="2h ago"
-                    android:textSize="10sp"
-                    android:textColor="@color/titleTextColorBlack"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="AED 35"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp">
 
-                </TextView>
+                            </TextView>
 
-                <LinearLayout
-                    android:id="@+id/llTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_1sdp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Pancakes with dried berries"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/roboto_bold"
-                            android:textColor="@color/titleTextColorBlack">
-
-                        </TextView>
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                    <LinearLayout
+                    <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="end">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="AED 35"
-                            android:textSize="16sp"
-                            android:layout_gravity="center_vertical"
-                            android:fontFamily="@font/roboto_bold"
-                            android:textColor="@color/titleTextColorBlack">
-
-                        </TextView>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="Sed ut perspiciatis unde omnis iste natus error sit volup
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Sed ut perspiciatis unde omnis iste natus error sit volup
 atem accu santium doloremque laudantium, totami repa
 aperiam, ea ipsa quae ab illo inventore veritatis et qurep
 architecto beat ae vitae dicta sunt explicabo. Nemo eni
@@ -302,87 +318,85 @@ ut fugit, sed quia conse  quia magni dolores eos qui rat
 ne voluptatem sequi nesciunt ab illo inventore veritatis
 quasi architecto beat ae vitae dicta sunt explicabo. atis
 enim ipsam voluptatem quia voluptas sit asperna."
-                    android:textSize="14sp"
-                    android:textColor="@color/titleTextColorBlack"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp">
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="14sp">
 
-                </TextView>
-
-                <LinearLayout
-                    android:id="@+id/llComentsSection"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:orientation="vertical">
-
+                    </TextView>
 
                     <LinearLayout
+                        android:id="@+id/llComentsSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_5sdp"
-                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cooking and Preparation time: 2 hours"
-                            android:textSize="14sp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:textColor="@color/colorOrange">
 
-                        </TextView>
-
-                        <TextView
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:layout_marginBottom="@dimen/_5sdp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="View all 7 comments"
-                            android:textSize="10sp"
-                            android:fontFamily="@font/roboto_light"
-                            android:textColor="@color/colorCommentGrey">
-
-                        </TextView>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvPostComments"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="300dp"
-                            tools:listitem="@layout/item_profile_comment"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-
-                        </androidx.recyclerview.widget.RecyclerView>
-
-                        <TextView
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Posted 5 minutes ago"
-                            android:textSize="10sp"
-                            android:fontFamily="@font/roboto_light"
-                            android:textColor="@color/colorCommentGrey">
+                            android:orientation="vertical">
 
-                        </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="Cooking and Preparation time: 2 hours"
+                                android:textColor="@color/colorOrange"
+                                android:textSize="14sp">
 
-                        <include
-                            android:id="@+id/layoutComment"
-                            android:visibility="gone"
-                            layout="@layout/layout_profile_chat_comment"></include>
+                            </TextView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:fontFamily="@font/roboto_light"
+                                android:text="View all 7 comments"
+                                android:textColor="@color/colorCommentGrey"
+                                android:textSize="10sp">
+
+                            </TextView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvPostComments"
+                                android:layout_width="match_parent"
+                                android:layout_height="300dp"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:listitem="@layout/item_profile_comment">
+
+                            </androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:fontFamily="@font/roboto_light"
+                                android:text="Posted 5 minutes ago"
+                                android:textColor="@color/colorCommentGrey"
+                                android:textSize="10sp">
+
+                            </TextView>
+
+                            <include
+                                android:id="@+id/layoutComment"
+                                layout="@layout/layout_profile_chat_comment"
+                                android:visibility="gone"></include>
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
 
                 </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
 
 
-            </LinearLayout>
-        </RelativeLayout>
-    </ScrollView>
-
-
-</RelativeLayout>
+    </RelativeLayout>
 
 </layout>

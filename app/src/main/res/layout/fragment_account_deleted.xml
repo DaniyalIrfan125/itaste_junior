@@ -15,10 +15,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.accountdeletedfragment.AccountDeletedFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/ll_back_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_50sdp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,21 +29,23 @@
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_centerVertical="true"
             android:src="@drawable/icon_backarrow" />
 
         <TextView
+            android:id="@+id/tv_backToLogin"
+            android:onClick="@{()->viewModel.onBackToLoginButtonClicked()}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/btn_back"
             android:fontFamily="@font/roboto_regular"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginTop="@dimen/_25sdp"
             android:text="Back to login page"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="12sp">
 
         </TextView>
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/ll_middle"
@@ -109,7 +111,8 @@
             app:mrl_rippleColor="@color/colorLightOrange">
 
             <Button
-                android:id="@+id/btn_confirm"
+                android:id="@+id/btn_doneAndExit"
+                android:onClick="@{()->viewModel.onDoneAndExitButtonClicked()}"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="6dp"
@@ -136,7 +139,8 @@
             app:mrl_rippleColor="@color/colorLightOrange">
 
             <Button
-                android:id="@+id/btn_Cancel"
+                android:id="@+id/btn_CreateNewAccount"
+                android:onClick="@{()->viewModel.onCreateNewAccountButtonClicked()}"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="6dp"

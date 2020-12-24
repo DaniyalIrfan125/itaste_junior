@@ -1,17 +1,20 @@
 package com.techbayportal.itaste.ui.fragments.loginfragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.LayoutSecondBinding
+import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_loginfragment.*
-import java.util.*
+
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
@@ -27,13 +30,20 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
     }
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
         mViewModel.onLoginClicked.observe(this, androidx.lifecycle.Observer {
+            /*Navigation.findNavController(ed_enterUserName)
+                .navigate(R.id.action_loginFragment_to_main_navigation_graph)*/
+
+            val intent = Intent (activity, MainActivity::class.java)
+            //intent.clearStack()
+            activity?.startActivity(intent)
+
 
         })
 
@@ -46,7 +56,7 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
 
         mViewModel.onSignUpClicked.observe(this, androidx.lifecycle.Observer {
             Navigation.findNavController(ed_enterUserName)
-                .navigate(R.id.action_loginFragment_to_signUpFragment)
+                .navigate(R.id.action_loginFragment_to_selectAccountTypeFragment2)
         })
     }
 
