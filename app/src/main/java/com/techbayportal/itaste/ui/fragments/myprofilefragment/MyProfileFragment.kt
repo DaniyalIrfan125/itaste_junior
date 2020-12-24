@@ -3,15 +3,20 @@ package com.techbayportal.itaste.ui.fragments.myprofilefragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.databinding.FragmentMyProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_my_profile.img_back
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>() {
@@ -22,15 +27,37 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var dataStoreProvider: DataStoreProvider
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        dataStoreProvider = DataStoreProvider(requireContext())
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*sw1?.setOnCheckedChangeListener({ _ , isChecked ->
-            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
-            Toast.makeText(this@MainActivity, message,
-                Toast.LENGTH_SHORT).show()
-        })*/
+        switch_darkMode?.setOnCheckedChangeListener { _, isChecked ->
+            val message: String
+            if (isChecked) {
+                GlobalScope.launch {
+                    dataStoreProvider.storeDarkMode(true)
+                }
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                message = "DarkMode ON"
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            } else {
+                GlobalScope.launch {
+                    dataStoreProvider.storeDarkMode(false)
+                }
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                message = "DarkMode OFF"
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            }
+
+        }
     }
+
 
 
 
@@ -81,7 +108,6 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 .navigate(R.id.action_myProfileFragment_to_welcomefragment)
             //Toast.makeText(context, "Move To Welcome Fragment", Toast.LENGTH_SHORT).show()
         })
-
 
 
     }

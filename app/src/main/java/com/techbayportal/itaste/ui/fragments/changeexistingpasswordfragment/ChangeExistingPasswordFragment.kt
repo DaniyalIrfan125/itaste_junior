@@ -1,10 +1,13 @@
 package com.techbayportal.itaste.ui.fragments.changeexistingpasswordfragment
 
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.LayoutChangeexistingpasswordfragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_cartfragment.*
 
 @AndroidEntryPoint
 class ChangeExistingPasswordFragment :
@@ -15,4 +18,12 @@ class ChangeExistingPasswordFragment :
         get() = ChangeExistingPasswordViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
+
+    override fun subscribeToNavigationLiveData() {
+        super.subscribeToNavigationLiveData()
+
+        mViewModel.onBackButtonClicked.observe(this, Observer {
+            Navigation.findNavController(img_back).popBackStack()
+        })
+    }
 }

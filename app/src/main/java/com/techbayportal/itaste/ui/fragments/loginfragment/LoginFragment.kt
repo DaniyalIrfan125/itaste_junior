@@ -30,7 +30,7 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
 
-
+      //  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 
     override fun subscribeToNavigationLiveData() {

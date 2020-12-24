@@ -37,6 +37,7 @@ object AppConstants {
             const val DATA_STORE_NAME = "BaseProject"
             const val LOCALIZATION_KEY_NAME = "lang"
             const val USER_NAME_KEY = "user_name_key"
+            const val DARK_MODE_KEY = "dark_mode_key"
         }
     }
 

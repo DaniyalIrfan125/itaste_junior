@@ -8,8 +8,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
         android:layout_marginBottom="@dimen/_10sdp"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="10">
 
@@ -22,8 +23,8 @@
             <com.google.android.material.imageview.ShapeableImageView
 
                 android:id="@+id/sivInfluancerImage"
-                android:layout_width="47dp"
-                android:layout_height="match_parent"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
                 android:layout_margin="@dimen/_3sdp"
                 android:elevation="@dimen/_3sdp"
                 android:scaleType="fitXY"
@@ -37,7 +38,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_weight="4"
             android:gravity="center_vertical"
             android:orientation="vertical">
@@ -63,23 +64,38 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="4"
-            android:gravity="end">
+            android:gravity="end"
+            >
 
-            <Button
-                android:id="@+id/btn_unblock"
-                style="?attr/materialButtonOutlinedStyle"
-                android:layout_width="110dp"
-                android:layout_height="34dp"
-                android:layout_gravity="center"
-                android:background="@drawable/btn_curve_small"
-                android:text="Unblock"
-                android:textAllCaps="false" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true">
 
-        </LinearLayout>
+                <com.balysv.materialripple.MaterialRippleLayout
+                    android:layout_width="115dp"
+                    android:layout_height="39dp"
+                    app:mrl_rippleColor="#838282">
+
+                    <Button
+                        android:layout_gravity="center"
+                        android:id="@+id/btn_unblock"
+                        style="?attr/materialButtonOutlinedStyle"
+                        android:layout_width="110dp"
+                        android:layout_height="34dp"
+                        android:background="@drawable/btn_curve_small"
+                        android:text="Unblock"
+                        android:textAllCaps="false" />
+                </com.balysv.materialripple.MaterialRippleLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
 
 
     </LinearLayout>
