@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
@@ -40,9 +38,9 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
             /*Navigation.findNavController(ed_enterUserName)
                 .navigate(R.id.action_loginFragment_to_main_navigation_graph)*/
 
-            val intent = Intent (activity, MainActivity::class.java)
-            //intent.clearStack()
-            activity?.startActivity(intent)
+            val intent = Intent(activity, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            startActivity(intent)
 
 
         })

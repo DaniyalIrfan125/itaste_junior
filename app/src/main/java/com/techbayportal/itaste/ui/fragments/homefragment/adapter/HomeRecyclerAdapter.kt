@@ -11,12 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.databinding.ItemHomeRecyclerImageBinding
+import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeChildRvClickListener
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
 
 class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
     RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
 
     private var onClickListener: HomeRvClickListener? = null
+    lateinit var homeChildRecyclerAdapter: HomeChildRecyclerAdapter
 
     fun setOnEntryClickListener(onEntryClickListener: HomeRvClickListener?) {
         onClickListener = onEntryClickListener
@@ -47,7 +49,7 @@ class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
         private var tv_profileName: TextView? = null
         private var tv_address: TextView? = null
         private var recyclerView: RecyclerView? = null
-        private  var img_dots : ImageView? = null
+        private var img_dots: ImageView? = null
 
         init {
             img_profile = itemView.findViewById(R.id.img_profile)
@@ -68,7 +70,7 @@ class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
             }
 
 
-            recyclerView!!.adapter = HomeChildRecyclerAdapter(
+           homeChildRecyclerAdapter = HomeChildRecyclerAdapter(
                 listOf<Int>(
                     R.drawable.img_food_second,
                     R.drawable.img_food_first,
@@ -76,11 +78,17 @@ class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
                     R.drawable.img_food_first
                 )
             )
+            recyclerView!!.adapter = homeChildRecyclerAdapter
+
+            homeChildRecyclerAdapter.setOnChildClickListener(object : HomeChildRvClickListener {
+                override fun onChildItemClick(position: Int) {
+                    onClickListener?.onChildItemClick(position)
+                }
+            })
 
 
-          // GridLayoutManager(context, 2, LinearLayoutManager.VERTICAL, false)
-
-            recyclerView!!.layoutManager =      LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView!!.layoutManager =
+                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
             itemView
 

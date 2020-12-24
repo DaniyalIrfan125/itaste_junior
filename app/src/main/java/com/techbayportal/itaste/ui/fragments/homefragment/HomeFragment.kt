@@ -38,8 +38,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         })
 
         mViewModel.tempClicked.observe(this, Observer {
-            Navigation.findNavController(iv_icon)
-                .navigate(R.id.action_homeFragment_to_postDetailFragment)
+
         })
     }
 
@@ -79,5 +78,10 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
                     .navigate(R.id.action_homeFragment_to_profileFragment)
             }
         }
+    }
+
+    override fun onChildItemClick(position: Int) {
+        Navigation.findNavController(iv_icon)
+            .navigate(R.id.action_homeFragment_to_postDetailFragment)
     }
 }
