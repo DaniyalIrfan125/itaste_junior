@@ -1,5 +1,7 @@
 package com.techbayportal.itaste.ui.fragments.myprofilefragment
 
+import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -19,6 +21,18 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         get() = MyProfileViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        /*sw1?.setOnCheckedChangeListener({ _ , isChecked ->
+            val message = if (isChecked) "Switch1:ON" else "Switch1:OFF"
+            Toast.makeText(this@MainActivity, message,
+                Toast.LENGTH_SHORT).show()
+        })*/
+    }
+
+
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()

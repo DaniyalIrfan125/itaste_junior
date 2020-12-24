@@ -207,13 +207,6 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"/>
-        <action
-            android:id="@+id/action_accountDeletedFragment_to_signup_graph"
-            app:destination="@id/signup_graph"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/selectAccountTypeFragment"
@@ -258,7 +251,6 @@
         android:id="@+id/contactUsFragment"
         android:name="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsFragment"
         android:label="ContactUsFragment" />
-    <include app:graph="@navigation/signup_graph" />
     <fragment
         android:id="@+id/welcomefragment"
         android:name="com.techbayportal.itaste.ui.fragments.welcomefragment.Welcomefragment"

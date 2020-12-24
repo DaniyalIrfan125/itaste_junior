@@ -38,8 +38,9 @@ class AccountDeletedFragment : BaseFragment<FragmentAccountDeletedBinding, Accou
         })
 
         mViewModel.onCreateNewAccountButtonClicked.observe(this, Observer {
-            Navigation.findNavController(btn_doneAndExit)
-                .navigate(R.id.action_accountDeletedFragment_to_signup_graph)
+            val intent = Intent (activity, SignupActivity::class.java)
+            intent.putExtra("OPEN_SIGNUP_SCREEN", "sign_up")
+            activity?.startActivity(intent)
             Toast.makeText(context, "go to signup", Toast.LENGTH_SHORT).show()
         })
 
