@@ -81,7 +81,7 @@
                         android:layout_marginStart="@dimen/_25sdp"
                         android:layout_marginTop="@dimen/_20sdp"
                         android:layout_marginEnd="@dimen/_25sdp"
-                        android:background="@drawable/ed_blackboundary"
+                        android:background="@drawable/ed_states"
                         android:fontFamily="@font/roboto_regular"
                         android:hint="Enter user name"
                         android:imeOptions="actionNext"
