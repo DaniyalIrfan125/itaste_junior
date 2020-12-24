@@ -67,11 +67,23 @@ sa****@gmail.com"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:inputType="number"
-                android:textColor="@android:color/white"
+                android:textColor="@color/titleTextColorBlack"
+                android:fontFamily="@font/roboto_bold"
                 app:OtpItemCount="4"
                 app:OtpLineColor="@color/titleTextColorBlack"
                 app:OtpViewType="line"
                 app:itemSpacing="10dp" />
+
+            <TextView
+                android:id="@+id/tv_otpError"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/colorErrorRed"
+                android:textSize="12sp"
+                android:visibility="gone" />
 
 
             <com.balysv.materialripple.MaterialRippleLayout
