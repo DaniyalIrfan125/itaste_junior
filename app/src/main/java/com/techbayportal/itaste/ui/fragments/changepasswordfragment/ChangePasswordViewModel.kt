@@ -12,10 +12,15 @@ class ChangePasswordViewModel @ViewModelInject constructor(
 ) : BaseViewModel() {
 
     val onBackButtonClicked = SingleLiveEvent<Any>()
+    val onSaveButtonClicked = SingleLiveEvent<Any>()
 
     fun onBackButtonClicked() {
 
         onBackButtonClicked.call()
 
+    }
+
+    fun onBtnClick (){
+        onSaveButtonClicked.call()
     }
 }

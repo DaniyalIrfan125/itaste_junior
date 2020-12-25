@@ -69,7 +69,7 @@ class ChangeExistingPasswordFragment :
 
                 if (!TextUtils.isEmpty(ed_confirmPassword.text)) {
 
-                    if (ed_newPassword.text.equals(ed_confirmPassword.text)) {
+                    if (ed_newPassword.text == ed_confirmPassword.text) {
 
 
 
