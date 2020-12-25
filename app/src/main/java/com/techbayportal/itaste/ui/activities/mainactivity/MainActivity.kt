@@ -3,6 +3,7 @@ package com.techbayportal.itaste.ui.activities.mainactivity
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.techbayportal.itaste.BR
@@ -42,6 +43,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         graph.startDestination = R.id.homeFragment
         navController.graph = graph
         bottom_navigation.setupWithNavController(navHostFragment.navController)
+
+
+        relative_addButton.setOnClickListener(View.OnClickListener {
+            Toast.makeText(applicationContext, "clicked add buttn", Toast.LENGTH_SHORT).show()
+        })
     }
 
     open fun showProgressBar() {
@@ -50,6 +56,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     open fun hideProgressBar() {
         progress_bar.visibility = View.GONE
+    }
+
+
+    fun onAddButtonVisibility(isShow: Boolean) {
+        if (isShow)
+            relative_addButton.visibility = View.VISIBLE
+        else
+            relative_addButton.visibility = View.GONE
     }
 
 }
