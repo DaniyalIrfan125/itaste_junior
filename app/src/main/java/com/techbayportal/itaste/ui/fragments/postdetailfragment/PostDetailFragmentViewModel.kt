@@ -26,7 +26,7 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
     }
 
     fun onBackButtonClicked() {
-        onBackButtonClicked
+        onBackButtonClicked.call()
     }
 
     fun onEditPostButtonClicked(){

@@ -67,15 +67,17 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
     override fun onItemClickListener(type : String) {
         when(type){
             AppConstants.RecyclerViewKeys.HOME_RV -> {
-                Toast.makeText(context, "Home", Toast.LENGTH_SHORT).show()
+                Navigation.findNavController(img_dots)
+                    .navigate(R.id.action_homeFragment_to_profileFragment)
             }
             AppConstants.RecyclerViewKeys.HOME_RV_CHILD -> {
                 Toast.makeText(context, "Home Child", Toast.LENGTH_SHORT).show()
             }
 
             AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS -> {
-                Navigation.findNavController(img_dots)
-                    .navigate(R.id.action_homeFragment_to_profileFragment)
+                Navigation.findNavController(iv_home_configuration)
+                    .navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
+
             }
         }
     }

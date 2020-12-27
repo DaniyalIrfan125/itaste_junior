@@ -14,6 +14,7 @@ import com.techbayportal.itaste.ui.fragments.postdetailfragment.itemclicklistene
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_post_detail.*
 
+
 @AndroidEntryPoint
 class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFragmentViewModel>(), PostCommentsRvClickListener {
 
