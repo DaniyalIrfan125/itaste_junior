@@ -107,6 +107,7 @@
                         android:layout_weight="1">
 
                         <RelativeLayout
+                            android:id="@+id/rl_dark_mode"
                             android:layout_width="@dimen/_70sdp"
                             android:layout_height="@dimen/_70sdp"
                             android:layout_centerHorizontal="true"
@@ -114,6 +115,7 @@
                             android:onClick="@{()->viewModel.onDarkModeButtonClicked()}">
 
                             <ImageView
+                                android:id="@+id/iv_moon"
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_centerInParent="true"
@@ -142,6 +144,7 @@
                         android:layout_weight="1">
 
                         <RelativeLayout
+                            android:id="@+id/rl_light_mode"
                             android:layout_width="@dimen/_70sdp"
                             android:layout_height="@dimen/_70sdp"
                             android:layout_centerHorizontal="true"
@@ -149,6 +152,7 @@
                             android:onClick="@{()->viewModel.onLightModeButtonClicked()}">
 
                             <ImageView
+                                android:id="@+id/iv_sun"
                                 android:layout_width="@dimen/_35sdp"
                                 android:layout_height="@dimen/_35sdp"
                                 android:layout_centerInParent="true"

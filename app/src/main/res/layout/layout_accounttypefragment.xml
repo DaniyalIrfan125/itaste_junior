@@ -58,10 +58,12 @@
                     android:background="@drawable/item_circleorangelayout">
 
                     <ImageView
+                        android:id="@+id/iv_exploreFood"
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="@dimen/_60sdp"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/icon_user" />
+                        android:src="@drawable/icon_user"
+                         />
                 </RelativeLayout>
 
                 <TextView
@@ -86,10 +88,12 @@
                     android:background="@drawable/item_circle_grey">
 
                     <ImageView
+                        android:id="@+id/iv_showFood"
                         android:layout_width="@dimen/_60sdp"
                         android:layout_height="@dimen/_60sdp"
                         android:layout_centerInParent="true"
-                        android:src="@drawable/icon_showfood" />
+                        android:src="@drawable/icon_showfood"
+                        />
 
                 </RelativeLayout>
 
