@@ -1,10 +1,5 @@
 package com.techbayportal.itaste.ui.fragments.changeexistingpasswordfragment
 
-import android.os.Bundle
-import android.text.TextUtils
-import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
@@ -39,6 +34,10 @@ class ChangeExistingPasswordFragment :
 
         mViewModel.onBtnClicked.observe(this,  Observer{
             validationsCheck()
+        })
+
+        mViewModel.onBackButtonClicked.observe(this, Observer {
+            Navigation.findNavController(img_back).popBackStack()
         })
     }
 

@@ -17,4 +17,10 @@ class ChangeExistingPasswordViewModel @ViewModelInject constructor(
     fun onBtnClicked(){
         onBtnClicked.call()
     }
+
+    val onBackButtonClicked = SingleLiveEvent<Any>()
+
+    fun onBackButtonClicked() {
+        onBackButtonClicked.call()
+    }
 }

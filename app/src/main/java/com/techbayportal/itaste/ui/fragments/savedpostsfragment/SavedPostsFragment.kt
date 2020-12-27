@@ -2,6 +2,8 @@ package com.techbayportal.itaste.ui.fragments.savedpostsfragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,14 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
         get() = SavedPostsViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
+
+    override fun subscribeToNavigationLiveData() {
+        super.subscribeToNavigationLiveData()
+
+        mViewModel.onBackButtonClicked.observe(this, Observer {
+            Navigation.findNavController(img_back).popBackStack()
+        })
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

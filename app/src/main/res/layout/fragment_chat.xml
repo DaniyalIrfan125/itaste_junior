@@ -19,19 +19,25 @@
     <RelativeLayout
         android:id="@+id/relative_top"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/_50sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/img_back"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:src="@drawable/icon_backarrow" />
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onBackButtonClicked()}">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:src="@drawable/icon_backarrow"
+                android:contentDescription="@string/back_icon"/>
+        </LinearLayout>
 
 
         <RelativeLayout

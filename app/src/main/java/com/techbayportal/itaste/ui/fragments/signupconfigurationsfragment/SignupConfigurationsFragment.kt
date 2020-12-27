@@ -1,6 +1,7 @@
 package com.techbayportal.itaste.ui.fragments.signupconfigurationsfragment
 
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
@@ -8,6 +9,8 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.LayoutSignupconfigurationsfragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_accounttypefragment.*
+import kotlinx.android.synthetic.main.layout_signupconfigurationsfragment.*
 import kotlinx.android.synthetic.main.layout_signupfragment.*
 
 
@@ -31,10 +34,20 @@ class SignupConfigurationsFragment :
 
         mViewModel.onDarkModeButtonClicked.observe(this, Observer {
             Toast.makeText(context, "Dark Mode", Toast.LENGTH_SHORT).show()
+            rl_dark_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
+            rl_light_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
+
+            iv_moon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+            iv_sun.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_image_color))
         })
 
         mViewModel.onLightModeButtonClicked.observe(this, Observer {
             Toast.makeText(context, "Light Mode", Toast.LENGTH_SHORT).show()
+            rl_light_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
+            rl_dark_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
+
+            iv_sun.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+            iv_moon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_image_color))
         })
     }
 }

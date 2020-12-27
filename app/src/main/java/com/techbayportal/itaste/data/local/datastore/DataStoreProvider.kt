@@ -17,6 +17,7 @@ class DataStoreProvider(context: Context) {
     companion object {
         val IS_LOCALIZATION_KEY = preferencesKey<Boolean>(AppConstants.DataStore.LOCALIZATION_KEY_NAME)
         val USER_NAME_KEY = preferencesKey<String>(AppConstants.DataStore.USER_NAME_KEY)
+        val DARK_MODE_KEY = preferencesKey<Boolean>(AppConstants.DataStore.DARK_MODE_KEY)
 
     }
 
@@ -25,6 +26,11 @@ class DataStoreProvider(context: Context) {
         dataStore.edit {
             it[IS_LOCALIZATION_KEY] = isLocalizationKey
             it[USER_NAME_KEY] = name
+        }
+    }
+    suspend fun storeDarkMode(isDarkModeOn: Boolean) {
+        dataStore.edit {
+            it[DARK_MODE_KEY] = isDarkModeOn
         }
     }
 
@@ -36,6 +42,10 @@ class DataStoreProvider(context: Context) {
     //Create a name flow
     val userNameFlow: Flow<String> = dataStore.data.map {
         it[USER_NAME_KEY] ?: ""
+    }
+
+    val darkModeFlow: Flow<Boolean> = dataStore.data.map {
+        it[DARK_MODE_KEY] ?: false
     }
 
 
