@@ -84,7 +84,10 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
 
         mViewModel.onLoginClicked.observe(this, androidx.lifecycle.Observer {
 
-            fieldValidationsCheck()
+          //  fieldValidationsCheck()
+
+           // remove thi  and uncomment above
+            navigateToMainActivity()
 
         })
 

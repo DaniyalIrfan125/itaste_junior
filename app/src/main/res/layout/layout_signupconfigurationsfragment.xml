@@ -10,7 +10,8 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/mainBackground">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -52,7 +53,8 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="English"
                         android:textColor="@color/titleTextColorBlack"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:buttonTint="@color/colorOrange"/>
 
 
                     <RadioButton
@@ -63,7 +65,8 @@
                         android:fontFamily="@font/roboto_regular"
                         android:text="Arabic"
                         android:textColor="@color/titleTextColorBlack"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:buttonTint="@color/colorOrange"/>
                 </RadioGroup>
 
 
@@ -211,7 +214,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
             android:layout_alignParentBottom="true"
-            android:background="@color/colorWhite">
+            android:background="@color/mainBackground">
 
             <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/ripple"

@@ -4,7 +4,8 @@
     android:layout_height="@dimen/_200sdp"
     android:layout_marginEnd="@dimen/_5sdp"
     android:id="@+id/linear_back"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/itemPackageBgColor">
 
 
     <LinearLayout

@@ -10,6 +10,7 @@
             type="com.techbayportal.itaste.ui.fragments.deleteaccountfragment.DeleteAccountViewModel" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:background="@color/mainBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.deleteaccountfragment.DeleteAccountFragment">
@@ -140,7 +141,7 @@
                 android:lineSpacingExtra="@dimen/_3sdp"
                 android:text="@string/cancel"
                 android:textAllCaps="true"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/titleTextColorBlack"
                 android:textSize="16sp">
             </Button>
 

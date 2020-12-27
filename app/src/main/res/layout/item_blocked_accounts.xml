@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:text="Syra I."
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/titleTextColorBlack"
                 android:textSize="16sp">
 
             </TextView>
@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
                 android:text="Syra Ikram"
+                android:textColor="@color/titleTextColorBlack"
                 android:textSize="12sp">
 
             </TextView>
@@ -91,6 +92,7 @@
                         android:layout_height="34dp"
                         android:background="@drawable/btn_curve_small"
                         android:text="Unblock"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textAllCaps="false" />
                 </com.balysv.materialripple.MaterialRippleLayout>
 

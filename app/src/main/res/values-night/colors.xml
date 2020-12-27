@@ -8,7 +8,7 @@
     <color name="colorOrange">#ff962d</color>
     <color name="colorLightOrange">#F6A95B</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="titleTextColorBlack">#1a1a1a</color>
+    <color name="titleTextColorBlack">#ffffff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorErrorRed">#d41818</color>
     <color name="colorGrey">#e1e1e1</color>
@@ -17,7 +17,33 @@
     <color name="topbar_greyColor">#eeeeee</color>
     <color name="dark_grey">#bfbfbf</color>
     <color name="color_darkGrey">#707070</color>
-    <color name="mainBackground" >#BE000000</color>
+    <color name="mainBackground" >#1a1a1a</color>
+    <color name="LoginBackground" >#BE000000</color>
+
+
+
+
+    <color name="gray_image_color">#828282</color>
+
+    <color name="colorGreyView">#a1a1a1</color>
+    <color name="colorAlertBox">#333333</color>
+    <color name="colorBlockBtnBg">#dfdfdf</color>
+    <color name="colorCommentGrey">#8f8f8f</color>
+    <color name="colorChatBg">#f8f8f8</color>
+    <color name="colorGreen">#34b100</color>
+    <color name="colorChatItemBg">#2a2a2a</color>
+    <color name="colorChatDetailGray">#949494</color>
+
+    <color name="bottomNavigationColor">#131313</color>
+    <color name="bottomSheetButtonColor">#2c2c2c</color>
+    <color name="btnRoundStrokeColor">#e1e1e1</color>
+    <color name="etBgStrokeColor">#e4e4e4</color>
+    <color name="directMessageBgUserColor">#1a1a1a</color>
+    <color name="notificationLlBgColor">#1a1a1a</color>
+    <color name="itemTimeBgColor">#141414</color>
+    <color name="cartItemBgColor">#2b2b2b</color>
+    <color name="layoutSearchBgColor">#161616</color>
+    <color name="itemPackageBgColor">#131313</color>
 
 
 </resources>

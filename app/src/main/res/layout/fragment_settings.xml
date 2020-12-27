@@ -10,6 +10,7 @@
             type="com.techbayportal.itaste.ui.fragments.settingsfragment.SettingsFragmentViewModel" />
     </data>
 <RelativeLayout
+    android:background="@color/mainBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.settingsfragment.SettingsFragment">
@@ -91,7 +92,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
                             android:text="About Us"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -134,7 +135,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Change Langauge"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -177,7 +178,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Tearms &amp; Conditions"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -220,7 +221,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Contact Us"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -262,7 +263,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Help &amp; FAQS"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -304,7 +305,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Ads"
-                            android:textColor="@color/colorGreyView"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
                         <ImageView
@@ -345,7 +346,7 @@
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Log Out"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
                         <ImageView

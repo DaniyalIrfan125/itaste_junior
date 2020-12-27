@@ -12,6 +12,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:layout_centerVertical="true"
             android:layout_width="match_parent"
             android:layout_height="51dp"
             android:layout_alignParentEnd="true"
@@ -29,7 +30,7 @@
 
                     android:id="@+id/sivInfluancerImage"
                     android:layout_width="47dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="47dp"
                     android:layout_margin="@dimen/_3sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
@@ -53,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:text="Syra Al Ameri"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/titleTextColorBlack"
                     android:textSize="12sp">
 
                 </TextView>
@@ -63,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_light"
                     android:text="So do you deliver this?"
+                    android:textColor="@color/titleTextColorBlack"
                     android:textSize="12sp">
 
                 </TextView>
@@ -81,6 +83,7 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/_10sdp"
+                    android:backgroundTint="@color/colorCommentGrey"
                     android:src="@drawable/ic_outline_favorite_border_24" />
 
             </LinearLayout>

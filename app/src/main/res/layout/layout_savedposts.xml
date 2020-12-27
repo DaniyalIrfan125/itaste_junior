@@ -12,7 +12,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/mainBackground">
 
         <RelativeLayout
             android:id="@+id/relative_top"
@@ -70,7 +71,7 @@
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="center"
                             android:text="Saved"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="20sp">
 
                         </TextView>

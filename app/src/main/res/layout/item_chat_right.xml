@@ -28,7 +28,7 @@
             android:layout_marginEnd="@dimen/_8sdp"
             android:background="@drawable/chat_round_corner_right"
 
-            android:backgroundTint="@color/colorChatGray"
+            android:backgroundTint="@color/colorChatItemBg"
             android:fontFamily="@font/roboto_regular"
             android:padding="@dimen/_8sdp"
             android:text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna"

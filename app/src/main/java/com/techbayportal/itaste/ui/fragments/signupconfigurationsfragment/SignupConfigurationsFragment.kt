@@ -33,7 +33,6 @@ class SignupConfigurationsFragment :
         })
 
         mViewModel.onDarkModeButtonClicked.observe(this, Observer {
-            Toast.makeText(context, "Dark Mode", Toast.LENGTH_SHORT).show()
             rl_dark_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
             rl_light_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
 
@@ -42,7 +41,6 @@ class SignupConfigurationsFragment :
         })
 
         mViewModel.onLightModeButtonClicked.observe(this, Observer {
-            Toast.makeText(context, "Light Mode", Toast.LENGTH_SHORT).show()
             rl_light_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
             rl_dark_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
 

@@ -31,7 +31,7 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_32sdp"
             android:background="@drawable/chat_round_corner"
-            android:backgroundTint="@color/colorChatGray"
+            android:backgroundTint="@color/colorChatItemBg"
             android:fontFamily="@font/roboto_regular"
             android:lineSpacingExtra="3sp"
             android:padding="@dimen/_8sdp"

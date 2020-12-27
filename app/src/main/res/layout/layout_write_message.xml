@@ -37,6 +37,8 @@
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="Write a Comment"
+                android:textColorHint="@color/titleTextColorBlack"
+                android:textColor="@color/titleTextColorBlack"
                 android:paddingStart="@dimen/_20sdp"
                 android:textSize="14sp">
 

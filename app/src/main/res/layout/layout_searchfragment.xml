@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/_2sdp"
-        android:background="@color/topbar_greyColor"
+        android:background="@color/layoutSearchBgColor"
         android:nestedScrollingEnabled="true"
         app:dragEdge="right"
         app:mode="same_level">
@@ -24,7 +24,7 @@
             android:layout_width="@dimen/_250sdp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
-            android:background="@color/colorWhite"
+            android:background="@color/mainBackground"
             android:orientation="vertical">
 
             <ScrollView
@@ -102,7 +102,7 @@
                         android:orientation='vertical'>
 
                         <RadioButton
-
+                            android:buttonTint="@color/colorOrange"
                             android:id="@+id/radia_id1"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
@@ -113,6 +113,7 @@
 
 
                         <RadioButton
+                            android:buttonTint="@color/colorOrange"
                             android:id="@+id/radia_id4"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
@@ -186,7 +187,7 @@
                         android:orientation='vertical'>
 
                         <RadioButton
-
+                            android:buttonTint="@color/colorOrange"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -196,6 +197,7 @@
 
 
                         <RadioButton
+                            android:buttonTint="@color/colorOrange"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -204,7 +206,7 @@
                             android:textSize="16sp" />
 
                         <RadioButton
-
+                            android:buttonTint="@color/colorOrange"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -214,7 +216,7 @@
 
 
                         <RadioButton
-
+                            android:buttonTint="@color/colorOrange"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -223,7 +225,7 @@
                             android:textSize="16sp" />
 
                         <RadioButton
-
+                            android:buttonTint="@color/colorOrange"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
@@ -233,7 +235,7 @@
 
 
                         <RadioButton
-
+                            android:buttonTint="@color/colorOrange"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"

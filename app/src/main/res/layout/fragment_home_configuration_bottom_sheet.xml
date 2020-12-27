@@ -17,6 +17,7 @@
         tools:context=".ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment">
 
         <LinearLayout
+
             android:id="@+id/ll_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,15 +39,16 @@
                 <com.balysv.materialripple.MaterialRippleLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:mrl_rippleColor="#838282">
+                    app:mrl_rippleColor="@color/titleTextColorBlack">
 
                     <Button
+                        android:backgroundTint="@color/bottomSheetButtonColor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Settings"
                         android:textAllCaps="false"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp" />
                 </com.balysv.materialripple.MaterialRippleLayout>
 
@@ -78,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Turn off notifications"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -108,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Contact Us"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 
 
@@ -169,7 +171,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Log Out"
-                    android:textColor="@color/colorBlack"
+                    android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 
             </LinearLayout>

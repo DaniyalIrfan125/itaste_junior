@@ -30,7 +30,7 @@
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_32sdp"
             android:background="@drawable/chat_round_corner"
-            android:backgroundTint="@color/colorChatGray"
+            android:backgroundTint="@color/colorChatItemBg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/sivInfluancerImage"
             app:layout_constraintTop_toTopOf="parent">

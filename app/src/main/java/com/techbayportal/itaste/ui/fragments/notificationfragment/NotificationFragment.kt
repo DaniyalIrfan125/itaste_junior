@@ -31,7 +31,7 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
 
     override fun onItemClickListener() {
         Toast.makeText(context, "Notification Clicked", Toast.LENGTH_SHORT).show()
-        rvNotificationItem.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorWhite))
+        rvNotificationItem.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.colorBlack))
     }
 
 

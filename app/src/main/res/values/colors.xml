@@ -19,14 +19,32 @@
     <color name="gray_image_color">#828282</color>
     <color name="color_darkGrey">#707070</color>
     <color name="mainBackground">#FFFFFF</color>
+    <color name="LoginBackground" >#FFFFFF</color>
+
+
     <color name="colorGreyView">#a1a1a1</color>
     <color name="colorAlertBox">#eeeeee</color>
     <color name="colorBlockBtnBg">#dfdfdf</color>
     <color name="colorCommentGrey">#8f8f8f</color>
     <color name="colorChatBg">#f8f8f8</color>
     <color name="colorGreen">#34b100</color>
-    <color name="colorChatGray">#dedede</color>
+    <color name="colorChatItemBg">#dedede</color>
     <color name="colorChatDetailGray">#4e4e4e</color>
+
+
+    <color name="bottomNavigationColor">#FFFFFF</color>
+    <color name="bottomSheetButtonColor">#dfdfdf</color>
+    <color name="btnRoundStrokeColor">#1a1a1a</color>
+    <color name="etBgStrokeColor">#1a1a1a</color>
+    <color name="directMessageBgUserColor">#e1e1e1</color>
+    <color name="notificationLlBgColor">#eeeeee</color>
+    <color name="itemTimeBgColor">#eeeeee</color>
+    <color name="cartItemBgColor">#eeeeee</color>
+    <color name="layoutSearchBgColor">#eeeeee</color>
+    <color name="itemPackageBgColor">#FFFFFF</color>
+
+
+
 
 
 

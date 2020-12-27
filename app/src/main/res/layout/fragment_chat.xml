@@ -12,6 +12,7 @@
 
     </data>
 <RelativeLayout
+    android:background="@color/mainBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.chatfragment.ChatFragment">
@@ -73,7 +74,7 @@
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center"
                         android:text="Ed Tamer"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textSize="20sp">
 
                     </TextView>

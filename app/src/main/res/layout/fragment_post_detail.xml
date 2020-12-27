@@ -13,6 +13,7 @@
 
 
     <RelativeLayout
+        android:background="@color/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragments.postdetailfragment.PostDetailFragment">
@@ -92,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Ed Tamer"
-                            android:textColor="@color/colorBlack"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="19sp">
 
                         </TextView>
@@ -104,6 +105,7 @@
                             android:drawablePadding="@dimen/_5sdp"
                             android:fontFamily="@font/roboto_light"
                             android:text="Jumeirah JLT, Dubai, UAE"
+                            android:textColor="@color/titleTextColorBlack"
                             android:textSize="12sp">
 
                         </TextView>
@@ -235,6 +237,7 @@
                                     android:background="@drawable/btn_curve_small"
                                     android:onClick="@{()->viewModel.onEditPostButtonClicked()}"
                                     android:text="Edit Post"
+                                    android:textColor="@color/titleTextColorBlack"
                                     android:textAllCaps="false" />
                             </com.balysv.materialripple.MaterialRippleLayout>
 

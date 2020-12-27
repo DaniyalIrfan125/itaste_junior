@@ -14,7 +14,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/transparent">
+        android:background="@drawable/bg_alert_box_transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -82,6 +82,7 @@ we can..."
                     android:padding="@dimen/_10sdp"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp"
+                    android:textColorHint="@color/titleTextColorBlack"
                     android:inputType="text" />
 
                 <com.balysv.materialripple.MaterialRippleLayout

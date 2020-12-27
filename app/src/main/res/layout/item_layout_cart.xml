@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_130sdp"
     android:layout_marginBottom="@dimen/_2sdp"
-    android:background="@color/topbar_greyColor"
+    android:background="@color/cartItemBgColor"
     app:dragEdge="right"
     app:mode="same_level">
 
@@ -40,6 +40,7 @@
 
     <!-- Your main layout here -->
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -47,7 +47,7 @@
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorWhite"
+                android:background="@color/bottomNavigationColor"
                 app:elevation="0dp"
                 app:itemIconTint="@drawable/bottom_item_color_tint"
                 app:labelVisibilityMode="unlabeled"

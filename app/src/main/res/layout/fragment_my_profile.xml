@@ -12,6 +12,7 @@
     </data>
 
     <RelativeLayout
+        android:background="@color/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragments.myprofilefragment.MyProfileFragment">
@@ -81,7 +82,7 @@
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="3sp"
                         android:text="Syra Ahmed"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp" />
 
                     <LinearLayout
@@ -139,7 +140,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onMyCartClicked()}"
                                 android:text="My Cart"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -182,7 +183,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onChangePasswordClicked()}"
                                 android:text="Change Password"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -224,7 +225,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onSavedPostsClicked()}"
                                 android:text="Saved Posts"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -264,7 +265,7 @@
                                 android:layout_weight="1.5"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Notifications"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <Switch
@@ -306,7 +307,7 @@
                                 android:layout_weight="1.5"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="Dark Mode"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <Switch
@@ -351,7 +352,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onReportBugClicked()}"
                                 android:text="Report a bug"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -395,7 +396,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onDeleteAccountClicked()}"
                                 android:text="Delete Account"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -439,7 +440,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onBlockedAccountClicked()}"
                                 android:text="Blocked Accounts"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -483,7 +484,7 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onLogoutClicked()}"
                                 android:text="Log Out"
-                                android:textColor="@color/colorBlack"
+                                android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
