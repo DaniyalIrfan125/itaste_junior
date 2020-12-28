@@ -29,7 +29,7 @@
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="4sp"
-                    android:text="Choose your language \n preference"
+                    android:text="@string/choose_your_language_n_preference"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/titleTextColorBlack"
@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/_15sdp"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="English"
+                        android:text="@string/english"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="18sp"
                         android:buttonTint="@color/colorOrange"/>
@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_15sdp"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Arabic"
+                        android:text="@string/arabic"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="18sp"
                         android:buttonTint="@color/colorOrange"/>
@@ -77,7 +77,7 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="4sp"
-                    android:text="Which mode you find \ninteresting?"
+                    android:text="@string/which_mode_you_find_ninteresting"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/titleTextColorBlack"
@@ -91,7 +91,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="3sp"
-                    android:text="Choose between light or dark mode to change interface."
+                    android:text="@string/choose_between_light_or_dark_mode_to_change_interface"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 
@@ -135,7 +135,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:gravity="center_horizontal"
                             android:lineSpacingExtra="3sp"
-                            android:text="Dark Mode"
+                            android:text="@string/dark_mode"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="14sp" />
 
@@ -171,7 +171,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:gravity="center_horizontal"
                             android:lineSpacingExtra="3sp"
-                            android:text="Light Mode"
+                            android:text="@string/light_mode"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="14sp" />
 
@@ -185,7 +185,7 @@
                     android:layout_marginTop="@dimen/_15sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="4sp"
-                    android:text="tell us where you \nare?"
+                    android:text="@string/tell_us_where_you_nare"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/titleTextColorBlack"
@@ -200,7 +200,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="3sp"
-                    android:text="Choose in which country of gulf you are \nlocated right now"
+                    android:text="@string/choose_in_which_country_of_gulf_you_are_nlocated_right_now"
                     android:textAlignment="center"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
@@ -235,7 +235,7 @@
                     android:background="@drawable/btn_curve_orange"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="@dimen/_3sdp"
-                    android:text="Next"
+                    android:text="@string/next"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp"

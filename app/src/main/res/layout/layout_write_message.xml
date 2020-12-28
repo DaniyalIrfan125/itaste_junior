@@ -36,7 +36,7 @@
                 android:layout_toStartOf="@+id/tvPostMessage"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/roboto_regular"
-                android:hint="Write a Comment"
+                android:hint="@string/write_a_comment"
                 android:textColorHint="@color/titleTextColorBlack"
                 android:textColor="@color/titleTextColorBlack"
                 android:paddingStart="@dimen/_20sdp"

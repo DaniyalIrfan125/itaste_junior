@@ -2,15 +2,207 @@
     <string name="app_name">iTaste</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="delete_account">Delete Account</string>
-    <string name="are_you_sure_you_want_to_delete_your_account_once_you_confirm_you_won_t_be_able_to_log_in_without_creating_a_new_account">Are you sure you want to delete your account? Once you confirm you won\'t be able to log in without creating a new account.</string>
-    <string name="confirm">CONFIRM</string>
-    <string name="cancel">CANCEL</string>
-    <string name="delete_icon">Delete Icon</string>
-    <string name="back_icon">Back Icon</string>
-    <string name="blocked_accounts">Blocked Accounts</string>
-    <string name="change_language">Change Language</string>
+
+    //Login Fragment
+    <string name="meet_the_good_taste_today">Meet the good taste today</string>
+    <string name="welcome">Welcome!</string>
+    <string name="time_to_cook_and_share_let_apos_s_sign_in">Time to cook and Share, Let\'s sign in</string>
+    <string name="enter_user_name">Enter user name</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign in</string>
+    <string name="guest_mode">GUEST MODE</string>
+    <string name="it_apos_s_your_first_time_here">It\'s your first time here?</string>
+
+    //Sign up Fragment
+    <string name="upload_profile_picture_logo">Upload Profile Picture/ Logo</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="set_user_name">Set User name</string>
+    <string name="_971">+971</string>
+    <string name="_0555_5555">0555 5555</string>
+    <string name="set_password">Set Password</string>
+
+    //=========COMMON========= Strings used in Multiple Fragments
+    <string name="sign_up">Sign up</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="next">NEXT</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="arabic">Arabic</string>
     <string name="english">English</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="my_cart">My Cart</string>
+    <string name="create_a_strong_password_including_alphabet_n_numbers_and_symbols">Create a strong password including alphabet,<br> </br> numbers and symbols.</string>
+    <string name="confirm_your_new_password">Confirm your new password</string>
+    <string name="cancel">cancel</string>
+    <string name="back_icon">Back Icon</string>
+    <string name="blocked_accounts">Blocked Accounts</string>
+    <string name="email">Email</string>
+    <string name="log_out">Log Out</string>
+    <string name="copy_link">Copy Link</string>
+    <string name="direct_message">Direct Message</string>
+    <string name="settings">Settings</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="deliverable">Deliverable</string>
+    <string name="not_deliverable">Not Deliverable</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+
+    //Forget Password Fragment
+    <string name="enter_your_n_email">Enter your <br> </br>email</string>
+    <string name="a_verification_code_will_be_sent_to_your_email">A verification code will be sent to your email</string>
+
+    //OTP Verification Fragment
+    <string name="verify_the_ncode">Verify the<br> </br>code</string>
+    <string name="enter_the_5_digit_code_sent_to_email_sa_gmail_com">Enter the 5- digit code sent to email sa****@gmail.com</string>
+
+    //Change password Fragment
+    <string name="new_npassword">New <br> </br>Password</string>
+    <string name="new_password">New password</string>
+    <string name="type_new_password">Type new password</string>
+    <string name="save">SAVE</string>
+
+    //SelectAccountTypeFragment
+    <string name="what_are_you_looking_nfor">What are you looking<br> </br>for?</string>
+    <string name="let_apos_s_get_you_started_by_creating_a_new_account">Let\'s get you started by creating a new account</string>
+    <string name="i_apos_m_looking_to_explore_nfood_around_me">I\'m looking to explore <br> </br> food around me</string>
+    <string name="i_m_looking_to_showcase_nmy_food">I\'m looking to showcase <br> </br>my food</string>
+
+    //Sign Up configuration Fragment
+    <string name="choose_your_language_n_preference">Choose your language <br> </br> preference</string>
+    <string name="which_mode_you_find_ninteresting">Which mode you find <br> </br>interesting?</string>
+    <string name="choose_between_light_or_dark_mode_to_change_interface">Choose between light or dark mode to change interface.</string>
+    <string name="light_mode">Light Mode</string>
+    <string name="tell_us_where_you_nare">tell us where you <br> </br>are?</string>
+    <string name="choose_in_which_country_of_gulf_you_are_nlocated_right_now">Choose in which country of gulf you are <br> </br>located right now</string>
+
+    //Notification Fragment
+    <string name="notifications">Notifications</string>
+
+    //My Profile Fragment
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="saved_posts">Saved Posts</string>
+    <string name="report_a_bug">Report a bug</string>
+    <string name="switch_to_premium_account">Switch to Premium Account</string>
+    <string name="switching_to_premium_account_will_let_you_post_your_products_and_show_case_them_but_you_can_still_watch_what_others_are_on_to">Switching to premium account will let you post your products and show case them, but you can still watch what others are on to.</string>
+
+    //My Cart Fragment and Adapter
+    //=>adapter
+    <string name="send_message">Send message</string>
+
+    //ChangeExistingPasswordFragment
+    <string name="change_npassword">Change <br> </br>Password</string>
+    <string name="type_existing_password">Type Existing Password</string>
+
+    //SavedPostsFragment
+    <string name="saved">Saved</string>
+    <string name="select">Select</string>
+
+    //ReportBugDialogFragment
+    <string name="send_a_bug_report">Send a Bug Report</string>
+    <string name="type_message_and_we_ll_get_back_to_you_as_soon_as_we_can">Type message and we\'ll get back to you as soon as we can…</string>
+    <string name="submit">Submit</string>
+
+    //Delete Account Fragment
+    <string name="delete_account">Delete Account</string>
+    <string name="delete_icon">Delete Icon</string>
+    <string name="are_you_sure_you_want_to_delete_your_account_once_you_confirm_you_won_t_be_able_to_log_in_without_creating_a_new_account">Are you sure you want to delete your account? Once you confirm you won\'t be able to log in without creating a new account.</string>
+    <string name="confirm">confirm</string>
+
+    //Account Deleted Fragment
+    <string name="back_to_login_page">Back to login page</string>
+    <string name="account_deleted">Account Deleted</string>
+    <string name="your_account_is_successfully_deleted_to_keep_exploring_out_our_services_you_need_to_create_a_new_account">Your account is successfully deleted, to keep exploring out our services you need to create a new account.</string>
+    <string name="image_account_deleted">Image Account Deleted</string>
+    <string name="done_and_exit">Done and Exit</string>
+    <string name="create_new_account">Create New Account</string>
+
+    //Direct Messages Fragment
+    <string name="message">Message</string>
+
+    //NewMessageFragment
+    <string name="new_message">New Message</string>
+    <string name="to">To</string>
+    <string name="search">Search</string>
+    //=>separate layout
+    <string name="write_a_comment">Write a Comment</string>
+
+    //SearchFragment
+    <string name="what_are_you_looking_for">What are you looking for?</string>
+    <string name="search_filter">Search Filter</string>
+    <string name="search_according_to_you_area_you_can_set_filters_to_what_best_suits_you">Search according to you area, you can set filters to what best suits you.</string>
+    <string name="distance">Distance</string>
+    <string name="_5_6_km">5 – 6 Km</string>
+    <string name="or_choose_by_area">Or Choose by Area</string>
+    <string name="food_category">Food Category</string>
+    <string name="turkish_food">Turkish Food</string>
+    <string name="arabian_food">Arabian Food</string>
+    <string name="chinese">Chinese</string>
+    <string name="hot_beverages">Hot Beverages</string>
+    <string name="fast_food">Fast Food</string>
+    <string name="apply">Apply</string>
+
+    //VendorProfileFragment
+    <string name="user_name">user name</string>
+    <string name="bio">bio</string>
+    <string name="phone_number">phone number</string>
     <string name="save_changes">Save Changes</string>
+
+    //ChoosePackageFragment
+    <string name="choose_package">Choose Package</string>
+    <string name="now_that_your_account_is_approved_you_need_to_pick_none_of_our_packages_so_that_nothing_can_stop_nfrom_posting">Now that your account is approved you need to pick \none of our packages, so that nothing can stop \nfrom posting.</string>
+    <string name="proceed_to_checkout">Proceed To Checkout</string>
+
+    //ContactUsFragment
+    <string name="get_in_touch">Get in Touch</string>
+    <string name="name">name</string>
+    <string name="ed_tamer">Ed Tamer</string>
+    <string name="email_123_com">email@123.com</string>
+    <string name="what_do_you_want_to_talk_about">What do you want to talk about?</string>
+    <string name="ask_us_anything">Ask us anything…</string>
+    <string name="send">Send</string>
+
+    //HomeConfigurationBottomSheetFragment
+    <string name="turn_off_notifications">Turn off notifications</string>
+
+    //HomeItemBottomSheetFragment
+    <string name="report">Report</string>
+    <string name="share_to">Share to</string>
+    <string name="turn_on_post_notifications">Turn on post notifications</string>
+    <string name="block">Block</string>
+
+    //PostDetailBottomSheetFragment
+    <string name="edit_post">Edit Post</string>
+    <string name="delete_post">Delete Post</string>
+    <string name="turn_off_commenting">Turn off commenting</string>
+    <string name="share_to_dots">Share to…</string>
+
+    //ProfileFragment
+    <string name="posts">Posts</string>
+    <string name="likes">Likes</string>
+    <string name="followers">Followers</string>
+    <string name="follow">Follow</string>
+
+    //SettingsFragment
+    <string name="about_us">About Us</string>
+    <string name="change_langauge">Change Langauge</string>
+    <string name="tearms_amp_conditions"><![CDATA[Tearms & Conditions]]></string>
+    <string name="help_amp_faqs"><![CDATA[Help & FAQS]]></string>
+    <string name="ads">Ads</string>
+
+    //SignUpVendorFragment
+    <string name="days_of_work">Days of Work</string>
+    <string name="select_days_you_want_to_work_on">Select days you want to work on.</string>
+    <string name="are_your_services">Are your services:</string>
+    <string name="description_optional">Description (Optional)</string>
+    <string name="write_something_about_your_shop">Write something about your shop…</string>
+    <string name="let_s_go">Let\'s Go</string>
+
+    //UserProfileFragment
+    <string name="syra_ahmed">Syra Ahmed</string>
+    <string name="syraahmed102">SyraAhmed102</string>
+
+    //ChangeLanguageFragment
+    <string name="change_language">Change Language</string>
+
 </resources>

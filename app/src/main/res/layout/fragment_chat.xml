@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="end"
-                        android:text="Select"
+                        android:text="@string/select"
                         android:textColor="@color/colorOrange"
                         android:textSize="14sp"></TextView>
 

@@ -31,7 +31,8 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_backarrow" />
+            android:src="@drawable/icon_backarrow"
+            android:contentDescription="@string/back_icon" />
 
         <TextView
             android:id="@+id/tv_backToLogin"
@@ -41,7 +42,7 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/btn_back"
             android:fontFamily="@font/roboto_regular"
-            android:text="Back to login page"
+            android:text="@string/back_to_login_page"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="12sp">
 
@@ -64,7 +65,8 @@
             android:layout_width="@dimen/_65sdp"
             android:layout_height="@dimen/_65sdp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon_deleted_img" />
+            android:src="@drawable/icon_deleted_img"
+            android:contentDescription="@string/image_account_deleted" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,7 +75,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="5sp"
-            android:text="Account Deleted"
+            android:text="@string/account_deleted"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="25sp" />
@@ -86,7 +88,7 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="3sp"
-            android:text="Your account is successfully deleted, to keep exploring out our services you need to create a new account."
+            android:text="@string/your_account_is_successfully_deleted_to_keep_exploring_out_our_services_you_need_to_create_a_new_account"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp" />
@@ -123,7 +125,7 @@
                 android:background="@drawable/btn_curve_orange"
                 android:fontFamily="@font/roboto_bold"
                 android:lineSpacingExtra="@dimen/_3sdp"
-                android:text="DONE AND EXIT"
+                android:text="@string/done_and_exit"
                 android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp">
@@ -151,7 +153,7 @@
                 android:background="@drawable/btn_curve_simple"
                 android:fontFamily="@font/roboto_bold"
                 android:lineSpacingExtra="@dimen/_3sdp"
-                android:text="CREATE NEW ACCOUNT"
+                android:text="@string/create_new_account"
                 android:textAllCaps="true"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="16sp">

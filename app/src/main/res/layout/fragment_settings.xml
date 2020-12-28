@@ -40,7 +40,7 @@
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
-            android:text="Settings"
+            android:text="@string/settings"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="22sp">
 
@@ -91,7 +91,7 @@
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="About Us"
+                            android:text="@string/about_us"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -134,7 +134,7 @@
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Change Langauge"
+                            android:text="@string/change_langauge"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -177,7 +177,7 @@
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Tearms &amp; Conditions"
+                            android:text="@string/tearms_amp_conditions"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -220,7 +220,7 @@
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Contact Us"
+                            android:text="@string/contact_us"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -262,7 +262,7 @@
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Help &amp; FAQS"
+                            android:text="@string/help_amp_faqs"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -304,7 +304,7 @@
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Ads"
+                            android:text="@string/ads"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -345,7 +345,7 @@
                             android:layout_marginStart="@dimen/_15sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Log Out"
+                            android:text="@string/log_out"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -386,7 +386,7 @@
                             android:layout_marginStart="@dimen/_10sdp"
                             android:layout_weight="1"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Switch to Premium Account"
+                            android:text="@string/switch_to_premium_account"
                             android:textColor="@color/colorOrange"
                             android:textSize="14sp" />
 
@@ -405,9 +405,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_20sdp"
                         android:fontFamily="@font/roboto_light"
-                        android:text="Switching to premium account will let you post your
-products and show case them, but you can still watch
-what others are on to."
+                        android:text="@string/switching_to_premium_account_will_let_you_post_your_products_and_show_case_them_but_you_can_still_watch_what_others_are_on_to"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="15sp"
                         android:layout_marginBottom="@dimen/_20sdp"/>

@@ -159,7 +159,7 @@ ab illo inventore veritatis et quas..."
                     android:background="@drawable/btn_send_message_background"
                     android:fontFamily="@font/roboto_medium"
                     android:lineSpacingExtra="@dimen/_3sdp"
-                    android:text="Send message"
+                    android:text="@string/send_message"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack"
                     android:textSize="12sp">

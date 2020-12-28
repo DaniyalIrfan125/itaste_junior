@@ -42,7 +42,7 @@
                 android:layout_alignParentBottom="true"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
-                android:text="My Cart"
+                android:text="@string/my_cart"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="22sp">
 

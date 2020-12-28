@@ -50,7 +50,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/antara_distance"
-                        android:text="Meet the good taste today"
+                        android:text="@string/meet_the_good_taste_today"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="37sp" />
 
@@ -60,7 +60,7 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="7sp"
-                        android:text="Welcome!"
+                        android:text="@string/welcome"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="34sp" />
 
@@ -71,7 +71,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:letterSpacing="-0.01"
                         android:lineSpacingExtra="3sp"
-                        android:text="Time to cook and Share, Let&apos;s sign in"
+                        android:text="@string/time_to_cook_and_share_let_apos_s_sign_in"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp" />
 
@@ -84,7 +84,7 @@
                         android:layout_marginEnd="@dimen/_25sdp"
                         android:background="@drawable/ed_states"
                         android:fontFamily="@font/roboto_regular"
-                        android:hint="Enter user name"
+                        android:hint="@string/enter_user_name"
                         android:imeOptions="actionNext"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
@@ -113,7 +113,7 @@
                         android:layout_marginEnd="@dimen/_25sdp"
                         android:background="@drawable/ed_states"
                         android:fontFamily="@font/roboto_regular"
-                        android:hint="Enter Password"
+                        android:hint="@string/enter_password"
                         android:imeOptions="actionNext"
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
@@ -142,7 +142,7 @@
                         android:letterSpacing="-0.01"
                         android:lineSpacingExtra="3sp"
                         android:onClick="@{() -> viewModel.onForgotPasswordClicked()}"
-                        android:text="Forgot Password?"
+                        android:text="@string/forgot_password"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp" />
 
@@ -167,7 +167,7 @@
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="@dimen/_3sdp"
                             android:onClick="@{() -> viewModel.onLoginClicked()}"
-                            android:text="Sign in"
+                            android:text="@string/sign_in"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
                             android:textSize="16sp">
@@ -194,7 +194,7 @@
                             android:background="@drawable/btn_curve_grey"
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="@dimen/_3sdp"
-                            android:text="GUEST MODE"
+                            android:text="@string/guest_mode"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
                             android:textSize="16sp">
@@ -216,7 +216,7 @@
                             android:fontFamily="@font/roboto_bold"
                             android:letterSpacing="-0.01"
                             android:lineSpacingExtra="3sp"
-                            android:text="It&apos;s your first time here?"
+                            android:text="@string/it_apos_s_your_first_time_here"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="14sp" />
 
@@ -228,7 +228,7 @@
                             android:fontFamily="@font/roboto_bold"
                             android:letterSpacing="-0.01"
                             android:lineSpacingExtra="3sp"
-                            android:text="Sign up"
+                            android:text="@string/sign_up"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="14sp" />
                     </LinearLayout>

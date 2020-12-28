@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/antara_distance"
-                android:text="Meet the good taste today"
+                android:text="@string/meet_the_good_taste_today"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="37sp" />
 
@@ -61,7 +61,7 @@
                 android:background="@drawable/btn_curve_orange"
                 android:fontFamily="@font/roboto_bold"
                 android:lineSpacingExtra="@dimen/_3sdp"
-                android:text="Sign in"
+                android:text="@string/sign_in"
                 android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp">

@@ -30,7 +30,8 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_15sdp"
-            android:src="@drawable/icon_backarrow" />
+            android:src="@drawable/icon_backarrow"
+            android:contentDescription="@string/back_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -41,7 +42,7 @@
             android:layout_alignParentBottom="true"
             android:fontFamily="@font/roboto_bold"
             android:gravity="center"
-            android:text="Get in Touch"
+            android:text="@string/get_in_touch"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="22sp"
             android:contentDescription="@string/back_icon">
@@ -84,7 +85,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
-                            android:text="NAME"
+                            android:text="@string/name"
+                            android:textAllCaps="true"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -92,9 +94,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
-                            android:text="Ed Tamer"
+                            android:hint="@string/ed_tamer"
+                            android:textColorHint="@color/titleTextColorBlack"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="14sp"></EditText>
+                            android:textSize="14sp" />
 
 
                     </LinearLayout>
@@ -109,7 +112,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
-                            android:text="EMAIL"
+                            android:text="@string/email"
+                            android:textAllCaps="true"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -117,9 +121,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
-                            android:text="email@123.com"
+                            android:hint="@string/email_123_com"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="14sp"></EditText>
+                            android:textColorHint="@color/titleTextColorBlack"
+                            android:textSize="14sp" />
 
 
                     </LinearLayout>
@@ -134,7 +139,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
-                            android:text="WHAT DO YOU WANT TO TALK ABOUT?"
+                            android:text="@string/what_do_you_want_to_talk_about"
+                            android:textAllCaps="true"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -144,8 +150,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="350dp"
                             android:fontFamily="@font/roboto_light"
-                            android:text="Ask us anything..."
+                            android:text="@string/ask_us_anything"
                             android:gravity="start"
+                            android:textColorHint="@color/titleTextColorBlack"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="14sp"
                             android:background="@drawable/btn_curve_small">
@@ -181,7 +188,7 @@
             android:background="@drawable/btn_curve_orange"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="@dimen/_3sdp"
-            android:text="Send"
+            android:text="@string/send"
             android:textAllCaps="true"
             android:textColor="@color/colorBlack"
             android:textSize="16sp">

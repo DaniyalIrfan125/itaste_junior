@@ -46,7 +46,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Settings"
+                        android:text="@string/settings"
                         android:textAllCaps="false"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp" />
@@ -79,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Turn off notifications"
+                    android:text="@string/turn_off_notifications"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 
@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Contact Us"
+                    android:text="@string/contact_us"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 
@@ -140,7 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="English"
+                    android:text="@string/english"
                     android:textColor="@color/colorOrange"
                     android:textSize="14sp" />
 
@@ -170,7 +170,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Log Out"
+                    android:text="@string/log_out"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 

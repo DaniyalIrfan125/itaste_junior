@@ -30,7 +30,7 @@
                     android:layout_gravity="center_horizontal"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="5sp"
-                    android:text="What are you looking \nfor?"
+                    android:text="@string/what_are_you_looking_nfor"
                     android:textAlignment="center"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="25sp" />
@@ -43,7 +43,7 @@
                     android:fontFamily="@font/roboto_regular"
                     android:letterSpacing="-0.01"
                     android:lineSpacingExtra="3sp"
-                    android:text="Let&apos;s get you started by creating a new account"
+                    android:text="@string/let_apos_s_get_you_started_by_creating_a_new_account"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp"
                     android:textStyle="normal" />
@@ -73,7 +73,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/roboto_regular"
                     android:lineSpacingExtra="4sp"
-                    android:text="I&apos;m looking to explore \nfood around me"
+                    android:text="@string/i_apos_m_looking_to_explore_nfood_around_me"
                     android:textAlignment="center"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="18sp" />
@@ -105,7 +105,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:fontFamily="@font/roboto_regular"
                     android:lineSpacingExtra="4sp"
-                    android:text="I'm looking to showcase \nmy food"
+                    android:text="@string/i_m_looking_to_showcase_nmy_food"
                     android:textAlignment="center"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="18sp" />
@@ -137,7 +137,7 @@
                 android:background="@drawable/btn_curve_orange"
                 android:fontFamily="@font/roboto_bold"
                 android:lineSpacingExtra="@dimen/_3sdp"
-                android:text="Next"
+                android:text="@string/next"
                 android:textAllCaps="true"
                 android:textColor="@color/colorBlack"
                 android:textSize="16sp">

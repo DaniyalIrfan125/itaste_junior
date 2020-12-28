@@ -39,7 +39,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:fontFamily="@font/roboto_bold"
                 android:lineSpacingExtra="5sp"
-                android:text="Verify the \ncode"
+                android:text="@string/verify_the_ncode"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/titleTextColorBlack"
@@ -53,8 +53,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:letterSpacing="-0.01"
                 android:lineSpacingExtra="3sp"
-                android:text="Enter the 5- digit code sent to email
-sa****@gmail.com"
+                android:text="@string/enter_the_5_digit_code_sent_to_email_sa_gmail_com"
                 android:textAlignment="center"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="14sp" />
@@ -107,7 +106,7 @@ sa****@gmail.com"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="@dimen/_3sdp"
                     android:onClick="@{()-> viewModel.onNextButtonClicked()}"
-                    android:text="NEXT"
+                    android:text="@string/next"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp">

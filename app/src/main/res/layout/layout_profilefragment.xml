@@ -126,7 +126,7 @@
                         android:layout_gravity="end"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="3sp"
-                        android:text="Posts"
+                        android:text="@string/posts"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -157,7 +157,7 @@
                         android:layout_gravity="center_horizontal"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="3sp"
-                        android:text="Likes"
+                        android:text="@string/likes"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp" />
 
@@ -185,7 +185,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="3sp"
-                        android:text="Followers"
+                        android:text="@string/followers"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp" />
 
@@ -230,7 +230,7 @@
                         android:background="@drawable/btn_direct_message_curve"
                         android:fontFamily="@font/roboto_regular"
                         android:lineSpacingExtra="@dimen/_3sdp"
-                        android:text="Direct Message"
+                        android:text="@string/direct_message"
                         android:textAllCaps="true"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp">
@@ -257,7 +257,7 @@
                         android:background="@drawable/btn_orange_curve_profile"
                         android:fontFamily="@font/roboto_regular"
                         android:lineSpacingExtra="@dimen/_3sdp"
-                        android:text="Follow"
+                        android:text="@string/follow"
                         android:textAllCaps="true"
                         android:textColor="@color/colorBlack"
                         android:textSize="14sp">

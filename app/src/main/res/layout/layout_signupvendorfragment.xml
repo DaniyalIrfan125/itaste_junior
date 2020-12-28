@@ -53,7 +53,7 @@
                     android:layout_marginTop="@dimen/_25sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="3sp"
-                    android:text="Days of Work"
+                    android:text="@string/days_of_work"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="16sp" />
 
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:lineSpacingExtra="3sp"
-                    android:text="Select days you want to work on."
+                    android:text="@string/select_days_you_want_to_work_on"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
 
@@ -79,7 +79,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="3sp"
-                    android:text="Are your services:"
+                    android:text="@string/are_your_services"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="16sp" />
 
@@ -96,7 +96,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Deliverable"
+                        android:text="@string/deliverable"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp" />
 
@@ -107,7 +107,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Not Deliverable"
+                        android:text="@string/not_deliverable"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp" />
                 </RadioGroup>
@@ -118,7 +118,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="-3sp"
-                    android:text="Description (Optional)"
+                    android:text="@string/description_optional"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="16sp" />
 
@@ -130,7 +130,7 @@
                     android:background="@drawable/item_days_grey_boundary"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="top"
-                    android:hint="Write something about your shop..."
+                    android:hint="@string/write_something_about_your_shop"
                     android:imeOptions="actionNext"
                     android:inputType="text|textMultiLine"
                     android:padding="10dp"
@@ -160,7 +160,7 @@
                         android:background="@drawable/btn_curve_orange"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="@dimen/_3sdp"
-                        android:text="Let's Go"
+                        android:text="@string/let_s_go"
                         android:textAllCaps="true"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp">

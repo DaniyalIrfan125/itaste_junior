@@ -44,7 +44,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="2sp"
-                        android:text="Search Filter"
+                        android:text="@string/search_filter"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="20sp" />
 
@@ -55,7 +55,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:letterSpacing="-0.03"
                         android:lineSpacingExtra="3sp"
-                        android:text="Search according to you area, you can set filters to what best suits you."
+                        android:text="@string/search_according_to_you_area_you_can_set_filters_to_what_best_suits_you"
                         android:textAlignment="textStart"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp" />
@@ -70,7 +70,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="-4sp"
-                            android:text="Distance"
+                            android:text="@string/distance"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="18sp" />
 
@@ -81,7 +81,7 @@
                             android:layout_marginEnd="@dimen/_10sdp"
                             android:fontFamily="@font/roboto_regular"
                             android:lineSpacingExtra="-4sp"
-                            android:text="5- 6 Km"
+                            android:text="@string/_5_6_km"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="18sp" />
                     </RelativeLayout>
@@ -107,7 +107,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Deliverable"
+                            android:text="@string/deliverable"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -118,7 +118,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Not Deliverable"
+                            android:text="@string/not_deliverable"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
                     </RadioGroup>
@@ -129,7 +129,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="-4sp"
-                        android:text="Or Choose by Area"
+                        android:text="@string/or_choose_by_area"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="18sp" />
 
@@ -173,7 +173,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="-4sp"
-                        android:text="Food Category"
+                        android:text="@string/food_category"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -191,7 +191,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Turkish Food"
+                            android:text="@string/turkish_food"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -201,7 +201,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Arabian Food"
+                            android:text="@string/arabian_food"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -210,26 +210,7 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Chinese"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-
-                        <RadioButton
-                            android:buttonTint="@color/colorOrange"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="Hot Beverages"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <RadioButton
-                            android:buttonTint="@color/colorOrange"
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="Fast Food"
+                            android:text="@string/chinese"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -239,7 +220,26 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Arabian Food"
+                            android:text="@string/hot_beverages"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+                        <RadioButton
+                            android:buttonTint="@color/colorOrange"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/fast_food"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="16sp" />
+
+
+                        <RadioButton
+                            android:buttonTint="@color/colorOrange"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="@string/arabian_food"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -265,7 +265,7 @@
                             android:background="@drawable/btn_curve_orange"
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="@dimen/_3sdp"
-                            android:text="Apply"
+                            android:text="@string/apply"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
                             android:textSize="16sp">
@@ -325,7 +325,7 @@
                         android:background="@color/transparent"
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="center_vertical|start"
-                        android:hint="What are you looking for?"
+                        android:hint="@string/what_are_you_looking_for"
                         android:imeOptions="actionDone"
                         android:paddingStart="@dimen/_10sdp"
                         android:paddingEnd="@dimen/_20sdp"

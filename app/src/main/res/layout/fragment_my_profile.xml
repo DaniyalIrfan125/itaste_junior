@@ -102,7 +102,7 @@
                             android:gravity="center_horizontal"
                             android:lineSpacingExtra="3sp"
                             android:onClick="@{()->viewModel.onEditProfileClicked()}"
-                            android:text="Edit Profile"
+                            android:text="@string/edit_profile"
                             android:textColor="@color/colorOrange"
                             android:textSize="12sp" />
                     </LinearLayout>
@@ -139,7 +139,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onMyCartClicked()}"
-                                android:text="My Cart"
+                                android:text="@string/my_cart"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -182,7 +182,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onChangePasswordClicked()}"
-                                android:text="Change Password"
+                                android:text="@string/change_password"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -224,7 +224,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onSavedPostsClicked()}"
-                                android:text="Saved Posts"
+                                android:text="@string/saved_posts"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -264,7 +264,7 @@
                                 android:layout_marginStart="@dimen/_14sdp"
                                 android:layout_weight="1.5"
                                 android:fontFamily="@font/roboto_regular"
-                                android:text="Notifications"
+                                android:text="@string/notifications"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -306,7 +306,7 @@
                                 android:layout_marginStart="@dimen/_14sdp"
                                 android:layout_weight="1.5"
                                 android:fontFamily="@font/roboto_regular"
-                                android:text="Dark Mode"
+                                android:text="@string/dark_mode"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -351,7 +351,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onReportBugClicked()}"
-                                android:text="Report a bug"
+                                android:text="@string/report_a_bug"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -395,7 +395,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onDeleteAccountClicked()}"
-                                android:text="Delete Account"
+                                android:text="@string/delete_account"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -439,7 +439,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onBlockedAccountClicked()}"
-                                android:text="Blocked Accounts"
+                                android:text="@string/blocked_accounts"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -483,7 +483,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:onClick="@{()->viewModel.onLogoutClicked()}"
-                                android:text="Log Out"
+                                android:text="@string/log_out"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
@@ -525,7 +525,7 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:text="Switch to Premium Account"
+                                android:text="@string/switch_to_premium_account"
                                 android:textColor="@color/colorOrange"
                                 android:textSize="16sp" />
 
@@ -544,9 +544,7 @@
                             android:layout_marginStart="@dimen/_24sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
                             android:fontFamily="@font/roboto_light"
-                            android:text="Switching to premium account will let you post your
-products and show case them, but you can still watch
-what others are on to."
+                            android:text="@string/switching_to_premium_account_will_let_you_post_your_products_and_show_case_them_but_you_can_still_watch_what_others_are_on_to"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="15sp" />
 

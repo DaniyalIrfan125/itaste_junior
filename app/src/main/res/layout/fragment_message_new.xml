@@ -70,7 +70,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="center"
-                            android:text="New Message"
+                            android:text="@string/new_message"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="22sp"></TextView>
 
@@ -127,7 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="To"
+                        android:text="@string/to"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="20sp">
 
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
                         android:fontFamily="@font/roboto_regular"
-                        android:hint="Search"
+                        android:hint="@string/search"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="20sp">
 

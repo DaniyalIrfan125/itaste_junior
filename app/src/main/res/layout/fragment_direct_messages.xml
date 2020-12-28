@@ -68,7 +68,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_bold"
                             android:gravity="center"
-                            android:text="Direct Message"
+                            android:text="@string/direct_message"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="22sp">
 
@@ -118,7 +118,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_curve_gray"
-                android:queryHint="dsadas"
                 android:searchIcon="@drawable/icon_search">
 
             </SearchView>
@@ -144,7 +143,7 @@
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Message"
+                android:text="@string/message"
                 android:textColor="@color/titleTextColorBlack">
 
             </TextView>
