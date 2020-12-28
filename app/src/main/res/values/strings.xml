@@ -77,6 +77,10 @@
 
     //Notification Fragment
     <string name="notifications">Notifications</string>
+    <string name="no_new_notifications">No new notifications</string>
+    <string name="today">Today</string>
+    <string name="icon_bell">icon bell</string>
+    <string name="check_out_this_section_for_app_updates_offers_and_other_general_notifications">Check out this section for app updates, offers and other general notifications</string>
 
     //My Profile Fragment
     <string name="edit_profile">Edit Profile</string>
@@ -204,5 +208,6 @@
 
     //ChangeLanguageFragment
     <string name="change_language">Change Language</string>
+
 
 </resources>

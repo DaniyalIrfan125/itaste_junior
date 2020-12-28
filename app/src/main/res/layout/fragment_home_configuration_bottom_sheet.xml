@@ -17,12 +17,11 @@
         tools:context=".ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment">
 
         <LinearLayout
-
             android:id="@+id/ll_top"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_marginBottom="14dp"
             android:background="@drawable/bg_alert_box"
             android:orientation="vertical">
@@ -57,12 +56,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:background="@color/colorGreyView">
-
                 </View>
 
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -73,7 +69,6 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:orientation="vertical">
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -190,17 +185,16 @@
                 android:id="@+id/hsv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
                 android:fillViewport="true"
                 android:measureAllChildren="false"
                 android:scrollbars="none">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
                     android:layout_marginBottom="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
@@ -220,7 +214,7 @@
                         android:layout_width="43dp"
                         android:layout_height="44dp"
                         android:layout_margin="@dimen/_3sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:elevation="@dimen/_3sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/icon_flag_saudi"
@@ -232,7 +226,7 @@
                         android:layout_width="43dp"
                         android:layout_height="44dp"
                         android:layout_margin="@dimen/_3sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:elevation="@dimen/_3sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/icon_flag_saudi"
@@ -244,7 +238,7 @@
                         android:layout_width="43dp"
                         android:layout_height="44dp"
                         android:layout_margin="@dimen/_3sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:elevation="@dimen/_3sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/icon_flag_saudi"
@@ -256,22 +250,16 @@
                         android:layout_width="43dp"
                         android:layout_height="44dp"
                         android:layout_margin="@dimen/_3sdp"
-                        android:layout_marginRight="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
                         android:elevation="@dimen/_3sdp"
                         android:scaleType="fitXY"
                         android:src="@drawable/icon_flag_saudi"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         tools:layout_editor_absoluteX="116dp"
                         tools:layout_editor_absoluteY="61dp" />
-
 
                 </LinearLayout>
             </HorizontalScrollView>
-
-
         </LinearLayout>
-
-
     </RelativeLayout>
-
 </layout>

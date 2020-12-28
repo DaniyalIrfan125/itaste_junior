@@ -30,7 +30,8 @@
             android:layout_height="@dimen/_15sdp"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/_15sdp"
-            android:src="@drawable/icon_backarrow" />
+            android:src="@drawable/icon_backarrow"
+            android:contentDescription="@string/back_icon" />
 
         <TextView
 
@@ -63,7 +64,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Today"
+            android:text="@string/today"
             android:textSize="12sp"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/titleTextColorBlack"
@@ -95,21 +96,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relative_top"
+        app:layout_constraintTop_toTopOf="parent"
         android:visibility="gone">
 
         <ImageView
             android:layout_width="@dimen/_10sdp"
             android:layout_height="@dimen/_10sdp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="@dimen/_52sdp"
+            android:layout_marginStart="@dimen/_52sdp"
             android:src="@drawable/icon_bell_small_three" />
 
         <ImageView
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_40sdp"
             android:layout_marginTop="-4dp"
             android:src="@drawable/icon_bell_small_two" />
 
@@ -117,7 +118,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_25sdp"
             android:layout_marginTop="-4dp"
             android:src="@drawable/icon_bell_small_one" />
 
@@ -127,7 +128,8 @@
             android:layout_height="@dimen/_65sdp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="-15dp"
-            android:src="@drawable/icon_bell" />
+            android:src="@drawable/icon_bell"
+            android:contentDescription="@string/icon_bell" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -136,7 +138,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="5sp"
-            android:text="No new notifications"
+            android:text="@string/no_new_notifications"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="25sp" />
@@ -149,7 +151,7 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="3sp"
-            android:text="Check out this section for app updates, offers and other general notifications"
+            android:text="@string/check_out_this_section_for_app_updates_offers_and_other_general_notifications"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp" />

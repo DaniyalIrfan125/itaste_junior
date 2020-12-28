@@ -10,7 +10,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="51dp"
@@ -24,9 +23,7 @@
                 android:layout_height="51dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical">
-
                 <com.google.android.material.imageview.ShapeableImageView
-
                     android:id="@+id/sivInfluancerImage"
                     android:layout_width="47dp"
                     android:layout_height="match_parent"
@@ -37,13 +34,12 @@
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
-
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_weight="6.5"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
@@ -55,7 +51,6 @@
                     android:text="Syra Al Ameri"
                     android:textColor="@color/colorBlack"
                     android:textSize="16sp">
-
                 </TextView>
 
                 <TextView
@@ -64,7 +59,6 @@
                     android:fontFamily="@font/roboto_light"
                     android:text="So do you deliver this?"
                     android:textSize="16sp">
-
                 </TextView>
 
             </LinearLayout>
@@ -78,16 +72,10 @@
                 <ImageView
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:src="@drawable/ic_outline_favorite_border_24" />
-
             </LinearLayout>
-
-
         </LinearLayout>
-
     </RelativeLayout>
-
 </layout>
