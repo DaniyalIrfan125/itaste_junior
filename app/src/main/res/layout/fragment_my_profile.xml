@@ -30,6 +30,7 @@
                 android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
                 <ImageView
+                    app:tint="@color/mainIconColor"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:onClick="@{()->viewModel.onBackButtonClicked()}"
@@ -128,6 +129,7 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.6"
+                                app:tint="@color/mainIconColor"
                                 android:src="@drawable/icon_cart" />
 
 
@@ -168,6 +170,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.6"
@@ -210,6 +213,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.6"
@@ -229,6 +233,7 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_gravity="center"
@@ -253,6 +258,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.1"
@@ -293,6 +299,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -336,6 +343,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -356,6 +364,7 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_gravity="center"
@@ -380,6 +389,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -400,6 +410,7 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_gravity="center"
@@ -424,6 +435,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -444,6 +456,7 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_gravity="center"
@@ -468,6 +481,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
@@ -488,6 +502,7 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_gravity="center"
@@ -506,7 +521,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_15sdp"
-
                             android:orientation="horizontal"
                             android:weightSum="2">
 
@@ -530,6 +544,7 @@
                                 android:textSize="16sp" />
 
                             <ImageView
+                                app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_gravity="center"

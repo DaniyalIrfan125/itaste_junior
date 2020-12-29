@@ -26,6 +26,7 @@
                 android:src="@drawable/app_icon" />
 
             <ImageView
+                app:tint="@color/mainIconColor"
                 android:id="@+id/iv_home_configuration"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="@dimen/_17sdp"

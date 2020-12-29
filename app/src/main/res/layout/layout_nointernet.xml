@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="5sp"
-            android:text="No Internet"
+            android:text="@string/no_internet"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="25sp" />
@@ -42,8 +42,7 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="3sp"
-            android:text="Please make sure that you device is connected
-to internet. Or restart the application."
+            android:text="@string/please_make_sure_that_you_device_is_connected_to_internet_or_restart_the_application"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp" />

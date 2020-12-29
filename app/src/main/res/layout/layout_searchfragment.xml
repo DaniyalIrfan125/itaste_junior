@@ -311,7 +311,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginStart="16dp"
                         android:src="@drawable/icon_search"
-                        app:tint="@color/titleTextColorBlack" />
+                        app:tint="@color/mainIconColor" />
 
                     <EditText
                         android:id="@+id/ed_search"
@@ -339,6 +339,7 @@
                 </RelativeLayout>
 
                 <ImageView
+                    app:tint="@color/mainIconColor"
                     android:id="@+id/img_filter"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"

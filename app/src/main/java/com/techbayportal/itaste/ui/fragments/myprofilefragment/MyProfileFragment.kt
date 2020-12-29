@@ -37,6 +37,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        subscribeToObserveDataStore()
+
+
         switch_darkMode?.setOnCheckedChangeListener { _, isChecked ->
             val message: String
             if (isChecked) {
@@ -54,8 +57,16 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 message = "DarkMode OFF"
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
-
         }
+    }
+
+    private fun subscribeToObserveDataStore() {
+
+        //observing data from data store and showing
+        dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
+            switch_darkMode.isChecked = it
+        })
+
     }
 
 

@@ -33,6 +33,7 @@
                 android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
                 <ImageView
+                    app:tint="@color/mainIconColor"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                   android:layout_gravity="center"
@@ -114,6 +115,7 @@
 
 
                     <LinearLayout
+
                         android:id="@+id/ll_more"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -122,6 +124,7 @@
                         android:onClick="@{()->viewModel.onMoreButtonClicked()}">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:id="@+id/outlinedButton"
                             android:layout_width="16dp"
                             android:layout_height="4dp"
@@ -183,7 +186,7 @@
 
                         <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="28dp"
+                            android:layout_height="30dp"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:orientation="horizontal">
@@ -191,7 +194,6 @@
                             <ImageView
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:src="@drawable/icon_like_heart" />
@@ -200,7 +202,6 @@
                                 android:id="@+id/ivComment"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:layout_marginEnd="@dimen/_10sdp"
                                 android:src="@drawable/speech_bubble" />
@@ -209,10 +210,9 @@
                                 android:id="@+id/iv_Chat"
                                 android:layout_width="@dimen/_25sdp"
                                 android:layout_height="match_parent"
-                                android:layout_centerVertical="true"
                                 android:layout_gravity="center"
                                 android:onClick="@{()->viewModel.onSendButtonClicked()}"
-                                android:scaleType="fitXY"
+                                android:scaleType="centerCrop"
                                 android:src="@drawable/icon_send" />
                         </LinearLayout>
 
@@ -226,7 +226,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                app:mrl_rippleColor="@color/colorLightOrange">
+                                app:mrl_rippleColor="#838282">
 
                                 <Button
                                     android:id="@+id/btn_edit_post"

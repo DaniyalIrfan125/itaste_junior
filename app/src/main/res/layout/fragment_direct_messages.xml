@@ -32,6 +32,7 @@
 
 
             <ImageView
+                app:tint="@color/mainIconColor"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
                 android:src="@drawable/icon_backarrow"/>
@@ -86,6 +87,7 @@
                         android:onClick="@{()->viewModel.onNewMessageIconClicked()}">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:id="@+id/outlinedButton"
                             android:layout_width="@dimen/_14sdp"
                             android:layout_height="@dimen/_14sdp"
@@ -115,10 +117,12 @@
             android:orientation="vertical">
 
             <SearchView
+                app:tint="@color/mainIconColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_curve_gray"
-                android:searchIcon="@drawable/icon_search">
+                android:searchIcon="@drawable/icon_search"
+                android:queryHint="Search in chat">
 
             </SearchView>
 

@@ -13,7 +13,6 @@ import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.LayoutChangeexistingpasswordfragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_changeexistingpasswordfragment.*
-import kotlinx.android.synthetic.main.layout_forgotpasswordfragment.*
 
 @AndroidEntryPoint
 class ChangeExistingPasswordFragment :

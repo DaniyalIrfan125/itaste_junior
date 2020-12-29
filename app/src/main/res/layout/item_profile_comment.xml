@@ -78,6 +78,7 @@
                 android:gravity="end">
 
                 <ImageView
+                    app:tint="@color/mainIconColor"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"

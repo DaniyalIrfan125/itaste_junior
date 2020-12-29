@@ -26,6 +26,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            app:tint="@color/mainIconColor"
             android:id="@+id/btn_back"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"

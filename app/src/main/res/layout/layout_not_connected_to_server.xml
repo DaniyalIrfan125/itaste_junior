@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="5sp"
-            android:text="Not connected to server"
+            android:text="@string/not_connected_to_server"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="25sp" />
@@ -42,9 +42,7 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="3sp"
-            android:text="Hold On, something fishy is going on, let us fix it.
-In the mean time we apologies for any sort of
-delay."
+            android:text="@string/hold_on_something_fishy_is_going_on_let_us_fix_it_in_the_mean_time_we_apologies_for_any_sort_of_delay"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp" />

@@ -19,7 +19,7 @@
             <item android:right="@dimen/_25sdp">
 
                 <bitmap android:gravity="center_vertical|right" android:src="@drawable/icon_dropdown_spinner"
-                    android:tint="@color/titleTextColorBlack"/>
+                    android:tint="@color/mainIconColor" />
 
             </item>
 

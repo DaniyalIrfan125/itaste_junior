@@ -8,13 +8,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.asLiveData
 import com.techbayportal.itaste.SharedViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
+import kotlinx.android.synthetic.main.fragment_my_profile.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
@@ -28,6 +36,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     abstract val layoutId: Int
     abstract val viewModel: Class<V>
     abstract val bindingVariable: Int
+
+    lateinit var dataStoreProviderBase: DataStoreProvider
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +62,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         mViewDataBinding.setVariable(bindingVariable, mViewModel)
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
+        dataStoreProviderBase = DataStoreProvider(requireContext())
 
 
         subscribeToShareLiveData()
@@ -59,6 +70,23 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         subscribeToNetworkLiveData()
         subscribeToViewLiveData()
 
+        subscribeToObserveDataStore()
+
+
+    }
+
+    private fun subscribeToObserveDataStore() {
+
+        //observing data from data store and showing
+        dataStoreProviderBase.darkModeFlow.asLiveData().observe(this, Observer {
+            if (it) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+            }
+        })
 
     }
 

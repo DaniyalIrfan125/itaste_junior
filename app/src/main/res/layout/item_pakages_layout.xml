@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:lineSpacingExtra="2sp"
-            android:text="AED"
+            android:text="@string/aed"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="12sp" />
 
@@ -80,7 +80,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="2sp"
-        android:text="- Weekly Updates"
+        android:text="@string/weekly_updates"
         android:textColor="@color/titleTextColorBlack"
         android:textSize="12sp" />
 
@@ -90,7 +90,7 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="2sp"
-        android:text="- Cancel Anytime"
+        android:text="@string/cancel_anytime"
         android:textColor="@color/titleTextColorBlack"
         android:textSize="12sp" />
 
@@ -100,7 +100,7 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="2sp"
-        android:text="- 10 Posts per week."
+        android:text="@string/_10_posts_per_week"
         android:textColor="@color/titleTextColorBlack"
         android:textSize="12sp" />
 
@@ -110,7 +110,7 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:fontFamily="sans-serif"
         android:lineSpacingExtra="2sp"
-        android:text="- Manual way to charge \nsubscription."
+        android:text="@string/manual_way_to_charge_nsubscription"
         android:textColor="@color/titleTextColorBlack"
         android:textSize="12sp" />
 

@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="5sp"
-            android:text="Error Loading Page"
+            android:text="@string/error_loading_page"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="25sp" />
@@ -41,9 +41,7 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="3sp"
-            android:text="Ooops! Looks like we have got some issue. We'll try
-to fix it as soon as we can, until then please make
-sure you are connected to internet."
+            android:text="@string/ooops_looks_like_we_have_got_some_issue_we_ll_try_to_fix_it_as_soon_as_we_can_until_then_please_make_sure_you_are_connected_to_internet"
             android:textAlignment="center"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp" />

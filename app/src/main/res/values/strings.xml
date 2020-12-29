@@ -209,5 +209,25 @@
     //ChangeLanguageFragment
     <string name="change_language">Change Language</string>
 
+    //my cart frafment
+    //=>rv item
+    <string name="aed">AED</string>
+    <string name="weekly_updates">- Weekly Updates</string>
+    <string name="cancel_anytime">- Cancel Anytime</string>
+    <string name="_10_posts_per_week">- 10 Posts per week.</string>
+    <string name="manual_way_to_charge_nsubscription">- Manual way to charge <br> </br>subscription.</string>
+
+    //layout Error Loading page
+    <string name="error_loading_page">Error Loading Page</string>
+    <string name="ooops_looks_like_we_have_got_some_issue_we_ll_try_to_fix_it_as_soon_as_we_can_until_then_please_make_sure_you_are_connected_to_internet">Ooops! Looks like we have got some issue. We\'ll try to fix it as soon as we can, until then please make sure you are connected to internet.</string>
+
+    //layout Ne Internet page
+    <string name="no_internet">No Internet</string>
+    <string name="please_make_sure_that_you_device_is_connected_to_internet_or_restart_the_application">Please make sure that you device is connected to internet. Or restart the application.</string>
+
+    //layout Not Connected to server
+    <string name="not_connected_to_server">Not connected to server</string>
+    <string name="hold_on_something_fishy_is_going_on_let_us_fix_it_in_the_mean_time_we_apologies_for_any_sort_of_delay">Hold On, something fishy is going on, let us fix it. In the mean time we apologies for any sort of delay.</string>
+
 
 </resources>

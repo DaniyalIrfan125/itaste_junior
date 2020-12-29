@@ -41,7 +41,6 @@ class FirstFragment : BaseFragment<FirstFragmentBinding, FirstViewModel>() {
         //Get reference to our Data Store Provider class
         dataStoreProvider = DataStoreProvider(requireContext())
 
-
         subscribeToObserveDataStore()
 
         //calling api

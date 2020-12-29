@@ -21,14 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp">
 
-        <ImageView
+        <LinearLayout
             android:id="@+id/img_back"
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:src="@drawable/icon_backarrow"
-           />
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                app:tint="@color/mainIconColor"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/icon_backarrow" />
+        </LinearLayout>
 
         <TextView
 
@@ -80,6 +85,7 @@
                         android:weightSum="2">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
@@ -96,6 +102,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_centerVertical="true"
@@ -121,6 +128,7 @@
                         android:weightSum="2">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -139,6 +147,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_centerVertical="true"
@@ -164,9 +173,9 @@
                         android:weightSum="2">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
-
                             android:layout_weight="0.6"
                             android:src="@drawable/icon_detail_document" />
 
@@ -182,6 +191,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_gravity="center"
@@ -206,6 +216,7 @@
                         android:weightSum="2">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -225,6 +236,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_centerVertical="true"
@@ -250,6 +262,7 @@
                         android:weightSum="2">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
                             android:layout_weight="0.6"
@@ -267,6 +280,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_gravity="center"
@@ -309,6 +323,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
+                            app:tint="@color/colorGreyView"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_weight="0.4"
@@ -332,6 +347,7 @@
                         android:weightSum="2">
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_20sdp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -350,6 +366,7 @@
                             android:textSize="16sp" />
 
                         <ImageView
+                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_gravity="center"

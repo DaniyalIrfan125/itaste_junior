@@ -45,5 +45,7 @@
     <color name="layoutSearchBgColor">#161616</color>
     <color name="itemPackageBgColor">#131313</color>
 
+    <color name="mainIconColor">#FFFFFF</color>
+
 
 </resources>

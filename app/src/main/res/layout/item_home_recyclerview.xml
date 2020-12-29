@@ -27,6 +27,7 @@
 
 
         <ImageView
+            app:tint="@color/mainIconColor"
             android:id="@+id/img_dots"
             android:layout_width="@dimen/_14sdp"
             android:layout_height="@dimen/_10sdp"
