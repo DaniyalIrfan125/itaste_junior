@@ -233,8 +233,26 @@
 
 
     //Validation Text
+
+    //Common
+    <string name="PleasewriteUsername">الرجاء كتابة اسم المستخدم!</string>
+    <string name="Pleasewritepassword">الرجاء كتابة كلمة المرور!</string>
     //=>login
-    <string name="please_write_password">Please write password!</string>
+
+    //=>forget pasword
+
+    //=>signup
+    <string name="Passwords_does_not_match">كلمات السر لا تتطابق!</string>
+    <string name="Pleasewriteconfirm_password">الرجاء كتابة تأكيد كلمة المرور!</string>
+
+    <string name="Pleasewritephonenumber">الرجاء كتابة تأكيد كلمة المرور!</string>
+    <string name="PleasewriteEmail">الرجاء كتابة البريد الإلكتروني!</string>
+    <string name="PleasewriteLastName">الرجاء كتابة الاسم الأخير!</string>
+    <string name="PleasewriteFirstName">الرجاء كتابة الاسم الأول!</string>
+
+    //=>change password
+    <string name="Passworddoesnotmatch">كلمة السر غير متطابقة!</string>
+    <string name="PleasewriteOtp">من فضلك اكتب Otp!</string>
 
 </resources>
 

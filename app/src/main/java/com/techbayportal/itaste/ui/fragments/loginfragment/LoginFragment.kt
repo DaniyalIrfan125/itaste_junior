@@ -17,7 +17,6 @@ import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.databinding.LayoutSecondBinding
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_loginfragment.*
 
 
@@ -63,14 +62,14 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
                 tv_passwordError.visibility = View.VISIBLE
                 ed_password.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                tv_passwordError.text = getString(R.string.please_write_password)
+                tv_passwordError.text = getString(R.string.PleasewriteUsername)
             }
 
         } else {
             tv_userNameError.visibility = View.VISIBLE
             ed_enterUserName.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-            tv_userNameError.text = getString(R.string.pleasewriteusername)
+            tv_userNameError.text = getString(R.string.Pleasewritepassword)
         }
 
 

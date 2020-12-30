@@ -67,7 +67,7 @@ class ChangePasswordFragment :
                    tv_errorConfirmPassword.visibility = View.VISIBLE
                    ed_confirmPassword.background =
                        ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                   tv_errorConfirmPassword.text = "Password doesnot match!"
+                   tv_errorConfirmPassword.text = getString(R.string.Passworddoesnotmatch)
 
                }
 
@@ -76,7 +76,7 @@ class ChangePasswordFragment :
                tv_errorConfirmPassword.visibility = View.VISIBLE
                ed_confirmPassword.background =
                    ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-               tv_errorConfirmPassword.text = "Please write password!"
+               tv_errorConfirmPassword.text = getString(R.string.Pleasewritepassword)
            }
 
        }
@@ -84,7 +84,7 @@ class ChangePasswordFragment :
            tv_errorNewPassword.visibility = View.VISIBLE
            ed_newPassword.background =
                ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-           tv_errorNewPassword.text = "Please write password!"
+           tv_errorNewPassword.text = getString(R.string.Pleasewritepassword)
 
         }
     }

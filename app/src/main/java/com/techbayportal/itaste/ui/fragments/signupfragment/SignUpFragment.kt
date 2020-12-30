@@ -196,10 +196,10 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
         mViewModel.onSignUpButtonClicked.observe(this, Observer {
 
-          //  fieldValidations()
+            fieldValidations()
 
-            Navigation.findNavController(btn_changePassword)
-                .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)
+           /* Navigation.findNavController(btn_changePassword)
+                .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)*/
 
         })
     }

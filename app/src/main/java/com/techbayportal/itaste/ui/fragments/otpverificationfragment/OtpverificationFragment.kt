@@ -48,7 +48,7 @@ class OtpverificationFragment :
             Navigation.findNavController(btn_next).navigate(R.id.action_otpverificationFragment_to_changePasswordFragment)
         } else {
             tv_otpError.visibility = View.VISIBLE
-            tv_otpError.text = "Please write Otp!"
+            tv_otpError.text = getString(R.string.PleasewriteOtp)
         }
     }
 
