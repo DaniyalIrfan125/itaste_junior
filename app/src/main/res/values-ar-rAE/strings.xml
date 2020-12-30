@@ -25,7 +25,7 @@
         <string name="set_password">ادخل كلمة المرور</string>
 
         //=========COMMON========= Strings used in Multiple Fragments
-        <string name="sign_up">Sign up</string>
+        <string name="sign_up">سجل</string>
         <string name="enter_your_email">ادخل البريد الالكتروني</string>
         <string name="next">التالي</string>
         <string name="confirm_password">تأكيد كلمة المرور</string>
@@ -231,6 +231,10 @@
         <string name="not_connected_to_server">غير متصل بمقدم الخدمة</string>
         <string name="hold_on_something_fishy_is_going_on_let_us_fix_it_in_the_mean_time_we_apologies_for_any_sort_of_delay">انتظر ، هناك شيء مريب يحدث ، دعونا نصلحه. في غضون ذلك نعتذر عن أي نوع من التأخير.</string>
 
+
+    //Validation Text
+    //=>login
+    <string name="please_write_password">Please write password!</string>
 
 </resources>
 

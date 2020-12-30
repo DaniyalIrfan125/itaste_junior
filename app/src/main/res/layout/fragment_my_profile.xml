@@ -131,8 +131,11 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.6"
-                                app:tint="@color/mainIconColor"
-                                android:src="@drawable/icon_cart" />
+                                android:rotation="0"
+                                android:rotationX="0"
+                                android:rotationY="0"
+                                android:src="@drawable/icon_cart"
+                                app:tint="@color/mainIconColor" />
 
 
                             <TextView

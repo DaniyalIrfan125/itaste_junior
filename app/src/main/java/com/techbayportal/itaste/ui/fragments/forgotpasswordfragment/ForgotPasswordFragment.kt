@@ -49,7 +49,7 @@ class ForgotPasswordFragment : BaseFragment<LayoutForgotpasswordfragmentBinding,
             tv_errorForgotPassword.visibility = View.VISIBLE
             ed_forgotPassword.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-            tv_errorForgotPassword.text = "Please write Username!"
+            tv_errorForgotPassword.text = getString(R.string.PleasewriteUsername)
         }
 
     }

@@ -43,8 +43,8 @@
 
                     <ImageView
                         android:id="@+id/iv_app_logo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_152sdp"
+                        android:layout_height="@dimen/_28sdp"
                         android:layout_gravity="center_horizontal"
                         android:src="@drawable/app_icon" />
 

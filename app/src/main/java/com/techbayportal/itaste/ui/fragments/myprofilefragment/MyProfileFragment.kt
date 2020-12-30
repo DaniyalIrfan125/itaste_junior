@@ -140,8 +140,8 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                     blocked_account_fwd_arrow.rotation = 180F
                     logout_fwd_arrow.rotation = 180F
 
-                    iv_cart.rotation = 180F
-                    iv_moon.rotation = 180F
+                  //  iv_cart.rotation = 180F
+                  //  iv_moon.rotation = 180F
 
 
                 } else {

@@ -16,10 +16,8 @@ import com.techbayportal.itaste.databinding.LayoutHomefragmentBinding
 import com.techbayportal.itaste.ui.fragments.homefragment.adapter.HomeRecyclerAdapter
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.*
 import kotlinx.android.synthetic.main.layout_homefragment.*
-import kotlinx.android.synthetic.main.layout_homefragment.view.*
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , HomeRvClickListener {

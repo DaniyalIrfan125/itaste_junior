@@ -63,14 +63,14 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
                 tv_passwordError.visibility = View.VISIBLE
                 ed_password.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                tv_passwordError.text = "Please write password!"
+                tv_passwordError.text = getString(R.string.please_write_password)
             }
 
         } else {
             tv_userNameError.visibility = View.VISIBLE
             ed_enterUserName.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-            tv_userNameError.text = "Please write Username!"
+            tv_userNameError.text = getString(R.string.pleasewriteusername)
         }
 
 
@@ -89,10 +89,9 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
 
         mViewModel.onLoginClicked.observe(this, androidx.lifecycle.Observer {
 
-          //  fieldValidationsCheck()
+            fieldValidationsCheck()
 
-           // remove thi  and uncomment above
-            navigateToMainActivity()
+
 
         })
 

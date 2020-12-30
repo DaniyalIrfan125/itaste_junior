@@ -229,5 +229,21 @@
     <string name="not_connected_to_server">Not connected to server</string>
     <string name="hold_on_something_fishy_is_going_on_let_us_fix_it_in_the_mean_time_we_apologies_for_any_sort_of_delay">Hold On, something fishy is going on, let us fix it. In the mean time we apologies for any sort of delay.</string>
 
+    //Validation Text
+    //=>login
+    <string name="please_write_password">Please write password!</string>
+    <string name="pleasewriteusername">Please write Username!</string>
+    //=>forget pasword
+    <string name="PleasewriteUsername">Please write Username!</string>
+    //=>signup
+    <string name="Passwords_does_not_match">Passwords does not match!</string>
+    <string name="Pleasewriteconfirm_password">Please write confirm password!</string>
+    <string name="Pleasewritepassword">Please write password!</string>
+    <string name="Pleasewritephonenumber">Please write phone number!</string>
+    <string name="PleasewriteEmail">Please write Email!</string>
+    <string name="PleasewriteUsername">Please write Username!</string>
+    <string name="PleasewriteLastName">Please write Last Name!</string>
+    <string name="PleasewriteFirstName">Please write First Name!</string>
+
 
 </resources>

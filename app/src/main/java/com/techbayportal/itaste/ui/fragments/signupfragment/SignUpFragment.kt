@@ -110,7 +110,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                                 requireContext(),
                                                 R.drawable.ed_errorboundary
                                             )
-                                        tv_errorConfirmPassword.text = "Passwords doesnot match!"
+                                        tv_errorConfirmPassword.text = getString(R.string.Passwords_does_not_match)
 
                                     }
 
@@ -123,7 +123,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                             requireContext(),
                                             R.drawable.ed_errorboundary
                                         )
-                                    tv_errorConfirmPassword.text = "Please write confirm password!"
+                                    tv_errorConfirmPassword.text = getString(R.string.Pleasewriteconfirm_password)
                                 }
 
 
@@ -135,7 +135,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                         requireContext(),
                                         R.drawable.ed_errorboundary
                                     )
-                                tv_errorSetPassword.text = "Please write password!"
+                                tv_errorSetPassword.text = getString(R.string.Pleasewritepassword)
                             }
 
 
@@ -147,7 +147,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                     requireContext(),
                                     R.drawable.ed_errorboundary
                                 )
-                            tv_errorPhoneNumber.text = "Please write phone number!"
+                            tv_errorPhoneNumber.text = getString(R.string.Pleasewritephonenumber)
 
                         }
 
@@ -156,7 +156,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                         tv_errorEmail.visibility = View.VISIBLE
                         ed_email.background =
                             ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                        tv_errorEmail.text = "Please write Email!"
+                        tv_errorEmail.text = getString(R.string.PleasewriteEmail)
 
 
                     }
@@ -167,7 +167,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                     tv_errorUsername.visibility = View.VISIBLE
                     ed_userName.background =
                         ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                    tv_errorUsername.text = "Please write Username!"
+                    tv_errorUsername.text = getString(R.string.PleasewriteUsername)
 
                 }
 
@@ -176,14 +176,14 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                 tv_errorName.visibility = View.VISIBLE
                 ed_lastName.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                tv_errorName.text = "Please write Last Name!"
+                tv_errorName.text = getString(R.string.PleasewriteLastName)
             }
 
         } else {
             tv_errorName.visibility = View.VISIBLE
             ed_firstName.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-            tv_errorName.text = "Please write First Name!"
+            tv_errorName.text = getString(R.string.PleasewriteFirstName)
         }
     }
 
