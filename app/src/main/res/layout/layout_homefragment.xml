@@ -21,7 +21,7 @@
                 android:id="@+id/iv_icon"
                 android:onClick="@{()->viewModel.tempClicked()}"
                 android:layout_width="@dimen/_150sdp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/_24sdp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/app_icon" />
 

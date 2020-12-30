@@ -7,13 +7,17 @@ import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.databinding.LayoutSecondBinding
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_loginfragment.*
 
 
@@ -26,11 +30,12 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        dataStoreProvider = DataStoreProvider(requireContext())
+        subscribeToObserveDarkActivation()
         fieldTextWatcher()
     }
 
@@ -116,6 +121,21 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
         super.onStart()
 
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+    }
+
+    private fun subscribeToObserveDarkActivation() {
+
+        //observing data from data store and showing
+        dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
+            //  switch_darkMode.isChecked = it
+            if (it != null) {
+                if(it == true){
+                    iv_app_logo.setImageResource(R.drawable.app_icon_dark)
+                    //iv_app_logo.setBackgroundResource(R.drawable.app_icon_dark)
+                }
+            }
+        })
+
     }
 
 }

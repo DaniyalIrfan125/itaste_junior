@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.databinding.LayoutHomefragmentBinding
 import com.techbayportal.itaste.ui.fragments.homefragment.adapter.HomeRecyclerAdapter
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.*
 import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_homefragment.view.*
@@ -29,6 +32,9 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         get() = BR.viewModel
 
     lateinit var homerRecyclerAdpater : HomeRecyclerAdapter
+
+    lateinit var dataStoreProvider: DataStoreProvider
+
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
@@ -46,6 +52,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         super.onViewCreated(view, savedInstanceState)
 
         populatingDataForHome()
+        dataStoreProvider = DataStoreProvider(requireContext())
+        subscribeToObserveDarkActivation()
     }
 
     private fun populatingDataForHome() {
@@ -85,5 +93,19 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
     override fun onChildItemClick(position: Int) {
         Navigation.findNavController(iv_icon)
             .navigate(R.id.action_homeFragment_to_postDetailFragment)
+    }
+
+    private fun subscribeToObserveDarkActivation() {
+
+        //observing data from data store and showing
+        dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
+          //  switch_darkMode.isChecked = it
+            if (it != null) {
+                if(it == true){
+                    iv_icon.setImageDrawable(resources.getDrawable(R.drawable.app_icon_dark))
+                }
+            }
+        })
+
     }
 }

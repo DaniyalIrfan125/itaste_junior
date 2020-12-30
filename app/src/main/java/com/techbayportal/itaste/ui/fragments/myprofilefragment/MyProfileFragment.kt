@@ -13,6 +13,7 @@ import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.databinding.FragmentMyProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_my_profile.img_back
 import kotlinx.coroutines.GlobalScope
@@ -32,12 +33,15 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataStoreProvider = DataStoreProvider(requireContext())
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        subscribeToObserveDataStore()
+        subscribeToObserveDarkModeDataStore()
+        subscribeToObserveLanguage()
+
 
 
         switch_darkMode?.setOnCheckedChangeListener { _, isChecked ->
@@ -56,7 +60,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         }
     }
 
-    private fun subscribeToObserveDataStore() {
+    private fun subscribeToObserveDarkModeDataStore() {
 
         //observing data from data store and showing
         dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
@@ -117,7 +121,39 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         })
 
 
+
+
     }
+    private fun subscribeToObserveLanguage() {
+        //observing data from data store and showing
+        dataStoreProvider.languageFlow.asLiveData().observe(this, Observer {
+
+            if (it != null) {
+                if (it == "ar") {
+                    // tv_language_name.text = getString(R.string.arabic)
+
+                    mycart_fwd_arrow.rotation = 180F
+                    change_password_fwd_arrow.rotation = 180F
+                    saved_post_fwd_arrow.rotation = 180F
+                    report_bug_fwd_arrow.rotation = 180F
+                    delete_account_fwd_arrow.rotation = 180F
+                    blocked_account_fwd_arrow.rotation = 180F
+                    logout_fwd_arrow.rotation = 180F
+
+                    iv_cart.rotation = 180F
+                    iv_moon.rotation = 180F
+
+
+                } else {
+                    // tv_language_name.text = getString(R.string.english)
+                }
+            } else {
+                // tv_language_name.text = getString(R.string.english)
+            }
+        })
+
+    }
+    
 
 
 }

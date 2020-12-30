@@ -46,7 +46,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
         relative_addButton.setOnClickListener(View.OnClickListener {
-            Toast.makeText(applicationContext, "clicked add buttn", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "clicked add button", Toast.LENGTH_SHORT).show()
         })
     }
 

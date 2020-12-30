@@ -27,6 +27,7 @@ object AppConstants {
             const val HOME_RV_IMG_DOTS = "home_rv_img_dots"
             const val HOME_RV_CHILD = "home_rv_child"
             const val BLOCKED_ACCOUNT_RV_UNBLOCK_BUTTON = "blocked_account_rv_unblock_button"
+            const val NOTIFICATION_ITEM = "notification_item"
         }
     }
 

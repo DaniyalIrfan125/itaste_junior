@@ -7,12 +7,15 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.databinding.LayoutSignupfragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_loginfragment.*
 import kotlinx.android.synthetic.main.layout_signupfragment.*
 
@@ -31,6 +34,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         super.onViewCreated(view, savedInstanceState)
 
         fieldTextWatcher()
+
     }
 
     private fun fieldTextWatcher() {
@@ -199,6 +203,8 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
         })
     }
+
+
 
 
 }

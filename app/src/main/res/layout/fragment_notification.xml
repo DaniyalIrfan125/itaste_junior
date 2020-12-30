@@ -82,8 +82,8 @@
             android:id="@+id/rvNotifications"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_notification"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+            app:reverseLayout="true"
+            app:stackFromEnd="true">
 
         </androidx.recyclerview.widget.RecyclerView>
 

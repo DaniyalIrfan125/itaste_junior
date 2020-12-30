@@ -117,6 +117,7 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:onClick="@{()->viewModel.onMyCartClicked()}"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
                             android:clickable="true"
@@ -126,6 +127,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                android:id="@+id/iv_cart"
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.6"
@@ -140,12 +142,13 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:onClick="@{()->viewModel.onMyCartClicked()}"
+
                                 android:text="@string/my_cart"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/mycart_fwd_arrow"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
 
@@ -161,6 +164,7 @@
                         </View>
 
                         <LinearLayout
+                            android:onClick="@{()->viewModel.onChangePasswordClicked()}"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
                             android:clickable="true"
@@ -184,12 +188,12 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:onClick="@{()->viewModel.onChangePasswordClicked()}"
                                 android:text="@string/change_password"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/change_password_fwd_arrow"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
                                 android:layout_weight="0.4"
@@ -204,6 +208,7 @@
                         </View>
 
                         <LinearLayout
+                            android:onClick="@{()->viewModel.onSavedPostsClicked()}"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
                             android:clickable="true"
@@ -227,12 +232,12 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:onClick="@{()->viewModel.onSavedPostsClicked()}"
                                 android:text="@string/saved_posts"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/saved_post_fwd_arrow"
                                 app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
@@ -299,6 +304,7 @@
                             android:weightSum="2">
 
                             <ImageView
+                                android:id="@+id/iv_moon"
                                 app:tint="@color/mainIconColor"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -334,6 +340,7 @@
                         </View>
 
                         <LinearLayout
+                            android:onClick="@{()->viewModel.onReportBugClicked()}"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
                             android:clickable="true"
@@ -358,12 +365,12 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:onClick="@{()->viewModel.onReportBugClicked()}"
                                 android:text="@string/report_a_bug"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/report_bug_fwd_arrow"
                                 app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
@@ -398,18 +405,19 @@
 
 
                             <TextView
+                                android:onClick="@{()->viewModel.onDeleteAccountClicked()}"
                                 android:id="@+id/tv_deleteAccount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:onClick="@{()->viewModel.onDeleteAccountClicked()}"
                                 android:text="@string/delete_account"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/delete_account_fwd_arrow"
                                 app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
@@ -426,6 +434,7 @@
                         </View>
 
                         <LinearLayout
+                            android:onClick="@{()->viewModel.onBlockedAccountClicked()}"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
                             android:clickable="true"
@@ -450,12 +459,12 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:onClick="@{()->viewModel.onBlockedAccountClicked()}"
                                 android:text="@string/blocked_accounts"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/blocked_account_fwd_arrow"
                                 app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
@@ -472,6 +481,7 @@
                         </View>
 
                         <LinearLayout
+                            android:onClick="@{()->viewModel.onLogoutClicked()}"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"
                             android:clickable="true"
@@ -496,12 +506,12 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-                                android:onClick="@{()->viewModel.onLogoutClicked()}"
                                 android:text="@string/log_out"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
                             <ImageView
+                                android:id="@+id/logout_fwd_arrow"
                                 app:tint="@color/mainIconColor"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"

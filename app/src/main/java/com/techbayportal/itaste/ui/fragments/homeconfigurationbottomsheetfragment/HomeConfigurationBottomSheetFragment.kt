@@ -16,6 +16,7 @@ import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
+import kotlinx.android.synthetic.main.fragment_my_profile.*
 
 
 @AndroidEntryPoint
@@ -54,7 +55,7 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
 
         ll_change_language.setOnClickListener(View.OnClickListener {
 
-            if (tv_language_name.text == getString(R.string.english)){
+            if (tv_language_name.text == getString(R.string.arabic)){
                 activity?.finish()
                 (activity as MainActivity?)!!.setLocaleLanguage("ar")
                 startActivity(
@@ -87,10 +88,11 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
 
             if (it != null) {
                 if (it == "ar") {
-                    tv_language_name.text = getString(R.string.arabic)
+                    tv_language_name.text = getString(R.string.english)
+
 
                 } else {
-                    tv_language_name.text = getString(R.string.english)
+                    tv_language_name.text = getString(R.string.arabic)
                 }
             } else {
                 tv_language_name.text = getString(R.string.english)

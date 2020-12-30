@@ -214,7 +214,7 @@
                                 android:layout_gravity="center"
                                 android:onClick="@{()->viewModel.onSendButtonClicked()}"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/icon_send" />
+                                android:src="@drawable/icon_send_new" />
                         </LinearLayout>
 
                         <LinearLayout

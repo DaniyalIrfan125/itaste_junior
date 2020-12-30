@@ -1,4 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+        <string name="app_name">iTaste</string>
+        <!-- TODO: Remove or change this placeholder text -->
+        <string name="hello_blank_fragment">Hello blank fragment</string>
+
+        //Login Fragment
+        <string name="meet_the_good_taste_today">جدالذوق المناسب الان</string>
+        <string name="welcome">مرحبا!</string>
+        <string name="time_to_cook_and_share_let_apos_s_sign_in">حان وقت الطهي والمشاركة ، فلنقم بتسجيل الدخول</string>
+        <string name="enter_user_name">ادخل اسم المستخدم</string>
+        <string name="enter_password">ادخل كلمة المرور</string>
+        <string name="forgot_password">هل نسيت كلمة المرور؟</string>
+        <string name="sign_in">تسجيل الدخول</string>
+        <string name="guest_mode">وضع الزائرين</string>
+        <string name="it_apos_s_your_first_time_here">انها المرة الأولى لك هنا؟</string>
+
+        //Sign up Fragment
+        <string name="upload_profile_picture_logo">تحميل صورة الملف الشخصي / الشعار</string>
+        <string name="first_name">الاسم الأول</string>
+        <string name="last_name">اسم العائلة</string>
+        <string name="set_user_name">ادخل اسم المستخدم</string>
+        <string name="_971">+971</string>
+        <string name="_0555_5555">0555 5555</string>
+        <string name="set_password">ادخل كلمة المرور</string>
+
+        //=========COMMON========= Strings used in Multiple Fragments
+        <string name="sign_up">Sign up</string>
+        <string name="enter_your_email">ادخل البريد الالكتروني</string>
+        <string name="next">التالي</string>
+        <string name="confirm_password">تأكيد كلمة المرور</string>
+        <string name="arabic">العربية</string>
+        <string name="english">الانجليزية</string>
+        <string name="dark_mode">الوضع الداكن</string>
+        <string name="my_cart">العربة</string>
+        <string name="create_a_strong_password_including_alphabet_n_numbers_and_symbols">انشيء كلمة مرور قوية تحتوي على حروف<br> </br> ارقام ورموز</string>
+        <string name="confirm_your_new_password">اكد كلمة المرور الجديدة</string>
+        <string name="cancel">الغاء</string>
+        <string name="back_icon">الرجوع</string>
+        <string name="blocked_accounts">الحسابات المحظورة</string>
+        <string name="email">البريد الالكتروني</string>
+        <string name="log_out">تسجيل الخروج</string>
+        <string name="copy_link">نسخ الرابط</string>
+        <string name="direct_message">الرسائل المباشرة</string>
+        <string name="settings">الإعدادات </string>
+        <string name="contact_us">تواصل معنا</string>
+        <string name="deliverable">قابل للتوصيل</string>
+        <string name="not_deliverable">غير قابل للتوصيل</string>
+        <string name="change_profile_picture">تغيير صورة الملف الشخصي</string>
+
+        //Forget Password Fragment
+        <string name="enter_your_n_email">ادخل <br> </br>بريدك الالكتروني</string>
+        <string name="a_verification_code_will_be_sent_to_your_email">سيتم إرسال رمز تحقق الى بريدك الالكتروني المسجل</string>
+
+        //OTP Verification Fragment
+        <string name="verify_the_ncode">كود<br> </br>التحقق</string>
+        <string name="enter_the_5_digit_code_sent_to_email_sa_gmail_com"> sa****@gmail.com ادخل رمز التحقق المكون من 5 ارقام المرسل الى البريد</string>
+
+        //Change password Fragment
+        <string name="new_npassword">كلمة المرور <br> </br>الجديدة</string>
+        <string name="new_password">كلمة المرور الجديدة</string>
+        <string name="type_new_password">ادخل كلمة المرور الجديدة</string>
+        <string name="save">حفظ</string>
+
+        //SelectAccountTypeFragment
+        <string name="what_are_you_looking_nfor">عن ماذا<br> </br>تبحث؟</string>
+        <string name="let_apos_s_get_you_started_by_creating_a_new_account">لنبدأ بإنشاء حساب جديد</string>
+        <string name="i_apos_m_looking_to_explore_nfood_around_me">أنا أتطلع للاستكشاف <br> </br> الطعام من حولي</string>
+        <string name="i_m_looking_to_showcase_nmy_food">انا اتطلع الى عرض  <br> </br>منتجاتي</string>
+
+        //Sign Up configuration Fragment
+        <string name="choose_your_language_n_preference">اختر لغتك <br> </br> المفضلة</string>
+        <string name="which_mode_you_find_ninteresting">أي وضعية  <br> </br>تفضل؟</string>
+        <string name="choose_between_light_or_dark_mode_to_change_interface">اختر بين الوضع الفاتح أو الداكن لتغيير الواجهة.</string>
+        <string name="light_mode">الوضع الفاتح</string>
+        <string name="tell_us_where_you_nare">أخبرنا اين <br> </br>انت؟</string>
+        <string name="choose_in_which_country_of_gulf_you_are_nlocated_right_now">اختر في أي بلد من دول الخليج أنت <br> </br>تسكن الان</string>
+
+        //Notification Fragment
+        <string name="notifications">الاشعارات</string>
+        <string name="no_new_notifications">لا يوجد اشعارات جديدة</string>
+        <string name="today">اليوم</string>
+        <string name="icon_bell">icon bell</string>
+        <string name="check_out_this_section_for_app_updates_offers_and_other_general_notifications">تحقق من هذا القسم للحصول على تحديثات التطبيق والعروض والإشعارات العامة الأخرى</string>
+
+        //My Profile Fragment
+        <string name="edit_profile">تعديل الملف الشخصي</string>
+        <string name="change_password">تغيير كلمة المرور</string>
+        <string name="saved_posts">المنتجات المحفوظة</string>
+        <string name="report_a_bug">الإبلاغ عن خطأ</string>
+        <string name="switch_to_premium_account">قم بالتبديل إلى الحساب المميز</string>
+        <string name="switching_to_premium_account_will_let_you_post_your_products_and_show_case_them_but_you_can_still_watch_what_others_are_on_to">سيسمح لك التبديل إلى الحساب المتميز بنشر منتجاتك وعرضها ، ولكن لا يزال بإمكانك مشاهدة ما يفعله الآخرون.</string>
+
+        //My Cart Fragment and Adapter
+        //=>adapter
+        <string name="send_message">أرسل رسالة</string>
+
+        //ChangeExistingPasswordFragment
+        <string name="change_npassword">تغيير <br> </br>كلمة المرور</string>
+        <string name="type_existing_password">ادخل كلمة المرور الحالية</string>
+
+        //SavedPostsFragment
+        <string name="saved">تم الحفظ</string>
+        <string name="select">اختر</string>
+
+        //ReportBugDialogFragment
+        <string name="send_a_bug_report">إرسال تقرير عن خطأ</string>
+        <string name="type_message_and_we_ll_get_back_to_you_as_soon_as_we_can">
+اكتب رسالة وسنعاود الاتصال بك بأسرع ما يمكن ...</string>
+        <string name="submit">ارسال</string>
+
+        //Delete Account Fragment
+        <string name="delete_account">حذف الحساب</string>
+        <string name="delete_icon">مسح</string>
+        <string name="are_you_sure_you_want_to_delete_your_account_once_you_confirm_you_won_t_be_able_to_log_in_without_creating_a_new_account">هل انت متأكد انك تريد حذف حسابك؟ بمجرد تأكيدك لن تتمكن من تسجيل الدخول دون إنشاء حساب جديد.</string>
+        <string name="confirm">تأكيد</string>
+
+        //Account Deleted Fragment
+        <string name="back_to_login_page">الرجوع إلى صفحة تسجيل الدخول</string>
+        <string name="account_deleted">تم مسح الحساب</string>
+        <string name="your_account_is_successfully_deleted_to_keep_exploring_out_our_services_you_need_to_create_a_new_account">تم حذف حسابك بنجاح ، لمواصلة استكشاف خدماتنا ، تحتاج إلى إنشاء حساب جديد.</string>
+        <string name="image_account_deleted">تم حذف صورة الحساب</string>
+        <string name="done_and_exit">تم والخروج</string>
+        <string name="create_new_account">انشاء حساب جديد</string>
+
+        //Direct Messages Fragment
+        <string name="message">الرسائل</string>
+
+        //NewMessageFragment
+        <string name="new_message">الرسائل الجديدة</string>
+        <string name="to">الى</string>
+        <string name="search">بحث</string>
+        //=>separate layout
+        <string name="write_a_comment">اكتب تعليق</string>
+
+        //SearchFragment
+        <string name="what_are_you_looking_for">عن ماذا تبحث؟</string>
+        <string name="search_filter">منقي البحث</string>
+        <string name="search_according_to_you_area_you_can_set_filters_to_what_best_suits_you">ابحث حسب منطقتك ، يمكنك ضبط الفلاتر على ما يناسبك.</string>
+        <string name="distance">المسافة</string>
+        <string name="_5_6_km">5 – 6 Km</string>
+        <string name="or_choose_by_area">أو اختار بالمنطقة</string>
+        <string name="food_category">فئات الطعام</string>
+        <string name="turkish_food">المأكولات التركي</string>
+        <string name="arabian_food">المأكولات العربية</string>
+        <string name="chinese">المأكولات الصينية</string>
+        <string name="hot_beverages">Hot Beverages</string>
+        <string name="fast_food">Fast Food</string>
+        <string name="apply">تطبيق</string>
+
+        //VendorProfileFragment
+        <string name="user_name">اسم المستخدم</string>
+        <string name="bio">معلومات عنك</string>
+        <string name="phone_number">رقم الهاتف</string>
+        <string name="save_changes">حفظ التغييرات</string>
+
+        //ChoosePackageFragment
+        <string name="choose_package">اختر الصفقة</string>
+        <string name="now_that_your_account_is_approved_you_need_to_pick_none_of_our_packages_so_that_nothing_can_stop_nfrom_posting">Now that your account is approved you need to pick \none of our packages, so that nothing can stop \nfrom posting.</string>
+        <string name="proceed_to_checkout">باشر بالخروج</string>
+
+        //ContactUsFragment
+        <string name="get_in_touch">ابقى على تواصل</string>
+        <string name="name">الاسم</string>
+        <string name="ed_tamer">Ed Tamer</string>
+        <string name="email_123_com">email@123.com</string>
+        <string name="what_do_you_want_to_talk_about">عن ماذا تريد ان تتكلم؟</string>
+        <string name="ask_us_anything">اسألنا اي سؤال...</string>
+        <string name="send">ارسال</string>
+
+        //HomeConfigurationBottomSheetFragment
+        <string name="turn_off_notifications">اغلق الاشعارات</string>
+
+        //HomeItemBottomSheetFragment
+        <string name="report">تقرير</string>
+        <string name="share_to">شارك ل</string>
+        <string name="turn_on_post_notifications">افتح الاشعارات</string>
+        <string name="block">حظر</string>
+
+        //PostDetailBottomSheetFragment
+        <string name="edit_post">تعديل المنشور</string>
+        <string name="delete_post">امسح المنشور</string>
+        <string name="turn_off_commenting">اغلق التواصل</string>
+        <string name="share_to_dots">المشاركة ل ....</string>
+
+        //ProfileFragment
+        <string name="posts">المنشورات</string>
+        <string name="likes">Likes</string>
+        <string name="followers">المتابعين</string>
+        <string name="follow">متابعة</string>
+
+        //SettingsFragment
+        <string name="about_us">عنا</string>
+        <string name="change_langauge">تغيير كلمة المرور</string>
+        <string name="tearms_amp_conditions"><![CDATA[Tearms & Conditions]]></string>
+        <string name="help_amp_faqs"><![CDATA[Help & FAQS]]></string>
+        <string name="ads">الاعلانات</string>
+
+        //SignUpVendorFragment
+        <string name="days_of_work">أيام العمل</string>
+        <string name="select_days_you_want_to_work_on">اختر الايام التي تعمل بها</string>
+        <string name="are_your_services">هل خدماتك:</string>
+        <string name="description_optional">الوصف (اختياري)</string>
+        <string name="write_something_about_your_shop">اكتب شيء عن مشروعك</string>
+        <string name="let_s_go">هيا للنطلق</string>
+
+        //UserProfileFragment
+        <string name="syra_ahmed">Syra Ahmed</string>
+        <string name="syraahmed102">SyraAhmed102</string>
+
+        //ChangeLanguageFragment
+        <string name="change_language">تغيير اللغة</string>
+
+        //my cart frafment
+        //=>rv item
+        <string name="aed">درهم</string>
+        <string name="weekly_updates">- التحديثات الأسبوعية</string>
+        <string name="cancel_anytime">- إلغاء في أي وقت</string>
+        <string name="_10_posts_per_week">- 10 منشورات في الاسبوع.</string>
+        <string name="manual_way_to_charge_nsubscription">-طريقة يدوية لشحن<br> </br>الاشتراك.</string>
+
+        //layout Error Loading page
+        <string name="error_loading_page">خطأ في تحميل الصفحة</string>
+        <string name="ooops_looks_like_we_have_got_some_issue_we_ll_try_to_fix_it_as_soon_as_we_can_until_then_please_make_sure_you_are_connected_to_internet">اوووه! يبدو أن لدينا بعض المشاكل. سنحاول إصلاحه بأسرع ما يمكن ، وحتى ذلك الحين ، يرجى التأكد من اتصالك بالإنترنت.</string>
+
+        //layout Ne Internet page
+        <string name="no_internet">لا يوجد اتصال بالانترنت</string>
+        <string name="please_make_sure_that_you_device_is_connected_to_internet_or_restart_the_application">يرجى التأكد من أن جهازك متصل بالإنترنت. أو أعد تشغيل التطبيق.</string>
+
+        //layout Not Connected to server
+        <string name="not_connected_to_server">غير متصل بمقدم الخدمة</string>
+        <string name="hold_on_something_fishy_is_going_on_let_us_fix_it_in_the_mean_time_we_apologies_for_any_sort_of_delay">انتظر ، هناك شيء مريب يحدث ، دعونا نصلحه. في غضون ذلك نعتذر عن أي نوع من التأخير.</string>
+
 
 </resources>
+
