@@ -18,6 +18,7 @@ class DataStoreProvider(context: Context) {
         val IS_LOCALIZATION_KEY = preferencesKey<Boolean>(AppConstants.DataStore.LOCALIZATION_KEY_NAME)
         val USER_NAME_KEY = preferencesKey<String>(AppConstants.DataStore.USER_NAME_KEY)
         val DARK_MODE_KEY = preferencesKey<Boolean>(AppConstants.DataStore.DARK_MODE_KEY)
+        val ARABIC_LANGUAGE_KEY = preferencesKey<String>(AppConstants.DataStore.ARABIC_LANGUAGE_KEY)
 
     }
 
@@ -34,6 +35,12 @@ class DataStoreProvider(context: Context) {
         }
     }
 
+    suspend fun storeLanguage(isArabicLanguageActive: String) {
+        dataStore.edit {
+            it[ARABIC_LANGUAGE_KEY] = isArabicLanguageActive
+        }
+    }
+
     //Create an Localization flow
     val localizationFlow: Flow<Boolean> = dataStore.data.map {
         it[IS_LOCALIZATION_KEY] ?: false
@@ -46,6 +53,10 @@ class DataStoreProvider(context: Context) {
 
     val darkModeFlow: Flow<Boolean> = dataStore.data.map {
         it[DARK_MODE_KEY] ?: false
+    }
+
+    val languageFlow: Flow<String> = dataStore.data.map {
+        it[ARABIC_LANGUAGE_KEY] ?: "English"
     }
 
 

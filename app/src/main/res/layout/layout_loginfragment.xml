@@ -12,14 +12,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="center"
-            android:background="@color/LoginBackground"
-            android:src="@drawable/welcome_background" />
+            android:src="@drawable/welcome_background"
+            />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -29,14 +30,16 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_15sdp">
+                android:paddingBottom="@dimen/_15sdp"
+                android:background="@drawable/black_transparent_shade">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:orientation="vertical"
-                    android:paddingBottom="@dimen/_15sdp">
+                    android:paddingBottom="@dimen/_15sdp"
+                    >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -89,7 +92,7 @@
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
                         android:singleLine="true"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textColorHint="@color/titleTextColorBlack"
                         android:textSize="13sp" />
 
@@ -118,7 +121,7 @@
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
                         android:singleLine="true"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textColorHint="@color/titleTextColorBlack"
                         android:textSize="13sp" />
 

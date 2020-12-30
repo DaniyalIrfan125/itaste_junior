@@ -64,12 +64,8 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         })
     }
 
-
     override fun onItemClickListener() {
         Toast.makeText(context, "ItemClicked", Toast.LENGTH_SHORT).show()
-
     }
-
-
 
 }

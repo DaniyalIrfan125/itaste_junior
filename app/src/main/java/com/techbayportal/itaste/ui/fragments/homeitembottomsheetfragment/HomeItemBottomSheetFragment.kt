@@ -10,7 +10,7 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.FragmentHomeItemBottomSheetBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_post_detail_bottom_sheet.*
+import kotlinx.android.synthetic.main.fragment_home_item_bottom_sheet.*
 
 @AndroidEntryPoint
 class HomeItemBottomSheetFragment : BottomSheetDialogFragment() {

@@ -41,21 +41,17 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
 
 
         switch_darkMode?.setOnCheckedChangeListener { _, isChecked ->
-            val message: String
             if (isChecked) {
                 GlobalScope.launch {
                     dataStoreProvider.storeDarkMode(true)
                 }
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                message = "DarkMode ON"
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+
             } else {
                 GlobalScope.launch {
                     dataStoreProvider.storeDarkMode(false)
                 }
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                message = "DarkMode OFF"
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -19,7 +19,7 @@
     <color name="gray_image_color">#828282</color>
     <color name="color_darkGrey">#707070</color>
     <color name="mainBackground">#FFFFFF</color>
-    <color name="LoginBackground" >#FFFFFF</color>
+    <color name="LoginBackground" >#00FFFFFF</color>
 
 
     <color name="colorGreyView">#a1a1a1</color>
