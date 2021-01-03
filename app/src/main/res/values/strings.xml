@@ -251,5 +251,8 @@
     <string name="Passworddoesnotmatch">Password does not match!</string>
     <string name="PleasewriteOtp">Please write Otp!</string>
 
+    //Others
+    <string name="Profile_pic_is_null">Profile pic is null</string>
+
 
 </resources>

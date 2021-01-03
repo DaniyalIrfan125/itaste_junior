@@ -57,7 +57,7 @@
                         android:background="@drawable/layout_relative_circle">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/sivInfluancerImage"
+                            android:id="@+id/siv_profile_pic"
                             android:layout_width="@dimen/_75sdp"
                             android:layout_height="@dimen/_75sdp"
                             android:layout_margin="@dimen/_3sdp"
@@ -71,6 +71,7 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/tv_profile_pic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -80,7 +81,8 @@
                         android:lineSpacingExtra="3sp"
                         android:text="@string/upload_profile_picture_logo"
                         android:textColor="@color/colorOrange"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:onClick="@{()->viewModel.onProfilePicTextClicked()}"/>
 
                     <LinearLayout
                         android:id="@+id/linear"
@@ -211,6 +213,7 @@
                             android:weightSum="2">
 
                             <EditText
+                                android:id="@+id/et_country_code"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_38sdp"
                                 android:layout_marginEnd="@dimen/_5sdp"

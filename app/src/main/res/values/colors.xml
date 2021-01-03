@@ -20,6 +20,7 @@
     <color name="color_darkGrey">#707070</color>
     <color name="mainBackground">#FFFFFF</color>
     <color name="LoginBackground" >#00FFFFFF</color>
+    <color name="loadingLayoutBackground" >#FFFFFF</color>
 
 
     <color name="colorGreyView">#a1a1a1</color>

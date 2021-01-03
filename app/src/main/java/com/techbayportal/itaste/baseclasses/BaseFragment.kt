@@ -1,5 +1,6 @@
 package com.techbayportal.itaste.baseclasses
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
@@ -20,6 +21,7 @@ import androidx.lifecycle.asLiveData
 import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
+import com.techbayportal.itaste.utils.DialogClass
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -32,6 +34,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     private var mActivity: BaseActivity<*, *>? = null
     lateinit var mViewDataBinding: T
     protected lateinit var mViewModel: V
+    protected lateinit var loadingDialog: Dialog
 
     abstract val layoutId: Int
     abstract val viewModel: Class<V>
@@ -63,6 +66,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
         dataStoreProviderBase = DataStoreProvider(requireContext())
+        loadingDialog = DialogClass.loadingDialog(requireContext())
 
 
         subscribeToShareLiveData()

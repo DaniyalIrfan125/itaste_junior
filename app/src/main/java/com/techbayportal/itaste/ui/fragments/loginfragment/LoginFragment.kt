@@ -31,6 +31,7 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
 
     lateinit var dataStoreProvider: DataStoreProvider
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataStoreProvider = DataStoreProvider(requireContext())
@@ -135,5 +136,8 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
         })
 
     }
+
+
+
 
 }

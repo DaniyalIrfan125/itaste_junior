@@ -6,10 +6,12 @@ import androidx.annotation.StringDef
 
 object AppConstants {
 
+    const val PROFILE_PIC_CODE  = 9272
+
     @StringDef(ApiConfiguration.BASE_URL)
     annotation class ApiConfiguration {
         companion object {
-            const val BASE_URL = "https://jsonplaceholder.typicode.com/"
+            const val BASE_URL = "https://itaste.netfans.online/api/v1/"
         }
     }
 
@@ -40,6 +42,9 @@ object AppConstants {
             const val USER_NAME_KEY = "user_name_key"
             const val DARK_MODE_KEY = "dark_mode_key"
             const val ARABIC_LANGUAGE_KEY = "Arabic"
+            //
+            const val IS_REMEMBER = "is_remember"
+            const val USER_OBJ = "is_remember"
         }
     }
 

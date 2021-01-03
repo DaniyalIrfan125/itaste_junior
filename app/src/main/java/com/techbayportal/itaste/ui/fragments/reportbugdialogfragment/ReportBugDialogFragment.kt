@@ -1,5 +1,7 @@
 package com.techbayportal.itaste.ui.fragments.reportbugdialogfragment
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,7 @@ class ReportBugDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
          var rootView = inflater.inflate(R.layout.fragment_report_bug, container, false)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
 
         return rootView

@@ -1,23 +1,30 @@
 package com.techbayportal.itaste.ui.fragments.signupfragment
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
+import com.opensooq.supernova.gligar.GligarPicker
+import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
-import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
+import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.constants.AppConstants.PROFILE_PIC_CODE
+import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutSignupfragmentBinding
+import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_homefragment.*
-import kotlinx.android.synthetic.main.layout_loginfragment.*
 import kotlinx.android.synthetic.main.layout_signupfragment.*
+import java.io.File
 
 
 @AndroidEntryPoint
@@ -29,12 +36,31 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    var profileImageFile: File? = null
+    private lateinit var mView: View
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mView = view
         fieldTextWatcher()
 
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AppConstants.PROFILE_PIC_CODE) {
+            val imagePath = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)!![0]
+            profileImageFile = File(imagePath)
+
+            if(profileImageFile != null)
+                Picasso.get()
+                .load(profileImageFile!!)
+                .fit()
+                .centerCrop()
+                .into(siv_profile_pic);
+        }
     }
 
     private fun fieldTextWatcher() {
@@ -101,6 +127,17 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
                                     if (ed_setPassword.text.toString() == ed_confirmPassword.text.toString()) {
 
+                                        /*mViewModel.signUpAPICall(
+                                            ed_firstName.text.toString(),
+                                            ed_lastName.text.toString(),
+                                            ed_userName.text.toString(),
+                                            ed_phoneNumber.text.toString(),
+                                            "",
+                                            ed_email.text.toString(),
+                                            ed_password.text.toString(),
+                                            "user"
+                                        )*/
+
 
                                     } else {
 
@@ -110,7 +147,8 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                                 requireContext(),
                                                 R.drawable.ed_errorboundary
                                             )
-                                        tv_errorConfirmPassword.text = getString(R.string.Passwords_does_not_match)
+                                        tv_errorConfirmPassword.text =
+                                            getString(R.string.Passwords_does_not_match)
 
                                     }
 
@@ -123,7 +161,8 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                             requireContext(),
                                             R.drawable.ed_errorboundary
                                         )
-                                    tv_errorConfirmPassword.text = getString(R.string.Pleasewriteconfirm_password)
+                                    tv_errorConfirmPassword.text =
+                                        getString(R.string.Pleasewriteconfirm_password)
                                 }
 
 
@@ -190,21 +229,64 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
+        mViewModel.signUpResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    // sharedViewModel.verifyOtpHoldUserName = editTextUserName.getText().toString()
+                    //  sharedViewModel.isForGotVerify = false
+                    //  Navigation.findNavController(mView).navigate(R.id.action_signupFragment_to_verifyOtpFragment)
+                    Toast.makeText(requireContext(), "Sign Up Success", Toast.LENGTH_SHORT).show()
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!)
+                }
+            }
+        })
+
         mViewModel.onBackButtonClicked.observe(this, Observer {
             Navigation.findNavController(img_back).popBackStack()
         })
 
+        mViewModel.onProfilePicTextClicked.observe(this, Observer {
+            GligarPicker().requestCode(AppConstants.PROFILE_PIC_CODE)
+                .withFragment(this)
+                .limit(1)
+                .show()
+        })
+
         mViewModel.onSignUpButtonClicked.observe(this, Observer {
 
-            fieldValidations()
+            // fieldValidations()
+            if(profileImageFile == null){
 
-           /* Navigation.findNavController(btn_changePassword)
-                .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)*/
+                Snackbar.make(mView, getString(R.string.Profile_pic_is_null), Snackbar.LENGTH_SHORT).show()
+
+            }else {
+
+
+                mViewModel.signUpAPICall(
+
+                    ed_firstName.text.toString(),
+                    ed_lastName.text.toString(),
+                    ed_userName.text.toString(),
+                    ed_phoneNumber.text.toString(),
+                    profileImageFile!!,
+                    ed_email.text.toString(),
+                    ed_confirmPassword.text.toString(),
+                    "user"
+                )
+            }
+
+            /* Navigation.findNavController(btn_changePassword)
+                 .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)*/
 
         })
     }
-
-
 
 
 }
