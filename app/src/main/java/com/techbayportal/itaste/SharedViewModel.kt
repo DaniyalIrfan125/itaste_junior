@@ -8,4 +8,9 @@ import com.techbayportal.itaste.baseclasses.BaseViewModel
  */
 class SharedViewModel : BaseViewModel() {
 
+    var verifyOtpHoldPhoneNumber = ""
+    var isForGotVerify = false
+    var userType = "user"
+    var otpVerifyCode = ""
+
 }

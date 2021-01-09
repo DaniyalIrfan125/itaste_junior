@@ -49,13 +49,16 @@
         <string name="change_profile_picture">تغيير صورة الملف الشخصي</string>
 
         //Forget Password Fragment
+
         <string name="enter_your_n_email">ادخل <br> </br>بريدك الالكتروني</string>
+        <string name="enter_your_n_number">رقم <br> </br>بريدك الالكتروني</string>
         <string name="a_verification_code_will_be_sent_to_your_email">سيتم إرسال رمز تحقق الى بريدك الالكتروني المسجل</string>
+    <string name="resend_code">أعد إرسال الرمز؟</string>
 
         //OTP Verification Fragment
         <string name="verify_the_ncode">كود<br> </br>التحقق</string>
         <string name="enter_the_5_digit_code_sent_to_email_sa_gmail_com"> sa****@gmail.com ادخل رمز التحقق المكون من 5 ارقام المرسل الى البريد</string>
-
+    <string name="enter_the_4_digit_code_sent_to_email_sa_gmail_com">أدخل الرمز المكون من 4 أرقام المرسل إلى رقم الهاتف</string>
         //Change password Fragment
         <string name="new_npassword">كلمة المرور <br> </br>الجديدة</string>
         <string name="new_password">كلمة المرور الجديدة</string>
@@ -253,6 +256,16 @@
     //=>change password
     <string name="Passworddoesnotmatch">كلمة السر غير متطابقة!</string>
     <string name="PleasewriteOtp">من فضلك اكتب Otp!</string>
+
+    //Others
+    <string name="Profile_pic_is_null">يرجى تحديد صورة الملف الشخصي</string>
+
+    //Sign up vendor
+    <string name="add_details">أضف التفاصيل</string>
+
+
+    <string name="a_verification_code_will_be_sent_to_your_contact_number">سيتم إرسال رمز التحقق إلى رقم الاتصال الخاص بك</string>
+    <string name="enter_your_phone_number">أدخل رقم هاتفك</string>
 
 </resources>
 

@@ -48,7 +48,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         populatingDataForHome()
         dataStoreProvider = DataStoreProvider(requireContext())
         subscribeToObserveDarkActivation()

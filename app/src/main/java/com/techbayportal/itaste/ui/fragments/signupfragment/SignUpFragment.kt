@@ -1,24 +1,24 @@
 package com.techbayportal.itaste.ui.fragments.signupfragment
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.opensooq.supernova.gligar.GligarPicker
+import com.rilixtech.widget.countrycodepicker.CountryCodePicker.OnCountryChangeListener
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
-import com.techbayportal.itaste.constants.AppConstants.PROFILE_PIC_CODE
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutSignupfragmentBinding
 import com.techbayportal.itaste.utils.DialogClass
@@ -39,11 +39,34 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
     var profileImageFile: File? = null
     private lateinit var mView: View
 
+    lateinit var fullNumber : String
+
+
+
+    lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dataStoreProvider = DataStoreProvider(requireContext())
         mView = view
         fieldTextWatcher()
+        checkUserType()
+
+       // fullNumber = et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
+        et_country_code.selectedCountryCodeWithPlus
+       // et_country_code.registeredPhoneNumberTextView
+
+        et_country_code.setOnCountryChangeListener(OnCountryChangeListener { selectedCountry ->
+
+
+            Toast.makeText(
+                context,
+                selectedCountry.name + " Selected",
+                Toast.LENGTH_SHORT
+            ).show()
+        })
+
+
 
 
     }
@@ -126,21 +149,32 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                 if (!TextUtils.isEmpty(ed_confirmPassword.text)) {
 
                                     if (ed_setPassword.text.toString() == ed_confirmPassword.text.toString()) {
+                                      //  when all Edit texts checks are full filled
 
-                                        /*mViewModel.signUpAPICall(
-                                            ed_firstName.text.toString(),
-                                            ed_lastName.text.toString(),
-                                            ed_userName.text.toString(),
-                                            ed_phoneNumber.text.toString(),
-                                            "",
-                                            ed_email.text.toString(),
-                                            ed_password.text.toString(),
-                                            "user"
-                                        )*/
+                                        //check for profile pic
+                                        if(profileImageFile == null){
+                                            Snackbar.make(mView, getString(R.string.Profile_pic_is_null), Snackbar.LENGTH_SHORT).show()
+                                        }else {
+                                            if(sharedViewModel.userType == AppConstants.UserTypeKeys.USER){
+                                                mViewModel.signUpAPICall(
+                                                    ed_firstName.text.toString(),
+                                                    ed_lastName.text.toString(),
+                                                    ed_userName.text.toString(),
+                                                    et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString(),
 
+                                                   // et_country_code.fullNumber,
+                                                    profileImageFile!!,
+                                                    ed_email.text.toString(),
+                                                    ed_confirmPassword.text.toString(),
+                                                    AppConstants.UserTypeKeys.USER
+                                                )
+                                            }else if(sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR){
+                                                Navigation.findNavController(btn_signUp)
+                                                    .navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
+                                            }
+                                        }
 
                                     } else {
-
                                         tv_errorConfirmPassword.visibility = View.VISIBLE
                                         ed_confirmPassword.background =
                                             ContextCompat.getDrawable(
@@ -149,12 +183,8 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                             )
                                         tv_errorConfirmPassword.text =
                                             getString(R.string.Passwords_does_not_match)
-
                                     }
-
-
                                 } else {
-
                                     tv_errorConfirmPassword.visibility = View.VISIBLE
                                     ed_confirmPassword.background =
                                         ContextCompat.getDrawable(
@@ -236,10 +266,14 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    // sharedViewModel.verifyOtpHoldUserName = editTextUserName.getText().toString()
-                    //  sharedViewModel.isForGotVerify = false
+                     sharedViewModel.verifyOtpHoldPhoneNumber = et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
+                    sharedViewModel.isForGotVerify = false
                     //  Navigation.findNavController(mView).navigate(R.id.action_signupFragment_to_verifyOtpFragment)
-                    Toast.makeText(requireContext(), "Sign Up Success", Toast.LENGTH_SHORT).show()
+
+                    //on signup success navigate to OTP screen
+                    Navigation.findNavController(mView).navigate(R.id.action_signUpFragment_to_otpverificationFragment)
+
+                   // Toast.makeText(requireContext(), "Sign Up Success", Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -261,31 +295,24 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
         mViewModel.onSignUpButtonClicked.observe(this, Observer {
 
-            // fieldValidations()
-            if(profileImageFile == null){
-
-                Snackbar.make(mView, getString(R.string.Profile_pic_is_null), Snackbar.LENGTH_SHORT).show()
-
-            }else {
+            fieldValidations()
 
 
-                mViewModel.signUpAPICall(
-
-                    ed_firstName.text.toString(),
-                    ed_lastName.text.toString(),
-                    ed_userName.text.toString(),
-                    ed_phoneNumber.text.toString(),
-                    profileImageFile!!,
-                    ed_email.text.toString(),
-                    ed_confirmPassword.text.toString(),
-                    "user"
-                )
-            }
-
-            /* Navigation.findNavController(btn_changePassword)
+            /* Navigation.findNavController(btn_signUp)
                  .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)*/
 
         })
+    }
+
+    //observing User type vendor or user
+    private fun checkUserType() {
+        if (sharedViewModel.userType == AppConstants.UserTypeKeys.USER) {
+
+
+        } else if(sharedViewModel.userType  == AppConstants.UserTypeKeys.VENDOR){
+            btn_signUp.text = getString(R.string.next)
+        }
+
     }
 
 

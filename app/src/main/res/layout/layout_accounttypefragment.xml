@@ -12,7 +12,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_50sdp">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -33,7 +34,8 @@
                     android:text="@string/what_are_you_looking_nfor"
                     android:textAlignment="center"
                     android:textColor="@color/titleTextColorBlack"
-                    android:textSize="25sp" />
+                    android:textSize="25sp"
+                    android:textAllCaps="true"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,7 +57,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_35sdp"
                     android:onClick="@{()->viewModel.onExploreFoodClicked()}"
-                    android:background="@drawable/item_circleorangelayout">
+                    android:background="@drawable/layout_circle_orange">
 
                     <ImageView
                         android:id="@+id/iv_exploreFood"
@@ -63,6 +65,7 @@
                         android:layout_height="@dimen/_60sdp"
                         android:layout_centerInParent="true"
                         android:src="@drawable/icon_user"
+
                          />
                 </RelativeLayout>
 

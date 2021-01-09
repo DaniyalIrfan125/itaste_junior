@@ -134,9 +134,6 @@ dependencies {
     //Lottie for animations
     implementation 'com.airbnb.android:lottie:3.4.1'
 
-    //Chucker for debuging api
-    debugImplementation "com.github.chuckerteam.chucker:library:3.2.0"
-    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.2.0"
 
     //swipe to referesh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
@@ -172,6 +169,13 @@ dependencies {
 
     //image picker including camera capture
     implementation 'com.opensooq.supernova:gligar:1.1.0'
+
+    //country codes
+    implementation 'com.github.joielechong:countrycodepicker:2.4.2'
+
+    //chucker api
+    debugImplementation "com.github.chuckerteam.chucker:library:3.4.0"
+    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.4.0"
 }
 protobuf {
     protoc {

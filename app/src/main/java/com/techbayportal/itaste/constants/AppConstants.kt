@@ -11,7 +11,9 @@ object AppConstants {
     @StringDef(ApiConfiguration.BASE_URL)
     annotation class ApiConfiguration {
         companion object {
-            const val BASE_URL = "https://itaste.netfans.online/api/v1/"
+
+           // const val BASE_URL = "https://itaste.netfans.online/api/v1/"
+            const val BASE_URL = "https://itaste.live/api/v1/"
         }
     }
 
@@ -21,6 +23,22 @@ object AppConstants {
             const val DB_NAME = "BaseProject"
         }
     }
+    @StringDef(UserTypeKeys.USER,UserTypeKeys.VENDOR)
+    annotation class UserTypeKeys {
+        companion object {
+            const val USER = "user"
+            const val VENDOR = "vendor"
+        }
+    }
+
+    @StringDef(VerifyOTPTypeKeys.SIGN_UP,VerifyOTPTypeKeys.FORGOT_PASSWORD)
+    annotation class VerifyOTPTypeKeys {
+        companion object {
+            const val SIGN_UP = "sign-up"
+            const val FORGOT_PASSWORD = "forget-password"
+        }
+    }
+
 
     @StringDef(RecyclerViewKeys.HOME_RV)
     annotation class RecyclerViewKeys {
@@ -42,6 +60,9 @@ object AppConstants {
             const val USER_NAME_KEY = "user_name_key"
             const val DARK_MODE_KEY = "dark_mode_key"
             const val ARABIC_LANGUAGE_KEY = "Arabic"
+            const val USER_TYPE_KEY = "user"
+            //const val USER_DATA = "user_data"
+
             //
             const val IS_REMEMBER = "is_remember"
             const val USER_OBJ = "is_remember"

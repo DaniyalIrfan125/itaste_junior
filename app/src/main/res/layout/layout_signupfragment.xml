@@ -212,7 +212,7 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <EditText
+                            <com.rilixtech.widget.countrycodepicker.CountryCodePicker
                                 android:id="@+id/et_country_code"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_38sdp"
@@ -220,14 +220,19 @@
                                 android:layout_weight="0.6"
                                 android:background="@drawable/ed_states"
                                 android:fontFamily="@font/roboto_regular"
-                                android:hint="@string/_971"
                                 android:imeOptions="actionNext"
-                                android:paddingStart="@dimen/_20sdp"
-                                android:paddingEnd="@dimen/_20sdp"
-                                android:singleLine="true"
-                                android:textColor="@color/titleTextColorBlack"
-                                android:textColorHint="@color/titleTextColorBlack"
-                                android:textSize="13sp" />
+                                android:layout_gravity="center"
+                                android:gravity="center"
+
+                                app:ccp_textColor="@color/titleTextColorBlack"
+                                app:ccp_textFont="roboto_regular.ttf"
+                                app:ccp_textSize="@dimen/_10sdp"
+                                app:ccp_hideNameCode="true"
+                                app:ccp_showFlag="false"
+                                app:ccp_defaultNameCode="AE"
+                                app:ccp_keyboardAutoPopOnSearch="false"
+                                app:ccp_backgroundColor="@color/mainBackground"
+                                app:ccp_dialogTextColor="@color/titleTextColorBlack"/>
 
 
                             <EditText
@@ -330,7 +335,7 @@
                         app:mrl_rippleColor="@color/colorLightOrange">
 
                         <Button
-                            android:id="@+id/btn_changePassword"
+                            android:id="@+id/btn_signUp"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
                             android:layout_marginStart="6dp"

@@ -47,6 +47,10 @@
     <color name="mainIconColor">#000000</color>
 
 
+    <color name="resendCodeColorLight">#ff962d</color>
+    <color name="otpTimerColor">#505050</color>
+
+
 
 
 

@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
@@ -22,9 +21,6 @@ import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import com.techbayportal.itaste.utils.DialogClass
-import kotlinx.android.synthetic.main.fragment_my_profile.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
@@ -110,9 +106,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(viewModel)
-
-
         sharedViewModel = ViewModelProviders.of(requireActivity()).get(SharedViewModel::class.java)
+        loadingDialog = DialogClass.loadingDialog(requireContext())
     }
 
 

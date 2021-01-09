@@ -82,24 +82,24 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
     }
 
 
-    private fun subscribeToObserveDataStore() {
-        //observing data from data store and showing
-        dataStoreProvider.languageFlow.asLiveData().observe(this, Observer {
+        private fun subscribeToObserveDataStore() {
+            //observing data from data store and showing
+            dataStoreProvider.languageFlow.asLiveData().observe(this, Observer {
 
-            if (it != null) {
-                if (it == "ar") {
-                    tv_language_name.text = getString(R.string.english)
+                if (it != null) {
+                    if (it == "ar") {
+                        tv_language_name.text = getString(R.string.english)
 
 
+                    } else {
+                        tv_language_name.text = getString(R.string.arabic)
+                    }
                 } else {
-                    tv_language_name.text = getString(R.string.arabic)
+                    tv_language_name.text = getString(R.string.english)
                 }
-            } else {
-                tv_language_name.text = getString(R.string.english)
-            }
-        })
+            })
 
-    }
+        }
 
 
 

@@ -1,5 +1,6 @@
 package com.techbayportal.itaste.ui.fragments.signupfragment
 
+import android.media.Image
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import com.techbayportal.itaste.utils.NetworkHelper
 import com.techbayportal.itaste.utils.SingleLiveEvent
 import com.techbayportal.itaste.utils.extractErrorMessage
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.io.File
 
 class SignUpFragmentViewModel @ViewModelInject constructor(
@@ -70,6 +72,9 @@ class SignUpFragmentViewModel @ViewModelInject constructor(
     }
 
 
+
+
+
     fun onBackButtonClicked() {
         onBackButtonClicked.call()
     }
@@ -81,6 +86,7 @@ class SignUpFragmentViewModel @ViewModelInject constructor(
     fun onProfilePicTextClicked() {
         onProfilePicTextClicked.call()
     }
+
 
 
 }

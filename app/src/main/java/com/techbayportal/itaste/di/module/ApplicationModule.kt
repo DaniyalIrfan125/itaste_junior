@@ -1,6 +1,7 @@
 package com.techbayportal.itaste.di.module
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.techbayportal.itaste.BuildConfig
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.db.AppDao
@@ -9,6 +10,7 @@ import com.techbayportal.itaste.data.remote.ApiService
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,13 +26,17 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 class ApplicationModule {
 
+
+    //added context for using chucker interceptor
     @Provides
     @Singleton
-    fun provideOkHttpClient()= if (BuildConfig.DEBUG) {
+    fun provideOkHttpClient(@ApplicationContext appContext: Context) =
+        if (BuildConfig.DEBUG) {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(ChuckerInterceptor.Builder(appContext).build())
             .build()
     } else OkHttpClient
         .Builder()
@@ -39,7 +45,7 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(gson: Gson,okHttpClient: OkHttpClient) : Retrofit = Retrofit.Builder()
+    fun provideRetrofit(gson: Gson, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
         .baseUrl(AppConstants.ApiConfiguration.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .client(okHttpClient)
@@ -53,7 +59,13 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext appContext: Context) = AppDatabase.getDatabase(appContext)
+    fun provideDatabase(@ApplicationContext appContext: Context) =
+        AppDatabase.getDatabase(appContext)
+
+    @Singleton
+    @Provides
+    fun provideDataStoreProvider(@ApplicationContext appContext: Context) =
+        DataStoreProvider(appContext)
 
     @Singleton
     @Provides
@@ -61,8 +73,9 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideRepository(apiService: ApiService,
-                          localDataSource: AppDao
+    fun provideRepository(
+        apiService: ApiService,
+        localDataSource: AppDao
     ) =
         MainRepository(apiService, localDataSource)
 

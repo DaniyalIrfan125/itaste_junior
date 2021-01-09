@@ -48,12 +48,15 @@
     <string name="change_profile_picture">Change Profile Picture</string>
 
     //Forget Password Fragment
-    <string name="enter_your_n_email">Enter your <br> </br>email</string>
+    <string name="enter_your_n_email">Enter your <br> </br>Email</string>
+    <string name="enter_your_n_number">Enter your <br> </br>Number</string>
     <string name="a_verification_code_will_be_sent_to_your_email">A verification code will be sent to your email</string>
 
     //OTP Verification Fragment
     <string name="verify_the_ncode">Verify the<br> </br>code</string>
     <string name="enter_the_5_digit_code_sent_to_email_sa_gmail_com">Enter the 5- digit code sent to email sa****@gmail.com</string>
+    <string name="enter_the_4_digit_code_sent_to_email_sa_gmail_com">Enter the 4- digit code sent to phone number</string>
+    <string name="resend_code">Resend Code?</string>
 
     //Change password Fragment
     <string name="new_npassword">New <br> </br>Password</string>
@@ -252,7 +255,16 @@
     <string name="PleasewriteOtp">Please write Otp!</string>
 
     //Others
-    <string name="Profile_pic_is_null">Profile pic is null</string>
+    <string name="Profile_pic_is_null">Please Select Profile Picture</string>
+
+
+    //Sign up vendor
+    <string name="add_details">Add Details</string>
+    <string name="a_verification_code_will_be_sent_to_your_contact_number">A verification code will be sent to your contact number</string>
+
+
+    <string name="enter_your_phone_number">Enter your phone <br></br> number</string>
+
 
 
 </resources>
