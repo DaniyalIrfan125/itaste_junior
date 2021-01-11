@@ -166,6 +166,7 @@ dependencies {
     implementation 'com.arasthel:spannedgridlayoutmanager:3.0.2'
 
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 }
 protobuf {
     protoc {

@@ -38,10 +38,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
-        val navInflater = navController.navInflater
-        val graph = navInflater.inflate(R.navigation.main_navigation_graph)
-        graph.startDestination = R.id.homeFragment
-        navController.graph = graph
+       // val navInflater = navController.navInflater
+     //   val graph = navInflater.inflate(R.navigation.main_navigation_graph)
+      //  graph.startDestination = R.id.homeFragment
+      //  navController.graph = graph
         bottom_navigation.setupWithNavController(navHostFragment.navController)
 
 

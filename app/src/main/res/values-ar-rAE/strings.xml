@@ -254,5 +254,7 @@
     <string name="Passworddoesnotmatch">كلمة السر غير متطابقة!</string>
     <string name="PleasewriteOtp">من فضلك اكتب Otp!</string>
 
+    <string name="new_post">منشور جديد</string>
+
 </resources>
 

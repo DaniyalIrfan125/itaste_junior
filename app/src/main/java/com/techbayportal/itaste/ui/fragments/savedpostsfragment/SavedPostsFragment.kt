@@ -67,7 +67,7 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
     }
 
 
-    fun RecyclerView.autoFitColumns(columnWidth: Int) {
+    private fun RecyclerView.autoFitColumns(columnWidth: Int) {
         val displayMetrics = this.context.resources.displayMetrics
         val noOfColumns =
             ((displayMetrics.widthPixels / displayMetrics.density) / columnWidth).toInt()

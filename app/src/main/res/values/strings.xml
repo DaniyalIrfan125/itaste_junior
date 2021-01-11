@@ -251,5 +251,6 @@
     <string name="Passworddoesnotmatch">Password does not match!</string>
     <string name="PleasewriteOtp">Please write Otp!</string>
 
+    <string name="new_post">New Post</string>
 
 </resources>

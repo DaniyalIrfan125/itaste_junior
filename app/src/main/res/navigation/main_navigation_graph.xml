@@ -258,4 +258,8 @@
         android:id="@+id/welcomefragment"
         android:name="com.techbayportal.itaste.ui.fragments.welcomefragment.Welcomefragment"
         android:label="Welcomefragment" />
+    <fragment
+        android:id="@+id/selectPostFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.selectpostfragment.SelectPostFragment"
+        android:label="SelectPostFragment" />
 </navigation>
