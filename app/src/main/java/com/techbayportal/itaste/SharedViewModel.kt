@@ -1,6 +1,7 @@
 package com.techbayportal.itaste
 
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.models.UserModel
 
 
 /**
@@ -12,5 +13,7 @@ class SharedViewModel : BaseViewModel() {
     var isForGotVerify = false
     var userType = "user"
     var otpVerifyCode = ""
+    var userModel = UserModel()
+    val isDarkMode :Boolean = false
 
 }

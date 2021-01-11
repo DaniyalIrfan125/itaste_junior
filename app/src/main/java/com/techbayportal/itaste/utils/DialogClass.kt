@@ -5,11 +5,15 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
+import android.view.Window
 import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
+import kotlinx.android.synthetic.main.fragment_my_profile.*
 
 class DialogClass {
 
@@ -20,15 +24,21 @@ class DialogClass {
         fun onCloseBtn()
     }
 
+
+
+
     companion object {
 
         fun loadingDialog(context: Context):Dialog {
             val dialog = Dialog(context)
+
             dialog.setContentView(R.layout.dialog_layout_loading)
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.setCancelable(false)
             return dialog
         }
+
+        //observing data from data store and showing
 
         fun errorDialog(context: Context,errorMessage:String) {
             val dialog = Dialog(context)
@@ -42,6 +52,8 @@ class DialogClass {
 
             val errorTextMessage = dialog.findViewById<TextView>(R.id.tv_description)
             errorTextMessage.text = errorMessage
+
+
 
           //  val dialogButton = dialog.findViewById<Button>(R.id.btn_dialog_okay)
 //        // if button is clicked, close the custom dialog

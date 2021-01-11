@@ -19,6 +19,7 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
+import com.techbayportal.itaste.data.models.UserModel
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutSignupfragmentBinding
 import com.techbayportal.itaste.utils.DialogClass
@@ -156,7 +157,21 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                             Snackbar.make(mView, getString(R.string.Profile_pic_is_null), Snackbar.LENGTH_SHORT).show()
                                         }else {
                                             if(sharedViewModel.userType == AppConstants.UserTypeKeys.USER){
-                                                mViewModel.signUpAPICall(
+                                                sharedViewModel.userModel?.let{
+                                                    it.first = ed_firstName.text.toString()
+                                                    it.last = ed_lastName.text.toString()
+                                                    it.username =  ed_userName.text.toString()
+                                                    it.phone  =et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
+                                                    it.profileImage = profileImageFile!!
+                                                    it.email = ed_email.text.toString()
+                                                    it.password = ed_confirmPassword.text.toString()
+                                                    it.role = AppConstants.UserTypeKeys.USER
+                                                    mViewModel.signUpAPICall(it)
+                                                    sharedViewModel.userModel = UserModel()
+
+                                                }
+
+                                                /*mViewModel.signUpAPICall(
                                                     ed_firstName.text.toString(),
                                                     ed_lastName.text.toString(),
                                                     ed_userName.text.toString(),
@@ -167,8 +182,9 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                                     ed_email.text.toString(),
                                                     ed_confirmPassword.text.toString(),
                                                     AppConstants.UserTypeKeys.USER
-                                                )
+                                                )*/
                                             }else if(sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR){
+                                                sharedViewModel.userModel = dataSetUserSignUpModel()
                                                 Navigation.findNavController(btn_signUp)
                                                     .navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
                                             }
@@ -256,6 +272,20 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         }
     }
 
+    private fun dataSetUserSignUpModel(): UserModel {
+        val addDataSetUserSignUpModel = UserModel()
+        addDataSetUserSignUpModel.first = ed_firstName.text.toString()
+        addDataSetUserSignUpModel.last = ed_lastName.text.toString()
+        addDataSetUserSignUpModel.username =  ed_userName.text.toString()
+        addDataSetUserSignUpModel.phone  =et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
+        addDataSetUserSignUpModel.profileImage = profileImageFile!!
+        addDataSetUserSignUpModel.email = ed_email.text.toString()
+        addDataSetUserSignUpModel.password = ed_confirmPassword.text.toString()
+        addDataSetUserSignUpModel.role = AppConstants.UserTypeKeys.USER
+        //mViewModel.signUpAPICall(it)
+        return addDataSetUserSignUpModel
+    }
+
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
@@ -296,6 +326,41 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         mViewModel.onSignUpButtonClicked.observe(this, Observer {
 
             fieldValidations()
+
+
+            //remove code below and uncomment above method
+
+            /*if(sharedViewModel.userType == AppConstants.UserTypeKeys.USER){
+                sharedViewModel.userModel?.let{
+                    it.first = ed_firstName.text.toString()
+                    it.last = ed_lastName.text.toString()
+                    it.username =  ed_userName.text.toString()
+                    it.phone  =et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
+                    it.profileImage = profileImageFile!!
+                    it.email = ed_email.text.toString()
+                    it.password = ed_confirmPassword.text.toString()
+                    it.role = AppConstants.UserTypeKeys.USER
+
+                    mViewModel.signUpAPICall(it)
+
+                }
+
+                *//*mViewModel.signUpAPICall(
+                    ed_firstName.text.toString(),
+                    ed_lastName.text.toString(),
+                    ed_userName.text.toString(),
+                    et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString(),
+
+                   // et_country_code.fullNumber,
+                    profileImageFile!!,
+                    ed_email.text.toString(),
+                    ed_confirmPassword.text.toString(),
+                    AppConstants.UserTypeKeys.USER
+                )*//*
+            }else if(sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR){
+                Navigation.findNavController(btn_signUp)
+                    .navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
+            }*/
 
 
             /* Navigation.findNavController(btn_signUp)

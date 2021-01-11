@@ -81,9 +81,11 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         dataStoreProviderBase.darkModeFlow.asLiveData().observe(this, Observer {
             if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                sharedViewModel.isDarkMode
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                !sharedViewModel.isDarkMode
 
             }
         })

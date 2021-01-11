@@ -92,37 +92,11 @@ class SignupVendorViewModel @ViewModelInject constructor(
         }
     }
 
-    fun signUpVendorAPICall(
-        first: String,
-        last: String,
-        username: String,
-        profilePic: File,
-        phone: String,
-        email: String,
-        password: String,
-        country_id: String,
-        city_id: String,
-        days_of_week: ArrayList<String>,
-        is_deliverable: Boolean,
-        password_confirmation: String
-    ) {
+    fun signUpVendorAPICall(userModel: UserModel) {
         viewModelScope.launch {
             _signUpVendorResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
-                mainRepository.signUpVendor(
-                    first,
-                    last,
-                    username,
-                    profilePic,
-                    phone,
-                    email,
-                    password,
-                    country_id,
-                    city_id,
-                    days_of_week,
-                    is_deliverable,
-                    password_confirmation
-                ).let {
+                mainRepository.signUpVendor(userModel).let {
                     if (it.isSuccessful) {
                         _signUpVendorResponse.postValue(Resource.success(it.body()!!))
                     } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
@@ -141,8 +115,6 @@ class SignupVendorViewModel @ViewModelInject constructor(
             } else _signUpVendorResponse.postValue(Resource.error("No Internet Connection", null))
         }
     }
-
-
 
     init {
         getAllCountries()

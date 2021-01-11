@@ -3,6 +3,7 @@ package com.techbayportal.itaste.data.remote.reporitory
 import com.techbayportal.itaste.data.local.db.AppDao
 import com.techbayportal.itaste.data.models.GetAllCitiesResponse
 import com.techbayportal.itaste.data.models.SignUpResponse
+import com.techbayportal.itaste.data.models.UserModel
 import com.techbayportal.itaste.data.models.getCitiesInputModel
 import com.techbayportal.itaste.data.remote.ApiService
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -26,19 +27,10 @@ class MainRepository @Inject constructor(
         apiService.login("application/json", email, password)
 
     //Sign Up User
-    suspend fun signUp(
-        first: String,
-        last: String,
-        username: String,
-        phone: String,
-        profilePic: File,
-        email: String,
-        password: String,
-        role: String
-    ): Response<SignUpResponse> {
+    suspend fun signUp(userModel: UserModel): Response<SignUpResponse> {
 
         val profilePicRequestBody: RequestBody =
-            profilePic.asRequestBody("image/*".toMediaTypeOrNull())
+            userModel.profileImage.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = MultipartBody.Part.createFormData(
             "profilePic",
             System.currentTimeMillis().toString() + ".png",
@@ -47,35 +39,23 @@ class MainRepository @Inject constructor(
 
         return apiService.signUp(
             "application/json",
-            first.toRequestBody(MultipartBody.FORM),
-            last.toRequestBody(MultipartBody.FORM),
-            username.toRequestBody(MultipartBody.FORM),
-            phone.toRequestBody(MultipartBody.FORM),
+            userModel.first,
+           // last.toRequestBody(MultipartBody.FORM),
+            userModel.last,
+            userModel.username,
+            userModel.phone,
             profilePicMultiPartBody,
-            email.toRequestBody(MultipartBody.FORM),
-            password.toRequestBody(MultipartBody.FORM),
-            role.toRequestBody(MultipartBody.FORM)
+            userModel.email,
+            userModel.password,
+            userModel.role
         )
     }
 
     //Sign Up User
-    suspend fun signUpVendor(
-        first: String,
-        last: String,
-        username: String,
-        profilePic: File,
-        phone: String,
-        email: String,
-        password: String,
-        country_id: String,
-        city_id: String,
-        days_of_week: ArrayList<String>,
-        is_deliverable: Boolean,
-        password_confirmation: String
-    ): Response<SignUpResponse> {
+    suspend fun signUpVendor(userModel: UserModel): Response<SignUpResponse> {
 
         val profilePicRequestBody: RequestBody =
-            profilePic.asRequestBody("image/*".toMediaTypeOrNull())
+            userModel.profileImage.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = MultipartBody.Part.createFormData(
             "profilePic",
             System.currentTimeMillis().toString() + ".png",
@@ -84,18 +64,19 @@ class MainRepository @Inject constructor(
 
         return apiService.signUpVendor(
             "application/json",
-            first,
-            last,
-            username,
+            userModel.first,
+            userModel.last,
+            userModel.username,
             profilePicMultiPartBody,
-            phone,
-            email,
-            password,
-            country_id,
-            city_id,
-            days_of_week,
-            is_deliverable,
-            password_confirmation
+            userModel.phone,
+            //userModel.email,
+            userModel.password,
+            userModel.country_id,
+            userModel.city_id,
+            userModel.days_of_week,
+            //userModel.days_of_week,
+            userModel.is_deliverable,
+            userModel.password_confirmation
         )
     }
 

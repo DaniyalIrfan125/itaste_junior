@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
 import com.techbayportal.itaste.data.models.SignUpResponse
+import com.techbayportal.itaste.data.models.UserModel
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
 import com.techbayportal.itaste.utils.NetworkHelper
@@ -29,29 +30,11 @@ class SignUpFragmentViewModel @ViewModelInject constructor(
     val signUpResponse: LiveData<Resource<SignUpResponse>>
         get() = _signUpResponse
 
-    fun signUpAPICall(
-        first: String,
-        last: String,
-        username: String,
-        phone: String,
-        profilePic: File,
-        email: String,
-        password: String,
-        role: String
-    ) {
+    fun signUpAPICall(userModel: UserModel) {
         viewModelScope.launch {
             _signUpResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
-                mainRepository.signUp(
-                    first,
-                    last,
-                    username,
-                    phone,
-                    profilePic,
-                    email,
-                    password,
-                    role
-                ).let {
+                mainRepository.signUp(userModel).let {
                     if (it.isSuccessful) {
                         _signUpResponse.postValue(Resource.success(it.body()!!))
                     } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {

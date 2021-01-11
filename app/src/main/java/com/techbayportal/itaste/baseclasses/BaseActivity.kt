@@ -3,6 +3,7 @@ package com.techbayportal.itaste.baseclasses
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
