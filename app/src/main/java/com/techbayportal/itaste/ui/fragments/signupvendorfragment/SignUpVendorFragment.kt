@@ -20,6 +20,7 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.models.DaysOfWeek
+import com.techbayportal.itaste.data.models.GetAllCitiesData
 import com.techbayportal.itaste.data.models.GetAllCountriesData
 import com.techbayportal.itaste.data.models.UserModel
 import com.techbayportal.itaste.data.remote.Resource
@@ -35,6 +36,7 @@ import kotlinx.android.synthetic.main.layout_signupvendorfragment.*
 import kotlinx.android.synthetic.main.layout_signupvendorfragment.img_back
 import java.io.File
 
+
 @AndroidEntryPoint
 class SignUpVendorFragment :
     BaseFragment<LayoutSignupvendorfragmentBinding, SignupVendorViewModel>() {
@@ -46,36 +48,44 @@ class SignUpVendorFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    var countryid: String = "0"
+    var cityid: String = "0"
+
+
     var profileImageFile: File? = null
 
-    var deliveriable : Boolean = false
-
-    //var array3: ArrayList<String> = ArrayList()
-
+    // var deliveriable : Boolean = false
+    var isDeliveriable: Int? = null
     var array3: Array<String> = arrayOf("Mashroom", "Kitkat", "Oreo", "Lolipop")
 
+    //sample array for test
     val listofweek = ArrayList<String>()
 
-
+    //original array for use in api
+    val listofweekDays = ArrayList<String>()
 
 
     private var selectedDayItems: MutableList<DaysOfWeek> = mutableListOf()
-  // private var selectedDayItems: ArrayList<DaysOfWeek> = ArrayList()
     private var selectedDayItems2: MutableList<DaysOfWeek> = mutableListOf()
-    private var actionMode: ActionMode? = null
     private lateinit var adapter: DaysRecyclerAdapter
-    private lateinit var adapter2: DaysRecyclerAdapter
     private var tracker: SelectionTracker<DaysOfWeek>? = null
-    private var tracker2: SelectionTracker<DaysOfWeek>? = null
-
     private val countriesList = arrayListOf<GetAllCountriesData>()
-    private var listView: ListView? = null
+    private val citiesList = arrayListOf<GetAllCitiesData>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeToNetworkLiveData()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //for sample array
+        listofweek.add("mon")
+        listofweek.add("tue")
 
-       // array3.add("mon")
+        //add static first item in Country list and cities list
+        countriesList.add(0, GetAllCountriesData("0", "Select Country", "", ""))
+        citiesList.add(0, GetAllCitiesData("0", "Select City", ""))
 
         val daysRecyclerView: RecyclerView = view.findViewById(R.id.recycler_days)
         val daysOfWeek: MutableList<DaysOfWeek> = mutableListOf()
@@ -112,23 +122,19 @@ class SignUpVendorFragment :
                     tracker?.let {
                         selectedDayItems = it.selection.toMutableList()
                         selectedDayItems.remove(DaysOfWeek(""))
-
-                        Toast.makeText(
-                            context,
-                            "checked: $selectedDayItems + ${selectedDayItems.size} :Days",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        if (selectedDayItems.isEmpty() && selectedDayItems2.isEmpty()) {
-                            //  actionMode?.finish()
-                        } else {
-                            /*if (actionMode == null) actionMode =
-                                activity.startSupportActionMode(this@MainActivity)
-                            actionMode?.title =
-                                "${selectedPostItems.size + selectedPostItems2.size}"*/
-                        }
+                        // Toast.makeText(context, "checked: $selectedDayItems + ${selectedDayItems.size} :Days", Toast.LENGTH_SHORT).show()
                     }
                 }
             })
+
+        rg_service_type.setOnCheckedChangeListener { group, checkedId ->
+            if (checkedId == R.id.rb_deliverable) {
+                isDeliveriable = 1
+            }
+            if (checkedId == R.id.rb_not_deliverable) {
+                isDeliveriable = 0
+            }
+        }
 
 
         /*recycler_days.adapter = DaysRecyclerAdapter(
@@ -141,62 +147,60 @@ class SignUpVendorFragment :
 
     }
 
-    fun fieldValidations() {
-        if (spinner_country != null && spinner_country.selectedItem != null) {
-            if (spinner_city != null && spinner_city.selectedItem != null) {
-                if (rg_service_type != null && rg_service_type.checkedRadioButtonId == -1) {
-                    Toast.makeText(requireContext(), "All fields filled", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }
+    fun signUpVendorFieldValidations() {
+        if (spinner_country.selectedItemPosition > 0) {
+            if (spinner_city.selectedItemPosition > 0) {
+                if (selectedDayItems.isNotEmpty()) {
+                    if (isDeliveriable != null) {
+                        // Toast.makeText(requireContext(), "LetsGo", Toast.LENGTH_SHORT).show()
 
+                        selectedDayItems.forEach {
+                            listofweekDays.add(it.dayName.toLowerCase())
+                        }
 
-    override fun subscribeToNavigationLiveData() {
-        super.subscribeToNavigationLiveData()
+                        if (sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR) {
+                            sharedViewModel.userModel?.let {
+                                it.country_id = countryid
+                                it.city_id = cityid
+                                it.days_of_week = listofweekDays
+                                it.is_deliverable = "" + isDeliveriable
+                                it.description = et_vendorDescription.text.toString()
+                                mViewModel.signUpVendorAPICall(it)
 
-        //  mViewModel.getAllCountries()
-
-        spinner_country.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                countriesList[position].id
-                mViewModel.getAllCities(countriesList[position].id.toInt())
-            }
-
-        }
-
-        mViewModel.onBackButtonClicked.observe(this, Observer {
-            Navigation.findNavController(img_back).popBackStack()
-        })
-
-        mViewModel.onServiceTypeRadioButtonClicked.observe(this, Observer {
-            val selectedRadioButtonId: Int = rg_service_type.checkedRadioButtonId
-            if (selectedRadioButtonId != -1) {
-                when {
-                    rb_deliverable.isChecked -> {
-                        deliveriable
+                                // sharedViewModel.userModel = dataSetVendorModel()
+                            }
+                        }
+                    } else {
+                        //Toast.makeText(requireContext(), "Please select your delivery types!", Toast.LENGTH_SHORT).show()
+                        Snackbar.make(
+                            requireView(),
+                            "Please select your delivery types!",
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
-                    rb_not_deliverable.isChecked -> {
-                        !deliveriable
-                    }
-                    else -> {
-                        Snackbar.make(requireView(), "No service selected", Snackbar.LENGTH_SHORT).show()
-                    }
+
+                } else {
+                    //Toast.makeText(requireContext(), "Please select your days of work!", Toast.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        requireView(),
+                        "Please select your days of work!",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             } else {
-                Snackbar.make(requireView(), "Please select your service type", Snackbar.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "Please select your city!", Toast.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), "Please select your city!", Snackbar.LENGTH_SHORT)
+                    .show()
             }
-        })
+        } else {
+            //Toast.makeText(requireContext(), "Please select your Country!", Toast.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), "Please select your Country!", Snackbar.LENGTH_SHORT)
+                .show()
+        }
 
+    }
+
+    override fun subscribeToNetworkLiveData() {
 
         mViewModel.getCountriesResponse.observe(this, Observer {
             //  Snackbar.make(requireView(), "Country", Snackbar.LENGTH_SHORT).show()
@@ -206,9 +210,9 @@ class SignUpVendorFragment :
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    mViewDataBinding.spinnerCountry.adapter = SpinnerAdapter(it.data!!.data)
-                    // paste api call here
                     countriesList.addAll(it.data!!.data)
+                    mViewDataBinding.spinnerCountry.adapter = SpinnerAdapter(countriesList)
+                    // paste api call here
                     // Toast.makeText(requireContext(), "Countries Loaded", Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.ERROR -> {
@@ -227,7 +231,9 @@ class SignUpVendorFragment :
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    mViewDataBinding.spinnerCity.adapter = SpinnerAdapter(it.data!!.data)
+                    citiesList.addAll(it.data!!.data)
+                    mViewDataBinding.spinnerCity.adapter = SpinnerAdapter(citiesList)
+
                     // paste api call here
                     // Toast.makeText(requireContext(), "Cities Loaded", Toast.LENGTH_SHORT).show()
                 }
@@ -247,13 +253,11 @@ class SignUpVendorFragment :
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    sharedViewModel.verifyOtpHoldPhoneNumber = et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
                     sharedViewModel.isForGotVerify = false
-                    //  Navigation.findNavController(mView).navigate(R.id.action_signupFragment_to_verifyOtpFragment)
 
-                    //on signup success navigate to OTP screen
-                    Navigation.findNavController(requireView()).navigate(R.id.action_signUpFragment_to_otpverificationFragment)
-
+                    //on sign up success navigate to OTP screen
+                    Navigation.findNavController(requireView())
+                        .navigate(R.id.action_signUpVendorFragment_to_otpverificationFragment2)
                     // Toast.makeText(requireContext(), "Sign Up Success", Toast.LENGTH_SHORT).show()
                 }
                 Resource.Status.ERROR -> {
@@ -263,58 +267,69 @@ class SignUpVendorFragment :
             }
         })
 
-
-        mViewModel.onSignUpVendorButtonClicked.observe(this, Observer {
-
-            // fieldValidations()
-
-           // sharedViewModel.userModel = dataSetUserModel()
-           // mViewModel.signUpVendorAPICall(dataSetUserModel())
-
-            listofweek.add("mon")
-            listofweek.add("tue")
-
-            if (sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR) {
-                sharedViewModel.userModel?.let {
-                    it.country_id = "" + 1
-                    it.city_id = "" + 1
-                    it.days_of_week = listofweek
-                    it.is_deliverable = deliveriable
-                    it.password_confirmation = "1"
-                    mViewModel.signUpVendorAPICall(it)
-
-                }
-            }
-
-
-            /* Navigation.findNavController(btn_signUp)
-                 .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)*/
-
-        })
-
-        /*mViewModel.onChooseCitySpinnerClicked.observe(this, Observer {
-          //  Snackbar.make(requireView(), "City", Snackbar.LENGTH_SHORT).show()
-        })*/
     }
 
-    private fun dataSetUserModel(): UserModel {
+    private fun dataSetVendorModel(): UserModel {
         val userModel = UserModel()
-        userModel.first = ed_firstName.text.toString()
-        userModel.last = ed_lastName.text.toString()
-        userModel.username = ed_userName.text.toString()
-        userModel.profileImage = profileImageFile!!
-        userModel.phone =
-            et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
-
-        userModel.email = ed_email.text.toString()
-        userModel.password = ed_setPassword.text.toString()
         userModel.country_id = spinner_country.selectedItem.toString()
         userModel.city_id = spinner_city.selectedItem.toString()
-       // userModel.days_of_week = arrayOf("sunday")
-
-        //arrayOf("sunday").toCollection(ArrayList())
-        userModel.is_deliverable = deliveriable
+        userModel.days_of_week = listofweekDays
+        userModel.is_deliverable = "" + isDeliveriable
         userModel.password_confirmation = ed_confirmPassword.text.toString()
+        userModel.description = et_vendorDescription.text.toString()
         return userModel
+    }
+
+
+    override fun subscribeToNavigationLiveData() {
+        super.subscribeToNavigationLiveData()
+
+
+        spinner_city.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                citiesList[position].id
+                cityid = citiesList[position].id
+            }
+        }
+
+        spinner_country.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (position > 0) {
+                    countriesList[position].id
+                    mViewModel.getAllCities(countriesList[position].id.toInt())
+                    countryid = countriesList[position].id
+                }
+            }
+        }
+
+        mViewModel.onBackButtonClicked.observe(this, Observer {
+            Navigation.findNavController(img_back).popBackStack()
+        })
+
+        mViewModel.onServiceTypeRadioButtonClicked.observe(this, Observer {
+        })
+
+        mViewModel.onSignUpVendorButtonClicked.observe(this, Observer {
+            // sharedViewModel.userModel = dataSetUserModel()
+            // mViewModel.signUpVendorAPICall(dataSetUserModel())
+            signUpVendorFieldValidations()
+        })
+
     }
 }

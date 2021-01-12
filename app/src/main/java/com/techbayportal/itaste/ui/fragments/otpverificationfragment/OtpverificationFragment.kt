@@ -190,7 +190,7 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                                     data.access_token
                                 ), ""
                             )
-                           // mViewModel.saveUserObj(userObje)
+                            mViewModel.saveUserObj(userObje)
                             navigateToMainScreen()
                         }
 

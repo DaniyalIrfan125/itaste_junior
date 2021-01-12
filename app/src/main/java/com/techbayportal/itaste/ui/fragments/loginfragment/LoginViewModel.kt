@@ -17,7 +17,8 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val dataStoreProvider: DataStoreProvider
 ) : BaseViewModel() {
 
 
@@ -31,6 +32,14 @@ class LoginViewModel @ViewModelInject constructor(
     private val _saveUserName = MutableLiveData<String>()
     val saveUserName: LiveData<String>
         get() = _saveUserName
+
+
+    fun saveUserObj(loginResponse: LoginResponse) {
+        viewModelScope.launch {
+            dataStoreProvider.saveUserObj(loginResponse)
+            LoginSession.getInstance().setLoginResponse(loginResponse)
+        }
+    }
 
     val onLoginClicked = SingleLiveEvent<Any>()
     val onForgotPasswordClicked = SingleLiveEvent<Any>()
@@ -60,8 +69,8 @@ class LoginViewModel @ViewModelInject constructor(
                     mainRepository.login(emailPhone, password).let {
                         if (it.isSuccessful) {
                             _loginResponse.postValue(Resource.success(it.body()!!))
-                            LoginSession.getInstance().setLoginResponse(it.body())
-                           // dataStoreProvider.storeUserData(it.body()!!)
+                           // LoginSession.getInstance().setLoginResponse(it.body())
+                          //  dataStoreProvider.storeUserData(it.body()!!)
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
                             _loginResponse.postValue(Resource.error(it.message(), null))
                         } else {

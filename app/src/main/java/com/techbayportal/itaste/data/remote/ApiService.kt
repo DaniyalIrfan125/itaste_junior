@@ -3,9 +3,9 @@ package com.techbayportal.itaste.data.remote
 
 import com.techbayportal.itaste.data.models.*
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
+
 
 interface ApiService {
 
@@ -25,15 +25,16 @@ interface ApiService {
     @POST("user-signup")
     suspend fun signUp(
         @Header("Accept") acceptJson: String,
-        @Part("first") first: RequestBody?,
-        @Part("last") last: RequestBody?,
-        @Part("username") username: RequestBody?,
-        @Part("phone") phone: RequestBody?,
+        @Query("first") first: String?,
+        @Query("last") last: String?,
+        @Query("username") username: String?,
+        @Query("phone") phone: String?,
         @Part profileImage: MultipartBody.Part,
-        @Part("email") email: RequestBody?,
-        @Part("password") password: RequestBody?,
-        @Part("role") role: RequestBody?
+        @Query("email") email: String?,
+        @Query("password") password: String?,
+        @Query("role") role: String?
     ): Response<SignUpResponse>
+
 
     @Multipart
     @POST("vendor-signup")
@@ -48,9 +49,12 @@ interface ApiService {
         @Query("password") password: String?,
         @Query("country_id") country_id: String?,
         @Query("city_id") city_id: String?,
-        @Query("days_of_week") days_of_week: ArrayList<String>?,
-        @Query("is_deliverable") is_deliverable: Boolean?,
-        @Query("password_confirmation") password_confirmation: String?
+       // @Query("days_of_week") days_of_week: MutableList<DaysOfWeek>?,
+        @Query("days_of_week[]") days_of_week: List<String>,
+        @Query("is_deliverable") is_deliverable: String?,
+        @Query("password_confirmation") password_confirmation: String?,
+        @Query("description") description: String?
+
 
     ): Response<SignUpResponse>
 

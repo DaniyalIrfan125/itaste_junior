@@ -30,6 +30,11 @@ class ForgotPasswordFragment : BaseFragment<LayoutForgotpasswordfragmentBinding,
 
     val resetPasswordWithPhoneNumber : Boolean = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeToNetworkLiveData()
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

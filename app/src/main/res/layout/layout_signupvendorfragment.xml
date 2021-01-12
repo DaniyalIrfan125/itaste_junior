@@ -63,13 +63,15 @@
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:orientation="vertical">
 
-
                 <Spinner
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_50sdp"
                     android:id="@+id/spinner_country"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_37sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:background="@drawable/spinner_background"
+                    android:translationZ="90dp"
                     android:fontFamily="@font/roboto_regular"
                     android:textColor="@color/titleTextColorBlack"
                     android:textColorHint="@color/titleTextColorBlack"
@@ -77,6 +79,8 @@
 
 
                 <Spinner
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_50sdp"
                     android:id="@+id/spinner_city"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_37sdp"
@@ -165,6 +169,7 @@
 
 
                 <EditText
+                    android:id="@+id/et_vendorDescription"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_130sdp"
                     android:layout_marginTop="@dimen/_10sdp"

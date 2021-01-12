@@ -38,9 +38,7 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-
+        subscribeToNetworkLiveData()
     }
 
 
@@ -77,8 +75,8 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
                 Resource.Status.SUCCESS -> {
                     it?.let {
                         loadingDialog.dismiss()
-                       // mViewModel.saveUserObj(it.data!!)
-                       // sharedViewModel.verifyOtpHoldUserName = editTextEmail.text.toString()
+                        mViewModel.saveUserObj(it.data!!)
+                       // sharedViewModel.verifyOtpHoldPhoneNumber = editTextEmail.text.toString()
                         navigateToMainActivity()
 
                     }
@@ -119,14 +117,14 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
                 tv_passwordError.visibility = View.VISIBLE
                 ed_password.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                tv_passwordError.text = getString(R.string.PleasewriteUsername)
+                tv_passwordError.text = getString(R.string.Pleasewritepassword)
             }
 
         } else {
             tv_userNameError.visibility = View.VISIBLE
             ed_enterUserName.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-            tv_userNameError.text = getString(R.string.Pleasewritepassword)
+            tv_userNameError.text = getString(R.string.PleasewriteUsername)
         }
 
 

@@ -122,6 +122,7 @@
                         android:paddingStart="@dimen/_20sdp"
                         android:paddingEnd="@dimen/_20sdp"
                         android:singleLine="true"
+                        android:inputType="textPassword"
                         android:textColor="@color/titleTextColorBlack"
                         android:textColorHint="@color/titleTextColorBlack"
                         android:textSize="13sp" />

@@ -67,7 +67,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
         subscribeToShareLiveData()
         subscribeToNavigationLiveData()
-        subscribeToNetworkLiveData()
         subscribeToViewLiveData()
 
         subscribeToObserveDataStore()
@@ -116,7 +115,6 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     open fun subscribeToShareLiveData() {
 
     }
-
     open fun subscribeToNetworkLiveData() {
         //All Network Tasks
     }

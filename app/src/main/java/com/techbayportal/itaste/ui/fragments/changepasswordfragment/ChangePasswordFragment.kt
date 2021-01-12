@@ -31,6 +31,11 @@ class ChangePasswordFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeToNetworkLiveData()
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,9 +58,6 @@ class ChangePasswordFragment :
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                  //  successMessageSlider.show()
-                   // relative_updatePassword.visibility = View.GONE
-//                    Navigation.findNavController(mView).navigate(R.id.action_forgotFragment_to_verifyOtpFragment)
 
                     navigateToLoginScreen()
                 }
@@ -88,7 +90,6 @@ class ChangePasswordFragment :
        if(!TextUtils.isEmpty(ed_newPassword.text)){
 
            if(!TextUtils.isEmpty(ed_confirmPassword.text)){
-
 
                if(ed_newPassword.text.toString() == ed_confirmPassword.text.toString()){
                    mViewModel.hitUpdatePassword(sharedViewModel.verifyOtpHoldPhoneNumber,ed_newPassword.text.toString(),ed_confirmPassword.text.toString())

@@ -69,14 +69,14 @@ class MainRepository @Inject constructor(
             userModel.username,
             profilePicMultiPartBody,
             userModel.phone,
-            //userModel.email,
+            userModel.email,
             userModel.password,
             userModel.country_id,
             userModel.city_id,
             userModel.days_of_week,
-            //userModel.days_of_week,
             userModel.is_deliverable,
-            userModel.password_confirmation
+            userModel.password_confirmation,
+            userModel.description
         )
     }
 
