@@ -9,11 +9,18 @@ import com.techbayportal.itaste.ui.fragments.signupvendorfragment.adapter.DaysRe
 class MyItemDetailsLookup(private val recyclerView: RecyclerView) :
     ItemDetailsLookup<DaysOfWeek>() {
     override fun getItemDetails(event: MotionEvent): ItemDetails<DaysOfWeek>? {
-        val view = recyclerView.findChildViewUnder(event.x, event.y)
+        val view = recyclerView.findChildViewUnder(event.x, event.y) ?: return EMPTY_ITEM
         if (view != null) {
             return (recyclerView.getChildViewHolder(view) as DaysRecyclerAdapter.ListViewHolder)
                 .getItemDetails()
         }
+
+
         return null
+    }
+
+    object EMPTY_ITEM : ItemDetails<DaysOfWeek>() {
+        override fun getSelectionKey(): DaysOfWeek? = DaysOfWeek("noday")
+        override fun getPosition(): Int = Integer.MAX_VALUE
     }
 }

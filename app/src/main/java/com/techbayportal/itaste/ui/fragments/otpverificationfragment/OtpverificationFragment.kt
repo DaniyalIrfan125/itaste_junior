@@ -6,6 +6,7 @@ import android.os.CountDownTimer
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -56,12 +57,22 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
     fun initialising() {
         otpCountDownTimer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                tv_expiryTime.text = counter.toString() + " sec"
+                tv_expiryTime.text = "$counter sec"
                 counter--
+
+                if(counter in 0..9){
+                    tv_expiryTime.setTextColor(resources.getColor(R.color.colorErrorRed))
+                    iv_otp_timer_clock.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorErrorRed))
+                }else{
+                    tv_expiryTime.setTextColor(resources.getColor(R.color.otpTimerColor))
+                    iv_otp_timer_clock.setColorFilter(ContextCompat.getColor(requireContext(), R.color.otpTimerColor))
+                }
+
             }
 
             override fun onFinish() {
                 tv_expiryTime.visibility = View.GONE
+                iv_otp_timer_clock.visibility  = View.GONE
                 tv_resendOtp.isEnabled = true
             }
         }
@@ -115,14 +126,20 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
         }
 
         tv_resendOtp.setOnClickListener {
-            tv_expiryTime.visibility = View.VISIBLE
+            iv_otp_timer_clock.visibility = View.GONE
+
             counter = 60
             otpCountDownTimer.cancel()
-            otpCountDownTimer.start()
             tv_resendOtp.isEnabled = false
+            otp_view.text = null
             sharedViewModel.verifyOtpHoldPhoneNumber?.let {
                 //key is set "forget-password" as per provided by backend
-                mViewModel.hitResentOtp(it, AppConstants.VerifyOTPTypeKeys.FORGOT_PASSWORD)
+
+                if (sharedViewModel.isForGotVerify) {
+                    mViewModel.hitResentOtp(it, AppConstants.VerifyOTPTypeKeys.FORGOT_PASSWORD)
+                }else{
+                    mViewModel.hitResentOtp(it, AppConstants.VerifyOTPTypeKeys.SIGN_UP)
+                }
             }
         }
 
@@ -157,6 +174,7 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                     loadingDialog.show()
                 }
                 Resource.Status.SUCCESS -> {
+                    tv_expiryTime.visibility = View.VISIBLE
                     loadingDialog.dismiss()
                     otpCountDownTimer.cancel()
                     sharedViewModel.otpVerifyCode = otp_view.text.toString()
@@ -171,28 +189,32 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                         }
 
                     } else {
-                        if (it.data!!.data == null){
-                            Toast.makeText(requireContext(), "Login Response is Empty", Toast.LENGTH_SHORT).show()
-                        }else{
-                            val data = it.data.data!!
 
-                            val userObje = LoginResponse(
-                                "",
-                                Data(
-                                    "" +data.id,
-                                    data.first,
-                                    data.last,
-                                    data.username,
-                                    data.phone,
-                                    data.email,
-                                    data.profile_img,
-                                    data.role,
-                                    data.access_token
-                                ), ""
-                            )
-                            mViewModel.saveUserObj(userObje)
-                            navigateToMainScreen()
+                        if(sharedViewModel.userType == AppConstants.UserTypeKeys.USER){
+                            if (it.data!!.data == null){
+                                Toast.makeText(requireContext(), "Otp Response is Empty", Toast.LENGTH_SHORT).show()
+                            }else{
+
+                                try {
+                                    mViewModel.saveUserObj(it.data)
+                                    Navigation.findNavController(mView).navigate(R.id.action_otpverificationFragment_to_signupConfigurationsFragment)
+                                } catch (e: Exception) {
+                                }
+                            }
+
+
+                        }else if(sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR){
+                            if (it.data!!.data == null){
+                                Toast.makeText(requireContext(), "Otp Response is Empty", Toast.LENGTH_SHORT).show()
+                            }else{
+                                try {
+                                    mViewModel.saveUserObj(it.data)
+                                    navigateToMainScreen()
+                                } catch (e: Exception) {
+                                }
+                            }
                         }
+
 
                     }
                 }
@@ -201,8 +223,10 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                     counter = 60
                     otpCountDownTimer.cancel()
                     tv_expiryTime.visibility = View.GONE
+                    iv_otp_timer_clock.visibility = View.GONE
                     tv_resendOtp.isEnabled = true
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    otp_view.text = null
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })
@@ -217,12 +241,9 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                     counter = 60
                     otpCountDownTimer.start()
                     tv_expiryTime.visibility = View.VISIBLE
+                    iv_otp_timer_clock.visibility = View.VISIBLE
                     tv_resendOtp.isEnabled = false
-//                    if(counter in 0..10){
-//                        tv_expiryTime.setTextColor(resources.getColor(R.color.colorErrorRed))
-//                    }else{
-//                        tv_expiryTime.setTextColor(resources.getColor(R.color.otpTimerColor))
-//                    }
+
 
                 }
                 Resource.Status.ERROR -> {
@@ -230,8 +251,9 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                     counter = 60
                     otpCountDownTimer.cancel()
                     tv_expiryTime.visibility = View.GONE
+                    iv_otp_timer_clock.visibility = View.VISIBLE
                     tv_resendOtp.isEnabled = true
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })

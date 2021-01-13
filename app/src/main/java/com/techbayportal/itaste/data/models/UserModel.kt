@@ -20,7 +20,7 @@ class UserModel {
     var city_id : String = ""
     //var days_of_week : MutableList<DaysOfWeek> = mutableListOf()
     var days_of_week : ArrayList<String> = ArrayList()
-    var is_deliverable : String = ""
+    var is_deliverable : Int? = 0
     var password_confirmation : String = ""
     var description : String = ""
 

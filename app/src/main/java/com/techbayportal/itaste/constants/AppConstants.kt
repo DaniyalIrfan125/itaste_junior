@@ -65,7 +65,7 @@ object AppConstants {
 
             //
             const val IS_REMEMBER = "is_remember"
-            const val USER_OBJ = "is_remember"
+            const val USER_OBJ = "user_obj"
         }
     }
 

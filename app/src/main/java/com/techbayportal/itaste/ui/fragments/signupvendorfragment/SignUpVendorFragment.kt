@@ -1,6 +1,7 @@
 package com.techbayportal.itaste.ui.fragments.signupvendorfragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ListView
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.view.ActionMode
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.recyclerview.selection.OnItemActivatedListener
 import androidx.recyclerview.selection.SelectionPredicates
 import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StorageStrategy
@@ -84,11 +86,12 @@ class SignUpVendorFragment :
         listofweek.add("tue")
 
         //add static first item in Country list and cities list
-        countriesList.add(0, GetAllCountriesData("0", "Select Country", "", ""))
+        countriesList.add(0, GetAllCountriesData("0", "Select Country", ""))
         citiesList.add(0, GetAllCitiesData("0", "Select City", ""))
 
         val daysRecyclerView: RecyclerView = view.findViewById(R.id.recycler_days)
         val daysOfWeek: MutableList<DaysOfWeek> = mutableListOf()
+
         daysOfWeek.add(DaysOfWeek("Sunday"))
         daysOfWeek.add(DaysOfWeek("Monday"))
         daysOfWeek.add(DaysOfWeek("Tuesday"))
@@ -101,6 +104,7 @@ class SignUpVendorFragment :
         recycler_days.adapter = adapter
         recycler_days.layoutManager =
             GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
+        adapter.notifyDataSetChanged()
 
 
         tracker = SelectionTracker.Builder<DaysOfWeek>(
@@ -109,19 +113,33 @@ class SignUpVendorFragment :
             MyItemKeyProvider(adapter),
             MyItemDetailsLookup(daysRecyclerView),
             StorageStrategy.createParcelableStorage(DaysOfWeek::class.java)
-        ).withSelectionPredicate(
+        ).withSelectionPredicate(object : SelectionTracker.SelectionPredicate<DaysOfWeek>() {
+            override fun canSelectMultiple(): Boolean = true
+            override fun canSetStateForKey(key: DaysOfWeek, nextState: Boolean): Boolean =
+                key != MyItemDetailsLookup.EMPTY_ITEM.selectionKey
+
+            override fun canSetStateAtPosition(position: Int, nextState: Boolean): Boolean =
+                position != MyItemDetailsLookup.EMPTY_ITEM.position
+        }).build()
+        /*).withSelectionPredicate(
             SelectionPredicates.createSelectAnything()
-        ).build()
+        ).build()*/
+
 
         adapter.tracker = tracker
 
+
+
         tracker?.addObserver(
-            object : SelectionTracker.SelectionObserver<Short>() {
+            object : SelectionTracker.SelectionObserver<Long>() {
+
                 override fun onSelectionChanged() {
                     super.onSelectionChanged()
                     tracker?.let {
-                        selectedDayItems = it.selection.toMutableList()
-                        selectedDayItems.remove(DaysOfWeek(""))
+                        if(it.hasSelection()){
+                            selectedDayItems = it.selection.toMutableList()
+                            selectedDayItems.remove(DaysOfWeek(""))
+                        }
                         // Toast.makeText(context, "checked: $selectedDayItems + ${selectedDayItems.size} :Days", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -159,15 +177,19 @@ class SignUpVendorFragment :
                         }
 
                         if (sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR) {
-                            sharedViewModel.userModel?.let {
-                                it.country_id = countryid
-                                it.city_id = cityid
-                                it.days_of_week = listofweekDays
-                                it.is_deliverable = "" + isDeliveriable
-                                it.description = et_vendorDescription.text.toString()
-                                mViewModel.signUpVendorAPICall(it)
+                            try {
+                                sharedViewModel.userModel?.let {
+                                    it.country_id = countryid
+                                    it.city_id = cityid
+                                    it.days_of_week = listofweekDays
+                                    it.is_deliverable = isDeliveriable
+                                    it.description = et_vendorDescription.text.toString()
+                                    mViewModel.signUpVendorAPICall(it)
 
-                                // sharedViewModel.userModel = dataSetVendorModel()
+                                    // sharedViewModel.userModel = dataSetVendorModel()
+                                }
+                            } catch (e: Exception) {
+                                //Log.d("EXE", "e $e")
                             }
                         }
                     } else {
@@ -217,7 +239,7 @@ class SignUpVendorFragment :
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
 
             }
@@ -239,7 +261,7 @@ class SignUpVendorFragment :
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
 
             }
@@ -262,7 +284,7 @@ class SignUpVendorFragment :
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })
@@ -274,7 +296,7 @@ class SignUpVendorFragment :
         userModel.country_id = spinner_country.selectedItem.toString()
         userModel.city_id = spinner_city.selectedItem.toString()
         userModel.days_of_week = listofweekDays
-        userModel.is_deliverable = "" + isDeliveriable
+        userModel.is_deliverable =  isDeliveriable
         userModel.password_confirmation = ed_confirmPassword.text.toString()
         userModel.description = et_vendorDescription.text.toString()
         return userModel

@@ -17,16 +17,18 @@ import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.remote.Resource
+import com.techbayportal.itaste.databinding.LayoutLoginfragmentBinding
 import com.techbayportal.itaste.databinding.LayoutSecondBinding
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_loginfragment.*
+import kotlinx.android.synthetic.main.layout_signupfragment.*
 
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
+class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>() {
     override val layoutId: Int
         get() = R.layout.layout_loginfragment
     override val viewModel: Class<LoginViewModel>
@@ -34,6 +36,7 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    var darkMode :Boolean = false
     lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +86,7 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })
@@ -106,7 +109,7 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
     fun fieldValidationsCheck() {
 
         if (!TextUtils.isEmpty(ed_enterUserName.text)) {
-            if (!TextUtils.isEmpty(ed_password.text)) {
+            if (!TextUtils.isEmpty(ed_password.text) && ed_password.text.toString().length > 5 ){
 
                // navigateToMainActivity()
                 mViewModel.loginApiCall(
@@ -114,10 +117,15 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
                     ed_password.text.toString()
                 )
             } else {
+
+                if(ed_password.text.toString().length in 1..5){
+                    tv_passwordError.text = getString(R.string.password_at_least_six_character)
+                }else{
+                    tv_passwordError.text = getString(R.string.Pleasewritepassword)
+                }
                 tv_passwordError.visibility = View.VISIBLE
                 ed_password.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                tv_passwordError.text = getString(R.string.Pleasewritepassword)
             }
 
         } else {
@@ -181,7 +189,10 @@ class LoginFragment : BaseFragment<LayoutSecondBinding, LoginViewModel>() {
             if (it != null) {
                 if(it == true){
                     iv_app_logo.setImageResource(R.drawable.app_icon_dark)
+                    darkMode
                     //iv_app_logo.setBackgroundResource(R.drawable.app_icon_dark)
+                }else{
+                    !darkMode
                 }
             }
         })

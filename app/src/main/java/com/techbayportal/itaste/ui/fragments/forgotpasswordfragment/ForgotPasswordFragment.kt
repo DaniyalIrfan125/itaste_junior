@@ -16,11 +16,14 @@ import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_forgotpasswordfragment.*
 import kotlinx.android.synthetic.main.layout_forgotpasswordfragment.btn_next
-import kotlinx.android.synthetic.main.layout_loginfragment.*
-import kotlinx.android.synthetic.main.layout_otpverificationfragment.*
+import kotlinx.android.synthetic.main.layout_forgotpasswordfragment.ed_phoneNumber
+import kotlinx.android.synthetic.main.layout_forgotpasswordfragment.et_country_code
+import kotlinx.android.synthetic.main.layout_signupfragment.*
+
 
 @AndroidEntryPoint
-class ForgotPasswordFragment : BaseFragment<LayoutForgotpasswordfragmentBinding,ForgotPasswordFragmentViewModel>() {
+class ForgotPasswordFragment :
+    BaseFragment<LayoutForgotpasswordfragmentBinding, ForgotPasswordFragmentViewModel>() {
     override val layoutId: Int
         get() = R.layout.layout_forgotpasswordfragment
     override val viewModel: Class<ForgotPasswordFragmentViewModel>
@@ -28,7 +31,7 @@ class ForgotPasswordFragment : BaseFragment<LayoutForgotpasswordfragmentBinding,
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    val resetPasswordWithPhoneNumber : Boolean = false
+    val resetPasswordWithPhoneNumber: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,17 +54,30 @@ class ForgotPasswordFragment : BaseFragment<LayoutForgotpasswordfragmentBinding,
         }
     }
 
-    fun validationsCheck(){
+    fun validationsCheck() {
         if (!TextUtils.isEmpty(ed_phoneNumber.text)) {
-            //Navigation.findNavController(btn_next).navigate(R.id.action_forgotPasswordFragment_to_otpverificationFragment)
-            sharedViewModel.verifyOtpHoldPhoneNumber = ed_phoneNumber.text.toString()
-            mViewModel.forgotPasswordApiCall(et_country_code.selectedCountryCodeWithPlus+ed_phoneNumber.text.toString())
+            if (ed_phoneNumber.text.toString().length == 10) {
+
+
+                //Navigation.findNavController(btn_next).navigate(R.id.action_forgotPasswordFragment_to_otpverificationFragment)
+                sharedViewModel.verifyOtpHoldPhoneNumber = ed_phoneNumber.text.toString()
+                mViewModel.forgotPasswordApiCall(et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString())
+            } else {
+                tv_errorForgotPassword.text = "Invalid Phone Number!"
+
+                tv_errorForgotPassword.visibility = View.VISIBLE
+                ed_forgotPasswordEmail.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
+            }
+
         } else {
+            tv_errorForgotPassword.text = getString(R.string.Pleasewritephonenumber)
+
             tv_errorForgotPassword.visibility = View.VISIBLE
             ed_forgotPasswordEmail.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
             //tv_errorForgotPassword.text = getString(R.string.PleasewriteUsername)
-            tv_errorForgotPassword.text = getString(R.string.Pleasewritephonenumber)
+
         }
 
     }
@@ -88,15 +104,17 @@ class ForgotPasswordFragment : BaseFragment<LayoutForgotpasswordfragmentBinding,
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    sharedViewModel.verifyOtpHoldPhoneNumber = et_country_code.selectedCountryCodeWithPlus+ed_phoneNumber.text.toString()
+                    sharedViewModel.verifyOtpHoldPhoneNumber =
+                        et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
                     sharedViewModel.isForGotVerify = true
-                 //   Navigation.findNavController(mView).navigate(R.id.action_forgotFragment_to_verifyOtpFragment)
-                    Navigation.findNavController(btn_next).navigate(R.id.action_forgotPasswordFragment_to_otpverificationFragment)
+                    //   Navigation.findNavController(mView).navigate(R.id.action_forgotFragment_to_verifyOtpFragment)
+                    Navigation.findNavController(btn_next)
+                        .navigate(R.id.action_forgotPasswordFragment_to_otpverificationFragment)
 
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })

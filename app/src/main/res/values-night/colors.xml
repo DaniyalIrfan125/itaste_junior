@@ -19,6 +19,7 @@
     <color name="color_darkGrey">#707070</color>
     <color name="mainBackground" >#1a1a1a</color>
     <color name="LoginBackground" >#BE000000</color>
+    <color name="loadingLayoutBackground" >#000000</color>
 
 
 
@@ -48,6 +49,9 @@
     <color name="mainIconColor">#FFFFFF</color>
 
     <color name="otpTimerColor">#FFFFFF</color>
+
+    <color name="permission_alert_bg">#1a1a1a</color>
+    <color name="permission_alert_color">#ffffff</color>
 
 
 </resources>

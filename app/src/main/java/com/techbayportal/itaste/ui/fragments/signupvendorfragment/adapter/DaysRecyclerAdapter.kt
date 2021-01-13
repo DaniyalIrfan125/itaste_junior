@@ -2,6 +2,7 @@ package com.techbayportal.itaste.ui.fragments.signupvendorfragment.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
@@ -36,6 +37,9 @@ class DaysRecyclerAdapter(private val list: List<DaysOfWeek>, val context: Conte
             object : ItemDetailsLookup.ItemDetails<DaysOfWeek>() {
                 override fun getPosition(): Int = adapterPosition
                 override fun getSelectionKey(): DaysOfWeek? = list[position]
+                override fun inSelectionHotspot(e: MotionEvent): Boolean {
+                    return true
+                }
             }
     }
 

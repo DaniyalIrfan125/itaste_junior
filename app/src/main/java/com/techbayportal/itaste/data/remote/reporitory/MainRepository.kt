@@ -1,10 +1,7 @@
 package com.techbayportal.itaste.data.remote.reporitory
 
 import com.techbayportal.itaste.data.local.db.AppDao
-import com.techbayportal.itaste.data.models.GetAllCitiesResponse
-import com.techbayportal.itaste.data.models.SignUpResponse
-import com.techbayportal.itaste.data.models.UserModel
-import com.techbayportal.itaste.data.models.getCitiesInputModel
+import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.ApiService
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -100,5 +97,9 @@ class MainRepository @Inject constructor(
 
     suspend fun getAllCities(countryId: Int): Response<GetAllCitiesResponse> {
         return apiService.getAllCities("application/json", countryId)
+    }
+
+    suspend fun updateUserLocation(auth:String, countryId: Int): Response<GetAllCountriesResponse> {
+        return apiService.updateUserLocation("application/json",auth, countryId)
     }
 }

@@ -3,7 +3,7 @@
     android:layout_width="80dp"
     android:layout_height="80dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/LoginBackground"
+    app:cardBackgroundColor="@color/loadingLayoutBackground"
     app:cardCornerRadius="12dp"
     app:cardUseCompatPadding="true">
 

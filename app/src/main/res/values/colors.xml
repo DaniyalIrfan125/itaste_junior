@@ -50,6 +50,17 @@
     <color name="resendCodeColorLight">#ff962d</color>
     <color name="otpTimerColor">#505050</color>
 
+    <color name="counter_bg">#ff962d</color>
+    <color name="camera_icon_color">#ff962d</color>
+    <color name="camera_text_color">#ff962d</color>
+
+    <color name="toolbar_bg">#ff962d</color>
+
+
+
+
+
+
 
 
 

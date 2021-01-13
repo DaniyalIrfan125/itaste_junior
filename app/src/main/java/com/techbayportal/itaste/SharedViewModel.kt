@@ -2,6 +2,7 @@ package com.techbayportal.itaste
 
 import com.techbayportal.itaste.baseclasses.BaseViewModel
 import com.techbayportal.itaste.data.models.UserModel
+import java.io.File
 
 
 /**
@@ -15,5 +16,6 @@ class SharedViewModel : BaseViewModel() {
     var otpVerifyCode = ""
     var userModel = UserModel()
     val isDarkMode :Boolean = false
+    val localProfilePic: File? = null
 
 }

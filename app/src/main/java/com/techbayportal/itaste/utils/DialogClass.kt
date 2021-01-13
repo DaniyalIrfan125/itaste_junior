@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.view.Window
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -16,6 +17,8 @@ import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 
 class DialogClass {
+
+
 
     interface ClickListener {
         fun onSingalItemBtnClick(dialog: Dialog)
@@ -40,7 +43,7 @@ class DialogClass {
 
         //observing data from data store and showing
 
-        fun errorDialog(context: Context,errorMessage:String) {
+        fun errorDialog(context: Context,errorMessage:String ,isDarkMode : Boolean) {
             val dialog = Dialog(context)
             dialog.setContentView(R.layout.layout_error_loading_page)
 
@@ -49,6 +52,14 @@ class DialogClass {
             // set the custom dialog components - text, image and button
             val titleText = dialog.findViewById<TextView>(R.id.tv_title)
             titleText.text = context.getString(R.string.error_loading_page)
+
+            val iv_image = dialog.findViewById<ImageView>(R.id.iv_image)
+
+            if (isDarkMode) {
+                iv_image.setImageResource(R.drawable.icon_error_img_white)
+            } else {
+                iv_image.setImageResource(R.drawable.icon_error_img)
+            }
 
             val errorTextMessage = dialog.findViewById<TextView>(R.id.tv_description)
             errorTextMessage.text = errorMessage

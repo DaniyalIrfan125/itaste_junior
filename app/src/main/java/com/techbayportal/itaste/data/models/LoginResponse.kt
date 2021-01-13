@@ -18,5 +18,9 @@ public data class Data(
     val email: String,
     val profile_img: String,
     val role: String,
-    val access_token: String
+    val access_token: String,
+    val country_id: String
+
+
+
 )

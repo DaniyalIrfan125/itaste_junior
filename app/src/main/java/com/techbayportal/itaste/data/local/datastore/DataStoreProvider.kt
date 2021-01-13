@@ -44,14 +44,14 @@ class DataStoreProvider(context: Context) {
         }
     }
 
-    //Store User Object For Session
+    /*//Store User Object For Session
     suspend fun storeUserData(userData : LoginResponse){
         val gson = Gson()
         val json = gson.toJson(userData)
         dataStore.edit {
             it[USER_OBJECT] = json
         }
-    }
+    }*/
 
     suspend fun storeDarkMode(isDarkModeOn: Boolean) {
         dataStore.edit {

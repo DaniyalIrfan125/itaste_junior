@@ -2,18 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/_48sdp"
     android:orientation="vertical"
     android:background="@color/mainBackground"
     android:gravity="center">
     <TextView
         android:id="@+id/txtSpinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_35sdp"
         android:fontFamily="@font/roboto_regular"
         android:textColor="@color/titleTextColorBlack"
+        android:gravity="center_vertical"
+        android:text="abc"
+        android:layout_marginStart="@dimen/_10sdp"
         android:textColorHint="@color/titleTextColorBlack"
-        android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_20sdp"
-        android:singleLine="true"/>
+        android:singleLine="true"
+        android:textSize="15sp"/>
 </LinearLayout>

@@ -25,7 +25,9 @@ import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutSignupfragmentBinding
 import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
+
 import kotlinx.android.synthetic.main.layout_signupfragment.*
+
 import java.io.File
 
 
@@ -39,6 +41,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         get() = BR.viewModel
 
     var profileImageFile: File? = null
+    //var compressedProfileImageFile: File? = null
     private lateinit var mView: View
 
     lateinit var fullNumber: String
@@ -77,16 +80,51 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        /*if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
+
+            // or get a single image only
+            val getImage = ImagePicker.getFirstImageOrNull(data)
+
+
+        }*/
+
         if (requestCode == AppConstants.PROFILE_PIC_CODE) {
             val imagePath = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)!![0]
             profileImageFile = File(imagePath)
-
-            if (profileImageFile != null)
+            if (profileImageFile != null) {
                 Picasso.get()
                     .load(profileImageFile!!)
                     .fit()
                     .centerCrop()
-                    .into(siv_profile_pic);
+                    .into(siv_profile_pic)
+            }
+        }
+    }
+
+    /*private fun compressImageFile(imageFile: File?) {
+        //compressedImage = imageFile
+        imageFile?.let {
+            GlobalScope.launch {
+                compressedProfileImageFile = Compressor.compress(requireActivity(), it) {
+                    size(1024) // 1 MB
+
+                }
+
+                // updateImageView(compressedImage!!)
+            }
+        }
+
+    }*/
+
+    override fun onResume() {
+        super.onResume()
+
+        if (profileImageFile != null) {
+            Picasso.get()
+                .load(profileImageFile!!)
+                .fit()
+                .centerCrop()
+                .into(siv_profile_pic)
         }
     }
 
@@ -150,37 +188,58 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
                             if (!TextUtils.isEmpty(ed_phoneNumber.text)) {
 
-                                if (!TextUtils.isEmpty(ed_setPassword.text)) {
+                                if (ed_phoneNumber.text.toString().length == 10) {
 
-                                    if (!TextUtils.isEmpty(ed_confirmPassword.text)) {
+                                    if (!TextUtils.isEmpty(ed_setPassword.text) && ed_setPassword.text.toString().length > 5) {
 
-                                        if (ed_setPassword.text.toString() == ed_confirmPassword.text.toString()) {
-                                            //  when all Edit texts checks are full filled
+                                        if (!TextUtils.isEmpty(ed_confirmPassword.text) && ed_confirmPassword.text.toString().length > 5) {
 
-                                            //check for profile pic
-                                            if (profileImageFile == null) {
-                                                Snackbar.make(mView, getString(R.string.Profile_pic_is_null), Snackbar.LENGTH_SHORT).show()
-                                            } else {
-                                                if (sharedViewModel.userType == AppConstants.UserTypeKeys.USER) {
-                                                    sharedViewModel.userModel?.let {
-                                                        it.first = ed_firstName.text.toString()
-                                                        it.last = ed_lastName.text.toString()
-                                                        it.username = ed_userName.text.toString()
-                                                        it.phone =
-                                                            et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
-                                                        it.profileImage = profileImageFile!!
-                                                        it.email = ed_email.text.toString()
-                                                        it.password =
-                                                            ed_confirmPassword.text.toString()
-                                                        it.role = AppConstants.UserTypeKeys.USER
-                                                        it.password_confirmation =
-                                                            ed_confirmPassword.text.toString()
-                                                        mViewModel.signUpAPICall(it)
-                                                        sharedViewModel.userModel = UserModel()
+                                            if (ed_setPassword.text.toString() == ed_confirmPassword.text.toString()) {
+                                                //  when all Edit texts checks are full filled
 
-                                                    }
 
-                                                    /*mViewModel.signUpAPICall(
+                                                //check for profile pic
+                                                if (profileImageFile == null) {
+                                                    Snackbar.make(
+                                                        mView,
+                                                        getString(R.string.Profile_pic_is_null),
+                                                        Snackbar.LENGTH_SHORT
+                                                    ).show()
+                                                } else {
+                                                   // compressImageFile(profileImageFile)
+                                                    if (sharedViewModel.userType == AppConstants.UserTypeKeys.USER) {
+                                                        try {
+                                                           // if (compressedProfileImageFile != null) {
+                                                                sharedViewModel.userModel?.let {
+                                                                    it.first =
+                                                                        ed_firstName.text.toString()
+                                                                    it.last =
+                                                                        ed_lastName.text.toString()
+                                                                    it.username =
+                                                                        ed_userName.text.toString()
+                                                                    it.phone =
+                                                                        et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
+                                                                    it.profileImage =
+                                                                        profileImageFile!!
+                                                                    it.email =
+                                                                        ed_email.text.toString()
+                                                                    it.password =
+                                                                        ed_confirmPassword.text.toString()
+                                                                    it.role =
+                                                                        AppConstants.UserTypeKeys.USER
+                                                                    it.password_confirmation =
+                                                                        ed_confirmPassword.text.toString()
+                                                                    mViewModel.signUpAPICall(it)
+                                                                    sharedViewModel.userModel =
+                                                                        UserModel()
+
+                                                              //  }
+                                                            }
+
+                                                        } catch (e: Exception) {
+                                                        }
+
+                                                        /*mViewModel.signUpAPICall(
                                                         ed_firstName.text.toString(),
                                                         ed_lastName.text.toString(),
                                                         ed_userName.text.toString(),
@@ -192,52 +251,75 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                                         ed_confirmPassword.text.toString(),
                                                         AppConstants.UserTypeKeys.USER
                                                     )*/
-                                                } else if (sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR) {
-                                                    sharedViewModel.verifyOtpHoldPhoneNumber =
-                                                        et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
-                                                    sharedViewModel.userModel =
-                                                        dataSetUserSignUpModel()
-                                                    Navigation.findNavController(btn_signUp)
-                                                        .navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
+                                                    } else if (sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR) {
+                                                        sharedViewModel.verifyOtpHoldPhoneNumber =
+                                                            et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
+                                                        sharedViewModel.userModel =
+                                                            dataSetUserSignUpModel()
+                                                        Navigation.findNavController(btn_signUp)
+                                                            .navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
+                                                    }
                                                 }
-                                            }
 
+                                            } else {
+                                                tv_errorConfirmPassword.visibility = View.VISIBLE
+                                                ed_confirmPassword.background =
+                                                    ContextCompat.getDrawable(
+                                                        requireContext(),
+                                                        R.drawable.ed_errorboundary
+                                                    )
+                                                tv_errorConfirmPassword.text =
+                                                    getString(R.string.Passwords_does_not_match)
+                                            }
                                         } else {
+
+                                            if (ed_confirmPassword.text.toString().length in 1..5) {
+                                                tv_errorConfirmPassword.text =
+                                                    getString(R.string.password_at_least_six_character)
+                                            } else {
+                                                tv_errorConfirmPassword.text =
+                                                    getString(R.string.Pleasewriteconfirm_password)
+                                            }
                                             tv_errorConfirmPassword.visibility = View.VISIBLE
                                             ed_confirmPassword.background =
                                                 ContextCompat.getDrawable(
                                                     requireContext(),
                                                     R.drawable.ed_errorboundary
                                                 )
-                                            tv_errorConfirmPassword.text =
-                                                getString(R.string.Passwords_does_not_match)
+
                                         }
+
+
                                     } else {
-                                        tv_errorConfirmPassword.visibility = View.VISIBLE
-                                        ed_confirmPassword.background =
-                                            ContextCompat.getDrawable(
-                                                requireContext(),
-                                                R.drawable.ed_errorboundary
-                                            )
-                                        tv_errorConfirmPassword.text =
-                                            getString(R.string.Pleasewriteconfirm_password)
+                                        if (ed_setPassword.text.toString().length in 1..5) {
+                                            tv_errorSetPassword.text =
+                                                getString(R.string.password_at_least_six_character)
+                                        } else {
+                                            tv_errorSetPassword.text =
+                                                getString(R.string.Pleasewritepassword)
+                                        }
+                                        tv_errorSetPassword.visibility = View.VISIBLE
+                                        ed_setPassword.background = ContextCompat.getDrawable(
+                                            requireContext(),
+                                            R.drawable.ed_errorboundary
+                                        )
+
                                     }
-
-
                                 } else {
+                                    tv_errorPhoneNumber.text = "Invalid Phone Number!"
 
-                                    tv_errorSetPassword.visibility = View.VISIBLE
-                                    ed_setPassword.background =
+                                    tv_errorPhoneNumber.visibility = View.VISIBLE
+                                    ed_phoneNumber.background =
                                         ContextCompat.getDrawable(
                                             requireContext(),
                                             R.drawable.ed_errorboundary
                                         )
-                                    tv_errorSetPassword.text =
-                                        getString(R.string.Pleasewritepassword)
                                 }
 
 
                             } else {
+                                tv_errorPhoneNumber.text =
+                                    getString(R.string.Pleasewritephonenumber)
 
                                 tv_errorPhoneNumber.visibility = View.VISIBLE
                                 ed_phoneNumber.background =
@@ -245,8 +327,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                         requireContext(),
                                         R.drawable.ed_errorboundary
                                     )
-                                tv_errorPhoneNumber.text =
-                                    getString(R.string.Pleasewritephonenumber)
+
 
                             }
                         } else {
@@ -313,7 +394,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         return addDataSetUserSignUpModel
     }
 
-    override fun subscribeToNetworkLiveData(){
+    override fun subscribeToNetworkLiveData() {
         mViewModel.signUpResponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -334,7 +415,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })
@@ -356,6 +437,8 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                 .withFragment(this)
                 .limit(1)
                 .show()
+
+            //  ImagePicker.create(this).single().start();
         })
 
         mViewModel.onSignUpButtonClicked.observe(this, Observer {

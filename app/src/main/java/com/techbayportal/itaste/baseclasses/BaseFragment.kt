@@ -36,6 +36,8 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     abstract val viewModel: Class<V>
     abstract val bindingVariable: Int
 
+    var baseDarkMode : Boolean =false
+
     lateinit var dataStoreProviderBase: DataStoreProvider
 
     override fun onCreateView(
@@ -81,10 +83,12 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
             if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 sharedViewModel.isDarkMode
+                baseDarkMode = true
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 !sharedViewModel.isDarkMode
+                baseDarkMode = false
 
             }
         })

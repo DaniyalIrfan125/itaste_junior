@@ -51,7 +51,7 @@ interface ApiService {
         @Query("city_id") city_id: String?,
        // @Query("days_of_week") days_of_week: MutableList<DaysOfWeek>?,
         @Query("days_of_week[]") days_of_week: List<String>,
-        @Query("is_deliverable") is_deliverable: String?,
+        @Query("is_deliverable") is_deliverable: Int?,
         @Query("password_confirmation") password_confirmation: String?,
         @Query("description") description: String?
 
@@ -80,7 +80,7 @@ interface ApiService {
         @Field("code") code: Int?,
         @Field("phone") phone: String?,
         @Field("type") type: String?
-    ): Response<VerifyOtpResponse>
+    ): Response<LoginResponse>
 
     @FormUrlEncoded
     @POST("ressend/otp")
@@ -88,7 +88,7 @@ interface ApiService {
         @Header("Accept") acceptJson: String,
         @Field("phone") phone: String?,
         @Field("type") type: String?
-    ): Response<VerifyOtpResponse>
+    ): Response<ResendOtpResponse>
 
 
     @GET("countries")
@@ -109,6 +109,15 @@ interface ApiService {
         @Field("password") password: String?,
         @Field("password_confirmation") confirmationPassword: String?
     ): Response<VerifyOtpResponse>
+
+
+    @FormUrlEncoded
+    @POST("location-update")
+    suspend fun updateUserLocation(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Field("country_id") country_id: Int?
+    ): Response<GetAllCountriesResponse>
 
 
 }

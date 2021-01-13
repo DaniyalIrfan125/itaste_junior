@@ -31,4 +31,5 @@ class LoginSession {
     fun setFcmToken(fcmToken: String?) {
         FcmToken = fcmToken
     }
+
 }

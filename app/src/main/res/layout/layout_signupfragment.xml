@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,7 +11,7 @@
     </data>
 
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -79,10 +80,10 @@
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="3sp"
+                        android:onClick="@{()->viewModel.onProfilePicTextClicked()}"
                         android:text="@string/upload_profile_picture_logo"
                         android:textColor="@color/colorOrange"
-                        android:textSize="14sp"
-                        android:onClick="@{()->viewModel.onProfilePicTextClicked()}"/>
+                        android:textSize="14sp" />
 
                     <LinearLayout
                         android:id="@+id/linear"
@@ -216,23 +217,23 @@
                                 android:id="@+id/et_country_code"
                                 android:layout_width="0dp"
                                 android:layout_height="@dimen/_38sdp"
+                                android:layout_gravity="center"
                                 android:layout_marginEnd="@dimen/_5sdp"
                                 android:layout_weight="0.6"
                                 android:background="@drawable/ed_states"
                                 android:fontFamily="@font/roboto_regular"
-                                android:imeOptions="actionNext"
-                                android:layout_gravity="center"
                                 android:gravity="center"
+                                android:imeOptions="actionNext"
 
+                                app:ccp_backgroundColor="@color/mainBackground"
+                                app:ccp_defaultNameCode="AE"
+                                app:ccp_dialogTextColor="@color/titleTextColorBlack"
+                                app:ccp_hideNameCode="true"
+                                app:ccp_keyboardAutoPopOnSearch="false"
+                                app:ccp_showFlag="false"
                                 app:ccp_textColor="@color/titleTextColorBlack"
                                 app:ccp_textFont="roboto_regular.ttf"
-                                app:ccp_textSize="@dimen/_10sdp"
-                                app:ccp_hideNameCode="true"
-                                app:ccp_showFlag="false"
-                                app:ccp_defaultNameCode="AE"
-                                app:ccp_keyboardAutoPopOnSearch="false"
-                                app:ccp_backgroundColor="@color/mainBackground"
-                                app:ccp_dialogTextColor="@color/titleTextColorBlack"/>
+                                app:ccp_textSize="@dimen/_10sdp" />
 
 
                             <EditText
@@ -244,8 +245,9 @@
                                 android:background="@drawable/ed_blackboundary"
                                 android:fontFamily="@font/roboto_regular"
                                 android:hint="@string/_0555_5555"
-                                android:inputType="phone"
                                 android:imeOptions="actionNext"
+                                android:inputType="phone"
+                                android:maxLength="10"
                                 android:paddingStart="@dimen/_20sdp"
                                 android:paddingEnd="@dimen/_20sdp"
                                 android:singleLine="true"
@@ -345,11 +347,11 @@
                             android:background="@drawable/btn_curve_orange"
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="@dimen/_3sdp"
+                            android:onClick="@{()->viewModel.onSignUpButtonClicked()}"
                             android:text="@string/sign_up"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
-                            android:textSize="16sp"
-                            android:onClick="@{()->viewModel.onSignUpButtonClicked()}">
+                            android:textSize="16sp">
 
                         </Button>
                     </com.balysv.materialripple.MaterialRippleLayout>

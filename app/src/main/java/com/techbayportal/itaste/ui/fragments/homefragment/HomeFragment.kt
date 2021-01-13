@@ -51,6 +51,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         populatingDataForHome()
         dataStoreProvider = DataStoreProvider(requireContext())
         subscribeToObserveDarkActivation()
+        mViewModel.loginSession!!.data.username
     }
 
     private fun populatingDataForHome() {

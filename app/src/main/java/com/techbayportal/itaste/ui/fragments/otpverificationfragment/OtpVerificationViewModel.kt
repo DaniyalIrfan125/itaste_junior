@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.LoginResponse
+import com.techbayportal.itaste.data.models.ResendOtpResponse
 import com.techbayportal.itaste.data.models.VerifyOtpResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
@@ -25,12 +26,12 @@ class OtpVerificationViewModel @ViewModelInject constructor(
 
     //val loginSession = LoginSession.getInstance().getLoginResponse()
 
-    private val _verifyOtpResponse = MutableLiveData<Resource<VerifyOtpResponse>>()
-    val verifyOtpResponse: LiveData<Resource<VerifyOtpResponse>>
+    private val _verifyOtpResponse = MutableLiveData<Resource<LoginResponse>>()
+    val verifyOtpResponse: LiveData<Resource<LoginResponse>>
         get() = _verifyOtpResponse
 
-    private val _resentVerifyOtpResponse = MutableLiveData<Resource<VerifyOtpResponse>>()
-    val resentVerifyOtpResponse: LiveData<Resource<VerifyOtpResponse>>
+    private val _resentVerifyOtpResponse = MutableLiveData<Resource<ResendOtpResponse>>()
+    val resentVerifyOtpResponse: LiveData<Resource<ResendOtpResponse>>
         get() = _resentVerifyOtpResponse
 
     val onNextButtonClicked = SingleLiveEvent<Any>()
@@ -104,6 +105,7 @@ class OtpVerificationViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             dataStoreProvider.saveUserObj(loginResponse)
         }
+        LoginSession.getInstance().setLoginResponse(loginResponse)
     }
 
 

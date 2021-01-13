@@ -236,6 +236,7 @@
     //Common
     <string name="PleasewriteUsername">Please write Username!</string>
     <string name="Pleasewritepassword">Please write password!</string>
+    <string name="password_at_least_six_character">Password at least six characters!</string>
     //=>login
 
     //=>forget pasword
