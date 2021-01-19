@@ -1,5 +1,5 @@
 package com.techbayportal.itaste.data.models
 
-class SuccessResponse {
-    var message : String = ""
-}
+data class SuccessResponse(
+    val message: String
+)

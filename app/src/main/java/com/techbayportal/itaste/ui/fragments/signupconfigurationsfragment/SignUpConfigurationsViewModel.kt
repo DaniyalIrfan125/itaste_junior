@@ -20,9 +20,7 @@ class SignUpConfigurationsViewModel @ViewModelInject constructor(
     private val networkHelper: NetworkHelper
 ) : BaseViewModel() {
 
-  //  private val loginResponse = LoginSession.getInstance().getLoginResponse()!!.data.access_token
     val loginSession = LoginSession.getInstance().getLoginResponse()
-   // val token = loginSession!!.data.access_token
 
     val _getAllCountriesResponse = MutableLiveData<Resource<GetAllCountriesResponse>>()
     val getCountriesResponse: LiveData<Resource<GetAllCountriesResponse>>

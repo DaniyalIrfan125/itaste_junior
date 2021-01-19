@@ -86,8 +86,8 @@ class SignUpVendorFragment :
         listofweek.add("tue")
 
         //add static first item in Country list and cities list
-        countriesList.add(0, GetAllCountriesData("0", "Select Country", ""))
-        citiesList.add(0, GetAllCitiesData("0", "Select City", ""))
+        countriesList.add(0, GetAllCountriesData("0", "Select Country", "",false))
+        citiesList.add(0, GetAllCitiesData("0", "Select City", false))
 
         val daysRecyclerView: RecyclerView = view.findViewById(R.id.recycler_days)
         val daysOfWeek: MutableList<DaysOfWeek> = mutableListOf()
@@ -276,6 +276,7 @@ class SignUpVendorFragment :
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     sharedViewModel.isForGotVerify = false
+                    sharedViewModel.isUpdatePhone = false
 
                     //on sign up success navigate to OTP screen
                     Navigation.findNavController(requireView())

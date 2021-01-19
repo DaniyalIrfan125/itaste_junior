@@ -25,7 +25,8 @@
             android:id="@+id/img_back"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
             <ImageView
                 app:tint="@color/mainIconColor"

@@ -218,7 +218,6 @@
                     android:layout_marginStart="@dimen/_65sdp"
                     android:layout_marginEnd="@dimen/_65sdp"
                     android:orientation="vertical"
-                    tools:itemCount="4"
                     tools:listitem="@layout/item_user_locations"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 

@@ -150,7 +150,7 @@
 
     //VendorProfileFragment
     <string name="user_name">user name</string>
-    <string name="bio">bio</string>
+    <string name="bio">Bio</string>
     <string name="phone_number">phone number</string>
     <string name="save_changes">Save Changes</string>
 
@@ -264,7 +264,21 @@
 
 
     <string name="enter_your_phone_number">Enter your phone <br></br> number</string>
-
+    <string name="optional">(optional)</string>
+    <string name="writevalidemail">Please write a Valid Email!</string>
+    <string name="writebio">Please write bio!</string>
+    <string name="writeusername">Please write user name!</string>
+    <string name="writelastname">Please write last name!</string>
+    <string name="writefirstname">Please write first name!</string>
+    <string name="country">country</string>
+    <string name="change_emirates">Change Emirates</string>
+    <string name="writephone">Please write phone!</string>
+    <string name="adnan_khan">Jhon Dao</string>
+    <string name="jhon_dao">Jhon</string>
+    <string name="dao">Dao</string>
+    <string name="abc_g_com">abc@g.com</string>
+    <string name="selectcity">Select City!</string>
+    <string name="selectcountry">Select Country!</string>
 
 
 </resources>

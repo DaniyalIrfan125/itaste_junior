@@ -58,11 +58,9 @@ class SignupConfigurationsFragment :
         rg_language.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == R.id.rb_english) {
                 languagePreference = "en"
-                //Toast.makeText(requireContext(), "Lan $languagePreference", Toast.LENGTH_SHORT).show()
             }
             if (checkedId == R.id.rb_arabic) {
                 languagePreference = "ar"
-                //Toast.makeText(requireContext(), "Lan $languagePreference", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -75,8 +73,7 @@ class SignupConfigurationsFragment :
                     //it will get the id of country on which we click . we will sed this id update Location APi
                     countryId = getAllCountriesData.id.toInt()
                     //Update ui on click
-                    Toast.makeText(requireContext(), "Location Sent $countryId", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(requireContext(), "Location selected $countryId ${getAllCountriesData.name}", Toast.LENGTH_SHORT).show()
                 }
             })
 

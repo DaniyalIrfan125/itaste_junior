@@ -83,9 +83,28 @@ interface ApiService {
     ): Response<LoginResponse>
 
     @FormUrlEncoded
+    @POST("verify-otp")
+    suspend fun verifyOptForUpdatePhone(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Field("code") code: Int?,
+        @Field("phone") phone: String?,
+        @Field("type") type: String?
+    ): Response<LoginResponse>
+
+    @FormUrlEncoded
     @POST("ressend/otp")
     suspend fun resentOtp(
         @Header("Accept") acceptJson: String,
+        @Field("phone") phone: String?,
+        @Field("type") type: String?
+    ): Response<ResendOtpResponse>
+
+    @FormUrlEncoded
+    @POST("ressend/otp")
+    suspend fun resentOtpUpdatePhone(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
         @Field("phone") phone: String?,
         @Field("type") type: String?
     ): Response<ResendOtpResponse>
@@ -118,6 +137,108 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Field("country_id") country_id: Int?
     ): Response<GetAllCountriesResponse>
+
+   
+    @GET("user/personal-profile")
+    suspend fun getUserPersonalProfile(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<UserPersonalProfileResponse>
+
+    @Multipart
+    @POST("user/update-profile")
+    suspend fun updateUserPersonalProfile(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("first") first: String,
+        @Query("last") last: String,
+        @Query("email") email : String,
+        @Query("phone") phone : String,
+        @Part profilePic : MultipartBody.Part
+    ): Response<SuccessResponse>
+
+
+    @POST("user/update-profile")
+    suspend fun updateUserPersonalProfileWithoutPic(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("first") first: String,
+        @Query("last") last: String,
+        @Query("email") email : String,
+        @Query("phone") phone : String
+    ): Response<SuccessResponse>
+
+    @GET("vendor/personal-profile")
+    suspend fun getVendorPersonalProfile(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<VendorPersonalProfileResponse>
+
+    @Multipart
+    @POST("vendor/update-profile")
+    suspend fun updateVendorPersonalProfile(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("first_name") first_name: String,
+        @Query("last_name") last_name : String,
+        @Query("bio") bio : String,
+        @Query("phone") phone : String,
+        @Query("email") email : String,
+        @Part profilePic : MultipartBody.Part,
+        @Query("country_id") country_id : String,
+        @Query("city_id") city_id  : String
+
+    ): Response<SuccessResponse>
+
+
+    @POST("vendor/update-profile")
+    suspend fun updateVendorPersonalProfileWithoutPic(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("first_name") first_name: String,
+        @Query("last_name") last_name : String,
+        @Query("bio") bio : String,
+        @Query("phone") phone : String,
+        @Query("email") email : String,
+        @Query("country_id") country_id : String,
+        @Query("city_id") city_id  : String
+    ): Response<SuccessResponse>
+
+    @FormUrlEncoded
+    @POST("password-change")
+    suspend fun changePassword(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Field("old_password") old_password : String?,
+        @Field("new_password") new_password: String?,
+        @Field("password_confirmation") password_confirmation: String?
+    ): Response<SuccessResponse>
+
+
+
+    @POST("logout")
+    suspend fun logout(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<SuccessResponse>
+
+    @POST("delete-account")
+    suspend fun deleteAccount(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<SuccessResponse>
+
+    @FormUrlEncoded
+    @POST("contact-us")
+    suspend fun contactUs(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Field("name") name : String,
+        @Field("email") email: String,
+        @Field("message") message: String
+    ): Response<SuccessResponse>
+
+
 
 
 }

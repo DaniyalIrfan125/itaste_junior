@@ -59,13 +59,13 @@
                         android:background="@drawable/layout_circle_gray">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/sivInfluancerImage"
+                            android:id="@+id/siv_userProfilePic"
                             android:layout_width="@dimen/_75sdp"
                             android:layout_height="@dimen/_75sdp"
                             android:layout_margin="@dimen/_3sdp"
                             android:elevation="@dimen/_3sdp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/icon_user_dp"
+                            android:src="@drawable/icon_profile"
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                             tools:layout_editor_absoluteX="116dp"
                             tools:layout_editor_absoluteY="61dp" />
@@ -73,6 +73,7 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/tv_userName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -80,11 +81,12 @@
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="3sp"
-                        android:text="Syra Ahmed"
+                        android:hint="@string/adnan_khan"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp" />
 
                     <TextView
+                        android:id="@+id/tv_changeProfilePic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -93,6 +95,7 @@
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="3sp"
                         android:text="@string/change_profile_picture"
+                        android:onClick="@{()->viewModel.onProfilePicChangeTextClicked()}"
                         android:textColor="@color/colorOrange"
                         android:textSize="12sp" />
 
@@ -107,8 +110,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_15sdp"
-
+                            android:layout_marginTop="@dimen/_20sdp"
                             android:orientation="horizontal"
                             android:weightSum="2">
 
@@ -127,7 +129,7 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1.4"
                                 android:fontFamily="@font/roboto_bold"
-                                android:text="@string/name"
+                                android:text="@string/first_name"
                                 android:textAllCaps="true"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
@@ -136,22 +138,88 @@
                         </LinearLayout>
 
                         <EditText
+                            android:id="@+id/et_userFirstName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_28sdp"
-                            android:layout_marginBottom="@dimen/_15sdp"
                             android:fontFamily="@font/roboto_light"
-                            android:text="@string/syra_ahmed"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="12sp">
+                            android:textSize="12sp"
+                            android:hint="@string/first_name">
 
                         </EditText>
+
+                        <TextView
+                            android:id="@+id/tv_error_userFirstName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
 
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_marginTop="@dimen/_15sdp">
+
+                            <ImageView
+                                app:tint="@color/mainIconColor"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_person" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1.4"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/last_name"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/et_userLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_28sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="12sp"
+                            android:hint="@string/last_name"
+                           >
+
+                        </EditText>
+                        <TextView
+                            android:id="@+id/tv_error_userLastName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone"
+                            />
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
                             android:weightSum="2">
 
                             <ImageView
@@ -169,7 +237,7 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1.4"
                                 android:fontFamily="@font/roboto_bold"
-                                android:text="@string/user_name"
+                                android:text="@string/email"
                                 android:textAllCaps="true"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
@@ -178,15 +246,136 @@
                         </LinearLayout>
 
                         <EditText
+                            android:id="@+id/et_userUserEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_28sdp"
                             android:fontFamily="@font/roboto_light"
-                            android:text="@string/syraahmed102"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="12sp"
+                            android:hint="@string/abc_g_com">
+
+                        </EditText>
+                        <TextView
+                            android:id="@+id/tv_error_userEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                app:tint="@color/mainIconColor"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_person" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1.4"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/phone_number"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
+
+                        <!--<EditText
+                            android:id="@+id/et_userUserPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_28sdp"
+                            android:fontFamily="@font/roboto_light"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="12sp">
 
-                        </EditText>
+                        </EditText>-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+
+
+                                <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                                    android:id="@+id/et_country_code"
+                                    android:layout_width="@dimen/_40sdp"
+                                    android:layout_height="@dimen/_22sdp"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:gravity="bottom"
+                                    android:paddingBottom="@dimen/_1sdp"
+                                    android:paddingStart="@dimen/_2sdp"
+                                    android:imeOptions="actionNext"
+                                    app:ccp_backgroundColor="@color/mainBackground"
+                                    app:ccp_dialogTextColor="@color/titleTextColorBlack"
+                                    app:ccp_hideNameCode="true"
+                                    app:ccp_keyboardAutoPopOnSearch="false"
+                                    app:ccp_showFlag="false"
+                                    app:ccp_textColor="@color/titleTextColorBlack"
+                                    app:ccp_textFont="roboto_light.ttf"
+                                    app:ccp_textSize="@dimen/_10sdp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1.2dp"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:background="@color/spinnerLinebg">
+
+                                </View>
+                            </LinearLayout>
+
+
+                            <EditText
+                                android:id="@+id/et_userPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_29sdp"
+                                android:fontFamily="@font/roboto_light"
+                                android:imeOptions="actionNext"
+                                android:inputType="phone"
+                                android:maxLength="14"
+                                android:singleLine="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="12sp">
+
+
+                            </EditText>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_error_userUserPhone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -251,9 +440,7 @@
                                 android:id="@+id/rippleConfirm"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/_20sdp"
                                 android:layout_marginTop="@dimen/_5sdp"
-                                android:layout_marginEnd="@dimen/_20sdp"
                                 app:mrl_rippleColor="@color/colorLightOrange">
 
                                 <Button

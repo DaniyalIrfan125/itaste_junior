@@ -2,18 +2,42 @@ package com.techbayportal.itaste.constants
 
 import androidx.annotation.IntDef
 import androidx.annotation.StringDef
+import java.lang.annotation.RetentionPolicy
 
 
 object AppConstants {
 
-    const val PROFILE_PIC_CODE  = 9272
+    const val PROFILE_PIC_CODE = 9272
+    const val USER_PROFILE_PIC_CODE = 92
+    const val VENDOR_PROFILE_PIC_CODE = 93
 
     @StringDef(ApiConfiguration.BASE_URL)
     annotation class ApiConfiguration {
         companion object {
 
-           // const val BASE_URL = "https://itaste.netfans.online/api/v1/"
+            // const val BASE_URL = "https://itaste.netfans.online/api/v1/"
             const val BASE_URL = "https://itaste.live/api/v1/"
+        }
+    }
+
+
+    @IntDef(
+        HomeConfigBottomSheet.SETTINGS,
+        HomeConfigBottomSheet.TURN_OFF_NOTIFICATION,
+        HomeConfigBottomSheet.CONTACT_US,
+        HomeConfigBottomSheet.LANGUAGE,
+        HomeConfigBottomSheet.LOGOUT,
+        HomeConfigBottomSheet.UPDATE_LOCATION
+    )
+    annotation class HomeConfigBottomSheet {
+        companion object {
+            const val SETTINGS = 1
+            const val TURN_OFF_NOTIFICATION = 2
+            const val CONTACT_US = 3
+            const val LANGUAGE = 4
+            const val LOGOUT = 5
+            const val UPDATE_LOCATION = 6
+
         }
     }
 
@@ -23,7 +47,8 @@ object AppConstants {
             const val DB_NAME = "BaseProject"
         }
     }
-    @StringDef(UserTypeKeys.USER,UserTypeKeys.VENDOR)
+
+    @StringDef(UserTypeKeys.USER, UserTypeKeys.VENDOR)
     annotation class UserTypeKeys {
         companion object {
             const val USER = "user"
@@ -31,11 +56,12 @@ object AppConstants {
         }
     }
 
-    @StringDef(VerifyOTPTypeKeys.SIGN_UP,VerifyOTPTypeKeys.FORGOT_PASSWORD)
+    @StringDef(VerifyOTPTypeKeys.SIGN_UP, VerifyOTPTypeKeys.FORGOT_PASSWORD)
     annotation class VerifyOTPTypeKeys {
         companion object {
             const val SIGN_UP = "sign-up"
             const val FORGOT_PASSWORD = "forget-password"
+            const val UPDATE_PHONE = "update-phone"
         }
     }
 
@@ -52,7 +78,7 @@ object AppConstants {
     }
 
 
-    @StringDef(DataStore.DATA_STORE_NAME,DataStore.LOCALIZATION_KEY_NAME,DataStore.USER_NAME_KEY)
+    @StringDef(DataStore.DATA_STORE_NAME, DataStore.LOCALIZATION_KEY_NAME, DataStore.USER_NAME_KEY)
     annotation class DataStore {
         companion object {
             const val DATA_STORE_NAME = "BaseProject"

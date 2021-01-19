@@ -44,6 +44,12 @@ class DataStoreProvider(context: Context) {
         }
     }
 
+    suspend fun clearUserObj(){
+        dataStore.edit {
+            it[USER_OBJECT] = ""
+        }
+    }
+
     /*//Store User Object For Session
     suspend fun storeUserData(userData : LoginResponse){
         val gson = Gson()

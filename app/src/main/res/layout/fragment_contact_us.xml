@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsFragment" />
+            type="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsViewModel" />
     </data>
 
 <RelativeLayout
@@ -25,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:onClick="@{()->viewModel.onBackButtonClicked()}"
             android:id="@+id/img_back"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
@@ -96,6 +97,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/et_userName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
@@ -123,6 +125,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/et_userEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
@@ -150,6 +153,7 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/et_usermessage"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:padding="@dimen/_10sdp"
                             android:layout_width="match_parent"
@@ -183,7 +187,8 @@
         app:mrl_rippleColor="@color/colorLightOrange">
 
         <Button
-            android:id="@+id/btn_confirm"
+            android:id="@+id/btn_send"
+            android:onClick="@{()->viewModel.onConfirmButtonClicked()}"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="6dp"

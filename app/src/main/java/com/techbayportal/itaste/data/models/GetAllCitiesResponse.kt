@@ -9,5 +9,5 @@ data class GetAllCitiesResponse(
 data class GetAllCitiesData(
     val id: String,
     val name: String,
-    val name_arabic: String
+    val select: Boolean
 )

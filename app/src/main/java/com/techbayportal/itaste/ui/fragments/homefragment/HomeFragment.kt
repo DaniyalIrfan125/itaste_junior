@@ -12,10 +12,17 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
+import com.techbayportal.itaste.data.models.GetAllCountriesData
+import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutHomefragmentBinding
+import com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment
 import com.techbayportal.itaste.ui.fragments.homefragment.adapter.HomeRecyclerAdapter
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
+import com.techbayportal.itaste.utils.DialogClass
+import com.techbayportal.itaste.utils.LoginSession
+import com.techbayportal.itaste.utils.SpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.*
 import kotlinx.android.synthetic.main.layout_homefragment.*
 
@@ -29,16 +36,26 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var mView :View
+    val bottomSheet = HomeConfigurationBottomSheetFragment()
+
+    val loginSession = LoginSession.getInstance().getLoginResponse()
     lateinit var homerRecyclerAdpater : HomeRecyclerAdapter
 
     lateinit var dataStoreProvider: DataStoreProvider
+    val countriesList = ArrayList<GetAllCountriesData>()
+
+
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
         mViewModel.onHomeConfigButtonClicked.observe(this, Observer {
-            Navigation.findNavController(iv_home_configuration)
-                .navigate(R.id.action_homeFragment_to_homeConfigurationBottomSheetFragment)
+//            Navigation.findNavController(iv_home_configuration)
+//                .navigate(R.id.action_homeFragment_to_homeConfigurationBottomSheetFragment)
+            //
+            bottomSheet.show(activity!!.supportFragmentManager, "bottomSheet")
+            mViewModel.hitGetAllCountries()
         })
 
         mViewModel.tempClicked.observe(this, Observer {
@@ -46,12 +63,22 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         })
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeToNetworkLiveData()
+
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         populatingDataForHome()
         dataStoreProvider = DataStoreProvider(requireContext())
         subscribeToObserveDarkActivation()
-        mViewModel.loginSession!!.data.username
+        sharedViewModel.test = true
+        mView = view
+       // mViewModel.loginSession!!.data.username
+        initilizing()
     }
 
     private fun populatingDataForHome() {
@@ -68,6 +95,56 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         recycler_home.adapter = homerRecyclerAdpater
         homerRecyclerAdpater.setOnEntryClickListener(this)
 
+    }
+
+    private fun initilizing() {
+        if (loginSession != null) {
+            if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
+                // bottom_navigation.menu.findItem(R.id.chatInboxFragment).isVisible = false
+
+            } else {
+
+            }
+        }
+
+
+    }
+
+    override fun subscribeToShareLiveData() {
+        super.subscribeToShareLiveData()
+
+        sharedViewModel._homeConfigBottomSheetClickId.observe(this, Observer {
+            if(it == AppConstants.HomeConfigBottomSheet.SETTINGS){
+                if (it != -1) {
+                    //call api to select country
+                    Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+                   // bottomSheet.dismiss()
+                    if(this::mView.isInitialized){
+                        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_settingsFragment)
+                    }
+
+
+                    sharedViewModel._homeConfigBottomSheetClickId.value = -1
+                }
+            }
+            /*else if(it == AppConstants.HomeConfigBottomSheet.TURN_OFF_NOTIFICATION){
+                    if (it != -1) {
+                        //call api to select country
+                        Toast.makeText(context, "Notify 2", Toast.LENGTH_SHORT).show()
+
+                        sharedViewModel._isSelectedCountryId?.value = -1
+                    }
+                }*/
+            /*else if(it == AppConstants.HomeConfigBottomSheet.LOGOUT){
+                    if (it != -1) {
+                        //call api to select country
+                        Toast.makeText(context, "Logout 2", Toast.LENGTH_SHORT).show()
+
+                        sharedViewModel._isSelectedCountryId?.value = -1
+                    }
+                }*/
+
+        })
     }
 
     override fun onItemClickListener(type : String) {
@@ -87,6 +164,30 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
             }
         }
     }
+    override fun subscribeToNetworkLiveData() {
+
+        mViewModel.getCountriesResponse.observe(this, Observer {
+            //  Snackbar.make(requireView(), "Country", Snackbar.LENGTH_SHORT).show()
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    countriesList.addAll(it.data!!.data)
+                    sharedViewModel._countriesList.value = it.data
+                    //  mViewDataBinding.spinnerCountry.adapter = SpinnerAdapter(countriesList)
+                    // paste api call here
+                    // Toast.makeText(requireContext(), "Countries Loaded", Toast.LENGTH_SHORT).show()
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+    }
 
     override fun onChildItemClick(position: Int) {
         Navigation.findNavController(iv_icon)
@@ -96,7 +197,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
     private fun subscribeToObserveDarkActivation() {
 
         //observing data from data store and showing
-        dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
+        dataStoreProvider.darkModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
           //  switch_darkMode.isChecked = it
             if (it != null) {
                 if(it == true){

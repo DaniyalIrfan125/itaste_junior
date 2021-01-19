@@ -44,8 +44,6 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
     //var compressedProfileImageFile: File? = null
     private lateinit var mView: View
 
-    lateinit var fullNumber: String
-
 
     lateinit var dataStoreProvider: DataStoreProvider
 
@@ -61,44 +59,29 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         fieldTextWatcher()
         checkUserType()
 
-        // fullNumber = et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
-        et_country_code.selectedCountryCodeWithPlus
-        // et_country_code.registeredPhoneNumberTextView
-
-        et_country_code.setOnCountryChangeListener(OnCountryChangeListener { selectedCountry ->
-
-
-            Toast.makeText(
-                context,
-                selectedCountry.name + " Selected",
-                Toast.LENGTH_SHORT
-            ).show()
-        })
+        et_country_code.registerPhoneNumberTextView(ed_phoneNumber);
+        ed_phoneNumber.hint = "547222799";
 
 
     }
 
+
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        /*if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
-
-            // or get a single image only
-            val getImage = ImagePicker.getFirstImageOrNull(data)
-
-
-        }*/
-
-        if (requestCode == AppConstants.PROFILE_PIC_CODE) {
-            val imagePath = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)!![0]
-            profileImageFile = File(imagePath)
-            if (profileImageFile != null) {
-                Picasso.get()
-                    .load(profileImageFile!!)
-                    .fit()
-                    .centerCrop()
-                    .into(siv_profile_pic)
+        if(data != null) {
+            if (requestCode == AppConstants.PROFILE_PIC_CODE) {
+                val imagePath = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)!![0]
+                profileImageFile = File(imagePath)
+                if (profileImageFile != null) {
+                    Picasso.get()
+                        .load(profileImageFile!!)
+                        .fit()
+                        .centerCrop()
+                        .into(siv_profile_pic)
+                }
             }
         }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     /*private fun compressImageFile(imageFile: File?) {
@@ -210,47 +193,32 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                                     if (sharedViewModel.userType == AppConstants.UserTypeKeys.USER) {
                                                         try {
                                                            // if (compressedProfileImageFile != null) {
-                                                                sharedViewModel.userModel?.let {
-                                                                    it.first =
-                                                                        ed_firstName.text.toString()
-                                                                    it.last =
-                                                                        ed_lastName.text.toString()
-                                                                    it.username =
-                                                                        ed_userName.text.toString()
-                                                                    it.phone =
-                                                                        et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
-                                                                    it.profileImage =
-                                                                        profileImageFile!!
-                                                                    it.email =
-                                                                        ed_email.text.toString()
-                                                                    it.password =
-                                                                        ed_confirmPassword.text.toString()
-                                                                    it.role =
-                                                                        AppConstants.UserTypeKeys.USER
-                                                                    it.password_confirmation =
-                                                                        ed_confirmPassword.text.toString()
-                                                                    mViewModel.signUpAPICall(it)
-                                                                    sharedViewModel.userModel =
-                                                                        UserModel()
-
-                                                              //  }
+                                                            sharedViewModel.userModel.let {
+                                                                it.first =
+                                                                    ed_firstName.text.toString()
+                                                                it.last =
+                                                                    ed_lastName.text.toString()
+                                                                it.username =
+                                                                    ed_userName.text.toString()
+                                                                it.phone = et_country_code.fullNumberWithPlus
+                                                                //et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
+                                                                it.profileImage =
+                                                                    profileImageFile!!
+                                                                it.email =
+                                                                    ed_email.text.toString()
+                                                                it.password =
+                                                                    ed_confirmPassword.text.toString()
+                                                                it.role =
+                                                                    AppConstants.UserTypeKeys.USER
+                                                                it.password_confirmation =
+                                                                    ed_confirmPassword.text.toString()
+                                                                mViewModel.signUpAPICall(it)
+                                                                sharedViewModel.userModel = UserModel()
                                                             }
 
                                                         } catch (e: Exception) {
                                                         }
 
-                                                        /*mViewModel.signUpAPICall(
-                                                        ed_firstName.text.toString(),
-                                                        ed_lastName.text.toString(),
-                                                        ed_userName.text.toString(),
-                                                        et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString(),
-
-                                                       // et_country_code.fullNumber,
-                                                        profileImageFile!!,
-                                                        ed_email.text.toString(),
-                                                        ed_confirmPassword.text.toString(),
-                                                        AppConstants.UserTypeKeys.USER
-                                                    )*/
                                                     } else if (sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR) {
                                                         sharedViewModel.verifyOtpHoldPhoneNumber =
                                                             et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
@@ -402,16 +370,12 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    sharedViewModel.verifyOtpHoldPhoneNumber =
-                        et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
+                    sharedViewModel.verifyOtpHoldPhoneNumber = et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
                     sharedViewModel.isForGotVerify = false
-                    //  Navigation.findNavController(mView).navigate(R.id.action_signupFragment_to_verifyOtpFragment)
+                    sharedViewModel.isUpdatePhone = false
 
                     //on signup success navigate to OTP screen
-                    Navigation.findNavController(mView)
-                        .navigate(R.id.action_signUpFragment_to_otpverificationFragment)
-
-                    // Toast.makeText(requireContext(), "Sign Up Success", Toast.LENGTH_SHORT).show()
+                    Navigation.findNavController(mView).navigate(R.id.action_signUpFragment_to_otpverificationFragment)
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -426,8 +390,6 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
-
-
         mViewModel.onBackButtonClicked.observe(this, Observer {
             Navigation.findNavController(img_back).popBackStack()
         })
@@ -437,53 +399,10 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                 .withFragment(this)
                 .limit(1)
                 .show()
-
-            //  ImagePicker.create(this).single().start();
         })
 
         mViewModel.onSignUpButtonClicked.observe(this, Observer {
-
             fieldValidations()
-
-
-            //remove code below and uncomment above method
-
-            /*if(sharedViewModel.userType == AppConstants.UserTypeKeys.USER){
-                sharedViewModel.userModel?.let{
-                    it.first = ed_firstName.text.toString()
-                    it.last = ed_lastName.text.toString()
-                    it.username =  ed_userName.text.toString()
-                    it.phone  =et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString()
-                    it.profileImage = profileImageFile!!
-                    it.email = ed_email.text.toString()
-                    it.password = ed_confirmPassword.text.toString()
-                    it.role = AppConstants.UserTypeKeys.USER
-
-                    mViewModel.signUpAPICall(it)
-
-                }
-
-                *//*mViewModel.signUpAPICall(
-                    ed_firstName.text.toString(),
-                    ed_lastName.text.toString(),
-                    ed_userName.text.toString(),
-                    et_country_code.selectedCountryCodeWithPlus+ ed_phoneNumber.text.toString(),
-
-                   // et_country_code.fullNumber,
-                    profileImageFile!!,
-                    ed_email.text.toString(),
-                    ed_confirmPassword.text.toString(),
-                    AppConstants.UserTypeKeys.USER
-                )*//*
-            }else if(sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR){
-                Navigation.findNavController(btn_signUp)
-                    .navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
-            }*/
-
-
-            /* Navigation.findNavController(btn_signUp)
-                 .navigate(R.id.action_signUpFragment_to_signupConfigurationsFragment)*/
-
         })
     }
 

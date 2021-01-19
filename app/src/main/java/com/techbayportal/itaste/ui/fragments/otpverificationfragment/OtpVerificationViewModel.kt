@@ -70,6 +70,31 @@ class OtpVerificationViewModel @ViewModelInject constructor(
         }
     }
 
+    fun hitVerifyOtpForPhone(code: Int, phone: String, type:String) {
+        val loginSession = LoginSession.getInstance().getLoginResponse()
+        viewModelScope.launch {
+            _verifyOtpResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.verifyOtpForUpdatePhone("Bearer ${loginSession!!.data.access_token}",code, phone, type).let {
+                        if (it.isSuccessful) {
+                            _verifyOtpResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _verifyOtpResponse.postValue(Resource.error(it.message(), null))
+                        } else  {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _verifyOtpResponse.postValue(Resource.error(extractErrorMessage(errorMessagesJson), null))
+                        }
+
+                    }
+                } catch (e: Exception) {
+                    _verifyOtpResponse.postValue(Resource.error("" + e.message, null))
+                }
+
+            } else _verifyOtpResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
 
 
     fun hitResentOtp(phone: String, type: String) {
@@ -78,6 +103,36 @@ class OtpVerificationViewModel @ViewModelInject constructor(
             if (networkHelper.isNetworkConnected()) {
                 try {
                     mainRepository.resentOtp(phone, type).let {
+                        if (it.isSuccessful) {
+                            _resentVerifyOtpResponse.postValue(Resource.success(it.body()!!))
+//                            saveUserObj(it.body()!!)
+                        }else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _resentVerifyOtpResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _resentVerifyOtpResponse.postValue(Resource.error(extractErrorMessage(errorMessagesJson), null))
+                        }
+                    }
+                } catch (e: Exception) {
+                    _resentVerifyOtpResponse.postValue(Resource.error(""+e.message, null))
+                }
+
+            } else _resentVerifyOtpResponse.postValue(
+                Resource.error(
+                    "No internet connection",
+                    null
+                )
+            )
+        }
+    }
+
+    fun hitResentOtpForPhone(phone: String, type: String) {
+        val loginSession = LoginSession.getInstance().getLoginResponse()
+        viewModelScope.launch {
+            _resentVerifyOtpResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.resentOtpUpdatePhone("Bearer ${loginSession!!.data.access_token}",phone, type).let {
                         if (it.isSuccessful) {
                             _resentVerifyOtpResponse.postValue(Resource.success(it.body()!!))
 //                            saveUserObj(it.body()!!)

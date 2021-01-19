@@ -37,7 +37,7 @@ class MainRepository @Inject constructor(
         return apiService.signUp(
             "application/json",
             userModel.first,
-           // last.toRequestBody(MultipartBody.FORM),
+            // last.toRequestBody(MultipartBody.FORM),
             userModel.last,
             userModel.username,
             userModel.phone,
@@ -47,6 +47,8 @@ class MainRepository @Inject constructor(
             userModel.role
         )
     }
+
+
 
     //Sign Up User
     suspend fun signUpVendor(userModel: UserModel): Response<SignUpResponse> {
@@ -90,8 +92,16 @@ class MainRepository @Inject constructor(
     suspend fun verifyOtp(code: Int, phone: String, type: String) =
         apiService.verifyOpt("application/json", code, phone, type)
 
+    suspend fun verifyOtpForUpdatePhone(auth: String, code: Int, phone: String,  type: String) =
+        apiService.verifyOptForUpdatePhone("application/json",auth,code, phone,type)
+
     suspend fun resentOtp(phone: String, type: String) =
         apiService.resentOtp("application/json", phone, type)
+
+
+
+    suspend fun resentOtpUpdatePhone(auth: String, phone: String, type: String) =
+        apiService.resentOtpUpdatePhone("application/json",auth, phone, type)
 
     suspend fun getAllCountries() = apiService.getAllCountries()
 
@@ -99,7 +109,131 @@ class MainRepository @Inject constructor(
         return apiService.getAllCities("application/json", countryId)
     }
 
-    suspend fun updateUserLocation(auth:String, countryId: Int): Response<GetAllCountriesResponse> {
-        return apiService.updateUserLocation("application/json",auth, countryId)
+    suspend fun updateUserLocation(
+        auth: String,
+        countryId: Int
+    ): Response<GetAllCountriesResponse> {
+        return apiService.updateUserLocation("application/json", auth, countryId)
     }
+
+    suspend fun getUserPersonalProfile(auth: String): Response<UserPersonalProfileResponse> {
+        return apiService.getUserPersonalProfile("application/json", auth)
+    }
+
+
+    suspend fun getVendorPersonalProfile(auth: String): Response<VendorPersonalProfileResponse> {
+        return apiService.getVendorPersonalProfile("application/json", auth)
+    }
+
+    suspend fun updateUserPersonalProfile(
+        auth: String,
+        first: String,
+        last: String,
+        email: String,
+        phone: String,
+        profilePic: File?
+    ): Response<SuccessResponse> {
+
+        val profilePicRequestBody: RequestBody? =
+            profilePic?.asRequestBody("image/*".toMediaTypeOrNull())
+        val profilePicMultiPartBody = profilePicRequestBody?.let {
+            MultipartBody.Part.createFormData(
+                "profilePic",
+                System.currentTimeMillis().toString() + ".png",
+                it
+            )
+        }
+        if (profilePic == null) {
+            return apiService.updateUserPersonalProfileWithoutPic(
+                "application/json",
+                auth,
+                first,
+                last,
+                email,
+                phone
+            )
+        } else {
+            return apiService.updateUserPersonalProfile(
+                "application/json",
+                auth,
+                first,
+                last,
+                email,
+                phone,
+                profilePicMultiPartBody!!
+            )
+        }
+
+
+    }
+
+    suspend fun updateVendorPersonalProfile(
+        auth: String,
+        first_name: String,
+        last_name: String,
+        bio: String,
+        phone: String,
+        email: String,
+        profilePic: File?,
+        country_id:String,
+        city_id :String
+
+    ): Response<SuccessResponse> {
+        val profilePicRequestBody: RequestBody? =
+            profilePic?.asRequestBody("image/*".toMediaTypeOrNull())
+        val profilePicMultiPartBody = profilePicRequestBody?.let {
+            MultipartBody.Part.createFormData(
+                "profilePic",
+                System.currentTimeMillis().toString() + ".png",
+                it
+            )
+        }
+        if (profilePic == null) {
+            return apiService.updateVendorPersonalProfileWithoutPic(
+                "application/json",
+                auth,
+                first_name,
+                last_name,
+                bio,
+                phone,
+                email,
+            country_id,
+            city_id)
+        } else {
+            return apiService.updateVendorPersonalProfile(
+                "application/json",
+                auth,
+                first_name,
+                last_name,
+                bio,
+                phone,
+                email,
+                profilePicMultiPartBody!!,
+            country_id,
+            city_id)
+        }
+    }
+
+    suspend fun changePassword(
+        auth: String,
+        old_password: String,
+        new_password: String,
+        password_confirmation: String
+    ) =
+        apiService.changePassword(
+            "application/json",
+            auth,
+            old_password,
+            new_password,
+            password_confirmation
+        )
+
+    suspend fun logout(auth: String) = apiService.logout("application/json", auth)
+
+    suspend fun deleteAccount(auth: String) = apiService.deleteAccount("application/json", auth)
+
+    suspend fun contactUs(auth: String, name: String, email: String, message: String) =
+        apiService.contactUs("application/json", auth, name, email, message)
+
+
 }

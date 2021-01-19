@@ -9,21 +9,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
-import com.techbayportal.itaste.data.models.Data
-import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutOtpverificationfragmentBinding
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_loginfragment.*
 import kotlinx.android.synthetic.main.layout_otpverificationfragment.*
 import kotlinx.android.synthetic.main.layout_otpverificationfragment.btn_next
 
@@ -41,6 +37,8 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
     lateinit var otpCountDownTimer: CountDownTimer
     var counter = 60
+
+    val loginSession = LoginSession.getInstance().getLoginResponse()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,16 +96,14 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
             // Navigation.findNavController(btn_next).navigate(R.id.action_otpverificationFragment_to_changePasswordFragment)
             //call api
             if (sharedViewModel.isForGotVerify) {
-                mViewModel.verifyOTP(
-                    Integer.parseInt(otp_view.text.toString()),
-                    sharedViewModel.verifyOtpHoldPhoneNumber,
-                    AppConstants.VerifyOTPTypeKeys.FORGOT_PASSWORD
+                mViewModel.verifyOTP(Integer.parseInt(otp_view.text.toString()), sharedViewModel.verifyOtpHoldPhoneNumber, AppConstants.VerifyOTPTypeKeys.FORGOT_PASSWORD
                 )
-            } else {
-                mViewModel.verifyOTP(
-                    Integer.parseInt(otp_view.text.toString()),
-                    sharedViewModel.verifyOtpHoldPhoneNumber,
-                    AppConstants.VerifyOTPTypeKeys.SIGN_UP
+            } else if(sharedViewModel.isUpdatePhone){
+                mViewModel.hitVerifyOtpForPhone(Integer.parseInt(otp_view.text.toString()), sharedViewModel.verifyOtpHoldNewPhoneNumber, AppConstants.VerifyOTPTypeKeys.UPDATE_PHONE )
+            }
+
+            else {
+                mViewModel.verifyOTP(Integer.parseInt(otp_view.text.toString()), sharedViewModel.verifyOtpHoldPhoneNumber, AppConstants.VerifyOTPTypeKeys.SIGN_UP
                 )
             }
         } else {
@@ -132,12 +128,18 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
             otpCountDownTimer.cancel()
             tv_resendOtp.isEnabled = false
             otp_view.text = null
+
+
             sharedViewModel.verifyOtpHoldPhoneNumber?.let {
                 //key is set "forget-password" as per provided by backend
 
                 if (sharedViewModel.isForGotVerify) {
                     mViewModel.hitResentOtp(it, AppConstants.VerifyOTPTypeKeys.FORGOT_PASSWORD)
-                }else{
+
+                } else if(sharedViewModel.isUpdatePhone){
+                    mViewModel.hitResentOtpForPhone(it, AppConstants.VerifyOTPTypeKeys.UPDATE_PHONE)
+                }
+                else{
                     mViewModel.hitResentOtp(it, AppConstants.VerifyOTPTypeKeys.SIGN_UP)
                 }
             }
@@ -183,12 +185,17 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                         // if it is from forgot verify
                         if (Navigation.findNavController(mView).currentDestination?.id == R.id.otpverificationFragment){
                             Navigation.findNavController(mView).navigate(R.id.action_otpverificationFragment_to_changePasswordFragment)
+
                         }
                         else{
                            // Toast.makeText(requireContext(), "Already there", Toast.LENGTH_SHORT).show()
                         }
 
-                    } else {
+                    }else if(sharedViewModel.isUpdatePhone){
+                        Navigation.findNavController(mView).popBackStack()
+                    }
+
+                    else {
 
                         if(sharedViewModel.userType == AppConstants.UserTypeKeys.USER){
                             if (it.data!!.data == null){
@@ -251,7 +258,7 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                     counter = 60
                     otpCountDownTimer.cancel()
                     tv_expiryTime.visibility = View.GONE
-                    iv_otp_timer_clock.visibility = View.VISIBLE
+                    iv_otp_timer_clock.visibility = View.GONE
                     tv_resendOtp.isEnabled = true
                     DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }

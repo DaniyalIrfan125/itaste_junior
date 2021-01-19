@@ -7,10 +7,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import com.google.android.material.snackbar.Snackbar
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutChangeexistingpasswordfragmentBinding
+import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_changeexistingpasswordfragment.*
 
@@ -24,6 +27,10 @@ class ChangeExistingPasswordFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeToNetworkLiveData()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,6 +71,27 @@ class ChangeExistingPasswordFragment :
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_states)
         }
     }
+    override fun subscribeToNetworkLiveData() {
+        super.subscribeToNetworkLiveData()
+        mViewModel.changeExistingPasswordResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    Navigation.findNavController(img_back).popBackStack()
+                    Snackbar.make(requireView(),"Password changed successfully",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode )
+                }
+            }
+        })
+    }
 
     fun validationsCheck() {
         if (!TextUtils.isEmpty(ed_existingPassword.text)) {
@@ -72,9 +100,9 @@ class ChangeExistingPasswordFragment :
 
                 if (!TextUtils.isEmpty(ed_confirmPassword.text)) {
 
-                    if (ed_newPassword.text == ed_confirmPassword.text) {
+                    if (ed_newPassword.text.toString() == ed_confirmPassword.text.toString()) {
 
-
+                        mViewModel.hitChangeExistingPassword(ed_existingPassword.text.toString(), ed_newPassword.text.toString(), ed_confirmPassword.text.toString())
 
                     } else {
 
@@ -82,7 +110,7 @@ class ChangeExistingPasswordFragment :
                         tv_confirmPassword.visibility = View.VISIBLE
                         ed_confirmPassword.background =
                             ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                        tv_confirmPassword.text = "New and confirm password doesnot match!"
+                        tv_confirmPassword.text = "New and confirm password does not match!"
                     }
 
 
@@ -100,7 +128,7 @@ class ChangeExistingPasswordFragment :
                 tv_newPassword.visibility = View.VISIBLE
                 ed_newPassword.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                tv_newPassword.text = "Please write Existing Password!"
+                tv_newPassword.text = "Please write New Password!"
 
             }
 

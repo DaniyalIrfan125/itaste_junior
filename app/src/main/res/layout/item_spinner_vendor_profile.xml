@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/mainBackground"
+    android:gravity="center">
+    <TextView
+        android:id="@+id/txtSpinner"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:fontFamily="@font/roboto_light"
+        android:textColor="@color/titleTextColorBlack"
+        android:gravity="center_vertical"
+        android:text="abc"
+        android:textColorHint="@color/titleTextColorBlack"
+        android:textSize="12sp"/>
+</LinearLayout>

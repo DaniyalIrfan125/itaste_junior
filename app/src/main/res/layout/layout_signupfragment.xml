@@ -224,7 +224,6 @@
                                 android:fontFamily="@font/roboto_regular"
                                 android:gravity="center"
                                 android:imeOptions="actionNext"
-
                                 app:ccp_backgroundColor="@color/mainBackground"
                                 app:ccp_defaultNameCode="AE"
                                 app:ccp_dialogTextColor="@color/titleTextColorBlack"

@@ -9,6 +9,7 @@ data class GetAllCountriesResponse(
 data class GetAllCountriesData(
     val id: String,
     val name: String,
-    val flag: String
+    val flag: String,
+    val select: Boolean
     )
 

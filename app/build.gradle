@@ -178,7 +178,9 @@ dependencies {
     debugImplementation "com.github.chuckerteam.chucker:library:3.4.0"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.4.0"
 
+    implementation 'id.zelory:compressor:3.0.0'
 
+    compile 'com.github.hkk595:Resizer:v1.5'
 
 }
 protobuf {
