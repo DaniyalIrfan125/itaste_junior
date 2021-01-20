@@ -103,10 +103,12 @@ class MainRepository @Inject constructor(
     suspend fun resentOtpUpdatePhone(auth: String, phone: String, type: String) =
         apiService.resentOtpUpdatePhone("application/json",auth, phone, type)
 
-    suspend fun getAllCountries() = apiService.getAllCountries()
+   // suspend fun getAllCountries() = apiService.getAllCountries()
 
-    suspend fun getAllCities(countryId: Int): Response<GetAllCitiesResponse> {
-        return apiService.getAllCities("application/json", countryId)
+    suspend fun getAllCountriesForHome(auth: String) = apiService.getAllCountriesForHome("application/json",auth)
+
+    suspend fun getAllCities(auth: String, countryId: Int): Response<GetAllCitiesResponse> {
+        return apiService.getAllCities("application/json",auth, countryId)
     }
 
     suspend fun updateUserLocation(
@@ -235,5 +237,16 @@ class MainRepository @Inject constructor(
     suspend fun contactUs(auth: String, name: String, email: String, message: String) =
         apiService.contactUs("application/json", auth, name, email, message)
 
+    suspend fun getVendorProfileDetails(auth: String, vendorId: Int): Response<VendorProfileDetailsResponse> {
+        return apiService.getVendorProfileDetails("application/json",auth, vendorId)
+    }
+
+    suspend fun setFollow(auth: String, vendorId: Int): Response<SuccessResponse> {
+        return apiService.setFollow("application/json",auth, vendorId)
+    }
+
+    suspend fun reportBug(auth: String, message: String): Response<SuccessResponse> {
+        return apiService.reportBug("application/json",auth, message)
+    }
 
 }

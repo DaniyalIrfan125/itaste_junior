@@ -5,6 +5,7 @@ import java.io.File
 import java.lang.reflect.Array
 
 class UserModel {
+    var id : Int = 0
     var first : String = ""
     var last : String = ""
     var username : String = ""

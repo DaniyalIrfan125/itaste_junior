@@ -37,7 +37,7 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
         super.onViewCreated(view, savedInstanceState)
 
 
-        recycler_posts.adapter = PostsRecyclerAdapter(
+        /*recycler_posts.adapter = PostsRecyclerAdapter(
             listOf<Int>(
                 R.drawable.img_food_second,
                 R.drawable.img_food_first,
@@ -60,7 +60,7 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
                 R.drawable.img_food_second,
                 R.drawable.img_food_first
             )
-        )
+        )*/
         recycler_posts.layoutManager =
             GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
         recycler_posts.autoFitColumns(110)

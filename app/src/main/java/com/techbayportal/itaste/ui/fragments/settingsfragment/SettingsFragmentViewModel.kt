@@ -12,8 +12,13 @@ class SettingsFragmentViewModel  @ViewModelInject constructor(
 ) : BaseViewModel() {
 
     val onBackButtonClicked = SingleLiveEvent<Any>()
+    val onContactUsClicked = SingleLiveEvent<Any>()
 
     fun onBackButtonClicked() {
         onBackButtonClicked.call()
+    }
+
+    fun onContactUsClicked() {
+        onContactUsClicked.call()
     }
 }

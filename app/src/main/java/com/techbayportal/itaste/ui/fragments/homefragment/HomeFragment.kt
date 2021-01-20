@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
@@ -54,20 +55,17 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
 //            Navigation.findNavController(iv_home_configuration)
 //                .navigate(R.id.action_homeFragment_to_homeConfigurationBottomSheetFragment)
             //
-            bottomSheet.show(activity!!.supportFragmentManager, "bottomSheet")
-            mViewModel.hitGetAllCountries()
+            bottomSheet.show(requireActivity().supportFragmentManager, "bottomSheet")
+            mViewModel.hitGetAllCountriesForHome()
         })
 
         mViewModel.tempClicked.observe(this, Observer {
-
         })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -127,6 +125,15 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
             }
+            else if(it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION){
+                if (it != -1) {
+                    //call api to select country
+                  //  Toast.makeText(context, "Update Loc: ${sharedViewModel.userUpdatedCountryId}", Toast.LENGTH_SHORT).show()
+                    mViewModel.hitUpdateUserLocationFromHome(sharedViewModel.userUpdatedCountryId)
+
+                    sharedViewModel._homeConfigBottomSheetClickId.value = -1
+                }
+            }
             /*else if(it == AppConstants.HomeConfigBottomSheet.TURN_OFF_NOTIFICATION){
                     if (it != -1) {
                         //call api to select country
@@ -147,6 +154,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         })
     }
 
+
+    //Home Screen RecyclearViews Items Clicks
     override fun onItemClickListener(type : String) {
         when(type){
             AppConstants.RecyclerViewKeys.HOME_RV -> {
@@ -160,7 +169,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
             AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS -> {
                 Navigation.findNavController(iv_home_configuration)
                     .navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
-
             }
         }
     }
@@ -176,9 +184,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
                     loadingDialog.dismiss()
                     countriesList.addAll(it.data!!.data)
                     sharedViewModel._countriesList.value = it.data
-                    //  mViewDataBinding.spinnerCountry.adapter = SpinnerAdapter(countriesList)
-                    // paste api call here
-                    // Toast.makeText(requireContext(), "Countries Loaded", Toast.LENGTH_SHORT).show()
+
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -187,6 +193,29 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
 
             }
         })
+
+        mViewModel.updateUserLocationResponse.observe(this, Observer {
+
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+
+                   // Snackbar.make(requireView(), "Country Updated" , Snackbar.LENGTH_SHORT).show()
+                    //hit again to refresh data
+                    mViewModel.hitGetAllCountriesForHome()
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+
+
     }
 
     override fun onChildItemClick(position: Int) {

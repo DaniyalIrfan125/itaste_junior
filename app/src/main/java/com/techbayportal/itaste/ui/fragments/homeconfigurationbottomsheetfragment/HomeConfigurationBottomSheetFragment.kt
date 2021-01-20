@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.asLiveData
@@ -21,13 +22,12 @@ import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.GetAllCountriesData
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.adapter.LocationsAdapter
+import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.layout_homefragment.*
 import timber.log.Timber
-
-
 
 class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -37,6 +37,8 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
 
     val locationsList = ArrayList<GetAllCountriesData>()
     lateinit var mView: View
+
+    val loginSession = LoginSession.getInstance().getLoginResponse()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,16 +74,11 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
            // Navigation.findNavController(mView).navigate(R.id.action_homeConfigurationBottomSheetFragment_to_settingsFragment)
             dismiss()
             sharedViewModel._homeConfigBottomSheetClickId.postValue(AppConstants.HomeConfigBottomSheet.SETTINGS)
-
-            //.setHideable(true);
-          //  bottomSheetInfoBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-
             Toast.makeText(requireContext(), "settings 1", Toast.LENGTH_SHORT).show()
 
         })
         tv_turnOffNotifications.setOnClickListener(View.OnClickListener {
            // sharedViewModel._homeConfigBottomSheetClickId.value = AppConstants.HomeConfigBottomSheet.TURN_OFF_NOTIFICATION
-
             Toast.makeText(requireContext(), "notify 1", Toast.LENGTH_SHORT).show()
 
         })
@@ -135,13 +132,28 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
 
         locationAdapter = LocationsAdapter(locationsList,object :LocationsAdapter.ClickItemListener{
             override fun onClicked(getAllCountriesData: GetAllCountriesData) {
-                Toast.makeText(requireContext(), "flag: ${getAllCountriesData.name}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), "flag: ${getAllCountriesData.name}", Toast.LENGTH_SHORT).show()
+
+                //Call Update Loc API
+                sharedViewModel.userUpdatedCountryId = getAllCountriesData.id.toInt()
+                sharedViewModel._homeConfigBottomSheetClickId.postValue(AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION)
 
             }
 
         })
 
         rv_userlocations.adapter = locationAdapter
+
+        if (loginSession != null) {
+            if (loginSession.data.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
+                // relative_addButton.background = null
+                rv_userlocations.isVisible = false
+
+
+            } else {
+
+            }
+        }
 
     }
 

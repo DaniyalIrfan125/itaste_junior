@@ -116,7 +116,7 @@ class VendorProfileViewModel @ViewModelInject constructor(
             _getAllCountriesResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getAllCountries().let {
+                    mainRepository.getAllCountriesForHome("Bearer ${loginSession!!.data.access_token}").let {
                         if (it.isSuccessful) {
                             _getAllCountriesResponse.postValue(Resource.success(it.body()!!))
                         } else _getAllCountriesResponse.postValue(Resource.error(it.message(), null))
@@ -133,7 +133,7 @@ class VendorProfileViewModel @ViewModelInject constructor(
             _getAllCitiesResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getAllCities(countryId).let {
+                    mainRepository.getAllCities("Bearer ${loginSession!!.data.access_token}",countryId).let {
                         if (it.isSuccessful) {
                             _getAllCitiesResponse.postValue(Resource.success(it.body()!!))
                         } else _getAllCitiesResponse.postValue(Resource.error(it.message(), null))

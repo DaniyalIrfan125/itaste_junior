@@ -17,21 +17,14 @@ import timber.log.Timber
 import java.lang.Exception
 
 class UserLocationAdapter(
-    private val context: Context, private val list: List<GetAllCountriesData>,
-    private val listener: ClickItemListener
-)
-
-    : RecyclerView.Adapter<UserLocationAdapter.ViewHolder>() {
+    private val context: Context,
+    private val list: List<GetAllCountriesData>,
+    private val listener: ClickItemListener):
+    RecyclerView.Adapter<UserLocationAdapter.ViewHolder>() {
 
     interface ClickItemListener {
         fun onClicked(getAllCountriesData: GetAllCountriesData)
     }
-
-    /*  private var onClickListener: UserLocationRvClickListener? = null
-
-      fun setOnEntryClickListener(onEntryClickListener: UserLocationRvClickListener?) {
-          onClickListener = onEntryClickListener
-      }*/
 
 
     override fun onCreateViewHolder(

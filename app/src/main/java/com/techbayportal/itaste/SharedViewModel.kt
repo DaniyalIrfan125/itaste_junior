@@ -41,7 +41,8 @@ class SharedViewModel : BaseViewModel() {
     val countriesList: LiveData<GetAllCountriesResponse>
         get() = _countriesList
 
-
+    var userUpdatedCountryId : Int = 0
 
     var test = false;
+    var testId :String = "0"
 }

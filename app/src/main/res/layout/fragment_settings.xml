@@ -209,6 +209,7 @@
                     </View>
 
                     <LinearLayout
+                        android:onClick="@{()->viewModel.onBackButtonClicked()}"
                         android:clickable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"

@@ -1,15 +1,15 @@
 package com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.adapter
 
-import android.content.Context
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.data.models.GetAllCountriesData
-import com.techbayportal.itaste.ui.fragments.signupconfigurationsfragment.adapter.UserLocationAdapter
+
 
 class LocationsAdapter (private val list: List<GetAllCountriesData>,
     private val listener: ClickItemListener
@@ -17,8 +17,14 @@ class LocationsAdapter (private val list: List<GetAllCountriesData>,
 
     : RecyclerView.Adapter<LocationsAdapter.ViewHolder>() {
 
+
+
+
     interface ClickItemListener {
-        fun onClicked(getAllCountriesData: GetAllCountriesData)
+        fun onClicked(getAllCountriesData: GetAllCountriesData){
+
+
+        }
     }
 
     /*  private var onClickListener: UserLocationRvClickListener? = null
@@ -55,30 +61,33 @@ class LocationsAdapter (private val list: List<GetAllCountriesData>,
         ) {
 
         private var ivCountryFlag: ImageView? = null
+      init {
+          ivCountryFlag = itemView.findViewById(R.id.iv_country_flag)
 
-        init {
-            ivCountryFlag = itemView.findViewById(R.id.iv_country_flag)
+      }
 
-        }
 
         fun bind(int: Int) {
             val model = list[int]
             var url = model.flag
 
+            Picasso.get()
+                .load(url).fit().centerCrop()
+                .into(ivCountryFlag)
+
             if(model.select){
+                ivCountryFlag?.clearColorFilter()
 
             }else{
-                Picasso.get()
-                    .load(url).fit().centerCrop()
-                    .into(ivCountryFlag)
+                val matrix = ColorMatrix()
+                matrix.setSaturation(0f)
+                ivCountryFlag?.colorFilter = ColorMatrixColorFilter(matrix)
+
             }
 
             itemView.setOnClickListener {
                 listener.onClicked(model)
             }
-
         }
-
-
     }
 }

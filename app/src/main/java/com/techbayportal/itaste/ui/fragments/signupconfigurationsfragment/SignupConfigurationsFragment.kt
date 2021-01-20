@@ -20,6 +20,7 @@ import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_signupconfigurationsfragment.*
 import kotlinx.android.synthetic.main.layout_signupvendorfragment.*
+import java.io.File
 
 @AndroidEntryPoint
 class SignupConfigurationsFragment :
@@ -35,19 +36,15 @@ class SignupConfigurationsFragment :
 
     val countriesList = ArrayList<GetAllCountriesData>()
     lateinit var mView: View
-
     lateinit var userLocationAdapter: UserLocationAdapter
-
     var countryId: Int = 0
 
-   // val loginSession = LoginSession.getInstance().getLoginResponse()
-  //  val token = loginSession!!.data.access_token
+    var compressedProfileImageFile: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.getAllCountries()
         subscribeToNetworkLiveData()
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -72,6 +69,7 @@ class SignupConfigurationsFragment :
 
                     //it will get the id of country on which we click . we will sed this id update Location APi
                     countryId = getAllCountriesData.id.toInt()
+                    sharedViewModel.userUpdatedCountryId = countryId
                     //Update ui on click
                     Toast.makeText(requireContext(), "Location selected $countryId ${getAllCountriesData.name}", Toast.LENGTH_SHORT).show()
                 }
@@ -142,8 +140,6 @@ class SignupConfigurationsFragment :
                   //  }else{
                   //      Snackbar.make(requireView(), "No Token Received", Snackbar.LENGTH_SHORT).show()
                   //  }
-
-
 
                 }else{
                     Snackbar.make(requireView(), "Please select a country", Snackbar.LENGTH_SHORT).show()

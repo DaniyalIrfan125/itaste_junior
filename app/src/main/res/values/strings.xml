@@ -279,6 +279,7 @@
     <string name="abc_g_com">abc@g.com</string>
     <string name="selectcity">Select City!</string>
     <string name="selectcountry">Select Country!</string>
+    <string name="profile_settings">Profile Settings</string>
 
 
 </resources>

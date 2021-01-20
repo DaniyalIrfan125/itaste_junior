@@ -110,13 +110,21 @@ interface ApiService {
     ): Response<ResendOtpResponse>
 
 
-    @GET("countries")
+   /* @GET("countries")
     suspend fun getAllCountries(
+    ): Response<GetAllCountriesResponse>*/
+
+    @GET("countries")
+    suspend fun getAllCountriesForHome(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
     ): Response<GetAllCountriesResponse>
+
 
     @GET("cities")
     suspend fun getAllCities(
         @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
         @Query("country_id") name: Int
     ): Response<GetAllCitiesResponse>
 
@@ -235,6 +243,29 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Field("name") name : String,
         @Field("email") email: String,
+        @Field("message") message: String
+    ): Response<SuccessResponse>
+
+    @GET("vendor/details")
+    suspend fun getVendorProfileDetails(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("vendor_id") name: Int
+    ): Response<VendorProfileDetailsResponse>
+
+    @FormUrlEncoded
+    @POST("vendor/follow")
+    suspend fun setFollow(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Field("vendor_id") vendor_id: Int
+    ): Response<SuccessResponse>
+
+    @FormUrlEncoded
+    @POST("report/bug")
+    suspend fun reportBug(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
         @Field("message") message: String
     ): Response<SuccessResponse>
 

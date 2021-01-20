@@ -204,6 +204,7 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
                                 try {
                                     mViewModel.saveUserObj(it.data)
+                                    sharedViewModel.testId = it.data.data.id
                                     Navigation.findNavController(mView).navigate(R.id.action_otpverificationFragment_to_signupConfigurationsFragment)
                                 } catch (e: Exception) {
                                 }
@@ -216,6 +217,7 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                             }else{
                                 try {
                                     mViewModel.saveUserObj(it.data)
+                                    sharedViewModel.testId = it.data.data.id
                                     navigateToMainScreen()
                                 } catch (e: Exception) {
                                 }

@@ -79,6 +79,7 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
                     it?.let {
                         loadingDialog.dismiss()
                         mViewModel.saveUserObj(it.data!!)
+                        sharedViewModel.testId = it.data.data.id
                        // sharedViewModel.verifyOtpHoldPhoneNumber = editTextEmail.text.toString()
                         navigateToMainActivity()
 

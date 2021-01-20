@@ -207,6 +207,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
+                    citiesList.clear()
                     citiesList.addAll(it.data!!.data)
                     mViewDataBinding.spVendorCity.adapter = ProfileSpinnerAdapter(citiesList)
                 }

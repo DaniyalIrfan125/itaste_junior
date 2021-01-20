@@ -51,7 +51,7 @@ class SignUpConfigurationsViewModel @ViewModelInject constructor(
             _getAllCountriesResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getAllCountries().let {
+                    mainRepository.getAllCountriesForHome("").let {
                         if (it.isSuccessful) {
                             _getAllCountriesResponse.postValue(Resource.success(it.body()!!))
                         } else _getAllCountriesResponse.postValue(Resource.error(it.message(), null))

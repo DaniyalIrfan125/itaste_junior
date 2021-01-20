@@ -12,7 +12,6 @@ import com.techbayportal.itaste.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_report_bug.*
 
-@AndroidEntryPoint
 class ReportBugDialogFragment : DialogFragment() {
 
     override fun onCreateView(

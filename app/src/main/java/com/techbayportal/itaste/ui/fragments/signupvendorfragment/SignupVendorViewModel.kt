@@ -63,7 +63,7 @@ class SignupVendorViewModel @ViewModelInject constructor(
             _getAllCountriesResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getAllCountries().let {
+                    mainRepository.getAllCountriesForHome("").let {
                         if (it.isSuccessful) {
                             _getAllCountriesResponse.postValue(Resource.success(it.body()!!))
                         } else _getAllCountriesResponse.postValue(Resource.error(it.message(), null))
@@ -80,7 +80,7 @@ class SignupVendorViewModel @ViewModelInject constructor(
             _getAllCitiesResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getAllCities(countryId).let {
+                    mainRepository.getAllCities("",countryId).let {
                         if (it.isSuccessful) {
                             _getAllCitiesResponse.postValue(Resource.success(it.body()!!))
                         } else _getAllCitiesResponse.postValue(Resource.error(it.message(), null))

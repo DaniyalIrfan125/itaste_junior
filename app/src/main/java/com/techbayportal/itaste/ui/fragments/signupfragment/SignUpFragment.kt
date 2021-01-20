@@ -1,6 +1,7 @@
 package com.techbayportal.itaste.ui.fragments.signupfragment
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
@@ -25,8 +26,14 @@ import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutSignupfragmentBinding
 import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.size
 
 import kotlinx.android.synthetic.main.layout_signupfragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 import java.io.File
 
@@ -41,10 +48,8 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         get() = BR.viewModel
 
     var profileImageFile: File? = null
-    //var compressedProfileImageFile: File? = null
+    var compressedProfileImageFile: File? = null
     private lateinit var mView: View
-
-
     lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,13 +71,14 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
     }
 
 
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if(data != null) {
+        if (data != null) {
             if (requestCode == AppConstants.PROFILE_PIC_CODE) {
                 val imagePath = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)!![0]
                 profileImageFile = File(imagePath)
                 if (profileImageFile != null) {
+                    //calling method to compress image
+                    compressImageFile(profileImageFile)
                     Picasso.get()
                         .load(profileImageFile!!)
                         .fit()
@@ -84,20 +90,19 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    /*private fun compressImageFile(imageFile: File?) {
-        //compressedImage = imageFile
+    private fun compressImageFile(imageFile: File?) {
         imageFile?.let {
             GlobalScope.launch {
-                compressedProfileImageFile = Compressor.compress(requireActivity(), it) {
-                    size(1024) // 1 MB
+                compressedProfileImageFile =
+                    Compressor.compress(requireContext(), profileImageFile!!) {
+                        quality(70)
+                        format(Bitmap.CompressFormat.WEBP)
+                        size(2_097_152) //2MB
 
-                }
-
-                // updateImageView(compressedImage!!)
+                    }
             }
         }
-
-    }*/
+    }
 
     override fun onResume() {
         super.onResume()
@@ -189,31 +194,39 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                                         Snackbar.LENGTH_SHORT
                                                     ).show()
                                                 } else {
-                                                   // compressImageFile(profileImageFile)
                                                     if (sharedViewModel.userType == AppConstants.UserTypeKeys.USER) {
                                                         try {
-                                                           // if (compressedProfileImageFile != null) {
-                                                            sharedViewModel.userModel.let {
-                                                                it.first =
-                                                                    ed_firstName.text.toString()
-                                                                it.last =
-                                                                    ed_lastName.text.toString()
-                                                                it.username =
-                                                                    ed_userName.text.toString()
-                                                                it.phone = et_country_code.fullNumberWithPlus
-                                                                //et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
-                                                                it.profileImage =
-                                                                    profileImageFile!!
-                                                                it.email =
-                                                                    ed_email.text.toString()
-                                                                it.password =
-                                                                    ed_confirmPassword.text.toString()
-                                                                it.role =
-                                                                    AppConstants.UserTypeKeys.USER
-                                                                it.password_confirmation =
-                                                                    ed_confirmPassword.text.toString()
-                                                                mViewModel.signUpAPICall(it)
-                                                                sharedViewModel.userModel = UserModel()
+                                                            if (compressedProfileImageFile != null) {
+                                                                sharedViewModel.userModel.let {
+                                                                    it.first =
+                                                                        ed_firstName.text.toString()
+                                                                    it.last =
+                                                                        ed_lastName.text.toString()
+                                                                    it.username =
+                                                                        ed_userName.text.toString()
+                                                                    it.phone =
+                                                                        et_country_code.fullNumberWithPlus
+                                                                    //et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
+                                                                    it.profileImage =
+                                                                        profileImageFile!!
+                                                                    it.email =
+                                                                        ed_email.text.toString()
+                                                                    it.password =
+                                                                        ed_confirmPassword.text.toString()
+                                                                    it.role =
+                                                                        AppConstants.UserTypeKeys.USER
+                                                                    it.password_confirmation =
+                                                                        ed_confirmPassword.text.toString()
+                                                                    mViewModel.signUpAPICall(it)
+                                                                    sharedViewModel.userModel =
+                                                                        UserModel()
+                                                                }
+                                                            } else {
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "File compressing...Try again",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
                                                             }
 
                                                         } catch (e: Exception) {
@@ -370,12 +383,14 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    sharedViewModel.verifyOtpHoldPhoneNumber = et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
+                    sharedViewModel.verifyOtpHoldPhoneNumber =
+                        et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
                     sharedViewModel.isForGotVerify = false
                     sharedViewModel.isUpdatePhone = false
 
                     //on signup success navigate to OTP screen
-                    Navigation.findNavController(mView).navigate(R.id.action_signUpFragment_to_otpverificationFragment)
+                    Navigation.findNavController(mView)
+                        .navigate(R.id.action_signUpFragment_to_otpverificationFragment)
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
