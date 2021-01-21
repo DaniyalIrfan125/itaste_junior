@@ -177,7 +177,7 @@ class MainRepository @Inject constructor(
         phone: String,
         email: String,
         profilePic: File?,
-        country_id:String,
+        country_id: String,
         city_id :String
 
     ): Response<SuccessResponse> {

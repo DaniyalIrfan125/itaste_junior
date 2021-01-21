@@ -56,6 +56,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     private val countriesList = arrayListOf<GetAllCountriesData>()
     private val citiesList = arrayListOf<GetAllCitiesData>()
     var countryid: String = "0"
+    var selectedCountryId: String = "0"
     var cityid: String = "0"
 
     var compressedProfileImageFile: File? = null
@@ -179,14 +180,15 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
+                    countriesList.clear()
                     countriesList.addAll(it.data!!.data)
                     countrySpinnerAdapter.notifyDataSetChanged()
 
                     for (index in 0 until countriesList.size) {
                         if (countriesList[index].select) {
-                            countryid = countriesList[index].id
+                           var countryidL = countriesList[index].id
                             sp_vendorCountry.setSelection(index)
-                            mViewModel.getAllCities(countryid.toInt())
+                            mViewModel.getAllCities(countryidL.toInt())
 
                             return@Observer
                         }
@@ -210,6 +212,15 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                     citiesList.clear()
                     citiesList.addAll(it.data!!.data)
                     mViewDataBinding.spVendorCity.adapter = ProfileSpinnerAdapter(citiesList)
+
+                    for (index in 0 until citiesList.size) {
+                        if (citiesList[index].select) {
+                            cityid = citiesList[index].id
+                            sp_vendorCity.setSelection(index)
+
+                            return@Observer
+                        }
+                    }
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -245,7 +256,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                                                     et_country_code.fullNumberWithPlus,
                                                     et_vendorEmail.text.toString(),
                                                     profileImageFile!!,
-                                                    countryid,
+                                                    selectedCountryId,
                                                     cityid
                                                 )
                                             }else{
@@ -263,7 +274,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                                                 et_country_code.fullNumberWithPlus,
                                                 et_vendorEmail.text.toString(),
                                                 null,
-                                                countryid,
+                                                selectedCountryId,
                                                 cityid
                                             )
                                         }
@@ -378,8 +389,9 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                 ) {
                     if (position > 0) {
                         countriesList[position].id
-                        mViewModel.getAllCities(countriesList[position].id.toInt())
-                        countryid = countriesList[position].id
+                        selectedCountryId = countriesList[position].id
+                        mViewModel.getAllCities(selectedCountryId.toInt())
+
                     }
                 }
             }

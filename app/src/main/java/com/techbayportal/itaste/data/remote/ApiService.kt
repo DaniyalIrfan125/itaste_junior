@@ -194,7 +194,7 @@ interface ApiService {
         @Query("email") email : String,
         @Part profilePic : MultipartBody.Part,
         @Query("country_id") country_id : String,
-        @Query("city_id") city_id  : String
+        @Query("city_id") city_id : String
 
     ): Response<SuccessResponse>
 
@@ -209,7 +209,7 @@ interface ApiService {
         @Query("phone") phone : String,
         @Query("email") email : String,
         @Query("country_id") country_id : String,
-        @Query("city_id") city_id  : String
+        @Query("city_id") city_id : String
     ): Response<SuccessResponse>
 
     @FormUrlEncoded
