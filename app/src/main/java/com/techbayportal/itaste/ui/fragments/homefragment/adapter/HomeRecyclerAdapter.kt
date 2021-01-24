@@ -86,7 +86,6 @@ class HomeRecyclerAdapter(private val list: List<Int>, val context: Context) :
                 }
             })
 
-
             recyclerView!!.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 

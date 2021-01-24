@@ -241,12 +241,20 @@ class MainRepository @Inject constructor(
         return apiService.getVendorProfileDetails("application/json",auth, vendorId)
     }
 
-    suspend fun setFollow(auth: String, vendorId: Int): Response<SuccessResponse> {
+    suspend fun setFollow(auth: String, vendorId: Int): Response<FollowResponse> {
         return apiService.setFollow("application/json",auth, vendorId)
     }
 
     suspend fun reportBug(auth: String, message: String): Response<SuccessResponse> {
         return apiService.reportBug("application/json",auth, message)
+    }
+
+    suspend fun getAllBlockedUsers(auth: String): Response<GetAllBlockedUserResponse> {
+        return apiService.getAllBlockedUsers("application/json",auth)
+    }
+
+    suspend fun blockVendor(auth: String, vendorId: Int): Response<BlockVendorResponse> {
+        return apiService.blockVendor("application/json",auth, vendorId)
     }
 
 }

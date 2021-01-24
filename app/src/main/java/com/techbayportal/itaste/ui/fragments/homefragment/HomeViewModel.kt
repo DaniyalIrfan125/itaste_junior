@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.models.BlockVendorResponse
 import com.techbayportal.itaste.data.models.GetAllCountriesResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
@@ -21,7 +22,7 @@ class HomeViewModel @ViewModelInject constructor(
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
-    val onHomeConfigButtonClicked = SingleLiveEvent<Any>()
+     val  onHomeConfigButtonClicked = SingleLiveEvent<Any>()
     val tempClicked = SingleLiveEvent<Any>()
 
     val _getAllCountriesResponse = MutableLiveData<Resource<GetAllCountriesResponse>>()
@@ -31,6 +32,10 @@ class HomeViewModel @ViewModelInject constructor(
     val _updateUserLocationResponse = MutableLiveData<Resource<GetAllCountriesResponse>>()
     val updateUserLocationResponse: LiveData<Resource<GetAllCountriesResponse>>
         get() = _updateUserLocationResponse
+
+    val _blockAccountResponse = MutableLiveData<Resource<BlockVendorResponse>>()
+    val blockAccountResponse: LiveData<Resource<BlockVendorResponse>>
+        get() = _blockAccountResponse
 
     fun onHomeConfigButtonClicked() {
         /*if(loginSession != null){
@@ -85,6 +90,34 @@ class HomeViewModel @ViewModelInject constructor(
                     }
                 }
             } else _updateUserLocationResponse.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
+    fun hitBlockAccountApi(vendorId: Int) {
+        viewModelScope.launch {
+            _blockAccountResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.blockVendor("Bearer ${loginSession!!.data.access_token}", vendorId).let {
+                        if (it.isSuccessful) {
+                            _blockAccountResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _blockAccountResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _blockAccountResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _blockAccountResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _blockAccountResponse.postValue(Resource.error("No Internet Connection", null))
         }
     }
 }

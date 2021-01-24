@@ -3,11 +3,14 @@ package com.techbayportal.itaste.ui.fragments.profilefragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
@@ -22,7 +25,9 @@ import com.techbayportal.itaste.ui.fragments.signupconfigurationsfragment.adapte
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_changepasswordfragment.*
 import kotlinx.android.synthetic.main.layout_profilefragment.*
+import java.lang.Exception
 
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewModel>() {
@@ -38,6 +43,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
 
     val postsList = ArrayList<PostDetailData>()
     private lateinit var postsRecyclerAdapter: PostsRecyclerAdapter
+    var isFallowing :Boolean = false
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
@@ -45,13 +51,16 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
-        mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
+       // mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
+        mViewModel.hitGetVendorProfileDetails(31)
+       // mViewModel.hitSetFollowApi(31)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mView = view
         initializing()
+        //isFallowingVendor(isFallowing)
 
         if (this::vendorProfileDetailData.isInitialized) {
             setData(vendorProfileDetailData)
@@ -145,7 +154,9 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    Toast.makeText(requireContext(), "Follow", Toast.LENGTH_SHORT).show()
+                    isFallowing = it.data!!.data.follow
+                    isFallowingVendor(isFallowing)
+
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -154,17 +165,44 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
             }
         })
     }
+    private fun isFallowingVendor(isFallowing :Boolean){
+        if(isFallowing){
+            Toast.makeText(requireContext(), "IS Following: $isFallowing", Toast.LENGTH_SHORT).show()
+            btn_follow.text = getString(R.string.following)
+            btn_follow.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.btn_direct_message_curve)
+        }else{
+            Toast.makeText(requireContext(), "IS Following: $isFallowing", Toast.LENGTH_SHORT).show()
+            btn_follow.text = getString(R.string.follow)
+            btn_follow.background =
+                ContextCompat.getDrawable(requireContext(), R.drawable.btn_orange_curve_profile)
+        }
+    }
 
     private fun setData(vendorProfileDetailData: VendorProfileDetailData){
-        Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage)
-        //tv_profileName.text = vendorProfileDetailData.
-        tv_details.text = vendorProfileDetailData.bio
-        tv_postCounts.text = vendorProfileDetailData.total_post.toString()
-        tv_likesCount.text = vendorProfileDetailData.total_likes.toString()
-        tv_followersCount.text = vendorProfileDetailData.total_followers.toString()
-        if(!vendorProfileDetailData.posts.isNullOrEmpty()){
-            postsList.addAll(vendorProfileDetailData.posts)
-            postsRecyclerAdapter.notifyDataSetChanged()
+        try {
+            Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage , object :Callback{
+                override fun onSuccess() {
+                    spinKit.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+                    Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
+                    spinKit.visibility = View.GONE
+                }
+
+            })
+            tv_vendorUserName.text = vendorProfileDetailData.username
+            tv_profileName.text = vendorProfileDetailData.first_name + vendorProfileDetailData.last_name
+            tv_details.text = vendorProfileDetailData.bio
+            tv_postCounts.text = vendorProfileDetailData.total_post.toString()
+            tv_likesCount.text = vendorProfileDetailData.total_likes.toString()
+            tv_followersCount.text = vendorProfileDetailData.total_followers.toString()
+            if(!vendorProfileDetailData.posts.isNullOrEmpty()){
+                postsList.addAll(vendorProfileDetailData.posts)
+                postsRecyclerAdapter.notifyDataSetChanged()
+            }
+        } catch (e: Exception) {
         }
 
     }

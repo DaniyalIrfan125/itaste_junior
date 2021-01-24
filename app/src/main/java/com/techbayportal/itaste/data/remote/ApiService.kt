@@ -259,7 +259,7 @@ interface ApiService {
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
         @Field("vendor_id") vendor_id: Int
-    ): Response<SuccessResponse>
+    ): Response<FollowResponse>
 
     @FormUrlEncoded
     @POST("report/bug")
@@ -268,6 +268,22 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Field("message") message: String
     ): Response<SuccessResponse>
+
+
+    @GET("get-block-users")
+    suspend fun getAllBlockedUsers(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetAllBlockedUserResponse>
+
+
+    @FormUrlEncoded
+    @POST("vendor/block")
+    suspend fun blockVendor(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Field("vendor_id") vendor_id: Int
+    ): Response<BlockVendorResponse>
 
 
 

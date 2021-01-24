@@ -38,6 +38,7 @@
                     android:layout_marginStart="@dimen/_15sdp"/>
 
                 <TextView
+                    android:id="@+id/tv_vendorUserName"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -104,6 +105,15 @@
                         app:strokeColor="@color/colorWhite"
 
                         app:strokeWidth="@dimen/_1sdp" />
+
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/spinKit"
+                        style="@style/SpinKitView.Large.Pulse"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        app:SpinKit_Color="@color/colorOrange" />
 
                     <RelativeLayout
                         android:layout_width="@dimen/_20sdp"
@@ -297,7 +307,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:lineSpacingExtra="@dimen/_3sdp"
                             android:text="@string/direct_message"
-                            android:textAllCaps="true"
+                            android:textAllCaps="false"
                             android:textColor="@color/colorBlack"
                             android:textSize="14sp">
 
@@ -313,7 +323,7 @@
                         app:mrl_rippleColor="@color/colorLightOrange">
 
                         <Button
-                            android:id="@+id/btn_changePassword"
+                            android:id="@+id/btn_follow"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="6dp"
@@ -324,7 +334,7 @@
                             android:fontFamily="@font/roboto_regular"
                             android:lineSpacingExtra="@dimen/_3sdp"
                             android:text="@string/follow"
-                            android:textAllCaps="true"
+                            android:textAllCaps="false"
                             android:textColor="@color/colorBlack"
                             android:textSize="14sp"
                             android:onClick="@{()->viewModel.onFollowButtonClicked()}">

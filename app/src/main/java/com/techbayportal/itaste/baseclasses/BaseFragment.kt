@@ -20,6 +20,7 @@ import androidx.lifecycle.asLiveData
 import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
+import com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDialogFragment
 import com.techbayportal.itaste.utils.DialogClass
 
 

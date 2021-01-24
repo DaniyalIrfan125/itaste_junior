@@ -8,6 +8,7 @@ import android.util.Patterns
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.core.view.isNotEmpty
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -237,6 +238,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
         if (et_vendorFirstName.text.isNotEmpty()) {
             if (et_vendorLastName.text.isNotEmpty()) {
                 if (et_vendorBio.text.isNotEmpty()) {
+                 //   if (et_country_code.isNotEmpty()) {
                     if (et_vendorPhoneNumber.text.isNotEmpty()) {
                         if (et_vendorEmail.text.isNotEmpty()) {
                             if (Patterns.EMAIL_ADDRESS.matcher(et_vendorEmail.text.toString())
@@ -294,6 +296,11 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                             tv_error_vendorEmail.text = getString(R.string.PleasewriteEmail)
                             tv_error_vendorEmail.visibility = View.VISIBLE
                         }
+                   /* } else {
+                        //et_country_code.setDefaultCountryUsingNameCode("AE")
+                        //tv_error_vendorPhoneNumber.text = getString(R.string.selectCode)
+                       // tv_error_vendorPhoneNumber.visibility = View.VISIBLE
+                    }*/
 
                     } else {
                         tv_error_vendorPhoneNumber.text = getString(R.string.writephone)
@@ -398,18 +405,21 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     }
 
     private fun setData(vendorPersonalProfileResponseData: VendorPersonalProfileResponseData) {
-        tv_vendorName.text =
-            "${vendorPersonalProfileResponseData.first_name} ${vendorPersonalProfileResponseData.last_name}"
-        et_vendorFirstName.setText(vendorPersonalProfileResponseData.first_name)
-        et_vendorLastName.setText(vendorPersonalProfileResponseData.last_name)
-        et_vendorBio.setText(vendorPersonalProfileResponseData.bio)
-        et_country_code.fullNumber = vendorPersonalProfileResponseData.phone
-        sharedViewModel.verifyOtpHoldPhoneNumber =
-            vendorPersonalProfileResponseData.phone
-        et_vendorEmail.setText(vendorPersonalProfileResponseData.email)
-        Picasso.get()
-            .load(vendorPersonalProfileResponseData.profile_pic).fit().centerCrop()
-            .into(siv_vendorProfilePic)
+        try {
+            tv_vendorName.text =
+                "${vendorPersonalProfileResponseData.first_name} ${vendorPersonalProfileResponseData.last_name}"
+            et_vendorFirstName.setText(vendorPersonalProfileResponseData.first_name)
+            et_vendorLastName.setText(vendorPersonalProfileResponseData.last_name)
+            et_vendorBio.setText(vendorPersonalProfileResponseData.bio)
+            et_country_code.fullNumber = vendorPersonalProfileResponseData.phone
+            sharedViewModel.verifyOtpHoldPhoneNumber =
+                vendorPersonalProfileResponseData.phone
+            et_vendorEmail.setText(vendorPersonalProfileResponseData.email)
+            Picasso.get()
+                .load(vendorPersonalProfileResponseData.profile_pic).fit().centerCrop()
+                .into(siv_vendorProfilePic)
+        } catch (e: Exception) {
+        }
     }
 
     private fun setCountriesData() {

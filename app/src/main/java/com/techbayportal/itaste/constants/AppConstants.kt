@@ -41,6 +41,36 @@ object AppConstants {
         }
     }
 
+    @IntDef(
+        HomeItemBottomSheet.BLOCK_VENDOR
+    )
+    annotation class HomeItemBottomSheet {
+        companion object {
+            const val BLOCK_VENDOR = 1
+
+        }
+    }
+
+    @IntDef(
+        ReportBugDialog.CANCEL,
+        ReportBugDialog.SUBMIT
+    )
+    annotation class ReportBugDialog {
+        companion object {
+            const val CANCEL = 1
+            const val SUBMIT = 2
+
+        }
+    }
+
+   /* @StringDef(ReportBugDialogFragment.REPORT_BUG_MESSAGE)
+    annotation class ReportBugDialogFragment {
+        companion object {
+            const val REPORT_BUG_MESSAGE = "Message"
+        }
+    }*/
+
+
     @StringDef(DbConfiguration.DB_NAME)
     annotation class DbConfiguration {
         companion object {
@@ -72,7 +102,7 @@ object AppConstants {
             const val HOME_RV = "home_rv"
             const val HOME_RV_IMG_DOTS = "home_rv_img_dots"
             const val HOME_RV_CHILD = "home_rv_child"
-            const val BLOCKED_ACCOUNT_RV_UNBLOCK_BUTTON = "blocked_account_rv_unblock_button"
+            const val BLOCKED_ACCOUNT_RV_UNBLOCK_BUTTON = "unBlocked_account_rv_button"
             const val NOTIFICATION_ITEM = "notification_item"
         }
     }

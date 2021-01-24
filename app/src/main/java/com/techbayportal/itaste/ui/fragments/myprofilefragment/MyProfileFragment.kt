@@ -12,6 +12,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
@@ -19,6 +20,7 @@ import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentMyProfileBinding
 import com.techbayportal.itaste.ui.activities.signupactivity.SignupActivity
+import com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDialogFragment
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,6 +43,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
     lateinit var dataStoreProvider: DataStoreProvider
+    lateinit var reportBugDialogFragment: ReportBugDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +76,22 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         }
     }
 
+    override fun subscribeToShareLiveData() {
+        super.subscribeToShareLiveData()
+
+        sharedViewModel.reportBugButtonsClicked.observe(this, Observer {
+            if(it == AppConstants.ReportBugDialog.SUBMIT){
+                if(it != -1){
+                   // Toast.makeText(requireContext(), "Submit Clicked", Toast.LENGTH_SHORT).show()
+
+                    mViewModel.hitReportBugApi(sharedViewModel.bugReportMessage)
+                }
+                sharedViewModel.reportBugButtonsClicked.value = -1
+            }
+        })
+
+    }
+
     private fun subscribeToObserveDarkModeDataStore() {
 
         //observing data from data store and showing
@@ -91,20 +110,34 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-
-                   // Navigation.findNavController(tv_logout).navigate(R.id.action_myProfileFragment_to_welcomefragment)
                     /*GlobalScope.launch {
                         dataStoreProvider.saveUserObj(null!!)
                     }*/
-
 
                     LoginSession.getInstance().setLoginResponse(null)
                     GlobalScope.launch {
                         dataStoreProvider.clearUserObj()
                     }
-
                     navigateToLoginScreen()
-                    Toast.makeText(requireContext(), "Logout", Toast.LENGTH_SHORT).show()
+
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode )
+                }
+            }
+        })
+
+        mViewModel.getReportBugResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+
+                    Toast.makeText(requireContext(), "Report Submitted", Toast.LENGTH_SHORT).show()
+                   // reportBugDialogFragment.dismiss()
 
                 }
                 Resource.Status.ERROR -> {
@@ -177,11 +210,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
 
 
         })
-
-
-
-
     }
+
+
 
     private fun navigateToLoginScreen() {
         val intent = Intent(activity, SignupActivity::class.java)

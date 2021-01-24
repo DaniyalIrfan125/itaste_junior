@@ -252,16 +252,19 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
     }
 
     private fun setData(userPersonalProfileResponseData: UserPersonalProfileResponseData) {
-        tv_userName.text =
-            "${userPersonalProfileResponseData.first_name} ${userPersonalProfileResponseData.last_name}"
-        et_userFirstName.setText(userPersonalProfileResponseData.first_name)
-        et_userLastName.setText(userPersonalProfileResponseData.last_name)
-        et_country_code.fullNumber = userPersonalProfileResponseData.phone
-        sharedViewModel.verifyOtpHoldPhoneNumber = userPersonalProfileResponseData.phone
-        et_userUserEmail.setText(userPersonalProfileResponseData.email)
-        Picasso.get()
-            .load(userPersonalProfileResponseData.profile_pic).fit().centerCrop()
-            .into(siv_userProfilePic)
+        try {
+            tv_userName.text =
+                "${userPersonalProfileResponseData.first_name} ${userPersonalProfileResponseData.last_name}"
+            et_userFirstName.setText(userPersonalProfileResponseData.first_name)
+            et_userLastName.setText(userPersonalProfileResponseData.last_name)
+            et_country_code.fullNumber = userPersonalProfileResponseData.phone
+            sharedViewModel.verifyOtpHoldPhoneNumber = userPersonalProfileResponseData.phone
+            et_userUserEmail.setText(userPersonalProfileResponseData.email)
+            Picasso.get()
+                .load(userPersonalProfileResponseData.profile_pic).fit().centerCrop()
+                .into(siv_userProfilePic)
+        } catch (e: Exception) {
+        }
 
     }
 

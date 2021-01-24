@@ -29,17 +29,23 @@ class SharedViewModel : BaseViewModel() {
     //var isSelectedCountryId : MutableLiveData<Int>? = null
 //    val isSelectedCountryId: LiveData<Int>
 
+
     val _isSelectedCountryId = MutableLiveData<Int>()
     val isSelectedCountryId: LiveData<Int>
         get() = _isSelectedCountryId
 
     val _homeConfigBottomSheetClickId = MutableLiveData<Int>()
+    val homeItemBottomSheetClickId = MutableLiveData<Int>()
    // val homeConfigBottomSheetClickId: LiveData<Int>
        // get() = _homeConfigBottomSheetClickId
 
     val _countriesList = MutableLiveData<GetAllCountriesResponse>()
     val countriesList: LiveData<GetAllCountriesResponse>
         get() = _countriesList
+
+    val reportBugButtonsClicked = MutableLiveData<Int>()
+    var bugReportMessage = ""
+    //var bugReportMessage = MutableLiveData<String>()
 
     var userUpdatedCountryId : Int = 0
 

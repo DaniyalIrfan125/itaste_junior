@@ -5,10 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
-import com.techbayportal.itaste.data.models.SuccessResponse
-import com.techbayportal.itaste.data.models.UserPersonalProfileResponse
-import com.techbayportal.itaste.data.models.VendorProfileDetailData
-import com.techbayportal.itaste.data.models.VendorProfileDetailsResponse
+import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
 import com.techbayportal.itaste.utils.LoginSession
@@ -31,12 +28,8 @@ class ProfileViewModel @ViewModelInject constructor(
     val getVendorProfileDetailResponse: LiveData<Resource<VendorProfileDetailsResponse>>
         get() = _getVendorProfileDetailResponse
 
-    val _getReportBugResponse = MutableLiveData<Resource<SuccessResponse>>()
-    val getReportBugResponse: LiveData<Resource<SuccessResponse>>
-        get() = _getReportBugResponse
-
-    val _getSetFollowResponse = MutableLiveData<Resource<SuccessResponse>>()
-    val getSetFollowResponse: LiveData<Resource<SuccessResponse>>
+    val _getSetFollowResponse = MutableLiveData<Resource<FollowResponse>>()
+    val getSetFollowResponse: LiveData<Resource<FollowResponse>>
         get() = _getSetFollowResponse
 
     fun onBackButtonClicked() {
@@ -80,33 +73,7 @@ class ProfileViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitReportBugApi(message : String) {
-        viewModelScope.launch {
-            _getReportBugResponse.postValue(Resource.loading(null))
-            if (networkHelper.isNetworkConnected()) {
-                try {
-                    mainRepository.reportBug("Bearer ${loginSession!!.data.access_token}", message).let {
-                        if (it.isSuccessful) {
-                            _getReportBugResponse.postValue(Resource.success(it.body()!!))
-                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
-                            _getReportBugResponse.postValue(Resource.error(it.message(), null))
-                        } else {
-                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
-                            _getReportBugResponse.postValue(
-                                Resource.error(
-                                    extractErrorMessage(
-                                        errorMessagesJson
-                                    ), null
-                                )
-                            )
-                        }
-                    }
-                } catch (e: Exception) {
-                    _getReportBugResponse.postValue(Resource.error("" + e.message, null))
-                }
-            } else _getReportBugResponse.postValue(Resource.error("No Internet Connection", null))
-        }
-    }
+
 
     fun hitSetFollowApi(vendorId : Int) {
         viewModelScope.launch {

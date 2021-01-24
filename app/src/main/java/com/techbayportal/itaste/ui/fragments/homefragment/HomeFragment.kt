@@ -19,16 +19,15 @@ import com.techbayportal.itaste.databinding.LayoutHomefragmentBinding
 import com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment
 import com.techbayportal.itaste.ui.fragments.homefragment.adapter.HomeRecyclerAdapter
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
+import com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment.HomeItemBottomSheetFragment
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
-import com.techbayportal.itaste.utils.SpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.*
 import kotlinx.android.synthetic.main.layout_homefragment.*
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , HomeRvClickListener {
+class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), HomeRvClickListener {
 
     override val layoutId: Int
         get() = R.layout.layout_homefragment
@@ -37,15 +36,15 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var mView :View
+    lateinit var mView: View
     val bottomSheet = HomeConfigurationBottomSheetFragment()
+    private val homeItemBottomSheet = HomeItemBottomSheetFragment()
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
-    lateinit var homerRecyclerAdpater : HomeRecyclerAdapter
+    lateinit var homerRecyclerAdpater: HomeRecyclerAdapter
 
     lateinit var dataStoreProvider: DataStoreProvider
     val countriesList = ArrayList<GetAllCountriesData>()
-
 
 
     override fun subscribeToNavigationLiveData() {
@@ -75,7 +74,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         subscribeToObserveDarkActivation()
         sharedViewModel.test = true
         mView = view
-       // mViewModel.loginSession!!.data.username
+        // mViewModel.loginSession!!.data.username
         initilizing()
     }
 
@@ -112,52 +111,43 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         super.subscribeToShareLiveData()
 
         sharedViewModel._homeConfigBottomSheetClickId.observe(this, Observer {
-            if(it == AppConstants.HomeConfigBottomSheet.SETTINGS){
+            if (it == AppConstants.HomeConfigBottomSheet.SETTINGS) {
                 if (it != -1) {
-                    //call api to select country
-                    Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
-                   // bottomSheet.dismiss()
-                    if(this::mView.isInitialized){
-                        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_settingsFragment)
+                    // bottomSheet.dismiss()
+                    if (this::mView.isInitialized) {
+                        Navigation.findNavController(mView)
+                            .navigate(R.id.action_homeFragment_to_settingsFragment)
                     }
 
 
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
-            }
-            else if(it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION){
+            } else if (it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION) {
                 if (it != -1) {
                     //call api to select country
-                  //  Toast.makeText(context, "Update Loc: ${sharedViewModel.userUpdatedCountryId}", Toast.LENGTH_SHORT).show()
+                    //  Toast.makeText(context, "Update Loc: ${sharedViewModel.userUpdatedCountryId}", Toast.LENGTH_SHORT).show()
                     mViewModel.hitUpdateUserLocationFromHome(sharedViewModel.userUpdatedCountryId)
 
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
             }
-            /*else if(it == AppConstants.HomeConfigBottomSheet.TURN_OFF_NOTIFICATION){
-                    if (it != -1) {
-                        //call api to select country
-                        Toast.makeText(context, "Notify 2", Toast.LENGTH_SHORT).show()
 
-                        sharedViewModel._isSelectedCountryId?.value = -1
-                    }
-                }*/
-            /*else if(it == AppConstants.HomeConfigBottomSheet.LOGOUT){
-                    if (it != -1) {
-                        //call api to select country
-                        Toast.makeText(context, "Logout 2", Toast.LENGTH_SHORT).show()
+        })
 
-                        sharedViewModel._isSelectedCountryId?.value = -1
-                    }
-                }*/
-
+        sharedViewModel.homeItemBottomSheetClickId.observe(this, Observer {
+            if (it == AppConstants.HomeItemBottomSheet.BLOCK_VENDOR) {
+                if (it != -1) {
+                    mViewModel.hitBlockAccountApi(31)
+                    sharedViewModel.homeItemBottomSheetClickId.value = -1
+                }
+            }
         })
     }
 
 
     //Home Screen RecyclearViews Items Clicks
-    override fun onItemClickListener(type : String) {
-        when(type){
+    override fun onItemClickListener(type: String) {
+        when (type) {
             AppConstants.RecyclerViewKeys.HOME_RV -> {
                 Navigation.findNavController(img_dots)
                     .navigate(R.id.action_homeFragment_to_profileFragment)
@@ -172,6 +162,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
             }
         }
     }
+
     override fun subscribeToNetworkLiveData() {
 
         mViewModel.getCountriesResponse.observe(this, Observer {
@@ -203,7 +194,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
 
-                   // Snackbar.make(requireView(), "Country Updated" , Snackbar.LENGTH_SHORT).show()
+                    // Snackbar.make(requireView(), "Country Updated" , Snackbar.LENGTH_SHORT).show()
                     //hit again to refresh data
                     mViewModel.hitGetAllCountriesForHome()
                 }
@@ -216,6 +207,26 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
         })
 
 
+        mViewModel.blockAccountResponse.observe(this, Observer {
+
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    Toast.makeText(requireContext(), "Vendor Blocked", Toast.LENGTH_SHORT).show()
+                   // Snackbar.make(requireView(), "Vendor Blocked", Snackbar.LENGTH_SHORT).show()
+                    //homeItemBottomSheet.dismiss()
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+
     }
 
     override fun onChildItemClick(position: Int) {
@@ -227,9 +238,9 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>() , 
 
         //observing data from data store and showing
         dataStoreProvider.darkModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
-          //  switch_darkMode.isChecked = it
+            //  switch_darkMode.isChecked = it
             if (it != null) {
-                if(it == true){
+                if (it == true) {
                     iv_icon.setImageDrawable(resources.getDrawable(R.drawable.app_icon_dark))
                 }
             }

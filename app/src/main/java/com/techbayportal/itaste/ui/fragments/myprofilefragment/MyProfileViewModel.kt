@@ -25,6 +25,10 @@ class MyProfileViewModel @ViewModelInject constructor(
     val logoutResponse: LiveData<Resource<SuccessResponse>>
         get() = _logoutResponse
 
+    val _getReportBugResponse = MutableLiveData<Resource<SuccessResponse>>()
+    val getReportBugResponse: LiveData<Resource<SuccessResponse>>
+        get() = _getReportBugResponse
+
 
 
     val onBackButtonClicked = SingleLiveEvent<Any>()
@@ -96,6 +100,34 @@ class MyProfileViewModel @ViewModelInject constructor(
                     _logoutResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _logoutResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    fun hitReportBugApi(message : String) {
+        viewModelScope.launch {
+            _getReportBugResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.reportBug("Bearer ${loginSession!!.data.access_token}", message).let {
+                        if (it.isSuccessful) {
+                            _getReportBugResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _getReportBugResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _getReportBugResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getReportBugResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _getReportBugResponse.postValue(Resource.error("No Internet Connection", null))
         }
     }
 

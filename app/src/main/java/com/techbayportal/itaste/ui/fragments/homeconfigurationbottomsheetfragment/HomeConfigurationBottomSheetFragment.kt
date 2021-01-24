@@ -74,7 +74,6 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
            // Navigation.findNavController(mView).navigate(R.id.action_homeConfigurationBottomSheetFragment_to_settingsFragment)
             dismiss()
             sharedViewModel._homeConfigBottomSheetClickId.postValue(AppConstants.HomeConfigBottomSheet.SETTINGS)
-            Toast.makeText(requireContext(), "settings 1", Toast.LENGTH_SHORT).show()
 
         })
         tv_turnOffNotifications.setOnClickListener(View.OnClickListener {
