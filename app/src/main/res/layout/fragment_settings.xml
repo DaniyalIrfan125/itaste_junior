@@ -25,7 +25,8 @@
             android:id="@+id/img_back"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
             <ImageView
                 app:tint="@color/mainIconColor"
@@ -55,7 +56,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
         android:layout_below="@+id/relative_top">
 
         <RelativeLayout
@@ -207,6 +209,7 @@
                     </View>
 
                     <LinearLayout
+                        android:onClick="@{()->viewModel.onContactUsClicked()}"
                         android:clickable="true"
                         android:foreground="?attr/selectableItemBackground"
                         android:layout_width="match_parent"

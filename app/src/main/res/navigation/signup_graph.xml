@@ -40,12 +40,19 @@
         android:name="com.techbayportal.itaste.ui.fragments.otpverificationfragment.OtpverificationFragment"
         android:label="OtpverificationFragment" >
         <action
-            android:id="@+id/action_otpverificationFragment_to_changePasswordFragment"
+            android:id="@+id/action_otpverificationFragment_to_signupConfigurationsFragment"
+            app:destination="@id/signupConfigurationsFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"
-            app:destination="@id/changePasswordFragment" />
+            app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_otpverificationFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
@@ -56,17 +63,20 @@
         android:name="com.techbayportal.itaste.ui.fragments.signupfragment.SignUpFragment"
         android:label="SignUpFragment" >
         <action
-            android:id="@+id/action_signUpFragment_to_signupConfigurationsFragment"
-            app:enterAnim="@anim/enter_from_right"
-            app:exitAnim="@anim/exit_to_left"
-            app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right"
-            app:destination="@id/signupConfigurationsFragment" />
+            android:id="@+id/action_signUpFragment_to_otpverificationFragment"
+            app:destination="@id/otpverificationFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_signUpVendorFragment"
+            app:destination="@id/signUpVendorFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpVendorFragment"
         android:name="com.techbayportal.itaste.ui.fragments.signupvendorfragment.SignUpVendorFragment"
-        android:label="SignUpVendorFragment" />
+        android:label="SignUpVendorFragment" >
+        <action
+            android:id="@+id/action_signUpVendorFragment_to_otpverificationFragment2"
+            app:destination="@id/otpverificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signupConfigurationsFragment"
         android:name="com.techbayportal.itaste.ui.fragments.signupconfigurationsfragment.SignupConfigurationsFragment"

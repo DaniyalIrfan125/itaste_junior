@@ -4,359 +4,651 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.techbayportal.itaste.ui.fragments.vendorprofilefragment.VendorProfileViewModel" />
     </data>
 
-<RelativeLayout
-    android:background="@color/mainBackground"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.vendorprofilefragment.VendorProfileFragment">
-
     <RelativeLayout
-        android:id="@+id/relative_top"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp">
-
-        <LinearLayout
-            android:id="@+id/img_back"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="match_parent"
-            android:gravity="center">
-
-            <ImageView
-                app:tint="@color/mainIconColor"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_centerVertical="true"
-                android:src="@drawable/icon_backarrow" />
-        </LinearLayout>
-
-    </RelativeLayout>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relative_top">
+        android:layout_height="match_parent"
+        android:background="@color/mainBackground"
+        tools:context=".ui.fragments.vendorprofilefragment.VendorProfileFragment">
 
         <RelativeLayout
+            android:id="@+id/relative_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/_50sdp">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/_50sdp"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/layout_circle_gray">
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/sivInfluancerImage"
-                        android:layout_width="@dimen/_75sdp"
-                        android:layout_height="@dimen/_75sdp"
-                        android:layout_margin="@dimen/_3sdp"
-                        android:elevation="@dimen/_3sdp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/icon_male_dp"
-                        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-                        tools:layout_editor_absoluteX="116dp"
-                        tools:layout_editor_absoluteY="61dp" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="center_horizontal"
-                    android:lineSpacingExtra="3sp"
-                    android:text="Ed Tamer"
-                    android:textColor="@color/titleTextColorBlack"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:gravity="center_horizontal"
-                    android:lineSpacingExtra="3sp"
-                    android:text="@string/change_profile_picture"
-                    android:textColor="@color/colorOrange"
-                    android:textSize="12sp" />
-
-                <LinearLayout
-                    android:id="@+id/linear"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_person" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1.4"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="name"
-                            android:textAllCaps="true"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_28sdp"
-                        android:layout_marginBottom="@dimen/_15sdp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="Ed Tamer"
-                        android:textColor="@color/titleTextColorBlack"
-                        android:textSize="12sp">
-
-                    </EditText>
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_person" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1.4"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="@string/user_name"
-                            android:textAllCaps="true"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_28sdp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="edyonline123"
-                        android:textColor="@color/titleTextColorBlack"
-                        android:textSize="12sp">
-
-                    </EditText>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_person" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1.4"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="@string/bio"
-                            android:textAllCaps="true"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_28sdp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="edyonline123"
-                        android:textColor="@color/titleTextColorBlack"
-                        android:textSize="12sp">
-
-                    </EditText>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_cart" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1.4"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="@string/phone_number"
-                            android:textAllCaps="true"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_28sdp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="edyonline123"
-                        android:textColor="@color/titleTextColorBlack"
-                        android:textSize="12sp">
-
-                    </EditText>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_cart" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1.4"
-                            android:fontFamily="@font/roboto_bold"
-                            android:text="@string/email"
-                            android:textAllCaps="true"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-
-                    </LinearLayout>
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_28sdp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="edyonline123"
-                        android:textColor="@color/titleTextColorBlack"
-                        android:textSize="12sp">
-
-                    </EditText>
-
-
-
-
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_backarrow"
+                    app:tint="@color/mainIconColor" />
             </LinearLayout>
+
         </RelativeLayout>
-    </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-
-        <com.balysv.materialripple.MaterialRippleLayout
-            android:id="@+id/rippleConfirm"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_20sdp"
-            app:mrl_rippleColor="@color/colorLightOrange">
+            android:layout_below="@+id/relative_top">
 
-            <Button
-                android:id="@+id/btn_confirm"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="@dimen/_6sdp"
-                android:background="@drawable/btn_curve_orange"
-                android:fontFamily="@font/roboto_bold"
-                android:lineSpacingExtra="@dimen/_3sdp"
-                android:text="@string/save_changes"
-                android:textAllCaps="true"
-                android:textColor="@color/colorBlack"
-                android:textSize="16sp">
+                android:layout_height="wrap_content">
 
-            </Button>
-        </com.balysv.materialripple.MaterialRippleLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/layout_circle_gray">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/siv_vendorProfilePic"
+                            android:layout_width="@dimen/_75sdp"
+                            android:layout_height="@dimen/_75sdp"
+                            android:layout_margin="@dimen/_3sdp"
+                            android:elevation="@dimen/_3sdp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/icon_profile"
+                            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                            tools:layout_editor_absoluteX="116dp"
+                            tools:layout_editor_absoluteY="61dp" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_vendorName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:gravity="center_horizontal"
+                        android:lineSpacingExtra="3sp"
+                        android:hint="Ben Harp"
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="center_horizontal"
+                        android:lineSpacingExtra="3sp"
+                        android:onClick="@{()->viewModel.onProfilePicChangeTextClicked()}"
+                        android:text="@string/change_profile_picture"
+                        android:textColor="@color/colorOrange"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_person"
+                                app:tint="@color/mainIconColor" />
 
 
-    </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="0dp"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/first_name"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
 
-</RelativeLayout>
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/et_vendorFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:imeOptions="actionNext"
+                            android:hint="@string/first_name"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="12sp">
+
+                        </EditText>
+
+                        <TextView
+                            android:id="@+id/tv_error_vendorFirstName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_person"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/last_name"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/et_vendorLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:imeOptions="actionNext"
+                            android:hint="@string/last_name"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="12sp">
+
+                        </EditText>
+
+                        <TextView
+                            android:id="@+id/tv_error_vendorLastName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+
+                        <!--<LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_person"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/user_name"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/et_vendorUserName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_25sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:imeOptions="actionNext"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="12sp">
+
+                        </EditText>
+
+                        <TextView
+                            android:id="@+id/tv_error_vendorUserName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />-->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_bio"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/bio"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/et_vendorBio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:imeOptions="actionNext"
+                            android:hint="@string/bio"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="12sp">
+
+                        </EditText>
+
+                        <TextView
+                            android:id="@+id/tv_error_vendorBio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/icon_call"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/phone_number"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                           <!-- <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:fontFamily="@font/roboto_light"
+                                android:text="@string/optional"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="10sp" />-->
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+
+
+                            <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+                                android:id="@+id/et_country_code"
+                                android:layout_width="@dimen/_40sdp"
+                                android:layout_height="@dimen/_22sdp"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
+                                android:fontFamily="@font/roboto_regular"
+                                android:gravity="bottom"
+                                android:paddingBottom="@dimen/_1sdp"
+                                android:paddingStart="@dimen/_2sdp"
+                                android:imeOptions="actionNext"
+                                app:ccp_backgroundColor="@color/mainBackground"
+                                app:ccp_dialogTextColor="@color/titleTextColorBlack"
+                                app:ccp_hideNameCode="true"
+                                app:ccp_keyboardAutoPopOnSearch="false"
+                                app:ccp_showFlag="false"
+                                app:ccp_textColor="@color/titleTextColorBlack"
+                                app:ccp_textFont="roboto_light.ttf"
+                                app:ccp_textSize="@dimen/_10sdp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1.2dp"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:background="@color/spinnerLinebg">
+
+                                </View>
+                            </LinearLayout>
+
+
+
+                            <EditText
+                                android:id="@+id/et_vendorPhoneNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_29sdp"
+                                android:fontFamily="@font/roboto_light"
+                                android:imeOptions="actionNext"
+                                android:inputType="phone"
+                                android:maxLength="14"
+                                android:singleLine="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="12sp">
+
+
+                            </EditText>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_error_vendorPhoneNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_10sdp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/email_profile"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="@font/roboto_bold"
+                                android:text="@string/email"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_3sdp"
+                                android:fontFamily="@font/roboto_light"
+                                android:text="@string/optional"
+                                android:textAllCaps="true"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="10sp" />
+
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/et_vendorEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:fontFamily="@font/roboto_light"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="12sp"
+                            android:hint="@string/abc_g_com">
+
+                        </EditText>
+
+                        <TextView
+                            android:id="@+id/tv_error_vendorEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_country"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            >
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.1">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_10sdp"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/icon_person"
+                                        app:tint="@color/mainIconColor" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="0dp"
+                                        android:fontFamily="@font/roboto_bold"
+                                        android:text="@string/country"
+                                        android:textAllCaps="true"
+                                        android:textColor="@color/titleTextColorBlack"
+                                        android:textSize="16sp" />
+
+
+                                </LinearLayout>
+
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:id="@+id/sp_vendorCountry"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:textColor="@color/titleTextColorBlack"
+                                    android:textColorHint="@color/titleTextColorBlack"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_error_vendorCountry"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_30sdp"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:textColor="@color/colorErrorRed"
+                                    android:textSize="12sp"
+                                    android:visibility="gone" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:orientation="vertical"
+                                android:id="@+id/ll_city"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.9">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_10sdp"
+                                        android:src="@drawable/icon_person"
+                                        android:layout_gravity="center"
+                                        app:tint="@color/mainIconColor" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto_bold"
+                                        android:text="@string/change_emirates"
+                                        android:textAllCaps="true"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:textColor="@color/titleTextColorBlack"
+                                        android:textSize="16sp" />
+
+
+                                </LinearLayout>
+
+                                <Spinner
+                                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_marginStart="@dimen/_20sdp"
+                                    android:id="@+id/sp_vendorCity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:fontFamily="@font/roboto_light"
+                                    android:textColor="@color/titleTextColorBlack"
+                                    android:textColorHint="@color/titleTextColorBlack"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_error_vendorCity"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_30sdp"
+                                    android:layout_marginTop="@dimen/_2sdp"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:textColor="@color/colorErrorRed"
+                                    android:textSize="12sp"
+                                    android:visibility="gone"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+
+                            <com.balysv.materialripple.MaterialRippleLayout
+                                android:id="@+id/rippleConfirm"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                app:mrl_rippleColor="@color/colorLightOrange">
+
+                                <Button
+                                    android:id="@+id/btn_confirm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_marginStart="6dp"
+                                    android:layout_marginTop="6dp"
+                                    android:layout_marginEnd="6dp"
+                                    android:layout_marginBottom="@dimen/_6sdp"
+                                    android:background="@drawable/btn_curve_orange"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:lineSpacingExtra="@dimen/_3sdp"
+                                    android:onClick="@{()->viewModel.onSaveChangesButtonClicked()}"
+                                    android:text="@string/save_changes"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/colorBlack"
+                                    android:textSize="16sp">
+
+                                </Button>
+                            </com.balysv.materialripple.MaterialRippleLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+
+
+    </RelativeLayout>
 
 </layout>

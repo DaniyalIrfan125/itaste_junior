@@ -12,11 +12,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/mainBackground">
+        <RelativeLayout
+            android:id="@+id/relative_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <LinearLayout
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onBackButtonClicked()}">
+
+                <ImageView
+                    app:tint="@color/mainIconColor"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_backarrow" />
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="@string/add_details"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="22sp">
+
+            </TextView>
+
+        </RelativeLayout>
 
         <ScrollView
             android:layout_width="match_parent"
             android:fillViewport="true"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relative_top">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -25,8 +63,9 @@
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:orientation="vertical">
 
-
                 <Spinner
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_50sdp"
                     android:id="@+id/spinner_country"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_37sdp"
@@ -34,10 +73,13 @@
                     android:background="@drawable/spinner_background"
                     android:fontFamily="@font/roboto_regular"
                     android:textColor="@color/titleTextColorBlack"
-                    android:textColorHint="@color/titleTextColorBlack" />
+                    android:textColorHint="@color/titleTextColorBlack"
+                   />
 
 
                 <Spinner
+                    android:paddingStart="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_50sdp"
                     android:id="@+id/spinner_city"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_37sdp"
@@ -84,15 +126,17 @@
                     android:textSize="16sp" />
 
                 <RadioGroup
-                    android:id="@+id/groupradio"
+                    android:id="@+id/rg_service_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation='vertical'>
+                    android:orientation="vertical"
+                    android:onClick="@{()->viewModel.onServiceTypeRadioButtonClicked()"
+                    >
 
                     <RadioButton
                         android:buttonTint="@color/colorOrange"
-                        android:id="@+id/radia_id1"
+                        android:id="@+id/rb_deliverable"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -103,7 +147,7 @@
 
                     <RadioButton
                         android:buttonTint="@color/colorOrange"
-                        android:id="@+id/radia_id4"
+                        android:id="@+id/rb_not_deliverable"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -124,6 +168,7 @@
 
 
                 <EditText
+                    android:id="@+id/et_vendorDescription"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_130sdp"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -150,7 +195,7 @@
                     app:mrl_rippleColor="@color/colorLightOrange">
 
                     <Button
-                        android:id="@+id/btn_login"
+                        android:id="@+id/btn_letsGo"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:layout_marginStart="6dp"
@@ -163,7 +208,9 @@
                         android:text="@string/let_s_go"
                         android:textAllCaps="true"
                         android:textColor="@color/colorBlack"
-                        android:textSize="16sp">
+                        android:textSize="16sp"
+                        android:onClick="@{()->viewModel.onSignUpVendorButtonClicked()}"
+                        >
 
                     </Button>
                 </com.balysv.materialripple.MaterialRippleLayout>

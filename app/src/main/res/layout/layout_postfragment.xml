@@ -217,9 +217,11 @@
                 android:lineSpacingExtra="3sp"
                 android:text="Add location"
                 android:textColor="@color/titleTextColorBlack"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone"/>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
                 android:id="@+id/recycler_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

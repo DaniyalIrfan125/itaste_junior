@@ -3,11 +3,14 @@ package com.techbayportal.itaste.baseclasses
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.observe
+import com.techbayportal.itaste.R
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.coroutines.GlobalScope
@@ -46,6 +49,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         super.onCreate(savedInstanceState)
         databindingWithViewModel()
 
+
     }
 
 
@@ -81,5 +85,24 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
         })
 
     }
+
+    /*private fun subscribeToObserveLanguageActivation() {
+        //observing data from data store and showing
+        dataStoreProvider.languageFlow.asLiveData().observe(this, androidx.lifecycle.Observer {
+
+            if (it != null) {
+                if (it == "ar") {
+                    tv_language_name.text = getString(R.string.english)
+
+
+                } else {
+                    tv_language_name.text = getString(R.string.arabic)
+                }
+            } else {
+                tv_language_name.text = getString(R.string.english)
+            }
+        })
+
+    }*/
 
 }

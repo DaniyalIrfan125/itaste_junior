@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment.HomeItemBottomSheetFragment" />
-    </data>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -137,20 +130,32 @@
             </View>
 
             <LinearLayout
-                android:id="@+id/ll_settings"
+                android:id="@+id/ll_blockVendor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 android:orientation="vertical">
 
-                <com.balysv.materialripple.MaterialRippleLayout
+                <TextView
+                    android:background="@color/bottomSheetButtonColor"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="@dimen/_32sdp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/block"
+                    android:textColor="@color/titleTextColorBlack"
+                    android:textSize="14sp" />
+
+               <!-- <com.balysv.materialripple.MaterialRippleLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:mrl_rippleColor="@color/titleTextColorBlack">
 
                     <Button
+
                         android:backgroundTint="@color/bottomSheetButtonColor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -159,7 +164,7 @@
                         android:textAllCaps="false"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp" />
-                </com.balysv.materialripple.MaterialRippleLayout>
+                </com.balysv.materialripple.MaterialRippleLayout>-->
             </LinearLayout>
         </LinearLayout>
 

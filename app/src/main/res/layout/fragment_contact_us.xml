@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsFragment" />
+            type="com.techbayportal.itaste.ui.fragments.contactusfragment.ContactUsViewModel" />
     </data>
 
 <RelativeLayout
@@ -25,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:onClick="@{()->viewModel.onBackButtonClicked()}"
             android:id="@+id/img_back"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
@@ -96,13 +97,26 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/et_userName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
                             android:hint="@string/ed_tamer"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
                             android:textColorHint="@color/titleTextColorBlack"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tv_errorUsername"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
 
 
                     </LinearLayout>
@@ -123,13 +137,27 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/et_userEmail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
                             android:hint="@string/email_123_com"
+                            android:imeOptions="actionNext"
+                            android:singleLine="true"
                             android:textColor="@color/titleTextColorBlack"
                             android:textColorHint="@color/titleTextColorBlack"
                             android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tv_error_userEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone" />
 
 
                     </LinearLayout>
@@ -150,18 +178,59 @@
                             android:textSize="16sp" />
 
                         <EditText
+                            android:id="@+id/et_usermessage"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:padding="@dimen/_10sdp"
                             android:layout_width="match_parent"
-                            android:layout_height="350dp"
+                            android:layout_height="300dp"
                             android:fontFamily="@font/roboto_light"
-                            android:text="@string/ask_us_anything"
+                            android:hint="@string/ask_us_anything"
                             android:gravity="start"
                             android:textColorHint="@color/titleTextColorBlack"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="14sp"
-                            android:background="@drawable/btn_curve_small">
+                            android:background="@drawable/ed_blackboundary_bug">
                         </EditText>
+
+                        <TextView
+                            android:id="@+id/tv_errorUserMessage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:textColor="@color/colorErrorRed"
+                            android:textSize="12sp"
+                            android:visibility="gone"/>
+
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:id="@+id/rippleConfirm"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="@dimen/_25sdp"
+                            android:layout_marginBottom="30dp"
+                            app:mrl_rippleColor="@color/colorLightOrange">
+
+                            <Button
+                                android:id="@+id/btn_send"
+                                android:onClick="@{()->viewModel.onConfirmButtonClicked()}"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="@dimen/_6sdp"
+                                android:background="@drawable/btn_curve_orange"
+                                android:fontFamily="@font/roboto_bold"
+                                android:lineSpacingExtra="@dimen/_3sdp"
+                                android:text="@string/send"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="16sp">
+
+                            </Button>
+                        </com.balysv.materialripple.MaterialRippleLayout>
 
 
                     </LinearLayout>
@@ -171,34 +240,6 @@
         </RelativeLayout>
     </ScrollView>
 
-    <com.balysv.materialripple.MaterialRippleLayout
-        android:id="@+id/rippleConfirm"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginEnd="@dimen/_20sdp"
-        android:layout_marginBottom="30dp"
-        app:mrl_rippleColor="@color/colorLightOrange">
 
-        <Button
-            android:id="@+id/btn_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="@dimen/_6sdp"
-            android:background="@drawable/btn_curve_orange"
-            android:fontFamily="@font/roboto_bold"
-            android:lineSpacingExtra="@dimen/_3sdp"
-            android:text="@string/send"
-            android:textAllCaps="true"
-            android:textColor="@color/colorBlack"
-            android:textSize="16sp">
-
-        </Button>
-    </com.balysv.materialripple.MaterialRippleLayout>
 </RelativeLayout>
 </layout>

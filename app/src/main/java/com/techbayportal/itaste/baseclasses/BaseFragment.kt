@@ -1,5 +1,6 @@
 package com.techbayportal.itaste.baseclasses
 
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Point
 import android.os.Bundle
@@ -8,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewParent
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.widget.NestedScrollView
 import androidx.databinding.DataBindingUtil
@@ -20,9 +20,8 @@ import androidx.lifecycle.asLiveData
 import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
-import kotlinx.android.synthetic.main.fragment_my_profile.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDialogFragment
+import com.techbayportal.itaste.utils.DialogClass
 
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
@@ -32,10 +31,13 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     private var mActivity: BaseActivity<*, *>? = null
     lateinit var mViewDataBinding: T
     protected lateinit var mViewModel: V
+    protected lateinit var loadingDialog: Dialog
 
     abstract val layoutId: Int
     abstract val viewModel: Class<V>
     abstract val bindingVariable: Int
+
+    var baseDarkMode : Boolean =false
 
     lateinit var dataStoreProviderBase: DataStoreProvider
 
@@ -63,11 +65,11 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
         dataStoreProviderBase = DataStoreProvider(requireContext())
+        loadingDialog = DialogClass.loadingDialog(requireContext())
 
 
         subscribeToShareLiveData()
         subscribeToNavigationLiveData()
-        subscribeToNetworkLiveData()
         subscribeToViewLiveData()
 
         subscribeToObserveDataStore()
@@ -81,9 +83,13 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         dataStoreProviderBase.darkModeFlow.asLiveData().observe(this, Observer {
             if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                sharedViewModel.isDarkMode
+                baseDarkMode = true
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                !sharedViewModel.isDarkMode
+                baseDarkMode = false
 
             }
         })
@@ -106,16 +112,14 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel = ViewModelProviders.of(this).get(viewModel)
-
-
         sharedViewModel = ViewModelProviders.of(requireActivity()).get(SharedViewModel::class.java)
+        loadingDialog = DialogClass.loadingDialog(requireContext())
     }
 
 
     open fun subscribeToShareLiveData() {
 
     }
-
     open fun subscribeToNetworkLiveData() {
         //All Network Tasks
     }

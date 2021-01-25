@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.techbayportal.itaste.ui.fragments.otpverificationfragment.OtpVerificationViewModel" />
-    </data>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/mainBackground">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,14 +13,13 @@
             android:orientation="vertical">
 
             <ImageView
-                app:tint="@color/mainIconColor"
                 android:id="@+id/btn_back"
                 android:layout_width="@dimen/_15sdp"
                 android:layout_height="@dimen/_15sdp"
                 android:layout_marginStart="@dimen/_15sdp"
                 android:layout_marginTop="@dimen/_25sdp"
-                android:onClick="@{()-> viewModel.onBackButtonClicked()}"
-                android:src="@drawable/icon_backarrow" />
+                android:src="@drawable/icon_backarrow"
+                app:tint="@color/mainIconColor" />
 
             <ImageView
                 android:layout_width="@dimen/_65sdp"
@@ -54,7 +48,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:letterSpacing="-0.01"
                 android:lineSpacingExtra="3sp"
-                android:text="@string/enter_the_5_digit_code_sent_to_email_sa_gmail_com"
+                android:text="@string/enter_the_4_digit_code_sent_to_email_sa_gmail_com"
                 android:textAlignment="center"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="14sp" />
@@ -66,13 +60,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_30sdp"
+                android:fontFamily="@font/roboto_bold"
                 android:inputType="number"
                 android:textColor="@color/titleTextColorBlack"
-                android:fontFamily="@font/roboto_bold"
                 app:OtpItemCount="4"
                 app:OtpLineColor="@color/titleTextColorBlack"
                 app:OtpViewType="line"
                 app:itemSpacing="10dp" />
+
 
             <TextView
                 android:id="@+id/tv_otpError"
@@ -85,13 +80,67 @@
                 android:textSize="12sp"
                 android:visibility="gone" />
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_35sdp"
+                android:layout_marginEnd="@dimen/_25sdp">
+
+                <LinearLayout
+                    android:id="@+id/ll_expiry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_otp_timer_clock"
+                        android:layout_width="17dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:src="@drawable/icon_otp_timer"
+                        app:tint="@color/otpTimerColor">
+
+                    </ImageView>
+
+                    <TextView
+                        android:id="@+id/tv_expiryTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="0dp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="60 sec"
+                        android:textColor="@color/otpTimerColor"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_resendOtp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="8dp"
+                    android:enabled="false"
+                    android:fontFamily="@font/roboto_medium"
+                    android:gravity="end"
+                    android:text="@string/resend_code"
+                    android:textColor="@color/resendCodeColorLight"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
 
             <com.balysv.materialripple.MaterialRippleLayout
                 android:id="@+id/ripple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 app:mrl_rippleColor="@color/colorLightOrange">
 
@@ -106,7 +155,6 @@
                     android:background="@drawable/btn_curve_orange"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="@dimen/_3sdp"
-                    android:onClick="@{()-> viewModel.onNextButtonClicked()}"
                     android:text="@string/next"
                     android:textAllCaps="true"
                     android:textColor="@color/colorBlack"

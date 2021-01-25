@@ -32,9 +32,8 @@ class AccountDeletedFragment : BaseFragment<FragmentAccountDeletedBinding, Accou
             /*Navigation.findNavController(btn_doneAndExit)
                 .navigate(R.id.action_deleteAccountFragment_to_accountDeletedFragment)*/
             //Toast.makeText(context, "go to login", Toast.LENGTH_SHORT).show()
-            val intent = Intent (activity, SignupActivity::class.java)
-           // intent.clearStack()
-            activity?.startActivity(intent)
+
+            navigateToLoginScreen()
         })
 
         mViewModel.onCreateNewAccountButtonClicked.observe(this, Observer {
@@ -45,11 +44,14 @@ class AccountDeletedFragment : BaseFragment<FragmentAccountDeletedBinding, Accou
         })
 
         mViewModel.onBackToLoginButtonClicked.observe(this, Observer {
-            val intent = Intent (activity, SignupActivity::class.java)
-           // intent.clearStack()
-            activity?.startActivity(intent)
-           // Toast.makeText(context, "go to login", Toast.LENGTH_SHORT).show()
+            navigateToLoginScreen()
         })
+    }
+
+    private fun navigateToLoginScreen() {
+        val intent = Intent(activity, SignupActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
     }
 
 

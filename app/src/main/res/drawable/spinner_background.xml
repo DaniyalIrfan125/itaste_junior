@@ -12,14 +12,14 @@
                     <stroke android:width="0.5dip" android:color="@color/titleTextColorBlack" />
 
                     <corners android:radius="@dimen/_20sdp" />
-                    <solid android:color="#FFFFFF" />
+                    <solid android:color="@color/mainBackground" />
                 </shape>
             </item>
 
             <item android:right="@dimen/_25sdp">
 
                 <bitmap android:gravity="center_vertical|right" android:src="@drawable/icon_dropdown_spinner"
-                    android:tint="@color/mainIconColor" />
+                    android:tint="@color/titleTextColorBlack" />
 
             </item>
 

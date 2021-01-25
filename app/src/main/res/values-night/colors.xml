@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimary">#ff962d</color>
     <color name="colorPrimaryDark">#303030</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorAccent">#ff962d</color>
 
 
     <color name="colorOrange">#ff962d</color>
     <color name="colorLightOrange">#F6A95B</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="titleTextColorBlack">#ffffff</color>
+    <color name="spinnerLinebg">#000000</color>
     <color name="colorBlack">#000000</color>
     <color name="colorErrorRed">#d41818</color>
     <color name="colorGrey">#e1e1e1</color>
@@ -19,6 +20,7 @@
     <color name="color_darkGrey">#707070</color>
     <color name="mainBackground" >#1a1a1a</color>
     <color name="LoginBackground" >#BE000000</color>
+    <color name="loadingLayoutBackground" >#000000</color>
 
 
 
@@ -46,6 +48,11 @@
     <color name="itemPackageBgColor">#131313</color>
 
     <color name="mainIconColor">#FFFFFF</color>
+
+    <color name="otpTimerColor">#FFFFFF</color>
+
+    <color name="permission_alert_bg">#1a1a1a</color>
+    <color name="permission_alert_color">#ffffff</color>
 
 
 </resources>

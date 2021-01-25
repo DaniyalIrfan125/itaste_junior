@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/_1sdp"
-    android:layout_marginTop="@dimen/_1sdp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/img_product"
-        android:layout_width="@dimen/_130sdp"
-        android:layout_height="@dimen/_105sdp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_1sdp">
 
-</RelativeLayout>
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="@dimen/_130sdp"
+            android:layout_height="@dimen/_105sdp" />
+
+    </RelativeLayout>
+</layout>

@@ -1,18 +1,30 @@
 package com.techbayportal.itaste.ui.fragments.myprofilefragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
+import com.techbayportal.itaste.data.models.LoginResponse
+import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentMyProfileBinding
+import com.techbayportal.itaste.ui.activities.signupactivity.SignupActivity
+import com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDialogFragment
+import com.techbayportal.itaste.utils.DialogClass
+import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_my_profile.img_back
@@ -28,11 +40,15 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    val loginSession = LoginSession.getInstance().getLoginResponse()
+
     lateinit var dataStoreProvider: DataStoreProvider
+    lateinit var reportBugDialogFragment: ReportBugDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dataStoreProvider = DataStoreProvider(requireContext())
+        subscribeToNetworkLiveData()
 
     }
 
@@ -60,13 +76,76 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         }
     }
 
+    override fun subscribeToShareLiveData() {
+        super.subscribeToShareLiveData()
+
+        sharedViewModel.reportBugButtonsClicked.observe(this, Observer {
+            if(it == AppConstants.ReportBugDialog.SUBMIT){
+                if(it != -1){
+                   // Toast.makeText(requireContext(), "Submit Clicked", Toast.LENGTH_SHORT).show()
+
+                    mViewModel.hitReportBugApi(sharedViewModel.bugReportMessage)
+                }
+                sharedViewModel.reportBugButtonsClicked.value = -1
+            }
+        })
+
+    }
+
     private fun subscribeToObserveDarkModeDataStore() {
 
         //observing data from data store and showing
-        dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
+        dataStoreProvider.darkModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
             switch_darkMode.isChecked = it
         })
 
+    }
+
+    override fun subscribeToNetworkLiveData() {
+        super.subscribeToNetworkLiveData()
+        mViewModel.logoutResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    /*GlobalScope.launch {
+                        dataStoreProvider.saveUserObj(null!!)
+                    }*/
+
+                    LoginSession.getInstance().setLoginResponse(null)
+                    GlobalScope.launch {
+                        dataStoreProvider.clearUserObj()
+                    }
+                    navigateToLoginScreen()
+
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode )
+                }
+            }
+        })
+
+        mViewModel.getReportBugResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+
+                    Toast.makeText(requireContext(), "Report Submitted", Toast.LENGTH_SHORT).show()
+                   // reportBugDialogFragment.dismiss()
+
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode )
+                }
+            }
+        })
     }
 
 
@@ -80,8 +159,19 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         })
 
         mViewModel.onEditProfileClicked.observe(this, Observer {
-            Navigation.findNavController(tv_editProfile)
-                .navigate(R.id.action_myProfileFragment_to_userProfileFragment)
+
+            if (loginSession != null) {
+                if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
+
+                    Navigation.findNavController(tv_editProfile).navigate(R.id.action_myProfileFragment_to_userProfileFragment)
+                    //flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+                } else {
+                    Navigation.findNavController(tv_editProfile)
+                        .navigate(R.id.action_myProfileFragment_to_vendorProfileFragment)
+                }
+            }
+
         })
 
         mViewModel.onMyCartClicked.observe(this, Observer {
@@ -115,18 +205,25 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         })
 
         mViewModel.onLogoutClicked.observe(this, Observer {
-            Navigation.findNavController(tv_logout)
-                .navigate(R.id.action_myProfileFragment_to_welcomefragment)
-            //Toast.makeText(context, "Move To Welcome Fragment", Toast.LENGTH_SHORT).show()
+
+            mViewModel.hitLogout()
+
+
         })
+    }
 
 
+
+    private fun navigateToLoginScreen() {
+        val intent = Intent(activity, SignupActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
 
 
     }
     private fun subscribeToObserveLanguage() {
         //observing data from data store and showing
-        dataStoreProvider.languageFlow.asLiveData().observe(this, Observer {
+        dataStoreProvider.languageFlow.asLiveData().observe(viewLifecycleOwner, Observer {
 
             if (it != null) {
                 if (it == "ar") {
