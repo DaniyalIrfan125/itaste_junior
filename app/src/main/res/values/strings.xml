@@ -286,5 +286,25 @@
     <string name="writename">Please write your name!</string>
 
     <string name="new_post">New Post</string>
+    <string name="select_picture">Please select one picture!</string>
+    <string name="tv_post">Post</string>
+    <string name="ed_write_something">Write something about the picture...</string>
+    <string name="ed_write_desired_price">Enter desired price</string>
+    <string name="tv_how_long_will">How long it took you to cook this?</string>
+    <string name="ed_enter_valid_time">Enter valid time</string>
+    <string name="ed_comments">Comments</string>
+    <string name="tv_once_you_turn_it_off">Once you turn it off, no one can comment on this post.</string>
+    <string name="tv_advance_Settings">Advanced Settings</string>
+    <string name="tv_choose_category">Choose Category</string>
+
+    //post fragment
+    <string name="tv_please_select_category">Please Select one category</string>
+    <string name="tv_post_added">Post Added Successfully!</string>
+    <string name="tv_success">Success!</string>
+    <string name="tv_add_price">Add price</string>
+    <string name="tv_caption">Caption</string>
+    <string name="tv_write_Caption">Please Write caption!</string>
+    <string name="tv_write_price">Please Write Price!</string>
+    <string name="tv_write_timing">Please Write Timing!</string>
 
 </resources>

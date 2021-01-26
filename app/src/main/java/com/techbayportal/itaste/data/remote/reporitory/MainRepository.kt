@@ -49,7 +49,6 @@ class MainRepository @Inject constructor(
     }
 
 
-
     //Sign Up User
     suspend fun signUpVendor(userModel: UserModel): Response<SignUpResponse> {
 
@@ -92,23 +91,23 @@ class MainRepository @Inject constructor(
     suspend fun verifyOtp(code: Int, phone: String, type: String) =
         apiService.verifyOpt("application/json", code, phone, type)
 
-    suspend fun verifyOtpForUpdatePhone(auth: String, code: Int, phone: String,  type: String) =
-        apiService.verifyOptForUpdatePhone("application/json",auth,code, phone,type)
+    suspend fun verifyOtpForUpdatePhone(auth: String, code: Int, phone: String, type: String) =
+        apiService.verifyOptForUpdatePhone("application/json", auth, code, phone, type)
 
     suspend fun resentOtp(phone: String, type: String) =
         apiService.resentOtp("application/json", phone, type)
 
 
-
     suspend fun resentOtpUpdatePhone(auth: String, phone: String, type: String) =
-        apiService.resentOtpUpdatePhone("application/json",auth, phone, type)
+        apiService.resentOtpUpdatePhone("application/json", auth, phone, type)
 
-   // suspend fun getAllCountries() = apiService.getAllCountries()
+    // suspend fun getAllCountries() = apiService.getAllCountries()
 
-    suspend fun getAllCountriesForHome(auth: String) = apiService.getAllCountriesForHome("application/json",auth)
+    suspend fun getAllCountriesForHome(auth: String) =
+        apiService.getAllCountriesForHome("application/json", auth)
 
     suspend fun getAllCities(auth: String, countryId: Int): Response<GetAllCitiesResponse> {
-        return apiService.getAllCities("application/json",auth, countryId)
+        return apiService.getAllCities("application/json", auth, countryId)
     }
 
     suspend fun updateUserLocation(
@@ -178,7 +177,7 @@ class MainRepository @Inject constructor(
         email: String,
         profilePic: File?,
         country_id: String,
-        city_id :String
+        city_id: String
 
     ): Response<SuccessResponse> {
         val profilePicRequestBody: RequestBody? =
@@ -199,8 +198,9 @@ class MainRepository @Inject constructor(
                 bio,
                 phone,
                 email,
-            country_id,
-            city_id)
+                country_id,
+                city_id
+            )
         } else {
             return apiService.updateVendorPersonalProfile(
                 "application/json",
@@ -211,8 +211,9 @@ class MainRepository @Inject constructor(
                 phone,
                 email,
                 profilePicMultiPartBody!!,
-            country_id,
-            city_id)
+                country_id,
+                city_id
+            )
         }
     }
 
@@ -237,24 +238,63 @@ class MainRepository @Inject constructor(
     suspend fun contactUs(auth: String, name: String, email: String, message: String) =
         apiService.contactUs("application/json", auth, name, email, message)
 
-    suspend fun getVendorProfileDetails(auth: String, vendorId: Int): Response<VendorProfileDetailsResponse> {
-        return apiService.getVendorProfileDetails("application/json",auth, vendorId)
+    suspend fun getVendorProfileDetails(
+        auth: String,
+        vendorId: Int
+    ): Response<VendorProfileDetailsResponse> {
+        return apiService.getVendorProfileDetails("application/json", auth, vendorId)
     }
 
     suspend fun setFollow(auth: String, vendorId: Int): Response<FollowResponse> {
-        return apiService.setFollow("application/json",auth, vendorId)
+        return apiService.setFollow("application/json", auth, vendorId)
     }
 
     suspend fun reportBug(auth: String, message: String): Response<SuccessResponse> {
-        return apiService.reportBug("application/json",auth, message)
+        return apiService.reportBug("application/json", auth, message)
     }
 
     suspend fun getAllBlockedUsers(auth: String): Response<GetAllBlockedUserResponse> {
-        return apiService.getAllBlockedUsers("application/json",auth)
+        return apiService.getAllBlockedUsers("application/json", auth)
     }
 
     suspend fun blockVendor(auth: String, vendorId: Int): Response<BlockVendorResponse> {
-        return apiService.blockVendor("application/json",auth, vendorId)
+        return apiService.blockVendor("application/json", auth, vendorId)
+    }
+
+    suspend fun getCategories(auth: String) =
+        apiService.getCategories("application/json", auth)
+
+    suspend fun getTimeSuggestion(auth: String) =
+        apiService.getTimeSuggestion("application/json", auth)
+
+    suspend fun addPost(
+        categoryId: Int,
+        image: File,
+        caption: String,
+        price: Double,
+        cookingTime: String,
+        allowComments: Int,
+        auth: String
+    ): Response<AddPostResponse> {
+
+        val postPicRequestBody: RequestBody =
+            image.asRequestBody("image/*".toMediaTypeOrNull())
+        val profilePicMultiPartBody = MultipartBody.Part.createFormData(
+            "image",
+            System.currentTimeMillis().toString() + ".png",
+            postPicRequestBody
+        )
+
+        return apiService.addPost(
+            "application/json",
+            auth,
+            categoryId,
+            caption,
+            price,
+            cookingTime,
+            profilePicMultiPartBody,
+            allowComments
+        )
     }
 
 }

@@ -1,5 +1,6 @@
 package com.techbayportal.itaste
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.techbayportal.itaste.baseclasses.BaseViewModel
@@ -23,6 +24,7 @@ class SharedViewModel : BaseViewModel() {
     var userModel = UserModel()
     val isDarkMode :Boolean = false
     val localProfilePic: File? = null
+    var selectedPostImageFile = MutableLiveData<File>()
 //    val countriesList = ArrayList<GetAllCountriesData>()
 
 

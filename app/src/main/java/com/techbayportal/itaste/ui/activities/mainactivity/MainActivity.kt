@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
@@ -49,19 +50,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
 
-        /*val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        val navInflater = navController.navInflater
-        val graph = navInflater.inflate(R.navigation.main_navigation_graph)
-        graph.startDestination = R.id.homeFragment
-        navController.graph = graph
-        bottom_navigation.setupWithNavController(navHostFragment.navController)*/
-
-
-        relative_addButton.setOnClickListener(View.OnClickListener {
-            Toast.makeText(applicationContext, "clicked add button", Toast.LENGTH_SHORT).show()
-        })
+        relative_addButton.setOnClickListener {
+            navController.navigate(R.id.selectPostFragment)
+        }
 
         if (loginSession != null) {
             if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {

@@ -15,7 +15,7 @@
         <RelativeLayout
             android:id="@+id/relative_top"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_50sdp">
+            android:layout_height="@dimen/_45sdp">
 
             <LinearLayout
                 android:id="@+id/img_back"
@@ -48,6 +48,7 @@
             </TextView>
 
             <RelativeLayout
+                android:onClick="@{()-> viewModel.onNextBtnClicked()}"
                 android:layout_width="@dimen/_40sdp"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true">
@@ -60,7 +61,7 @@
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/roboto_regular"
                     android:lineSpacingExtra="3sp"
-                    android:text="Next"
+                    android:text="@string/next"
                     android:textColor="@color/colorOrange"
                     android:textSize="@dimen/_11sdp"
                     android:textStyle="normal" />
@@ -109,7 +110,7 @@
                         android:layout_centerInParent="true"
                         android:fontFamily="@font/roboto_medium"
                         android:lineSpacingExtra="3sp"
-                        android:text="Recents"
+                        android:text="Recents "
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="@dimen/_12sdp"
                         android:textStyle="normal" />
@@ -117,6 +118,7 @@
                 </RelativeLayout>
 
                 <ImageView
+                    android:onClick="@{()->viewModel.onCameraBtnClicked()}"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_alignParentEnd="true"

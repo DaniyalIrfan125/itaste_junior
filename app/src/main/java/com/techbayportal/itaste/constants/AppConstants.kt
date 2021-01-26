@@ -10,6 +10,7 @@ object AppConstants {
     const val PROFILE_PIC_CODE = 9272
     const val USER_PROFILE_PIC_CODE = 92
     const val VENDOR_PROFILE_PIC_CODE = 93
+    const val SELECT_POST_PICTURE = 12
 
     @StringDef(ApiConfiguration.BASE_URL)
     annotation class ApiConfiguration {

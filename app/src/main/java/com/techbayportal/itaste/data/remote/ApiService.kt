@@ -287,5 +287,31 @@ interface ApiService {
 
 
 
+    @GET("category/getAll")
+    suspend fun getCategories(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetCategoriesResponse>
+
+    @GET("suggestion-time")
+    suspend fun getTimeSuggestion(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetTimeSuggestionResponse>
+
+
+    @Multipart
+    @POST("post/add")
+    suspend fun addPost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("category_id") category_id: Int?,
+        @Query("caption") caption: String?,
+        @Query("price") price: Double?,
+        @Query("cooking_time") cookingTime: String?,
+        @Part profileImage: MultipartBody.Part,
+        @Query("allow_comments") allowComments: Int?
+
+    ): Response<AddPostResponse>
 
 }

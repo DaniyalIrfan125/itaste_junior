@@ -1,16 +1,41 @@
 package com.techbayportal.itaste.ui.fragments.postfragment
 
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.RadioButton
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.data.models.GetCategoriesResponse
+import com.techbayportal.itaste.data.models.GetTimeSuggestionData
+import com.techbayportal.itaste.data.models.GetTimeSuggestionResponse
+import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutPostfragmentBinding
-import com.techbayportal.itaste.ui.fragments.postfragment.adapter.LocationAdapter
+import com.techbayportal.itaste.generated.callback.OnClickListener
 import com.techbayportal.itaste.ui.fragments.postfragment.adapter.TimeDurationAdapter
+import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
+import id.zelory.compressor.Compressor
+import id.zelory.compressor.constraint.format
+import id.zelory.compressor.constraint.quality
+import id.zelory.compressor.constraint.size
+import kotlinx.android.synthetic.main.layout_loginfragment.*
 import kotlinx.android.synthetic.main.layout_postfragment.*
+import kotlinx.android.synthetic.main.layout_selectpost.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import www.sanju.motiontoast.MotionToast
+import java.io.File
+
 
 @AndroidEntryPoint
 class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
@@ -21,27 +46,238 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var compressedImageFile: File
+    var isAllowComments: Int = 0
+    var listOfTime: ArrayList<GetTimeSuggestionData> = ArrayList()
+    lateinit var timeDurationAdapter: TimeDurationAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        //calling get categories api
+        mViewModel.getCategories()
+        mViewModel.getTimeSuggestions()
+        subscribeToNetworkLiveData()
+    }
+
+
+    private fun fieldTextWatcher() {
+        ed_price.doOnTextChanged { text, start, before, count ->
+            tv_errorPrice.visibility = View.GONE
+        }
+        ed_time.doOnTextChanged { text, start, before, count ->
+            tv_errorTime.visibility = View.GONE
+
+        }
+
+        ed_caption.doOnTextChanged { text, start, before, count ->
+            tv_errorCaption.visibility = View.GONE
+
+        }
+    }
+
+    override fun subscribeToShareLiveData() {
+        super.subscribeToShareLiveData()
+
+        sharedViewModel.selectedPostImageFile.observe(this, Observer {
+            it?.let {
+                compressImageFile(it)
+                Glide.with(requireContext()).load(it).into(imgView_post)
+            }
+        })
+    }
+
+    override fun subscribeToNetworkLiveData() {
+        super.subscribeToNetworkLiveData()
+
+        mViewModel.getCategoriesResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+                            createRadioButton(it.data)
+
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+
+        mViewModel.getTimeSuggestionResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+                            listOfTime.addAll(it.data)
+                            timeDurationAdapter.notifyDataSetChanged()
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+        mViewModel.addPostsResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+                            MotionToast.createToast(
+                                requireActivity(),
+                                getString(R.string.tv_success),
+                                getString(R.string.tv_post_added),
+                                MotionToast.TOAST_SUCCESS,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.SHORT_DURATION,
+                                ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
+                            )
+
+                            Navigation.findNavController(radioGroup).popBackStack(R.id.homeFragment,false)
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+    }
+
+    override fun subscribeToNavigationLiveData() {
+        super.subscribeToNavigationLiveData()
+
+        mViewModel.onPostBtnClicked.observe(this, Observer {
+            fieldValidations()
+        })
+
+    }
+
+    private fun compressImageFile(imageFile: File?) {
+        imageFile?.let {
+            GlobalScope.launch {
+                compressedImageFile =
+                    Compressor.compress(requireContext(), imageFile) {
+                        quality(70)
+                        format(Bitmap.CompressFormat.WEBP)
+                        size(2_097_152) //2MB
+
+                    }
+            }
+        }
+    }
+
+    private fun fieldValidations() {
+        if (!TextUtils.isEmpty(ed_caption.text)) {
+            if (!TextUtils.isEmpty(ed_price.text)) {
+                if (!TextUtils.isEmpty(ed_time.text)) {
+                    if (radioGroup.checkedRadioButtonId == -1) {
+                        Snackbar.make(
+                            radioGroup,
+                            getString(R.string.tv_please_select_category),
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        mViewModel.addPostCall(
+                            radioGroup.checkedRadioButtonId,
+                            compressedImageFile,
+                            ed_caption.text.toString(),
+                            ed_price.text.toString().toDouble(),
+                            ed_time.text.toString(),
+                            isAllowComments
+                        )
+                    }
+
+
+                } else {
+                    tv_errorTime.visibility = View.VISIBLE
+                    tv_errorTime.text = getString(R.string.tv_write_timing)
+                }
+
+            } else {
+
+                tv_errorPrice.visibility = View.VISIBLE
+                tv_errorPrice.text = getString(R.string.tv_write_price)
+            }
+
+        } else {
+            tv_errorCaption.visibility = View.VISIBLE
+            tv_errorCaption.text = getString(R.string.tv_write_Caption)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        fieldTextWatcher()
 
-        recycler_time.adapter = TimeDurationAdapter(
-            listOf<String>(
-                "Sunday", "1 hour 30 minutes", "3 days", " 4 minutes",
-                "Sunday", "1 hour 30 minutes", "3 days", " 4 minutes"
-            ),
+        timeDurationAdapter = TimeDurationAdapter(
+            listOfTime,
             requireContext()
         )
+        recycler_time.adapter = timeDurationAdapter
 
 
-        recycler_location.adapter = LocationAdapter(
-            listOf<String>(
-                "Dubai, UAE", "Business bay, dubai", "Al Barsha Heights", "Sharjah",
-                "Diera, Naif"
-            ),
-            requireContext()
-        )
+        switch_allowComments.setOnCheckedChangeListener { buttonView, isChecked ->
+            isAllowComments = if (isChecked)
+                1
+            else
+                0
+        }
+
+        timeDurationAdapter.setOnEntryClickListener(object :
+            TimeDurationAdapter.TimeDurationItemClickListener {
+            override fun onItemClick(position: Int) {
+                ed_time.setText("")
+                ed_time.setText(listOfTime[position].time)
+            }
+
+        })
+
+
+    }
+
+    private fun createRadioButton(data: List<GetCategoriesResponse.Data>) {
+        val rb = arrayOfNulls<RadioButton>(data.size)
+        for (i in data.indices) {
+            rb[i] = RadioButton(requireContext())
+            rb[i]!!.text = data[i].name
+            rb[i]!!.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.titleTextColorBlack
+                )
+            )
+            rb[i]!!.textSize = 14f
+            val font = ResourcesCompat.getFont(requireContext(), R.font.roboto_regular)
+            rb[i]!!.typeface = font
+            rb[i]!!.id = data[i].id
+            radioGroup.addView(rb[i])
+        }
+
 
     }
 }
