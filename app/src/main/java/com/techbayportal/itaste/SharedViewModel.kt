@@ -48,6 +48,7 @@ class SharedViewModel : BaseViewModel() {
     //var bugReportMessage = MutableLiveData<String>()
 
     var userUpdatedCountryId : Int = 0
+    var vendorProfileId : Int = 0
 
     var test = false;
     var testId :String = "0"

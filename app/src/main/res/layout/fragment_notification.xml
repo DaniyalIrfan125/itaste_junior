@@ -83,7 +83,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:reverseLayout="true"
-            app:stackFromEnd="true">
+            app:stackFromEnd="true"
+            android:orientation="vertical"
+            tools:listitem="@layout/item_notification"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -92,7 +95,7 @@
 
 
     <LinearLayout
-        android:id="@+id/ll_middle"
+        android:id="@+id/ll_no_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll_back_button"

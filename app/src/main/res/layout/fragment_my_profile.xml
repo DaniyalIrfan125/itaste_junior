@@ -61,20 +61,31 @@
                         android:background="@drawable/layout_circle_gray">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/sivInfluancerImage"
+                            android:id="@+id/siv_userImage"
                             android:layout_width="@dimen/_75sdp"
                             android:layout_height="@dimen/_75sdp"
                             android:layout_margin="@dimen/_3sdp"
                             android:elevation="@dimen/_3sdp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/icon_user_dp"
+                            android:src="@drawable/icon_profile"
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                             tools:layout_editor_absoluteX="116dp"
                             tools:layout_editor_absoluteY="61dp" />
 
+                        <com.github.ybq.android.spinkit.SpinKitView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/sk_myProfile"
+                            style="@style/SpinKitView.Large.Pulse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_centerInParent="true"
+                            app:SpinKit_Color="@color/colorOrange" />
+
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/tv_userName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -82,7 +93,7 @@
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="3sp"
-                        android:text="Syra Ahmed"
+                        android:hint="Jhon Dao"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp" />
 

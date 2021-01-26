@@ -18,13 +18,27 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/image_face"
+            android:src="@drawable/icon_profile"
             app:strokeColor="@color/colorOrange"
             android:scaleType="centerCrop"
             app:strokeWidth="@dimen/_1sdp"
             android:padding="@dimen/_1sdp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKit"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_profile"
+            android:layout_alignTop="@+id/img_profile"
+            android:layout_alignEnd="@+id/img_profile"
+            android:layout_alignBottom="@+id/img_profile"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            app:SpinKit_Color="@color/colorOrange" />
 
         <ImageView
             app:tint="@color/mainIconColor"

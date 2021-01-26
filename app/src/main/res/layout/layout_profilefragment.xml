@@ -100,7 +100,7 @@
                         android:layout_gravity="center"
                         android:padding="@dimen/_1sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_face"
+                        android:src="@drawable/icon_profile"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         app:strokeColor="@color/colorWhite"
 
@@ -350,7 +350,57 @@
                     android:layout_below="@+id/linear_buttons"
                     android:layout_marginTop="@dimen/_10sdp" />
 
+                <LinearLayout
+                    android:id="@+id/ll_noPosts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_buttons"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@color/topbar_greyColor"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/icon_no_posts"
+                        >
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/no_posts_yet"
+                        android:textSize="18sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/titleTextColorBlack">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/there_is_nothing_to_show_yet_you_need_to_update_your_payment_to_start_posting"
+                        android:layout_marginStart="@dimen/_50sdp"
+                        android:layout_marginEnd="@dimen/_50sdp"
+                        android:textSize="14sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/titleTextColorBlack">
+
+                    </TextView>
+
+                </LinearLayout>
+
             </RelativeLayout>
+
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

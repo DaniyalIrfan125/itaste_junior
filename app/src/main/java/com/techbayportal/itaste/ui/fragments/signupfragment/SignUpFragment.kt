@@ -176,8 +176,6 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
 
                             if (!TextUtils.isEmpty(ed_phoneNumber.text)) {
 
-                                if (ed_phoneNumber.text.toString().length == 10) {
-
                                     if (!TextUtils.isEmpty(ed_setPassword.text) && ed_setPassword.text.toString().length > 5) {
 
                                         if (!TextUtils.isEmpty(ed_confirmPassword.text) && ed_confirmPassword.text.toString().length > 5) {
@@ -286,16 +284,6 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                         )
 
                                     }
-                                } else {
-                                    tv_errorPhoneNumber.text = "Invalid Phone Number!"
-
-                                    tv_errorPhoneNumber.visibility = View.VISIBLE
-                                    ed_phoneNumber.background =
-                                        ContextCompat.getDrawable(
-                                            requireContext(),
-                                            R.drawable.ed_errorboundary
-                                        )
-                                }
 
 
                             } else {

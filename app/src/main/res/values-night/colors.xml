@@ -53,6 +53,7 @@
 
     <color name="permission_alert_bg">#1a1a1a</color>
     <color name="permission_alert_color">#ffffff</color>
+    <color name="location_text">#575757</color>
 
 
 </resources>

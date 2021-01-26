@@ -47,8 +47,8 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        this.mView = view
         initialising()
+        this.mView = view
         fieldTextWatcher()
         clickListener(mView)
     }
@@ -130,7 +130,7 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
             otp_view.text = null
 
 
-            sharedViewModel.verifyOtpHoldPhoneNumber?.let {
+            sharedViewModel.verifyOtpHoldPhoneNumber.let {
                 //key is set "forget-password" as per provided by backend
 
                 if (sharedViewModel.isForGotVerify) {
@@ -138,8 +138,7 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
                 } else if(sharedViewModel.isUpdatePhone){
                     mViewModel.hitResentOtpForPhone(it, AppConstants.VerifyOTPTypeKeys.UPDATE_PHONE)
-                }
-                else{
+                } else{
                     mViewModel.hitResentOtp(it, AppConstants.VerifyOTPTypeKeys.SIGN_UP)
                 }
             }

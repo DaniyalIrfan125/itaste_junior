@@ -285,6 +285,25 @@ interface ApiService {
         @Field("vendor_id") vendor_id: Int
     ): Response<BlockVendorResponse>
 
+    @GET("category/getAll")
+    suspend fun getAllCategories(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetAllCategoriesResponse>
+
+
+    @GET("home-screen")
+    suspend fun getHomeScreenInfo(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetHomeScreenResponse>
+
+    @GET("notifications")
+    suspend fun getNotifications(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<NotificationResponse>
+
 
 
 

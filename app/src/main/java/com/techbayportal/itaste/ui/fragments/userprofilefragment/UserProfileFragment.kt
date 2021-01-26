@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import com.opensooq.supernova.gligar.GligarPicker
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
@@ -27,9 +28,11 @@ import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
 import id.zelory.compressor.constraint.size
+import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import kotlinx.android.synthetic.main.fragment_user_profile.et_country_code
 import kotlinx.android.synthetic.main.fragment_user_profile.img_back
+import kotlinx.android.synthetic.main.fragment_user_profile.tv_userName
 import kotlinx.android.synthetic.main.fragment_vendor_profile.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -260,9 +263,26 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
             et_country_code.fullNumber = userPersonalProfileResponseData.phone
             sharedViewModel.verifyOtpHoldPhoneNumber = userPersonalProfileResponseData.phone
             et_userUserEmail.setText(userPersonalProfileResponseData.email)
-            Picasso.get()
-                .load(userPersonalProfileResponseData.profile_pic).fit().centerCrop()
-                .into(siv_userProfilePic)
+
+                Picasso.get()
+                    .load(userPersonalProfileResponseData.profile_pic).fit().centerCrop()
+                    .into(siv_userProfilePic ,object :Callback{
+                        override fun onSuccess() {
+                            if(sk_userProfile != null) {
+                                sk_userProfile.visibility = View.GONE
+                            }
+                        }
+
+                        override fun onError(e: java.lang.Exception?) {
+                            Picasso.get().load(R.drawable.placeholder_image).into(siv_userProfilePic)
+                            if(sk_userProfile != null) {
+                                sk_userProfile.visibility = View.GONE
+                            }
+                        }
+
+                    })
+
+
         } catch (e: Exception) {
         }
 

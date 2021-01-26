@@ -13,6 +13,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.opensooq.supernova.gligar.GligarPicker
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
@@ -417,7 +418,17 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
             et_vendorEmail.setText(vendorPersonalProfileResponseData.email)
             Picasso.get()
                 .load(vendorPersonalProfileResponseData.profile_pic).fit().centerCrop()
-                .into(siv_vendorProfilePic)
+                .into(siv_vendorProfilePic, object :Callback{
+                    override fun onSuccess() {
+                        sk_vendorProfile.visibility = View.GONE
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        Picasso.get().load(R.drawable.placeholder_image).into(siv_vendorProfilePic)
+                        sk_vendorProfile.visibility = View.GONE
+                    }
+
+                })
         } catch (e: Exception) {
         }
     }

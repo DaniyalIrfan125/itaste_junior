@@ -24,6 +24,8 @@ class DataStoreProvider(context: Context) {
         val USER_TYPE_KEY = preferencesKey<String>(AppConstants.DataStore.USER_TYPE_KEY)
         //val USER_DATA = preferencesKey<String>(AppConstants.DataStore.USER_DATA)
         val USER_OBJECT = preferencesKey<String>(AppConstants.DataStore.USER_OBJ)
+        val IS_DARK_MODE = preferencesKey<String>(AppConstants.DataStore.IS_DARK_MODE)
+        val LANGUAGE_PREF = preferencesKey<String>(AppConstants.DataStore.LANGUAGE_PREF)
 
     }
 
@@ -33,6 +35,14 @@ class DataStoreProvider(context: Context) {
             it[IS_LOCALIZATION_KEY] = isLocalizationKey
             it[USER_NAME_KEY] = name
         }
+    }
+
+    //SignupConfigration
+    suspend fun signUpConfig(isDarkMode: Boolean, languagePref : String){
+        dataStore.edit {
+            it
+        }
+
     }
 
     //store user object

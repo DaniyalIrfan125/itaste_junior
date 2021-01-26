@@ -51,8 +51,8 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
-       // mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
-        mViewModel.hitGetVendorProfileDetails(31)
+        mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
+       // mViewModel.hitGetVendorProfileDetails(31)
        // mViewModel.hitSetFollowApi(31)
     }
 
@@ -181,17 +181,23 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
 
     private fun setData(vendorProfileDetailData: VendorProfileDetailData){
         try {
-            Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage , object :Callback{
-                override fun onSuccess() {
-                    spinKit.visibility = View.GONE
-                }
+            if(vendorProfileDetailData.image.isNotEmpty()){
+                Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage , object :Callback{
+                    override fun onSuccess() {
+                        if(spinKit != null){
+                            spinKit.visibility = View.GONE
+                        }
+                    }
+                    override fun onError(e: Exception?) {
+                        Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
+                        if(spinKit != null){
+                            spinKit.visibility = View.GONE
+                        }
 
-                override fun onError(e: Exception?) {
-                    Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
-                    spinKit.visibility = View.GONE
-                }
+                    }
+                })
+            }
 
-            })
             tv_vendorUserName.text = vendorProfileDetailData.username
             tv_profileName.text = vendorProfileDetailData.first_name + vendorProfileDetailData.last_name
             tv_details.text = vendorProfileDetailData.bio
@@ -201,6 +207,9 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
             if(!vendorProfileDetailData.posts.isNullOrEmpty()){
                 postsList.addAll(vendorProfileDetailData.posts)
                 postsRecyclerAdapter.notifyDataSetChanged()
+            }
+            else{
+                ll_noPosts.visibility = View.VISIBLE
             }
         } catch (e: Exception) {
         }

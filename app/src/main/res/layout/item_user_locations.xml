@@ -13,18 +13,27 @@
         android:baselineAligned="false"
         android:orientation="horizontal">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_country_flag"
             android:layout_width="42dp"
             android:layout_height="42dp"
             android:layout_margin="@dimen/_3sdp"
-            android:elevation="@dimen/_3sdp"
             android:scaleType="fitXY"
             android:src="@drawable/icon_profile"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
-            tools:layout_editor_absoluteX="116dp"
-            tools:layout_editor_absoluteY="61dp" />
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/sk_locations"
+                style="@style/SpinKitView.Large.Pulse"
+                android:layout_width="49dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/colorOrange" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_country_name"
@@ -34,8 +43,9 @@
             android:text="United Arab Emirates"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/_2sdp"
-            android:textColor="@color/titleTextColorBlack"
-            android:textSize="16sp">
+            android:textColor="@color/location_text"
+            android:textSize="16sp"
+            >
 
         </TextView>
 

@@ -100,12 +100,7 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
             if (tv_language_name.text == getString(R.string.arabic)){
                 activity?.finish()
                 (activity as MainActivity?)!!.setLocaleLanguage("ar")
-                startActivity(
-                    Intent(
-                        context,
-                        MainActivity::class.java
-                    )
-                )
+                startActivity(Intent(context, MainActivity::class.java))
 
               //  sharedViewModel._isSelectedCountryId?.value = 2
 

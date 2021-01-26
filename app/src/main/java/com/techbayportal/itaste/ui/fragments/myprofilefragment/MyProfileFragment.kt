@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.SharedViewModel
@@ -27,9 +29,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_my_profile.*
-import kotlinx.android.synthetic.main.fragment_my_profile.img_back
+import kotlinx.android.synthetic.main.layout_profilefragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 @AndroidEntryPoint
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>() {
@@ -41,6 +44,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         get() = BR.viewModel
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
+    lateinit var mView: View
 
     lateinit var dataStoreProvider: DataStoreProvider
     lateinit var reportBugDialogFragment: ReportBugDialogFragment
@@ -54,9 +58,10 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mView = view
         subscribeToObserveDarkModeDataStore()
         subscribeToObserveLanguage()
+        initializing()
 
 
 
@@ -74,6 +79,25 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+    }
+
+    private fun initializing(){
+        if (loginSession != null){
+            tv_userName.text = loginSession.data.first +" "+ loginSession.data.last
+
+            Picasso.get().load(loginSession.data.profile_img).fit().centerCrop().into(siv_userImage , object :
+                Callback {
+                override fun onSuccess() {
+                    sk_myProfile.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+                    Picasso.get().load(R.drawable.placeholder_image).into(siv_userImage)
+                    sk_myProfile.visibility = View.GONE
+                }
+            })
+        }
+
     }
 
     override fun subscribeToShareLiveData() {
@@ -155,7 +179,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         super.subscribeToNavigationLiveData()
 
         mViewModel.onBackButtonClicked.observe(this, Observer {
-            Navigation.findNavController(img_back).popBackStack()
+            Navigation.findNavController(mView).popBackStack()
         })
 
         mViewModel.onEditProfileClicked.observe(this, Observer {

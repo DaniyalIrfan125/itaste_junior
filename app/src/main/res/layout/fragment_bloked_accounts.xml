@@ -2,16 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.BlockedAccountsViewModel" />
     </data>
 
     <RelativeLayout
-        android:background="@color/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/mainBackground"
         tools:context=".ui.fragments.blockedaccountsfragment.BlockedAccountsFragment">
 
         <RelativeLayout
@@ -26,12 +28,12 @@
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
-            <ImageView
-                app:tint="@color/mainIconColor"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/icon_backarrow"
-                android:contentDescription="@string/back_icon"/>
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:contentDescription="@string/back_icon"
+                    android:src="@drawable/icon_backarrow"
+                    app:tint="@color/mainIconColor" />
             </LinearLayout>
 
             <TextView
@@ -65,11 +67,47 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBlockedAccounts"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/rvBlockedAccounts">
+                android:layout_height="match_parent">
 
             </androidx.recyclerview.widget.RecyclerView>
+
         </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/ll_noBlockedAccounts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/no_block_accounts"
+                >
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_block_accounts"
+                android:textSize="18sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/titleTextColorBlack">
+
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/you_don_t_have_any_block_accounts"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/titleTextColorBlack">
+
+            </TextView>
+        </LinearLayout>
     </RelativeLayout>
 </layout>

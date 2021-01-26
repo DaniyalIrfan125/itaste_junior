@@ -116,6 +116,7 @@ class BlockedAccountsFragment : BaseFragment<FragmentBlokedAccountsBinding, Bloc
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     mViewModel.hitGetAllBlockedAccountsApi()
+                    blockedAccountsAdapter.notifyDataSetChanged()
 
                 }
                 Resource.Status.ERROR -> {
@@ -131,6 +132,10 @@ class BlockedAccountsFragment : BaseFragment<FragmentBlokedAccountsBinding, Bloc
             blockedAccountsList.clear()
             blockedAccountsList.addAll(model.data)
             blockedAccountsAdapter.notifyDataSetChanged()
+            rvBlockedAccounts.visibility = View.VISIBLE
+        }else{
+            ll_noBlockedAccounts.visibility = View.VISIBLE
+            rvBlockedAccounts.visibility = View.GONE
         }
 
     }

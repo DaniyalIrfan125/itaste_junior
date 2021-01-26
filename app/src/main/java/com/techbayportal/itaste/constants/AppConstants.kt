@@ -20,7 +20,6 @@ object AppConstants {
         }
     }
 
-
     @IntDef(
         HomeConfigBottomSheet.SETTINGS,
         HomeConfigBottomSheet.TURN_OFF_NOTIFICATION,
@@ -62,6 +61,7 @@ object AppConstants {
 
         }
     }
+
 
    /* @StringDef(ReportBugDialogFragment.REPORT_BUG_MESSAGE)
     annotation class ReportBugDialogFragment {
@@ -122,6 +122,8 @@ object AppConstants {
             //
             const val IS_REMEMBER = "is_remember"
             const val USER_OBJ = "user_obj"
+            const val IS_DARK_MODE = "is_dark_mode"
+            const val LANGUAGE_PREF = "language_pref"
         }
     }
 
