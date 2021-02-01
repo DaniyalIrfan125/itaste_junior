@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
+import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.models.SuccessResponse
 import com.techbayportal.itaste.data.models.UserPersonalProfileResponse
 import com.techbayportal.itaste.data.remote.Resource
@@ -18,7 +20,9 @@ import java.io.File
 
 class UserProfileViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val dataStoreProvider: DataStoreProvider
+
 ) : BaseViewModel() {
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
@@ -30,8 +34,8 @@ class UserProfileViewModel @ViewModelInject constructor(
     val getUserPersonalPersonalResponse: LiveData<Resource<UserPersonalProfileResponse>>
         get() = _getUserPersonalProfileResponse
 
-    val _getUpdateUserPersonalProfileResponse = MutableLiveData<Resource<SuccessResponse>>()
-    val getUpdateUserPersonalProfileResponse: LiveData<Resource<SuccessResponse>>
+    val _getUpdateUserPersonalProfileResponse = MutableLiveData<Resource<UserPersonalProfileResponse>>()
+    val getUpdateUserPersonalProfileResponse: LiveData<Resource<UserPersonalProfileResponse>>
         get() = _getUpdateUserPersonalProfileResponse
 
     fun onBackButtonClicked() {
@@ -104,5 +108,13 @@ class UserProfileViewModel @ViewModelInject constructor(
                 }
             } else _getUpdateUserPersonalProfileResponse.postValue(Resource.error("No Internet Connection", null))
         }
+    }
+
+
+    fun saveUserObj(loginResponse: LoginResponse){
+        viewModelScope.launch {
+            dataStoreProvider.saveUserObj(loginResponse)
+        }
+        LoginSession.getInstance().setLoginResponse(loginResponse)
     }
 }

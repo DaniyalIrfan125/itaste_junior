@@ -50,7 +50,15 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.techbayportal.itaste.ui.fragments.profilefragment.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_choosePakageFragment"
+            app:destination="@id/choosePakageFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
     <fragment
         android:id="@+id/savedPostsFragment"
         android:name="com.techbayportal.itaste.ui.fragments.savedpostsfragment.SavedPostsFragment"
@@ -81,7 +89,11 @@
         android:label="HomeConfigurationBottomSheetFragment" >
         <action
             android:id="@+id/action_homeConfigurationBottomSheetFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </dialog>
     <fragment
         android:id="@+id/postDetailFragment"
@@ -192,10 +204,25 @@
             app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_myProfileFragment_to_welcomefragment"
-            app:destination="@id/welcomefragment" />
+            app:destination="@id/welcomefragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_myProfileFragment_to_vendorProfileFragment"
-            app:destination="@id/vendorProfileFragment" />
+            app:destination="@id/vendorProfileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_signUpVendorFragment2"
+            app:destination="@id/signUpVendorFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
@@ -203,7 +230,11 @@
         android:label="UserProfileFragment" >
         <action
             android:id="@+id/action_userProfileFragment_to_otpverificationFragment2"
-            app:destination="@id/otpverificationFragment2" />
+            app:destination="@id/otpverificationFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <dialog
         android:id="@+id/reportBugDialogFragment"
@@ -276,10 +307,18 @@
         android:label="VendorProfileFragment" >
         <action
             android:id="@+id/action_vendorProfileFragment_to_otpverificationFragment2"
-            app:destination="@id/otpverificationFragment2" />
+            app:destination="@id/otpverificationFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/otpverificationFragment2"
         android:name="com.techbayportal.itaste.ui.fragments.otpverificationfragment.OtpverificationFragment"
         android:label="OtpverificationFragment" />
+    <fragment
+        android:id="@+id/signUpVendorFragment2"
+        android:name="com.techbayportal.itaste.ui.fragments.signupvendorfragment.SignUpVendorFragment"
+        android:label="SignUpVendorFragment" />
 </navigation>

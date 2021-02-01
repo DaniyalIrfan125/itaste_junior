@@ -24,6 +24,8 @@ class ProfileViewModel @ViewModelInject constructor(
     val onFollowButtonClicked = SingleLiveEvent<Any>()
     val onDirectMessageButtonClicked = SingleLiveEvent<Any>()
 
+    val onUpdateButtonClicked = SingleLiveEvent<Any>()
+
     val _getVendorProfileDetailResponse = MutableLiveData<Resource<VendorProfileDetailsResponse>>()
     val getVendorProfileDetailResponse: LiveData<Resource<VendorProfileDetailsResponse>>
         get() = _getVendorProfileDetailResponse
@@ -44,6 +46,9 @@ class ProfileViewModel @ViewModelInject constructor(
         onDirectMessageButtonClicked.call()
     }
 
+    fun onUpdateButtonClicked() {
+        onUpdateButtonClicked.call()
+    }
 
     fun hitGetVendorProfileDetails(vendorId : Int) {
         viewModelScope.launch {

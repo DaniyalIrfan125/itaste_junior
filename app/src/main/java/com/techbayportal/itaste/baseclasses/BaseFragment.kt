@@ -41,12 +41,11 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
 
     lateinit var dataStoreProviderBase: DataStoreProvider
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         mViewDataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        dataStoreProviderBase = DataStoreProvider(requireContext())
+        subscribeToObserveDataStore()
         return mViewDataBinding.root
 
     }
@@ -60,19 +59,21 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
     }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         mViewDataBinding.setVariable(bindingVariable, mViewModel)
         mViewDataBinding.lifecycleOwner = this
         mViewDataBinding.executePendingBindings()
-        dataStoreProviderBase = DataStoreProvider(requireContext())
+
         loadingDialog = DialogClass.loadingDialog(requireContext())
+
 
 
         subscribeToShareLiveData()
         subscribeToNavigationLiveData()
         subscribeToViewLiveData()
 
-        subscribeToObserveDataStore()
+
 
 
     }
@@ -82,14 +83,16 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         //observing data from data store and showing
         dataStoreProviderBase.darkModeFlow.asLiveData().observe(this, Observer {
             if (it) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
                 sharedViewModel.isDarkMode
                 baseDarkMode = true
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
             } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
                 !sharedViewModel.isDarkMode
                 baseDarkMode = false
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
             }
         })

@@ -3,11 +3,11 @@ package com.techbayportal.itaste.ui.fragments.homefragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
@@ -25,6 +25,7 @@ import com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment.HomeIte
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.spinKit
 import kotlinx.android.synthetic.main.layout_homefragment.*
@@ -44,7 +45,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     lateinit var mView: View
 
     var thisVendorId: Int = 0
-    var thisVendorPosition: Int = 0
+
     val bottomSheet = HomeConfigurationBottomSheetFragment()
     private val homeItemBottomSheet = HomeItemBottomSheetFragment()
 
@@ -72,7 +73,14 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 //                .navigate(R.id.action_homeFragment_to_homeConfigurationBottomSheetFragment)
             //
             bottomSheet.show(requireActivity().supportFragmentManager, "bottomSheet")
-            mViewModel.hitGetAllCountriesForHome()
+
+            if (loginSession != null) {
+                if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
+                    // call api only when user is logged in
+                    mViewModel.hitGetAllCountriesForHome()
+                }
+            }
+
         })
 
         mViewModel.tempClicked.observe(this, Observer {
@@ -86,38 +94,22 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //populatingDataForHome()
+        mView = view
         initilizing()
         dataStoreProvider = DataStoreProvider(requireContext())
         subscribeToObserveDarkActivation()
         sharedViewModel.test = true
-        mView = view
+
 
         if (this::getHomeScreenResponse.isInitialized) {
             setData(getHomeScreenResponse)
         }
-        // mViewModel.loginSession!!.data.username
 
         mViewModel.hitGetHomeScreenInfoApi()
+
     }
 
-   /* private fun populatingDataForHome() {
-        homerRecyclerAdpater = HomeRecyclerAdapter(
-            listOf<Int>(
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first
-            ),
-            requireContext()
-        )
-        recycler_home.layoutManager = LinearLayoutManager(context)
-        recycler_home.adapter = homerRecyclerAdpater
-        homerRecyclerAdpater.setOnEntryClickListener(this)
-
-    }*/
-
-    private fun initilizing() {
+       private fun initilizing() {
         homerRecyclerAdpater = HomeRecyclerAdapter(vendorsDataList, requireContext())
         recycler_home.layoutManager = LinearLayoutManager(context)
         recycler_home.adapter = homerRecyclerAdpater
@@ -125,15 +117,15 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
 
         if (loginSession != null) {
-            if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
-                // bottom_navigation.menu.findItem(R.id.chatInboxFragment).isVisible = false
-
-            } else {
+            if (loginSession.data.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
+                //Check if user payment is done or not on first time move him to user profile and ask
+                //for payment
+                /*if(!loginSession.data.is_payment_update){
+                    Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_profileFragment)
+                }*/
 
             }
         }
-
-
 
 
     }
@@ -156,7 +148,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             } else if (it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION) {
                 if (it != -1) {
                     //call api to select country
-                    //  Toast.makeText(context, "Update Loc: ${sharedViewModel.userUpdatedCountryId}", Toast.LENGTH_SHORT).show()
                     mViewModel.hitUpdateUserLocationFromHome(sharedViewModel.userUpdatedCountryId)
 
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
@@ -180,9 +171,10 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     override fun onItemClickListener(type: String, id :Int) {
         when (type) {
             AppConstants.RecyclerViewKeys.HOME_RV -> {
+                sharedViewModel.vendorProfileId = id
                 Navigation.findNavController(img_dots)
                     .navigate(R.id.action_homeFragment_to_profileFragment)
-                sharedViewModel.vendorProfileId = id
+
             }
             AppConstants.RecyclerViewKeys.HOME_RV_CHILD -> {
                 Toast.makeText(context, "Home Child", Toast.LENGTH_SHORT).show()
@@ -198,7 +190,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     override fun subscribeToNetworkLiveData() {
 
         mViewModel.getCountriesResponse.observe(this, Observer {
-            //  Snackbar.make(requireView(), "Country", Snackbar.LENGTH_SHORT).show()
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
@@ -225,8 +216,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-
-                    // Snackbar.make(requireView(), "Country Updated" , Snackbar.LENGTH_SHORT).show()
                     //hit again to refresh data
                     mViewModel.hitGetAllCountriesForHome()
                 }
@@ -247,7 +236,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                  //  Toast.makeText(requireContext(), "Vendor Blocked", Toast.LENGTH_SHORT).show()
                     mViewModel.hitGetHomeScreenInfoApi()
                 }
                 Resource.Status.ERROR -> {
@@ -262,21 +250,27 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    loadingDialog.show()
+                   // loadingDialog.show()
                 }
                 Resource.Status.SUCCESS -> {
-                    loadingDialog.dismiss()
+                   // loadingDialog.dismiss()
                     getHomeScreenResponse = it.data!!
 
                     setData(getHomeScreenResponse)
                     homerRecyclerAdpater.notifyDataSetChanged()
-                   // Toast.makeText(requireContext(), "HomeScreen Api Hit", Toast.LENGTH_SHORT).show()
+                    shimmerFrameLayout.stopShimmer()
+                    shimmerFrameLayout.visibility = View.GONE
+                    recycler_home.visibility = View.VISIBLE
+                    rl_promotion.visibility = View.VISIBLE
 
 
                 }
                 Resource.Status.ERROR -> {
-                    loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                    shimmerFrameLayout.visibility = View.GONE
+                    recycler_home.visibility = View.VISIBLE
+                    rl_promotion.visibility = View.VISIBLE
+                   // loadingDialog.dismiss()
+                   // DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
 
             }
@@ -309,15 +303,25 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 vendorsDataList.clear()
                 vendorsDataList.addAll(homeScreenResponse.data)
                 homerRecyclerAdpater.notifyDataSetChanged()
-
-
             }
+
+            
 
 
 
         } catch (e: Exception) {
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        shimmerFrameLayout.startShimmer()
+    }
+
+    override fun onPause() {
+        shimmerFrameLayout.stopShimmer()
+        super.onPause()
     }
 
     //vendor post item clicked

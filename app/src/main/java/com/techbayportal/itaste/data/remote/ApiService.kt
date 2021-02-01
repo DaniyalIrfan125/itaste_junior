@@ -47,11 +47,10 @@ interface ApiService {
         @Query("phone") phone: String?,
         @Query("email") email: String?,
         @Query("password") password: String?,
-        @Query("country_id") country_id: String?,
-        @Query("city_id") city_id: String?,
-       // @Query("days_of_week") days_of_week: MutableList<DaysOfWeek>?,
-        @Query("days_of_week[]") days_of_week: List<String>,
-        @Query("is_deliverable") is_deliverable: Int?,
+        @Query("country_id") country_id: Int?,
+        @Query("city_id") city_id: Int?,
+      //  @Query("days_of_week[]") days_of_week: List<String>,
+      //  @Query("is_deliverable") is_deliverable: Int?,
         @Query("password_confirmation") password_confirmation: String?,
         @Query("description") description: String?
 
@@ -163,7 +162,7 @@ interface ApiService {
         @Query("email") email : String,
         @Query("phone") phone : String,
         @Part profilePic : MultipartBody.Part
-    ): Response<SuccessResponse>
+    ): Response<UserPersonalProfileResponse>
 
 
     @POST("user/update-profile")
@@ -174,7 +173,7 @@ interface ApiService {
         @Query("last") last: String,
         @Query("email") email : String,
         @Query("phone") phone : String
-    ): Response<SuccessResponse>
+    ): Response<UserPersonalProfileResponse>
 
     @GET("vendor/personal-profile")
     suspend fun getVendorPersonalProfile(
@@ -189,14 +188,14 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Query("first_name") first_name: String,
         @Query("last_name") last_name : String,
-        @Query("bio") bio : String,
+        @Query("description") description : String,
         @Query("phone") phone : String,
         @Query("email") email : String,
         @Part profilePic : MultipartBody.Part,
-        @Query("country_id") country_id : String,
-        @Query("city_id") city_id : String
+        @Query("country_id") country_id : Int,
+        @Query("city_id") city_id : Int
 
-    ): Response<SuccessResponse>
+    ): Response<VendorUpdateProfileResponse>
 
 
     @POST("vendor/update-profile")
@@ -205,11 +204,22 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Query("first_name") first_name: String,
         @Query("last_name") last_name : String,
-        @Query("bio") bio : String,
+        @Query("description") description : String,
         @Query("phone") phone : String,
         @Query("email") email : String,
-        @Query("country_id") country_id : String,
-        @Query("city_id") city_id : String
+        @Query("country_id") country_id : Int,
+        @Query("city_id") city_id : Int
+    ): Response<VendorUpdateProfileResponse>
+
+    @POST("vendor/update-profile")
+    suspend fun switchToPremium(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("country_id") country_id : Int,
+        @Query("city_id") city_id : Int,
+      //  @Query("days_of_week[]") days_of_week: List<String>,
+      //  @Query("is_deliverable") is_deliverable: Int,
+        @Query("description") description: String
     ): Response<SuccessResponse>
 
     @FormUrlEncoded
@@ -303,6 +313,10 @@ interface ApiService {
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String
     ): Response<NotificationResponse>
+
+    @GET("packages")
+    suspend fun getPackages(
+    ): Response<PackagesResponse>
 
 
 

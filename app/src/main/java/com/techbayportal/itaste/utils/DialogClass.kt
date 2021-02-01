@@ -60,13 +60,13 @@ class DialogClass {
 
         fun successDialog(context: Context,successMessage:String ,isDarkMode : Boolean) {
             val dialog = Dialog(context)
-            dialog.setContentView(R.layout.layout_error_loading_page)
+            dialog.setContentView(R.layout.layout_success_dialog)
 
 
 
             // set the custom dialog components - text, image and button
             val titleText = dialog.findViewById<TextView>(R.id.tv_title_success)
-            val descText = dialog.findViewById<TextView>(R.id.tv_title_success)
+            val descText = dialog.findViewById<TextView>(R.id.tv_description_success)
             val btnOk = dialog.findViewById<Button>(R.id.btn_ok_success)
             titleText.text = context.getString(R.string.you_are_all_set)
 
@@ -82,7 +82,7 @@ class DialogClass {
                 iv_image.setImageResource(R.drawable.icon_success_dialog)
             }
 
-            val successTextMessage = dialog.findViewById<TextView>(R.id.tv_description)
+            val successTextMessage = dialog.findViewById<TextView>(R.id.tv_description_success)
             successTextMessage.text = successMessage
 
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

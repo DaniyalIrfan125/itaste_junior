@@ -58,8 +58,8 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     private val countriesList = arrayListOf<GetAllCountriesData>()
     private val citiesList = arrayListOf<GetAllCitiesData>()
     var countryid: String = "0"
-    var selectedCountryId: String = "0"
-    var cityid: String = "0"
+    var selectedCountryId: Int = 0
+    var cityid: Int = 0
 
     var compressedProfileImageFile: File? = null
 
@@ -73,6 +73,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fieldTextWatcher()
+        mViewModel.getAllCountries()
         setCountriesData()
         mView = view
         if (this::vendorPersonalProfileResponseData.isInitialized) {
@@ -156,14 +157,13 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                     if (et_country_code.fullNumberWithPlus != vendorPersonalProfileResponseData.phone) {
                         sharedViewModel.isUpdatePhone = true
                         sharedViewModel.isForGotVerify = false
-                        sharedViewModel.verifyOtpHoldNewPhoneNumber =
-                            et_country_code.fullNumberWithPlus
-                        Navigation.findNavController(mView)
-                            .navigate(R.id.action_vendorProfileFragment_to_otpverificationFragment2)
+                        sharedViewModel.verifyOtpHoldNewPhoneNumber = et_country_code.fullNumberWithPlus
+                        Navigation.findNavController(mView).navigate(R.id.action_vendorProfileFragment_to_otpverificationFragment2)
 
                     } else {
                         mViewModel.hitGetVendorPersonalProfile()
                     }
+
 
                 }
                 Resource.Status.ERROR -> {
@@ -190,7 +190,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                         if (countriesList[index].select) {
                            var countryidL = countriesList[index].id
                             sp_vendorCountry.setSelection(index)
-                            mViewModel.getAllCities(countryidL.toInt())
+                            mViewModel.getAllCities(countryidL)
 
                             return@Observer
                         }
@@ -245,9 +245,9 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                             if (Patterns.EMAIL_ADDRESS.matcher(et_vendorEmail.text.toString())
                                     .matches()
                             ) {
-                                if (sp_vendorCountry.selectedItemPosition != -1) {
+                              //  if (sp_vendorCountry.selectedItemPosition != -1 ) {
                                     tv_error_vendorCountry.visibility = View.GONE
-                                    if (sp_vendorCity.selectedItemPosition != -1 && cityid != "0") {
+                                    if (sp_vendorCity.selectedItemPosition != -1 && cityid != 0) {
                                         tv_error_vendorCity.visibility = View.GONE
                                         if (profileImageFile != null) {
 
@@ -285,10 +285,10 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                                         tv_error_vendorCity.text = getString(R.string.selectcity)
                                         tv_error_vendorCity.visibility = View.VISIBLE
                                     }
-                                } else {
+                               /* } else {
                                     tv_error_vendorCountry.text = getString(R.string.selectcountry)
                                     tv_error_vendorCountry.visibility = View.VISIBLE
-                                }
+                                }*/
                             } else {
                                 tv_error_vendorEmail.text = getString(R.string.writevalidemail)
                                 tv_error_vendorEmail.visibility = View.VISIBLE
@@ -395,12 +395,9 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                     position: Int,
                     id: Long
                 ) {
-                    if (position > 0) {
                         countriesList[position].id
                         selectedCountryId = countriesList[position].id
-                        mViewModel.getAllCities(selectedCountryId.toInt())
-
-                    }
+                        mViewModel.getAllCities(selectedCountryId)
                 }
             }
     }
@@ -411,7 +408,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                 "${vendorPersonalProfileResponseData.first_name} ${vendorPersonalProfileResponseData.last_name}"
             et_vendorFirstName.setText(vendorPersonalProfileResponseData.first_name)
             et_vendorLastName.setText(vendorPersonalProfileResponseData.last_name)
-            et_vendorBio.setText(vendorPersonalProfileResponseData.bio)
+            et_vendorBio.setText(vendorPersonalProfileResponseData.description)
             et_country_code.fullNumber = vendorPersonalProfileResponseData.phone
             sharedViewModel.verifyOtpHoldPhoneNumber =
                 vendorPersonalProfileResponseData.phone

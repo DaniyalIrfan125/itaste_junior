@@ -117,10 +117,10 @@ class NotificationFragmentAdapter(
             }
 
             if (rowIndex == position) {
-                rlNotificationItem!!.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWhite))
+                rlNotificationItem!!.setBackgroundColor(ContextCompat.getColor(context, R.color.bottomNavigationColor))
 
             } else {
-                rlNotificationItem!!.setBackgroundColor(ContextCompat.getColor(context, R.color.notificationLlBgColor));
+                rlNotificationItem!!.setBackgroundColor(ContextCompat.getColor(context, R.color.bottomNavigationColor));
 
             }
 

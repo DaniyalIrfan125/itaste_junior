@@ -70,8 +70,6 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
         subscribeToObserveDataStore()
 
         ll_settings.setOnClickListener(View.OnClickListener {
-           // Navigation.findNavController(mView).popBackStack()
-           // Navigation.findNavController(mView).navigate(R.id.action_homeConfigurationBottomSheetFragment_to_settingsFragment)
             dismiss()
             sharedViewModel._homeConfigBottomSheetClickId.postValue(AppConstants.HomeConfigBottomSheet.SETTINGS)
 
@@ -87,7 +85,6 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
         })
 
         ll_logout.setOnClickListener(View.OnClickListener {
-           // sharedViewModel._isSelectedCountryId.value = 1
             sharedViewModel._homeConfigBottomSheetClickId.value = AppConstants.HomeConfigBottomSheet.LOGOUT
 
 
@@ -102,10 +99,8 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
                 (activity as MainActivity?)!!.setLocaleLanguage("ar")
                 startActivity(Intent(context, MainActivity::class.java))
 
-              //  sharedViewModel._isSelectedCountryId?.value = 2
 
             } else{
-             //   sharedViewModel._isSelectedCountryId?.value = 3
                 activity?.finish()
                 (activity as MainActivity?)!!.setLocaleLanguage("en")
                 startActivity(
@@ -115,9 +110,6 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
                     )
                 )
             }
-
-            Toast.makeText(requireContext(), "change language", Toast.LENGTH_SHORT).show()
-            Log.d("CLICK:", "change language")
         })
         initilizing()
     }
@@ -126,8 +118,6 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
 
         locationAdapter = LocationsAdapter(locationsList,object :LocationsAdapter.ClickItemListener{
             override fun onClicked(getAllCountriesData: GetAllCountriesData) {
-                //Toast.makeText(requireContext(), "flag: ${getAllCountriesData.name}", Toast.LENGTH_SHORT).show()
-
                 //Call Update Loc API
                 sharedViewModel.userUpdatedCountryId = getAllCountriesData.id.toInt()
                 sharedViewModel._homeConfigBottomSheetClickId.postValue(AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION)
@@ -142,9 +132,8 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
             if (loginSession.data.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
                 // relative_addButton.background = null
                 rv_userlocations.isVisible = false
+                view_last.visibility = View.GONE
 
-
-            } else {
 
             }
         }

@@ -25,8 +25,9 @@ import com.techbayportal.itaste.ui.fragments.signupconfigurationsfragment.adapte
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_changepasswordfragment.*
 import kotlinx.android.synthetic.main.layout_profilefragment.*
+import kotlinx.android.synthetic.main.layout_profilefragment.spinKit
+import kotlinx.android.synthetic.main.layout_profilefragment.tv_profileName
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -51,46 +52,19 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
-        mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
-       // mViewModel.hitGetVendorProfileDetails(31)
-       // mViewModel.hitSetFollowApi(31)
+//        mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
+        mViewModel.hitGetVendorProfileDetails(31)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mView = view
         initializing()
-        //isFallowingVendor(isFallowing)
 
         if (this::vendorProfileDetailData.isInitialized) {
             setData(vendorProfileDetailData)
         }
-
-
-
-        /*recycler_profilePosts.adapter = PostsRecyclerAdapter(
-            listOf<Int>(
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first)
-        )*/
 
     }
 
@@ -118,11 +92,16 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         super.subscribeToNavigationLiveData()
 
         mViewModel.onBackButtonClicked.observe(this, Observer {
-            Navigation.findNavController(mView).popBackStack()
+            Navigation.findNavController(img_back).popBackStack()
         })
 
         mViewModel.onFollowButtonClicked.observe(this, Observer {
             mViewModel.hitSetFollowApi(loginSession!!.data.id.toInt())
+        })
+
+        mViewModel.onUpdateButtonClicked.observe(this, Observer {
+           // Navigation.findNavController(btn_updatePayment).navigate(R.id.action_profileFragment_to_choosePakageFragment)
+            Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_choosePakageFragment)
         })
     }
 
@@ -167,12 +146,10 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     }
     private fun isFallowingVendor(isFallowing :Boolean){
         if(isFallowing){
-            Toast.makeText(requireContext(), "IS Following: $isFallowing", Toast.LENGTH_SHORT).show()
             btn_follow.text = getString(R.string.following)
             btn_follow.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.btn_direct_message_curve)
         }else{
-            Toast.makeText(requireContext(), "IS Following: $isFallowing", Toast.LENGTH_SHORT).show()
             btn_follow.text = getString(R.string.follow)
             btn_follow.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.btn_orange_curve_profile)
@@ -199,17 +176,37 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
             }
 
             tv_vendorUserName.text = vendorProfileDetailData.username
-            tv_profileName.text = vendorProfileDetailData.first_name + vendorProfileDetailData.last_name
+            tv_profileName.text = vendorProfileDetailData.first_name +" " +vendorProfileDetailData.last_name
             tv_details.text = vendorProfileDetailData.bio
             tv_postCounts.text = vendorProfileDetailData.total_post.toString()
             tv_likesCount.text = vendorProfileDetailData.total_likes.toString()
             tv_followersCount.text = vendorProfileDetailData.total_followers.toString()
             if(!vendorProfileDetailData.posts.isNullOrEmpty()){
+                ll_noPosts.visibility = View.GONE
+                postsList.clear()
                 postsList.addAll(vendorProfileDetailData.posts)
                 postsRecyclerAdapter.notifyDataSetChanged()
             }
             else{
                 ll_noPosts.visibility = View.VISIBLE
+            }
+
+            if(vendorProfileDetailData.is_follow){
+                btn_follow.text = getString(R.string.following)
+                btn_follow.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.btn_direct_message_curve)
+            }else{
+                btn_follow.text = getString(R.string.follow)
+                btn_follow.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.btn_orange_curve_profile)
+            }
+
+            if(!vendorProfileDetailData.is_payment_update){
+                ll_update_payment.visibility = View.VISIBLE
+                ll_message_follow_button.visibility = View.GONE
+            }else{
+                ll_update_payment.visibility = View.GONE
+                ll_message_follow_button.visibility = View.VISIBLE
             }
         } catch (e: Exception) {
         }

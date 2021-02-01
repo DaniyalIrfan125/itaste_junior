@@ -231,12 +231,9 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
                                                         }
 
                                                     } else if (sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR) {
-                                                        sharedViewModel.verifyOtpHoldPhoneNumber =
-                                                            et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
-                                                        sharedViewModel.userModel =
-                                                            dataSetUserSignUpModel()
-                                                        Navigation.findNavController(btn_signUp)
-                                                            .navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
+                                                        sharedViewModel.verifyOtpHoldPhoneNumber = et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString()
+                                                        sharedViewModel.userModel = dataSetUserSignUpModel()
+                                                        Navigation.findNavController(btn_signUp).navigate(R.id.action_signUpFragment_to_signUpVendorFragment)
                                                     }
                                                 }
 

@@ -10,6 +10,7 @@ import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
 import com.techbayportal.itaste.utils.LoginSession
 import com.techbayportal.itaste.utils.NetworkHelper
+import com.techbayportal.itaste.utils.SingleLiveEvent
 import com.techbayportal.itaste.utils.extractErrorMessage
 import kotlinx.coroutines.launch
 
@@ -23,6 +24,12 @@ class NotificationFragmentViewModel @ViewModelInject constructor(
     val _getNotificationsResponse = MutableLiveData<Resource<NotificationResponse>>()
     val getNotificationsResponse: LiveData<Resource<NotificationResponse>>
         get() = _getNotificationsResponse
+
+    val onBackButtonClicked = SingleLiveEvent<Any>()
+
+    fun onBackButtonClicked() {
+        onBackButtonClicked.call()
+    }
 
     fun hitGetNotificationApi() {
         viewModelScope.launch {

@@ -67,7 +67,6 @@
                             android:layout_margin="@dimen/_3sdp"
                             android:elevation="@dimen/_3sdp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/icon_profile"
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                             tools:layout_editor_absoluteX="116dp"
                             tools:layout_editor_absoluteY="61dp" />
@@ -93,7 +92,6 @@
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="3sp"
-                        android:hint="Jhon Dao"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp" />
 
@@ -542,11 +540,13 @@
                         </View>
 
                         <LinearLayout
+                            android:id="@+id/ll_switchToPremium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_15sdp"
                             android:orientation="horizontal"
-                            android:weightSum="2">
+                            android:weightSum="2"
+                            android:onClick="@{()->viewModel.onSwitchToPremiumClicked()}">
 
                             <ImageView
                                 android:layout_width="@dimen/_20sdp"
@@ -578,6 +578,7 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tv_description_switch_to_premium"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_24sdp"

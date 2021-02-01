@@ -43,7 +43,7 @@ class ChangeExistingPasswordFragment :
         super.subscribeToNavigationLiveData()
 
 
-        mViewModel.onBtnClicked.observe(this,  Observer{
+        mViewModel.onBtnClicked.observe(this, Observer {
             validationsCheck()
         })
 
@@ -71,6 +71,7 @@ class ChangeExistingPasswordFragment :
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_states)
         }
     }
+
     override fun subscribeToNetworkLiveData() {
         super.subscribeToNetworkLiveData()
         mViewModel.changeExistingPasswordResponse.observe(this, Observer {
@@ -80,14 +81,20 @@ class ChangeExistingPasswordFragment :
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
+
+
+                    DialogClass.successDialog(requireContext(), getString(R.string.Password_changed_successfully), baseDarkMode)
+
+                    ed_existingPassword.text.clear()
+                    ed_newPassword.text.clear()
+                    ed_confirmPassword.text.clear()
+
                     Navigation.findNavController(img_back).popBackStack()
-                    Snackbar.make(requireView(),"Password changed successfully",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode )
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })
@@ -102,7 +109,11 @@ class ChangeExistingPasswordFragment :
 
                     if (ed_newPassword.text.toString() == ed_confirmPassword.text.toString()) {
 
-                        mViewModel.hitChangeExistingPassword(ed_existingPassword.text.toString(), ed_newPassword.text.toString(), ed_confirmPassword.text.toString())
+                        mViewModel.hitChangeExistingPassword(
+                            ed_existingPassword.text.toString(),
+                            ed_newPassword.text.toString(),
+                            ed_confirmPassword.text.toString()
+                        )
 
                     } else {
 
@@ -110,7 +121,8 @@ class ChangeExistingPasswordFragment :
                         tv_confirmPassword.visibility = View.VISIBLE
                         ed_confirmPassword.background =
                             ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                        tv_confirmPassword.text = "New and confirm password does not match!"
+                        tv_confirmPassword.text =
+                            getString(R.string.New_and_confirm_password_does_not_match)
                     }
 
 
@@ -119,7 +131,7 @@ class ChangeExistingPasswordFragment :
                     tv_confirmPassword.visibility = View.VISIBLE
                     ed_confirmPassword.background =
                         ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                    tv_confirmPassword.text = "Please write Confirm Password!"
+                    tv_confirmPassword.text = getString(R.string.Please_write_Confirm_Password)
 
                 }
 
@@ -128,7 +140,7 @@ class ChangeExistingPasswordFragment :
                 tv_newPassword.visibility = View.VISIBLE
                 ed_newPassword.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-                tv_newPassword.text = "Please write New Password!"
+                tv_newPassword.text = getString(R.string.Please_write_New_Password)
 
             }
 
@@ -137,7 +149,7 @@ class ChangeExistingPasswordFragment :
             tv_errorExistingPassword.visibility = View.VISIBLE
             ed_existingPassword.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-            tv_errorExistingPassword.text = "Please write Existing Password!"
+            tv_errorExistingPassword.text = getString(R.string.Please_write_Existing_Password)
         }
     }
 

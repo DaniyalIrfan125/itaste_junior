@@ -30,8 +30,8 @@ class VendorProfileViewModel @ViewModelInject constructor(
     val getVendorPersonalProfileResponse: LiveData<Resource<VendorPersonalProfileResponse>>
         get() = _getVendorPersonalProfileResponse
 
-    val _getUpdateVendorPersonalProfileResponse = MutableLiveData<Resource<SuccessResponse>>()
-    val getUpdateVendorPersonalProfileResponse: LiveData<Resource<SuccessResponse>>
+    val _getUpdateVendorPersonalProfileResponse = MutableLiveData<Resource<VendorUpdateProfileResponse>>()
+    val getUpdateVendorPersonalProfileResponse: LiveData<Resource<VendorUpdateProfileResponse>>
         get() = _getUpdateVendorPersonalProfileResponse
 
     val _getAllCountriesResponse = MutableLiveData<Resource<GetAllCountriesResponse>>()
@@ -83,7 +83,9 @@ class VendorProfileViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitUpdateVendorPersonalProfile( first_name:String, last_name:String, bio:String, phone :String ,email: String, profilePic:File?, country_id: String, city_id: String) {
+    fun hitUpdateVendorPersonalProfile( first_name:String, last_name:String, bio:String, phone :String ,email: String, profilePic:File?, country_id: Int, city_id: Int) {
+        var days_of_week1 : ArrayList<String> = ArrayList()
+        days_of_week1.add("monday")
         viewModelScope.launch {
             _getUpdateVendorPersonalProfileResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
@@ -145,7 +147,5 @@ class VendorProfileViewModel @ViewModelInject constructor(
         }
     }
 
-    init {
-        getAllCountries()
-    }
+
 }

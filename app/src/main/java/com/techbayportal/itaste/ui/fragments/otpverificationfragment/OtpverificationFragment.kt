@@ -14,6 +14,7 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutOtpverificationfragmentBinding
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
@@ -22,6 +23,8 @@ import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_otpverificationfragment.*
 import kotlinx.android.synthetic.main.layout_otpverificationfragment.btn_next
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -40,9 +43,12 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
+    lateinit var dataStoreProvider: DataStoreProvider
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
+        dataStoreProvider = DataStoreProvider(requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -92,9 +98,6 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
     fun validateFields() {
         if (!TextUtils.isEmpty(otp_view.text)) {
-            //
-            // Navigation.findNavController(btn_next).navigate(R.id.action_otpverificationFragment_to_changePasswordFragment)
-            //call api
             if (sharedViewModel.isForGotVerify) {
                 mViewModel.verifyOTP(Integer.parseInt(otp_view.text.toString()), sharedViewModel.verifyOtpHoldPhoneNumber, AppConstants.VerifyOTPTypeKeys.FORGOT_PASSWORD
                 )
@@ -146,23 +149,18 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
     }
 
-    /*override fun subscribeToNavigationLiveData() {
-        super.subscribeToNavigationLiveData()
-
-        mViewModel.onNextButtonClicked.observe(this, Observer {
-            validateFields()
-        })
-
-        mViewModel.onBackButtonClicked.observe(this, Observer {
-            Navigation.findNavController(btn_back)
-                .popBackStack()
-        })
-    }*/
-
 
     //navigate to home screen
     private fun navigateToMainScreen() {
         val intent = Intent(activity, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
+    }
+
+    //navigate to home screen with profile fragment
+    private fun navigateToMainScreenWithProfileFragmentOpen() {
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.putExtra("PROFILE_FRAGMENT", "profile")
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
     }
@@ -186,9 +184,6 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                             Navigation.findNavController(mView).navigate(R.id.action_otpverificationFragment_to_changePasswordFragment)
 
                         }
-                        else{
-                           // Toast.makeText(requireContext(), "Already there", Toast.LENGTH_SHORT).show()
-                        }
 
                     }else if(sharedViewModel.isUpdatePhone){
                         Navigation.findNavController(mView).popBackStack()
@@ -197,13 +192,18 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
                     else {
 
                         if(sharedViewModel.userType == AppConstants.UserTypeKeys.USER){
-                            if (it.data!!.data == null){
+                            if (it.data == null){
                                 Toast.makeText(requireContext(), "Otp Response is Empty", Toast.LENGTH_SHORT).show()
                             }else{
 
                                 try {
                                     mViewModel.saveUserObj(it.data)
                                     sharedViewModel.testId = it.data.data.id
+
+                                    //setting switch to premium false
+                                    GlobalScope.launch {
+                                        dataStoreProvider.switchToPremium(false)
+                                    }
                                     Navigation.findNavController(mView).navigate(R.id.action_otpverificationFragment_to_signupConfigurationsFragment)
                                 } catch (e: Exception) {
                                 }
@@ -211,13 +211,20 @@ class OtpverificationFragment : BaseFragment<LayoutOtpverificationfragmentBindin
 
 
                         }else if(sharedViewModel.userType == AppConstants.UserTypeKeys.VENDOR){
-                            if (it.data!!.data == null){
+                            if (it.data == null){
                                 Toast.makeText(requireContext(), "Otp Response is Empty", Toast.LENGTH_SHORT).show()
                             }else{
                                 try {
-                                    mViewModel.saveUserObj(it.data)
-                                    sharedViewModel.testId = it.data.data.id
-                                    navigateToMainScreen()
+                                    if(!it.data.data.is_payment_update){
+                                        mViewModel.saveUserObj(it.data)
+                                        sharedViewModel.testId = it.data.data.id
+                                        navigateToMainScreenWithProfileFragmentOpen()
+                                    }else{
+                                        mViewModel.saveUserObj(it.data)
+                                        sharedViewModel.testId = it.data.data.id
+                                        navigateToMainScreen()
+                                    }
+
                                 } catch (e: Exception) {
                                 }
                             }

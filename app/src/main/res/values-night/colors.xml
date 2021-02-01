@@ -44,6 +44,7 @@
     <color name="notificationLlBgColor">#1a1a1a</color>
     <color name="itemTimeBgColor">#141414</color>
     <color name="cartItemBgColor">#2b2b2b</color>
+    <color name="noPostsBgColor">#343434</color>
     <color name="layoutSearchBgColor">#161616</color>
     <color name="itemPackageBgColor">#131313</color>
 
@@ -51,9 +52,11 @@
 
     <color name="otpTimerColor">#FFFFFF</color>
 
-    <color name="permission_alert_bg">#1a1a1a</color>
-    <color name="permission_alert_color">#ffffff</color>
     <color name="location_text">#575757</color>
+    <color name="shimmer_item_color">#808080</color>
+
+    <color name="sameBlackTitleText">#1a1a1a</color>
+    <color name="noPostsTextColor">#a1a1a1</color>
 
 
 </resources>

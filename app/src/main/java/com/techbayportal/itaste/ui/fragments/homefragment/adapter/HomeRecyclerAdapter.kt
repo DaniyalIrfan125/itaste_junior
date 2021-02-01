@@ -30,6 +30,8 @@ class HomeRecyclerAdapter(
     val context: Context
 ) :
     RecyclerView.Adapter<HomeRecyclerAdapter.ViewHolder>() {
+
+
     private var onClickListener: HomeRvClickListener? = null
     lateinit var homeChildRecyclerAdapter: HomeChildRecyclerAdapter
 
@@ -100,7 +102,6 @@ class HomeRecyclerAdapter(
 
             img_profile?.setOnClickListener {
                 onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV,model.id)
-
 
             }
 

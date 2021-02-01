@@ -97,7 +97,8 @@
                     android:lineSpacingExtra="3sp"
                     android:text="@string/days_of_work"
                     android:textColor="@color/titleTextColorBlack"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -106,14 +107,16 @@
                     android:lineSpacingExtra="3sp"
                     android:text="@string/select_days_you_want_to_work_on"
                     android:textColor="@color/titleTextColorBlack"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:visibility="gone"/>
 
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_days"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp" />
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:visibility="gone"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -123,7 +126,8 @@
                     android:lineSpacingExtra="3sp"
                     android:text="@string/are_your_services"
                     android:textColor="@color/titleTextColorBlack"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:visibility="gone"/>
 
                 <RadioGroup
                     android:id="@+id/rg_service_type"
@@ -132,6 +136,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="vertical"
                     android:onClick="@{()->viewModel.onServiceTypeRadioButtonClicked()"
+                    android:visibility="gone"
                     >
 
                     <RadioButton
@@ -159,7 +164,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:fontFamily="@font/roboto_bold"
                     android:lineSpacingExtra="-3sp"
                     android:text="@string/description_optional"

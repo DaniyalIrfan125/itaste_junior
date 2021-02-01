@@ -86,6 +86,8 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
 
     }
 
+
+
     /*private fun subscribeToObserveLanguageActivation() {
         //observing data from data store and showing
         dataStoreProvider.languageFlow.asLiveData().observe(this, androidx.lifecycle.Observer {

@@ -63,7 +63,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Syra Ahmed and 38 others liked your food post."
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="12sp"
                     >

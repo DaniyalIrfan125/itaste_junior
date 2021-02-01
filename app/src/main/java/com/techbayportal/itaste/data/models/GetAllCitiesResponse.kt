@@ -7,7 +7,7 @@ data class GetAllCitiesResponse(
 )
 
 data class GetAllCitiesData(
-    val id: String,
+    val id: Int,
     val name: String,
     val select: Boolean
 )

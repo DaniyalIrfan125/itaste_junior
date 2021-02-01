@@ -156,7 +156,7 @@
 
     //ChoosePackageFragment
     <string name="choose_package">Choose Package</string>
-    <string name="now_that_your_account_is_approved_you_need_to_pick_none_of_our_packages_so_that_nothing_can_stop_nfrom_posting">Now that your account is approved you need to pick \none of our packages, so that nothing can stop \nfrom posting.</string>
+    <string name="now_that_your_account_is_approved_you_need_to_pick_none_of_our_packages_so_that_nothing_can_stop_nfrom_posting">Now that your account is approved you need to pick one of our packages, so that nothing can stop from posting.</string>
     <string name="proceed_to_checkout">Proceed To Checkout</string>
 
     //ContactUsFragment
@@ -216,7 +216,7 @@
     <string name="aed">AED</string>
     <string name="weekly_updates">- Weekly Updates</string>
     <string name="cancel_anytime">- Cancel Anytime</string>
-    <string name="_10_posts_per_week">- 10 Posts per week.</string>
+    <string name="_10_posts_per_week">Posts per week.</string>
     <string name="manual_way_to_charge_nsubscription">- Manual way to charge <br> </br>subscription.</string>
 
     //layout Error Loading page
@@ -294,6 +294,13 @@
     <string name="Select_preffered_language">Please select your preferred language</string>
     <string name="success">success</string>
     <string name="you_are_all_set">You are all set!</string>
+    <string name="select_package">Select Package</string>
+    <string name="Password_changed_successfully">Password Changed Successfully</string>
+    <string name="New_and_confirm_password_does_not_match">New and confirm password does not match!</string>
+    <string name="Please_write_Confirm_Password">Please write Confirm Password!</string>
+    <string name="Please_write_New_Password">Please write New Password!</string>
+    <string name="Please_write_Existing_Password">Please write Existing Password!</string>
+    <string name="bug_report_submitted">Bug Report Submitted</string>
 
 
 </resources>

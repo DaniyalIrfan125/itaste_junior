@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
@@ -74,7 +75,7 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
                     notificationDataList.clear()
                     if(!it.data!!.data.isNullOrEmpty()){
                         ll_no_notifications.visibility = View.GONE
-                        notificationDataList.addAll(it.data!!.data)
+                        notificationDataList.addAll(it.data.data)
                         notificationFragmentAdapter.notifyDataSetChanged()
                     }else{
                         ll_no_notifications.visibility = View.VISIBLE
@@ -87,6 +88,14 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
                 }
 
             }
+        })
+    }
+
+    override fun subscribeToNavigationLiveData() {
+        super.subscribeToNavigationLiveData()
+        mViewModel.onBackButtonClicked.observe(this, Observer {
+
+            Navigation.findNavController(mView).popBackStack()
         })
     }
 

@@ -26,6 +26,7 @@ class DataStoreProvider(context: Context) {
         val USER_OBJECT = preferencesKey<String>(AppConstants.DataStore.USER_OBJ)
         val IS_DARK_MODE = preferencesKey<String>(AppConstants.DataStore.IS_DARK_MODE)
         val LANGUAGE_PREF = preferencesKey<String>(AppConstants.DataStore.LANGUAGE_PREF)
+        val SWITCH_TO_PREMIUM = preferencesKey<Boolean>(AppConstants.DataStore.SWITCH_TO_PREMIUM)
 
     }
 
@@ -40,7 +41,7 @@ class DataStoreProvider(context: Context) {
     //SignupConfigration
     suspend fun signUpConfig(isDarkMode: Boolean, languagePref : String){
         dataStore.edit {
-            it
+
         }
 
     }
@@ -53,6 +54,14 @@ class DataStoreProvider(context: Context) {
             it[USER_OBJECT] = json
         }
     }
+
+    //Switch to Premium
+    suspend fun switchToPremium(switchToPremium: Boolean){
+        dataStore.edit {
+            it[SWITCH_TO_PREMIUM] = switchToPremium
+        }
+    }
+
 
     suspend fun clearUserObj(){
         dataStore.edit {
@@ -121,6 +130,10 @@ class DataStoreProvider(context: Context) {
     //Create an userObject flow
     val userObjFlow: Flow<String?> = dataStore.data.map {
         it[USER_OBJECT]
+    }
+
+    val switchToPremiumFlow: Flow<Boolean> = dataStore.data.map {
+        it[SWITCH_TO_PREMIUM] ?: false
     }
 
 

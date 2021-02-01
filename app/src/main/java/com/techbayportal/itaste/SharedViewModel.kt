@@ -45,7 +45,6 @@ class SharedViewModel : BaseViewModel() {
 
     val reportBugButtonsClicked = MutableLiveData<Int>()
     var bugReportMessage = ""
-    //var bugReportMessage = MutableLiveData<String>()
 
     var userUpdatedCountryId : Int = 0
     var vendorProfileId : Int = 0

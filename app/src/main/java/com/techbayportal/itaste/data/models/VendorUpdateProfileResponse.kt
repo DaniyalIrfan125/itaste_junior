@@ -2,26 +2,21 @@ package com.techbayportal.itaste.data.models
 
 import java.io.Serializable
 
-data class LoginResponse(
+data class VendorUpdateProfileResponse(
     val message: String,
-    val data: Data,
+    val data: VendorPersonalProfileResponseData,
     val errors: Any
-):Serializable
+): Serializable
 
-
-public data class Data(
-    val id : String,
+data class VendorUpdateProfileResponseData(
     val first: String,
     val last: String,
-    val username: String,
     val phone: String,
     val email: String,
-    val profile_pic: String,
-    val role: String,
-    val access_token: String,
     val country_id: String,
+    val city_id: String,
+    val description: String,
+    val profilePic: String,
+    val role: String,
     val is_payment_update: Boolean
-
-
-
 )

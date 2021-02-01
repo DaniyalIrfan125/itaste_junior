@@ -28,7 +28,8 @@
             android:id="@+id/img_back"
             android:layout_width="@dimen/_50sdp"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
             <ImageView
                 app:tint="@color/mainIconColor"
@@ -104,39 +105,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
         android:visibility="gone">
 
         <ImageView
-            android:layout_width="@dimen/_10sdp"
-            android:layout_height="@dimen/_10sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="@dimen/_52sdp"
-            android:src="@drawable/icon_bell_small_three" />
-
-        <ImageView
-            android:layout_width="@dimen/_15sdp"
-            android:layout_height="@dimen/_15sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="@dimen/_40sdp"
-            android:layout_marginTop="-4dp"
-            android:src="@drawable/icon_bell_small_two" />
-
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="@dimen/_25sdp"
-            android:layout_marginTop="-4dp"
-            android:src="@drawable/icon_bell_small_one" />
-
-
-        <ImageView
-            android:layout_width="@dimen/_65sdp"
-            android:layout_height="@dimen/_65sdp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-15dp"
-            android:src="@drawable/icon_bell"
-            android:contentDescription="@string/icon_bell" />
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/icon_four_bells"
+            app:tint="@color/mainIconColor"
+            >
+        </ImageView>
 
         <TextView
             android:layout_width="wrap_content"

@@ -87,6 +87,7 @@
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:src="@drawable/no_block_accounts"
+                app:tint="@color/mainIconColor"
                 >
             </ImageView>
 

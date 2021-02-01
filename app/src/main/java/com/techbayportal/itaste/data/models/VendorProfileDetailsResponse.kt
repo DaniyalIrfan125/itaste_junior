@@ -17,7 +17,10 @@ data class VendorProfileDetailData(
     val total_post: Int,
     val total_likes: Int,
     val total_followers: Int,
-    val posts: List<PostDetailData>
+    val posts: List<PostDetailData>,
+    val is_follow: Boolean,
+    val is_payment_update: Boolean
+
 )
 
 data class PostDetailData(
