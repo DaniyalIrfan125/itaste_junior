@@ -302,9 +302,19 @@
     <string name="tv_post_added">Post Added Successfully!</string>
     <string name="tv_success">Success!</string>
     <string name="tv_add_price">Add price</string>
+    <string name="tv_description">Description</string>
+    <string name="tv_describe">Describe your product....</string>
     <string name="tv_caption">Caption</string>
     <string name="tv_write_Caption">Please Write caption!</string>
+    <string name="tv_error_description">Please Write Description!</string>
     <string name="tv_write_price">Please Write Price!</string>
     <string name="tv_write_timing">Please Write Timing!</string>
+    <string name="tv_likes">likes</string>
+    <string name="tv_cooking_time_is">Cooking and Preparation time</string>
+    <string name="tv_write_comment">Write a Comment</string>
+    <string name="tv_plz_write_comment">Please Write a Comment!</string>
+    <string name="tv_viewAll">View All </string>
+    <string name="tv_comments">Comments</string>
+    <string name="tv_update">Update</string>
 
 </resources>

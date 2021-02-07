@@ -50,7 +50,16 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.techbayportal.itaste.ui.fragments.profilefragment.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_postdetailfragment"
+            app:destination="@id/postDetailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right" />
+
+    </fragment>
     <fragment
         android:id="@+id/savedPostsFragment"
         android:name="com.techbayportal.itaste.ui.fragments.savedpostsfragment.SavedPostsFragment"
@@ -74,7 +83,17 @@
     <dialog
         android:id="@+id/postDetailBottomSheetFragment"
         android:name="com.techbayportal.itaste.ui.fragments.postdetailbottomsheetfragment.PostDetailBottomSheetFragment"
-        android:label="PostDetailBottomSheetFragment" />
+        android:label="PostDetailBottomSheetFragment" >
+
+        <action
+            android:id="@+id/action_postDetailBottomSheetFragment_to_postfragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"
+            app:destination="@id/postFragment" />
+
+    </dialog>
     <dialog
         android:id="@+id/homeConfigurationBottomSheetFragment"
         android:name="com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment"

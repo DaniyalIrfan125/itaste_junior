@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.techbayportal.itaste.baseclasses.BaseViewModel
 import com.techbayportal.itaste.data.models.GetAllCountriesData
 import com.techbayportal.itaste.data.models.GetAllCountriesResponse
+import com.techbayportal.itaste.data.models.GetCategoriesResponse
 import com.techbayportal.itaste.data.models.UserModel
 import java.io.File
 
@@ -25,6 +26,10 @@ class SharedViewModel : BaseViewModel() {
     val isDarkMode :Boolean = false
     val localProfilePic: File? = null
     var selectedPostImageFile = MutableLiveData<File>()
+    var isEditPost : Boolean = false
+    var isEditBottomSheetClicked = MutableLiveData<Boolean>(false)
+    var isPostUpdated = MutableLiveData<Boolean>()
+    var categoriesResponse : MutableLiveData<List<GetCategoriesResponse.Data>> = MutableLiveData()
 //    val countriesList = ArrayList<GetAllCountriesData>()
 
 

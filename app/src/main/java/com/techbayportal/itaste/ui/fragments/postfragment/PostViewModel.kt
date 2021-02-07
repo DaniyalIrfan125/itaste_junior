@@ -27,15 +27,19 @@ class PostViewModel @ViewModelInject constructor(
     val addPostsResponse: LiveData<Resource<AddPostResponse>>
         get() = _addPostsResponse
 
-    private val _getCategoriesResponse = MutableLiveData<Resource<GetCategoriesResponse>>()
-    val getCategoriesResponse: LiveData<Resource<GetCategoriesResponse>>
-        get() = _getCategoriesResponse
+    private val _updatePostsResponse = MutableLiveData<Resource<UpdatePostResponse>>()
+    val updatePostsResponse: LiveData<Resource<UpdatePostResponse>>
+        get() = _updatePostsResponse
+
+
 
     private val _getTimeSuggestionResponse = MutableLiveData<Resource<GetTimeSuggestionResponse>>()
     val getTimeSuggestionResponse: LiveData<Resource<GetTimeSuggestionResponse>>
         get() = _getTimeSuggestionResponse
 
-
+    private val _editPostResponse = MutableLiveData<Resource<EditPostResponse>>()
+    val editPostResponse: LiveData<Resource<EditPostResponse>>
+        get() = _editPostResponse
 
     val onPostBtnClicked = SingleLiveEvent<Any>()
     val onBackButtonClicked = SingleLiveEvent<Any>()
@@ -56,6 +60,7 @@ class PostViewModel @ViewModelInject constructor(
         caption: String,
         price: Double,
         cookingTime: String,
+        description: String,
         allowComments: Int
     ) {
         viewModelScope.launch {
@@ -68,6 +73,7 @@ class PostViewModel @ViewModelInject constructor(
                         caption,
                         price,
                         cookingTime,
+                        description,
                         allowComments,
                         "Bearer ${loginSession!!.data.access_token}"
                     ).let {
@@ -95,34 +101,6 @@ class PostViewModel @ViewModelInject constructor(
     }
 
 
-    fun getCategories() {
-        viewModelScope.launch {
-            _getCategoriesResponse.postValue(Resource.loading(null))
-            if (networkHelper.isNetworkConnected()) {
-                try {
-                    mainRepository.getCategories("Bearer ${loginSession!!.data.access_token}").let {
-                        if (it.isSuccessful) {
-                            _getCategoriesResponse.postValue(Resource.success(it.body()!!))
-
-                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
-                            _getCategoriesResponse.postValue(Resource.error(it.message(), null))
-                        } else {
-                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
-                            _getCategoriesResponse.postValue(
-                                Resource.error(
-                                    extractErrorMessage(
-                                        errorMessagesJson
-                                    ), null
-                                )
-                            )
-                        }
-                    }
-                } catch (e: Exception) {
-                    _getCategoriesResponse.postValue(Resource.error("" + e.message, null))
-                }
-            } else _getCategoriesResponse.postValue(Resource.error("No internet connection", null))
-        }
-    }
 
 
     fun getTimeSuggestions() {
@@ -151,6 +129,87 @@ class PostViewModel @ViewModelInject constructor(
                     _getTimeSuggestionResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _getTimeSuggestionResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    fun updatePostCall(
+        postId: Int,
+        categoryId: Int,
+        caption: String,
+        price: Double,
+        cookingTime: String,
+        description: String,
+        allowComments: Int
+    ) {
+        viewModelScope.launch {
+            _updatePostsResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.updatePost(
+                        postId,
+                        categoryId,
+                        caption,
+                        price,
+                        cookingTime,
+                        description,
+                        allowComments,
+                        "Bearer ${loginSession!!.data.access_token}"
+                    ).let {
+                        if (it.isSuccessful) {
+                            _updatePostsResponse.postValue(Resource.success(it.body()!!))
+
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _updatePostsResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _updatePostsResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _updatePostsResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _updatePostsResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    fun editPostCall(
+        postId: Int
+    ) {
+        viewModelScope.launch {
+            _editPostResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.getEditPost(
+                        "Bearer ${loginSession!!.data.access_token}",postId
+                    ).let {
+                        if (it.isSuccessful) {
+                            _editPostResponse.postValue(Resource.success(it.body()!!))
+
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _editPostResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _editPostResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _editPostResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _editPostResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 }

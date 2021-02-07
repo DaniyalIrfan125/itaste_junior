@@ -15,12 +15,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.data.models.EditPostResponse
 import com.techbayportal.itaste.data.models.GetCategoriesResponse
 import com.techbayportal.itaste.data.models.GetTimeSuggestionData
-import com.techbayportal.itaste.data.models.GetTimeSuggestionResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutPostfragmentBinding
-import com.techbayportal.itaste.generated.callback.OnClickListener
 import com.techbayportal.itaste.ui.fragments.postfragment.adapter.TimeDurationAdapter
 import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,9 +27,9 @@ import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
 import id.zelory.compressor.constraint.size
-import kotlinx.android.synthetic.main.layout_loginfragment.*
+import kotlinx.android.synthetic.main.fragment_post_detail.*
 import kotlinx.android.synthetic.main.layout_postfragment.*
-import kotlinx.android.synthetic.main.layout_selectpost.*
+import kotlinx.android.synthetic.main.layout_postfragment.img_back
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import www.sanju.motiontoast.MotionToast
@@ -50,13 +49,24 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
     var isAllowComments: Int = 0
     var listOfTime: ArrayList<GetTimeSuggestionData> = ArrayList()
     lateinit var timeDurationAdapter: TimeDurationAdapter
+    var isEditPostClicked = false
+    var postId = -1
+    var categoryId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         //calling get categories api
-        mViewModel.getCategories()
+
         mViewModel.getTimeSuggestions()
+
+        if (sharedViewModel.isEditPost) {
+            isEditPostClicked = true
+            mViewModel.editPostCall(14)
+            sharedViewModel.isEditPost = false
+            sharedViewModel.isEditBottomSheetClicked.value = false
+
+        }
         subscribeToNetworkLiveData()
     }
 
@@ -74,6 +84,11 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
             tv_errorCaption.visibility = View.GONE
 
         }
+
+        ed_description.doOnTextChanged { text, start, before, count ->
+            tv_errorDescription.visibility = View.GONE
+
+        }
     }
 
     override fun subscribeToShareLiveData() {
@@ -85,32 +100,15 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
                 Glide.with(requireContext()).load(it).into(imgView_post)
             }
         })
+
+        sharedViewModel.categoriesResponse?.observe(this, Observer {
+            createRadioButton(it)
+        })
     }
 
     override fun subscribeToNetworkLiveData() {
         super.subscribeToNetworkLiveData()
 
-        mViewModel.getCategoriesResponse.observe(this, Observer {
-            when (it.status) {
-                Resource.Status.LOADING -> {
-                    loadingDialog.show()
-                }
-                Resource.Status.SUCCESS -> {
-                    it?.let { it ->
-                        loadingDialog.dismiss()
-                        it.data?.let {
-                            createRadioButton(it.data)
-
-                        }
-
-                    }
-                }
-                Resource.Status.ERROR -> {
-                    loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
-                }
-            }
-        })
 
 
         mViewModel.getTimeSuggestionResponse.observe(this, Observer {
@@ -154,7 +152,8 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
                                 ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
                             )
 
-                            Navigation.findNavController(radioGroup).popBackStack(R.id.homeFragment,false)
+                            Navigation.findNavController(radioGroup)
+                                .popBackStack(R.id.homeFragment, false)
                         }
 
                     }
@@ -165,6 +164,69 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
                 }
             }
         })
+
+        mViewModel.updatePostsResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+                            MotionToast.createToast(
+                                requireActivity(),
+                                getString(R.string.tv_success),
+                                getString(R.string.tv_post_added),
+                                MotionToast.TOAST_SUCCESS,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.SHORT_DURATION,
+                                ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
+                            )
+
+                            sharedViewModel.isPostUpdated.value = true
+                            Navigation.findNavController(radioGroup).popBackStack()
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+        mViewModel.editPostResponse.observe(this, Observer { it ->
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+
+                            ed_caption.setText(it.data.caption)
+                            ed_price.setText(it.data.price)
+                            ed_time.setText(it.data.cooking_time)
+                            ed_description.setText(it.data.description)
+                            postId = it.data.id
+                            categoryId = it.data.category_id.toInt()
+                            radioGroup.check(it.data.category_id.toInt())
+                            Glide.with(requireContext()).load(it.data.image).into(imgView_post)
+
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
     }
 
     override fun subscribeToNavigationLiveData() {
@@ -172,6 +234,10 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
 
         mViewModel.onPostBtnClicked.observe(this, Observer {
             fieldValidations()
+        })
+
+        mViewModel.onBackButtonClicked.observe(this, Observer {
+            Navigation.findNavController(img_back).popBackStack()
         })
 
     }
@@ -192,37 +258,58 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
 
     private fun fieldValidations() {
         if (!TextUtils.isEmpty(ed_caption.text)) {
-            if (!TextUtils.isEmpty(ed_price.text)) {
-                if (!TextUtils.isEmpty(ed_time.text)) {
-                    if (radioGroup.checkedRadioButtonId == -1) {
-                        Snackbar.make(
-                            radioGroup,
-                            getString(R.string.tv_please_select_category),
-                            Snackbar.LENGTH_SHORT
-                        ).show()
+            if (!TextUtils.isEmpty(ed_description.text)) {
+                if (!TextUtils.isEmpty(ed_price.text)) {
+                    if (!TextUtils.isEmpty(ed_time.text)) {
+                        if (radioGroup.checkedRadioButtonId == -1) {
+                            Snackbar.make(
+                                radioGroup,
+                                getString(R.string.tv_please_select_category),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        } else {
+                            if (!isEditPostClicked) {
+                                mViewModel.addPostCall(
+                                    radioGroup.checkedRadioButtonId,
+                                    compressedImageFile,
+                                    ed_caption.text.toString(),
+                                    ed_price.text.toString().toDouble(),
+                                    ed_time.text.toString(),
+                                    ed_description.text.toString(),
+                                    isAllowComments
+                                )
+                            } else {
+                                if (postId != -1)
+
+
+                                    mViewModel.updatePostCall(
+                                        postId,
+                                        radioGroup.checkedRadioButtonId,
+                                        ed_caption.text.toString(),
+                                        ed_price.text.toString().toDouble(),
+                                        ed_time.text.toString(),
+                                        ed_description.text.toString(),
+                                        isAllowComments
+                                    )
+                            }
+                        }
+
+
                     } else {
-                        mViewModel.addPostCall(
-                            radioGroup.checkedRadioButtonId,
-                            compressedImageFile,
-                            ed_caption.text.toString(),
-                            ed_price.text.toString().toDouble(),
-                            ed_time.text.toString(),
-                            isAllowComments
-                        )
+                        tv_errorTime.visibility = View.VISIBLE
+                        tv_errorTime.text = getString(R.string.tv_write_timing)
                     }
 
-
                 } else {
-                    tv_errorTime.visibility = View.VISIBLE
-                    tv_errorTime.text = getString(R.string.tv_write_timing)
+
+                    tv_errorPrice.visibility = View.VISIBLE
+                    tv_errorPrice.text = getString(R.string.tv_write_price)
                 }
 
             } else {
-
-                tv_errorPrice.visibility = View.VISIBLE
-                tv_errorPrice.text = getString(R.string.tv_write_price)
+                tv_errorDescription.visibility = View.VISIBLE
+                tv_errorDescription.text = getString(R.string.tv_error_description)
             }
-
         } else {
             tv_errorCaption.visibility = View.VISIBLE
             tv_errorCaption.text = getString(R.string.tv_write_Caption)
@@ -233,6 +320,10 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
         super.onViewCreated(view, savedInstanceState)
 
         fieldTextWatcher()
+
+        if (isEditPostClicked) {
+            tv_cornerText.setText(R.string.tv_update)
+        }
 
         timeDurationAdapter = TimeDurationAdapter(
             listOfTime,

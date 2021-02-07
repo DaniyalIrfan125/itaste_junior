@@ -273,6 +273,7 @@ class MainRepository @Inject constructor(
         caption: String,
         price: Double,
         cookingTime: String,
+        description:String,
         allowComments: Int,
         auth: String
     ): Response<AddPostResponse> {
@@ -293,8 +294,57 @@ class MainRepository @Inject constructor(
             price,
             cookingTime,
             profilePicMultiPartBody,
-            allowComments
+            allowComments,
+            description
         )
     }
 
+
+    suspend fun updatePost(
+        postId:Int,
+        categoryId: Int,
+        caption: String,
+        price: Double,
+        cookingTime: String,
+        description:String,
+        allowComments: Int,
+        auth: String
+    ): Response<UpdatePostResponse> {
+
+
+        return apiService.updatePost(
+            "application/json",
+            auth,
+            postId,
+            categoryId,
+            caption,
+            price,
+            cookingTime,
+            allowComments,
+            description
+
+        )
+    }
+
+
+    suspend fun getEditPost(auth: String, postId: Int): Response<EditPostResponse> {
+       return apiService.getEditPost("application/json", auth, postId)
+    }
+
+    suspend fun getPostDetail(auth: String, postId: Int): Response<PostDetailResponse> {
+        return apiService.getPostDetail("application/json", auth, postId)
+    }
+
+    suspend fun postComment(auth: String, postId: Int,comment: String): Response<PostCommentResponse> {
+        return apiService.postComment("application/json", auth, postId,comment)
+    }
+
+    suspend fun favouriteUnFavoritePost(auth: String, postId: Int): Response<SetFavouriteUnFavouriteResponse> {
+        return apiService.favouriteUnfavouritePost("application/json", auth, postId)
+    }
+
+
+    suspend fun favouriteUnFavoriteComment(auth: String, commentId: Int): Response<CommentFavouriteResponse> {
+        return apiService.favouriteUnfavouriteComment("application/json", auth,commentId)
+    }
 }

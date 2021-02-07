@@ -49,7 +49,7 @@ interface ApiService {
         @Query("password") password: String?,
         @Query("country_id") country_id: String?,
         @Query("city_id") city_id: String?,
-       // @Query("days_of_week") days_of_week: MutableList<DaysOfWeek>?,
+        // @Query("days_of_week") days_of_week: MutableList<DaysOfWeek>?,
         @Query("days_of_week[]") days_of_week: List<String>,
         @Query("is_deliverable") is_deliverable: Int?,
         @Query("password_confirmation") password_confirmation: String?,
@@ -110,9 +110,9 @@ interface ApiService {
     ): Response<ResendOtpResponse>
 
 
-   /* @GET("countries")
-    suspend fun getAllCountries(
-    ): Response<GetAllCountriesResponse>*/
+    /* @GET("countries")
+     suspend fun getAllCountries(
+     ): Response<GetAllCountriesResponse>*/
 
     @GET("countries")
     suspend fun getAllCountriesForHome(
@@ -146,7 +146,7 @@ interface ApiService {
         @Field("country_id") country_id: Int?
     ): Response<GetAllCountriesResponse>
 
-   
+
     @GET("user/personal-profile")
     suspend fun getUserPersonalProfile(
         @Header("Accept") acceptJson: String,
@@ -160,9 +160,9 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Query("first") first: String,
         @Query("last") last: String,
-        @Query("email") email : String,
-        @Query("phone") phone : String,
-        @Part profilePic : MultipartBody.Part
+        @Query("email") email: String,
+        @Query("phone") phone: String,
+        @Part profilePic: MultipartBody.Part
     ): Response<SuccessResponse>
 
 
@@ -172,8 +172,8 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Query("first") first: String,
         @Query("last") last: String,
-        @Query("email") email : String,
-        @Query("phone") phone : String
+        @Query("email") email: String,
+        @Query("phone") phone: String
     ): Response<SuccessResponse>
 
     @GET("vendor/personal-profile")
@@ -188,13 +188,13 @@ interface ApiService {
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
         @Query("first_name") first_name: String,
-        @Query("last_name") last_name : String,
-        @Query("bio") bio : String,
-        @Query("phone") phone : String,
-        @Query("email") email : String,
-        @Part profilePic : MultipartBody.Part,
-        @Query("country_id") country_id : String,
-        @Query("city_id") city_id : String
+        @Query("last_name") last_name: String,
+        @Query("bio") bio: String,
+        @Query("phone") phone: String,
+        @Query("email") email: String,
+        @Part profilePic: MultipartBody.Part,
+        @Query("country_id") country_id: String,
+        @Query("city_id") city_id: String
 
     ): Response<SuccessResponse>
 
@@ -204,12 +204,12 @@ interface ApiService {
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
         @Query("first_name") first_name: String,
-        @Query("last_name") last_name : String,
-        @Query("bio") bio : String,
-        @Query("phone") phone : String,
-        @Query("email") email : String,
-        @Query("country_id") country_id : String,
-        @Query("city_id") city_id : String
+        @Query("last_name") last_name: String,
+        @Query("bio") bio: String,
+        @Query("phone") phone: String,
+        @Query("email") email: String,
+        @Query("country_id") country_id: String,
+        @Query("city_id") city_id: String
     ): Response<SuccessResponse>
 
     @FormUrlEncoded
@@ -217,11 +217,10 @@ interface ApiService {
     suspend fun changePassword(
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
-        @Field("old_password") old_password : String?,
+        @Field("old_password") old_password: String?,
         @Field("new_password") new_password: String?,
         @Field("password_confirmation") password_confirmation: String?
     ): Response<SuccessResponse>
-
 
 
     @POST("logout")
@@ -241,7 +240,7 @@ interface ApiService {
     suspend fun contactUs(
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
-        @Field("name") name : String,
+        @Field("name") name: String,
         @Field("email") email: String,
         @Field("message") message: String
     ): Response<SuccessResponse>
@@ -286,7 +285,6 @@ interface ApiService {
     ): Response<BlockVendorResponse>
 
 
-
     @GET("category/getAll")
     suspend fun getCategories(
         @Header("Accept") acceptJson: String,
@@ -299,6 +297,19 @@ interface ApiService {
         @Header("Authorization") authHeader: String
     ): Response<GetTimeSuggestionResponse>
 
+    @GET("post/edit")
+    suspend fun getEditPost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId: Int
+    ): Response<EditPostResponse>
+
+    @GET("post/get-detail")
+    suspend fun getPostDetail(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId: Int
+    ): Response<PostDetailResponse>
 
     @Multipart
     @POST("post/add")
@@ -310,8 +321,48 @@ interface ApiService {
         @Query("price") price: Double?,
         @Query("cooking_time") cookingTime: String?,
         @Part profileImage: MultipartBody.Part,
-        @Query("allow_comments") allowComments: Int?
-
+        @Query("allow_comments") allowComments: Int?,
+        @Query("description") description: String?
     ): Response<AddPostResponse>
 
+
+
+    @POST("post/update")
+    suspend fun updatePost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") post_id: Int?,
+        @Query("category_id") category_id: Int?,
+        @Query("caption") caption: String?,
+        @Query("price") price: Double?,
+        @Query("cooking_time") cookingTime: String?,
+        @Query("allow_comments") allowComments: Int?,
+        @Query("description") description: String?
+
+    ): Response<UpdatePostResponse>
+
+
+    @POST("post/add-comments")
+    suspend fun postComment(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId: Int,
+        @Query("comments") comment: String
+    ): Response<PostCommentResponse>
+
+
+    @POST("post/set-favourite")
+    suspend fun favouriteUnfavouritePost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId: Int
+    ): Response<SetFavouriteUnFavouriteResponse>
+
+
+    @POST("post/like-comment")
+    suspend fun favouriteUnfavouriteComment(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("comment_id") commentId: Int
+    ): Response<CommentFavouriteResponse>
 }

@@ -38,8 +38,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    private lateinit var mView: View
-    lateinit var vendorProfileDetailData: VendorProfileDetailData
+     var vendorProfileDetailData: VendorProfileDetailData? = null
 
     val postsList = ArrayList<PostDetailData>()
     private lateinit var postsRecyclerAdapter: PostsRecyclerAdapter
@@ -52,45 +51,20 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
        // mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
-        mViewModel.hitGetVendorProfileDetails(31)
+        mViewModel.hitGetVendorProfileDetails(177)
        // mViewModel.hitSetFollowApi(31)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mView = view
+
         initializing()
         //isFallowingVendor(isFallowing)
 
-        if (this::vendorProfileDetailData.isInitialized) {
-            setData(vendorProfileDetailData)
+        if (vendorProfileDetailData != null) {
+            setData(vendorProfileDetailData!!)
         }
 
-
-
-        /*recycler_profilePosts.adapter = PostsRecyclerAdapter(
-            listOf<Int>(
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first,
-                R.drawable.img_food_second,
-                R.drawable.img_food_first)
-        )*/
 
     }
 
@@ -98,6 +72,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
        postsRecyclerAdapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener{
             override fun onClicked(postDetailData: PostDetailData) {
                 Toast.makeText(requireContext(), "Location selected: ${postDetailData.id}", Toast.LENGTH_SHORT).show()
+                Navigation.findNavController(recycler_profilePosts).navigate(R.id.action_profileFragment_to_postdetailfragment)
             }
         })
         recycler_profilePosts.adapter = postsRecyclerAdapter
@@ -118,7 +93,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         super.subscribeToNavigationLiveData()
 
         mViewModel.onBackButtonClicked.observe(this, Observer {
-            Navigation.findNavController(mView).popBackStack()
+            Navigation.findNavController(tv_vendorUserName).popBackStack()
         })
 
         mViewModel.onFollowButtonClicked.observe(this, Observer {
@@ -137,7 +112,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     vendorProfileDetailData = it.data!!.data
-                    setData(vendorProfileDetailData)
+                    setData(it.data.data)
                    // postsRecyclerAdapter.notifyDataSetChanged()
                 }
                 Resource.Status.ERROR -> {
@@ -181,13 +156,12 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
 
     private fun setData(vendorProfileDetailData: VendorProfileDetailData){
         try {
-            Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage , object :Callback{
+            Picasso.get().load(vendorProfileDetailData.image).fit().placeholder(R.drawable.placeholder_image).centerCrop().into(sivProfileImage , object :Callback{
                 override fun onSuccess() {
                     spinKit.visibility = View.GONE
                 }
 
                 override fun onError(e: Exception?) {
-                    Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
                     spinKit.visibility = View.GONE
                 }
 

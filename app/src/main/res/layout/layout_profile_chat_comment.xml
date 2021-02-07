@@ -9,28 +9,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentEnd="true"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal"
-            android:weightSum="10"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:weightSum="10">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="55dp"
-                android:layout_weight="2.5"
+                android:layout_weight="2"
                 android:gravity="center_vertical">
 
                 <com.google.android.material.imageview.ShapeableImageView
-
                     android:id="@+id/sivInfluancerImage"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
+                    android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/_3sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
@@ -39,20 +38,21 @@
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
 
-                android:layout_weight="7.5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_marginBottom="@dimen/_2sdp"
-                android:background="@drawable/layout_curve_gray">
+                android:layout_weight="7.5"
+                android:background="@drawable/layout_curve_gray"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/ed_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
@@ -61,29 +61,33 @@
                     android:layout_toStartOf="@+id/tvPostMessage"
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/roboto_regular"
-                    android:hint="Write a Comment"
+                    android:hint="@string/tv_write_comment"
                     android:paddingStart="@dimen/_20sdp"
-                    android:textSize="12sp"
+                    android:paddingEnd="@dimen/_20sdp"
+                    android:textColor="@color/titleTextColorBlack"
                     android:textColorHint="@color/titleTextColorBlack"
-                    android:textColor="@color/titleTextColorBlack">
+                    android:textSize="12sp">
 
                 </EditText>
 
-                <TextView
+                <RelativeLayout
                     android:id="@+id/tvPostMessage"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:text="Post"
-                    android:paddingEnd="@dimen/_15sdp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:textColor="@color/colorOrange">
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true">
 
-                </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_10sdp"
+                        android:text="@string/tv_post"
+                        android:textColor="@color/colorOrange" />
+                </RelativeLayout>
+
+
             </RelativeLayout>
-
-
 
 
         </LinearLayout>

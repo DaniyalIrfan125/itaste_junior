@@ -2,4 +2,5 @@ package com.techbayportal.itaste.ui.fragments.postdetailfragment.itemclicklisten
 
 interface PostCommentsRvClickListener {
     fun onItemClickListener()
+    fun favouriteUnFavorite(commentId : Int)
 }

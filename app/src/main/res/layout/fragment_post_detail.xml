@@ -13,9 +13,9 @@
 
 
     <RelativeLayout
-        android:background="@color/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/mainBackground"
         tools:context=".ui.fragments.postdetailfragment.PostDetailFragment">
 
         <RelativeLayout
@@ -33,11 +33,11 @@
                 android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
                 <ImageView
-                    app:tint="@color/mainIconColor"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
-                  android:layout_gravity="center"
-                    android:src="@drawable/icon_backarrow" />
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_backarrow"
+                    app:tint="@color/mainIconColor" />
             </LinearLayout>
 
 
@@ -69,7 +69,7 @@
                         android:onClick="@{()->viewModel.onVendorProfileHeaderClicked()}">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/sivInfluancerImage"
+                            android:id="@+id/img_profile"
                             android:layout_width="66dp"
                             android:layout_height="66dp"
                             android:layout_margin="@dimen/_3sdp"
@@ -79,6 +79,14 @@
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                             tools:layout_editor_absoluteX="116dp"
                             tools:layout_editor_absoluteY="61dp" />
+
+                        <com.github.ybq.android.spinkit.SpinKitView
+                            android:id="@+id/spinKit_profile"
+                            style="@style/SpinKitView.Small.Pulse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:SpinKit_Color="@color/colorOrange" />
 
                     </LinearLayout>
 
@@ -90,25 +98,27 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_vendorName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
-                            android:text="Ed Tamer"
+                            tools:text="Ed Tamer"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="19sp">
 
                         </TextView>
 
                         <TextView
+                            android:id="@+id/tv_vendorLocation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:drawableTint="@color/mainIconColor"
-                            android:drawableStart="@drawable/icon_pin_location"
                             android:drawablePadding="@dimen/_5sdp"
+                            app:drawableTint="@color/mainIconColor"
                             android:fontFamily="@font/roboto_light"
-                            android:text="Jumeirah JLT, Dubai, UAE"
+                            tools:text="Jumeirah JLT, Dubai, UAE"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="12sp">
+                            android:textSize="12sp"
+                            app:drawableStartCompat="@drawable/icon_pin_location">
 
                         </TextView>
 
@@ -116,7 +126,6 @@
 
 
                     <LinearLayout
-
                         android:id="@+id/ll_more"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -125,15 +134,14 @@
                         android:onClick="@{()->viewModel.onMoreButtonClicked()}">
 
                         <ImageView
-                            app:tint="@color/mainIconColor"
                             android:id="@+id/outlinedButton"
                             android:layout_width="16dp"
                             android:layout_height="4dp"
                             android:layout_gravity="center"
                             android:scaleType="fitXY"
                             android:src="@drawable/icon_more_three_dots"
-                            android:text="Unblock"
-                            android:textAllCaps="false" />
+                            android:textAllCaps="false"
+                            app:tint="@color/mainIconColor" />
 
                     </LinearLayout>
 
@@ -163,14 +171,21 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="414dp"
-                        android:layout_below="@+id/relative_top"
                         android:layout_marginTop="0dp">
 
+                        <com.github.ybq.android.spinkit.SpinKitView
+                            android:id="@+id/spinKit_post"
+                            style="@style/SpinKitView.Large.Pulse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            app:SpinKit_Color="@color/colorOrange" />
+
                         <ImageView
+                            android:id="@+id/imageProduct"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/icon_egg_bread_img">
+                            android:scaleType="fitXY">
 
                         </ImageView>
                     </RelativeLayout>
@@ -192,12 +207,20 @@
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="@dimen/_20sdp"
+
+                            <com.like.LikeButton
+                                android:id="@+id/mLikeButton"
+                               android:layout_marginEnd="@dimen/_5sdp"
+                                android:layout_width="40dp"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:src="@drawable/icon_like_heart" />
+                                app:anim_scale_factor="3"
+                                app:icon_size="25dp"
+                                app:icon_type="heart"
+                                app:circle_end_color="@color/colorPrimaryDark"
+                                app:circle_start_color="@color/colorAccent"
+                                app:like_drawable="@drawable/icon_like_heart"
+                                app:unlike_drawable="@drawable/icon_unselected_heart" />
 
                             <ImageView
                                 android:id="@+id/ivComment"
@@ -238,8 +261,8 @@
                                     android:background="@drawable/btn_curve_small"
                                     android:onClick="@{()->viewModel.onEditPostButtonClicked()}"
                                     android:text="Edit Post"
-                                    android:textColor="@color/titleTextColorBlack"
-                                    android:textAllCaps="false" />
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/titleTextColorBlack" />
                             </com.balysv.materialripple.MaterialRippleLayout>
 
                         </LinearLayout>
@@ -248,12 +271,13 @@
 
 
                     <TextView
+                        android:id="@+id/tv_totalLikes"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_25sdp"
                         android:layout_marginEnd="@dimen/_25sdp"
                         android:fontFamily="@font/roboto_light"
-                        android:text="2h ago"
+                        tools:text="2h ago"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="10sp">
 
@@ -276,10 +300,11 @@
                             android:orientation="horizontal">
 
                             <TextView
+                                android:id="@+id/tv_title"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_bold"
-                                android:text="Pancakes with dried berries"
+                                tools:text="Pancakes with dried berries"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp">
 
@@ -293,11 +318,12 @@
                             android:gravity="end">
 
                             <TextView
+                                android:id="@+id/tv_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:fontFamily="@font/roboto_bold"
-                                android:text="AED 35"
+                                tools:text="AED 35"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp">
 
@@ -308,12 +334,13 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_25sdp"
                         android:layout_marginEnd="@dimen/_25sdp"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Sed ut perspiciatis unde omnis iste natus error sit volup
+                        tools:text="Sed ut perspiciatis unde omnis iste natus error sit volup
 atem accu santium doloremque laudantium, totami repa
 aperiam, ea ipsa quae ab illo inventore veritatis et qurep
 architecto beat ae vitae dicta sunt explicabo. Nemo eni
@@ -344,22 +371,24 @@ enim ipsam voluptatem quia voluptas sit asperna."
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/roboto_regular"
-                                android:text="Cooking and Preparation time: 2 hours"
+                               tools:text="Cooking and Preparation time: 2 hours"
                                 android:textColor="@color/colorOrange"
                                 android:textSize="14sp">
 
                             </TextView>
 
                             <TextView
+                                android:id="@+id/tv_viewAllComments"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginBottom="@dimen/_5sdp"
                                 android:fontFamily="@font/roboto_light"
-                                android:text="View all 7 comments"
+                                tools:text="View all 7 comments"
                                 android:textColor="@color/colorCommentGrey"
                                 android:textSize="10sp">
 
@@ -380,7 +409,7 @@ enim ipsam voluptatem quia voluptas sit asperna."
                                 android:layout_marginTop="@dimen/_5sdp"
                                 android:layout_marginBottom="@dimen/_5sdp"
                                 android:fontFamily="@font/roboto_light"
-                                android:text="Posted 5 minutes ago"
+                                tools:text="Posted 5 minutes ago"
                                 android:textColor="@color/colorCommentGrey"
                                 android:textSize="10sp">
 
@@ -389,7 +418,7 @@ enim ipsam voluptatem quia voluptas sit asperna."
                             <include
                                 android:id="@+id/layoutComment"
                                 layout="@layout/layout_profile_chat_comment"
-                                android:visibility="gone"></include>
+                                android:visibility="gone" />
                         </LinearLayout>
 
 
