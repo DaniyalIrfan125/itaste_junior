@@ -21,6 +21,8 @@ class SharedViewModel : BaseViewModel() {
     var userType = "user"
     var otpVerifyCode = ""
     var userModel = UserModel()
+    var userModelLiveData = MutableLiveData<UserModel>()
+
     val isDarkMode :Boolean = false
     val localProfilePic: File? = null
 //    val countriesList = ArrayList<GetAllCountriesData>()
@@ -50,5 +52,5 @@ class SharedViewModel : BaseViewModel() {
     var vendorProfileId : Int = 0
 
     var test = false;
-    var testId :String = "0"
+    var testId :Int = 0
 }

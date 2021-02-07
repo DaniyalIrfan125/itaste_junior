@@ -19,12 +19,11 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
-import com.techbayportal.itaste.data.models.GetAllCitiesData
-import com.techbayportal.itaste.data.models.GetAllCountriesData
-import com.techbayportal.itaste.data.models.VendorPersonalProfileResponseData
+import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentVendorProfileBinding
 import com.techbayportal.itaste.utils.DialogClass
+import com.techbayportal.itaste.utils.LoginSession
 import com.techbayportal.itaste.utils.ProfileSpinnerAdapter
 import com.techbayportal.itaste.utils.SpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -162,6 +161,19 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
 
                     } else {
                         mViewModel.hitGetVendorPersonalProfile()
+                    }
+
+                    val accessToken = LoginSession.getInstance().getLoginResponse()!!.data.access_token
+                  //  val countryId = LoginSession.getInstance().getLoginResponse()!!.data.country_id
+                   // val isPaymentUpdated = LoginSession.getInstance().getLoginResponse()!!.data.is_payment_update
+                    val vendorUserName = LoginSession.getInstance().getLoginResponse()!!.data.username
+
+                    if(it.data != null){
+                        val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, vendorUserName, it.data.data.phone,  it.data.data.email,
+                             it.data.data.profile_pic, it.data.data.role,  accessToken, it.data.data.country_id,  it.data.data.is_payment_update)
+                        val loginResponse = LoginResponse("update vendor profile", userData, "")
+                        //LoginSession.getInstance().setLoginResponse(loginResponse)
+                        mViewModel.saveUserObj(loginResponse)
                     }
 
 
@@ -405,9 +417,9 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     private fun setData(vendorPersonalProfileResponseData: VendorPersonalProfileResponseData) {
         try {
             tv_vendorName.text =
-                "${vendorPersonalProfileResponseData.first_name} ${vendorPersonalProfileResponseData.last_name}"
-            et_vendorFirstName.setText(vendorPersonalProfileResponseData.first_name)
-            et_vendorLastName.setText(vendorPersonalProfileResponseData.last_name)
+                "${vendorPersonalProfileResponseData.first} ${vendorPersonalProfileResponseData.last}"
+            et_vendorFirstName.setText(vendorPersonalProfileResponseData.first)
+            et_vendorLastName.setText(vendorPersonalProfileResponseData.last)
             et_vendorBio.setText(vendorPersonalProfileResponseData.description)
             et_country_code.fullNumber = vendorPersonalProfileResponseData.phone
             sharedViewModel.verifyOtpHoldPhoneNumber =

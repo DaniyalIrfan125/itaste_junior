@@ -96,7 +96,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         })
 
         mViewModel.onFollowButtonClicked.observe(this, Observer {
-            mViewModel.hitSetFollowApi(loginSession!!.data.id.toInt())
+            mViewModel.hitSetFollowApi(loginSession!!.data.id)
         })
 
         mViewModel.onUpdateButtonClicked.observe(this, Observer {
@@ -176,7 +176,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
             }
 
             tv_vendorUserName.text = vendorProfileDetailData.username
-            tv_profileName.text = vendorProfileDetailData.first_name +" " +vendorProfileDetailData.last_name
+            tv_profileName.text = vendorProfileDetailData.first +" " +vendorProfileDetailData.last
             tv_details.text = vendorProfileDetailData.bio
             tv_postCounts.text = vendorProfileDetailData.total_post.toString()
             tv_likesCount.text = vendorProfileDetailData.total_likes.toString()

@@ -301,6 +301,7 @@
     <string name="Please_write_New_Password">Please write New Password!</string>
     <string name="Please_write_Existing_Password">Please write Existing Password!</string>
     <string name="bug_report_submitted">Bug Report Submitted</string>
+    <string name="reset">Reset</string>
 
 
 </resources>

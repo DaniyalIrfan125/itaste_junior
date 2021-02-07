@@ -64,15 +64,7 @@
 
     <color name="sameBlackTitleText">#1a1a1a</color>
     <color name="noPostsTextColor">#1a1a1a</color>
-
-
-
-
-
-
-
-
-
+    <color name="filterScreen">#f9f9f9</color>
 
 
 </resources>

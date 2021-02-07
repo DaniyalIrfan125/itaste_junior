@@ -10,7 +10,7 @@ data class LoginResponse(
 
 
 public data class Data(
-    val id : String,
+    val id : Int,
     val first: String,
     val last: String,
     val username: String,

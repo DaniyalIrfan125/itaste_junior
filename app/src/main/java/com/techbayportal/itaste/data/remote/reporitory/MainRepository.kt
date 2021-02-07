@@ -179,7 +179,7 @@ class MainRepository @Inject constructor(
         country_id: Int,
         city_id: Int
 
-    ): Response<VendorUpdateProfileResponse> {
+    ): Response<VendorPersonalProfileResponse> {
         val profilePicRequestBody: RequestBody? =
             profilePic?.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = profilePicRequestBody?.let {
@@ -225,7 +225,7 @@ class MainRepository @Inject constructor(
       //  is_deliverable: Int,
         description: String
 
-    ): Response<SuccessResponse> {
+    ): Response<VendorPersonalProfileResponse> {
 
         return apiService.switchToPremium(
             "application/json",
@@ -297,4 +297,21 @@ class MainRepository @Inject constructor(
     suspend fun getPackages(): Response<PackagesResponse> {
         return apiService.getPackages()
     }
+
+    suspend fun getAllSearchPostsApi(auth: String): Response<SearchAndFilterResponse> {
+        return apiService.getAllSearchPostsApi("application/json", auth)
+    }
+
+    suspend fun searchAndFilterApi(auth: String, keyword : String, country_id:String, city_id :String, category_id :String): Response<SearchAndFilterResponse> {
+        return apiService.searchAndFilterApi("application/json", auth, keyword, country_id, city_id, category_id)
+    }
+
+    suspend fun searchApi(auth: String, keyword:String): Response<SearchAndFilterResponse> {
+        return apiService.searchApi("application/json", auth, keyword)
+    }
+
+    suspend fun checkOutApi(auth: String, post_id: ArrayList<String>, quantity : ArrayList<String>, ammount : ArrayList<String> ): Response<BlockVendorResponse> {
+        return apiService.checkOutApi("application/json", auth, post_id, quantity, ammount)
+    }
+
 }

@@ -9,7 +9,7 @@ class UserPersonalProfileResponse(
 ): Serializable
 
 data class UserPersonalProfileResponseData(
-    val id: String,
+    val id: Int,
     val first: String,
     val last: String,
     val username: String,

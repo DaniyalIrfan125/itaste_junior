@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
@@ -17,7 +18,8 @@ import java.io.File
 
 class SignupVendorViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val dataStoreProvider: DataStoreProvider
 ) : BaseViewModel() {
 
 
@@ -33,8 +35,8 @@ class SignupVendorViewModel @ViewModelInject constructor(
     val signUpVendorResponse: LiveData<Resource<SignUpResponse>>
         get() = _signUpVendorResponse
 
-    val _getSwitchToPremiumResponse = MutableLiveData<Resource<SuccessResponse>>()
-    val getSwitchToPremiumResponse: LiveData<Resource<SuccessResponse>>
+    val _getSwitchToPremiumResponse = MutableLiveData<Resource<VendorPersonalProfileResponse>>()
+    val getSwitchToPremiumResponse: LiveData<Resource<VendorPersonalProfileResponse>>
         get() = _getSwitchToPremiumResponse
 
     val onBackButtonClicked = SingleLiveEvent<Any>()
@@ -151,7 +153,10 @@ class SignupVendorViewModel @ViewModelInject constructor(
         }
     }
 
-    init {
-       // getAllCountries()
+    fun saveUserObj(loginResponse: LoginResponse){
+        viewModelScope.launch {
+            dataStoreProvider.saveUserObj(loginResponse)
+        }
+        LoginSession.getInstance().setLoginResponse(loginResponse)
     }
 }

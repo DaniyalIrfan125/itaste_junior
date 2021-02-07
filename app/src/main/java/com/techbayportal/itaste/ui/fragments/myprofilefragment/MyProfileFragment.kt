@@ -23,8 +23,6 @@ import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_profile.*
-import kotlinx.android.synthetic.main.fragment_report_bug.*
-import kotlinx.android.synthetic.main.layout_error_loading_page.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -84,12 +82,18 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 .into(siv_userImage, object :
                     Callback {
                     override fun onSuccess() {
-                        sk_myProfile.visibility = View.GONE
+                        if(sk_myProfile != null){
+                            sk_myProfile.visibility = View.GONE
+                        }
+
                     }
 
                     override fun onError(e: Exception?) {
                         Picasso.get().load(R.drawable.placeholder_image).into(siv_userImage)
-                        sk_myProfile.visibility = View.GONE
+                        if(sk_myProfile != null){
+                            sk_myProfile.visibility = View.GONE
+                        }
+
                     }
                 })
 

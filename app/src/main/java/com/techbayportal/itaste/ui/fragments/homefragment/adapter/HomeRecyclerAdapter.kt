@@ -97,7 +97,7 @@ class HomeRecyclerAdapter(
                 })
 
 
-            tv_profileName!!.text = model.first_name + model.last_name
+            tv_profileName!!.text = model.first + model.last
             tv_address!!.text = model.location
 
             img_profile?.setOnClickListener {

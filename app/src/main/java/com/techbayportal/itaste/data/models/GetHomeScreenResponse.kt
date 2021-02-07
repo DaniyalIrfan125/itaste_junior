@@ -17,8 +17,8 @@ public data class PromotionData(
 data class GetHomeScreenData(
     val id: Int,
     val profilePic: String,
-    val first_name: String,
-    val last_name: String,
+    val first: String,
+    val last: String,
     val location: String,
     val post: ArrayList<GetHomeScreenPostsData>
 )

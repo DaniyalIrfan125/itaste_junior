@@ -9,8 +9,8 @@ data class VendorProfileDetailsResponse(
 
 data class VendorProfileDetailData(
     val id: Int,
-    val first_name: String,
-    val last_name: String,
+    val first: String,
+    val last: String,
     val username: String,
     val image: String,
     val bio: String,

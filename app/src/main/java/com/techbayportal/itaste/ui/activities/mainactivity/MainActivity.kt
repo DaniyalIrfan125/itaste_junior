@@ -82,6 +82,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
                 relative_addButton.isVisible = false
             }
+
         }
     }
 
