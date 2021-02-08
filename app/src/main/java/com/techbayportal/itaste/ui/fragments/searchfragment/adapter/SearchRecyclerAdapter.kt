@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -87,6 +88,11 @@ class SearchRecyclerAdapter(
                         }
 
                     })
+
+                holder.itemView.img_first.setOnClickListener(View.OnClickListener {
+                    Toast.makeText(context, "Post Clicked : ${model[0].id}", Toast.LENGTH_SHORT).show()
+                    // callback.methodName(model[0].id)
+                })
             }
 
             if (model[1].image.isNotEmpty()) {
@@ -103,6 +109,10 @@ class SearchRecyclerAdapter(
                         }
 
                     })
+                holder.itemView.img_second.setOnClickListener(View.OnClickListener {
+                    Toast.makeText(context, "Post Clicked : ${model[1].id}", Toast.LENGTH_SHORT).show()
+                    // callback.methodName(model[0].id)
+                })
             }
         } else {
 
@@ -121,6 +131,11 @@ class SearchRecyclerAdapter(
                         }
 
                     })
+
+                holder.itemView.img_third.setOnClickListener(View.OnClickListener {
+                    Toast.makeText(context, "Post Clicked : ${model[0].id}", Toast.LENGTH_SHORT).show()
+                    // callback.methodName(model[0].id)
+                })
             }
 
             if (model[1].image.isNotEmpty()) {
@@ -137,6 +152,11 @@ class SearchRecyclerAdapter(
                         }
 
                     })
+                holder.itemView.img_fourth.setOnClickListener(View.OnClickListener {
+                    Toast.makeText(context, "Post Clicked : ${model[1].id}", Toast.LENGTH_SHORT).show()
+                    // callback.methodName(model[0].id)
+                })
+
             }
             if (model[2].image.isNotEmpty()) {
                 Picasso.get().load(model[2].image).fit().centerCrop()
@@ -152,21 +172,27 @@ class SearchRecyclerAdapter(
                         }
 
                     })
+
+                holder.itemView.img_fifth.setOnClickListener(View.OnClickListener {
+                    Toast.makeText(context, "Post Clicked : ${model[2].id}", Toast.LENGTH_SHORT).show()
+                    // callback.methodName(model[0].id)
+                })
             }
 
         }
 
 
 
-        holder.itemView.img_first.setOnClickListener(View.OnClickListener {
 
-           // callback.methodName(model[0].id)
-        })
-        holder.itemView.img_second.setOnClickListener(View.OnClickListener {
 
+
+        /*holder.itemView.img_second.setOnClickListener(View.OnClickListener {
+            Toast.makeText(context, "Post Clicked : ${model[2].id}", Toast.LENGTH_SHORT).show()
            // callback.methodName(model[1].id)
-        })
-        holder.itemView.img_third.setOnClickListener(View.OnClickListener {
+        })*/
+
+
+       /* holder.itemView.img_third.setOnClickListener(View.OnClickListener {
 
          //   callback.methodName(model[0].id)
         })
@@ -177,7 +203,7 @@ class SearchRecyclerAdapter(
         holder.itemView.img_fifth.setOnClickListener(View.OnClickListener {
 
           //  callback.methodName(model[2].id)
-        })
+        })*/
     }
 
     override fun getItemCount(): Int {

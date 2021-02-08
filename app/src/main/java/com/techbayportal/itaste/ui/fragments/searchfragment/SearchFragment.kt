@@ -24,7 +24,11 @@ import com.techbayportal.itaste.ui.fragments.searchfragment.adapter.SearchRecycl
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.SearchFilterSpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_vendor_profile.*
 import kotlinx.android.synthetic.main.layout_searchfragment.*
+import kotlinx.android.synthetic.main.layout_searchfragment.spinner_city
+import kotlinx.android.synthetic.main.layout_searchfragment.spinner_country
+import kotlinx.android.synthetic.main.layout_signupvendorfragment.*
 import timber.log.Timber
 
 
@@ -53,7 +57,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
 
     var countryid: Int = 0
     var cityid: Int = 0
-    var categoryId: Int = 0
+    var categoryId: String = ""
 
     var searchApiStatus = true
 
@@ -83,7 +87,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             }
         }
 
-        searchRecyclerAdapter=  SearchRecyclerAdapter(
+        searchRecyclerAdapter = SearchRecyclerAdapter(
             mainArrayList,
 
             requireContext()
@@ -100,7 +104,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
 
     }
 
-    private fun splitArray(splitArrayList: ArrayList<SearchAndFilterResponseData>){
+    private fun splitArray(splitArrayList: ArrayList<SearchAndFilterResponseData>) {
         var variableTwo = 0
         var variableThree = 0
         var isTwoRow = false
@@ -147,6 +151,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             } else if (text.length == 0) {
                 loading(false)
                 searchResultList.clear()
+                mViewModel.hitSearchApi("")
             }
         }
     }
@@ -248,10 +253,13 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     allPostsList.clear()
-                    //  allPostsList.addAll(it.data!!.data)
-                   /* splitArray(it.data!!.data)
+                    //Close the side filter screen
+
+                    allPostsList.addAll(it.data!!.data)
+                    splitArray(it.data.data)
                     searchRecyclerAdapter.notifyDataSetChanged()
-                    Toast.makeText(requireContext(), "All data", Toast.LENGTH_SHORT).show()*/
+                    Toast.makeText(requireContext(), "All data after filter", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -261,6 +269,8 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             }
         })
 
+
+        //Search only with keyword
         mViewModel.getSearchResponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -269,11 +279,11 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                 Resource.Status.SUCCESS -> {
                     searchApiStatus = true
                     loading(false)
-                    it?.let {
-                        // setData(it.data!!.data)
-
-                        Toast.makeText(requireContext(), "Search data", Toast.LENGTH_SHORT).show()
-                    }
+                    allPostsList.addAll(it.data!!.data)
+                    splitArray(it.data.data)
+                    searchRecyclerAdapter.notifyDataSetChanged()
+                    Toast.makeText(requireContext(), "search applied", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 Resource.Status.ERROR -> {
                     searchApiStatus = true
@@ -321,13 +331,33 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                 }
             }
         }
+        groupradio.setOnCheckedChangeListener { group, checkedId ->
+            categoryId = checkedId.toString()
+        }
 
         mViewModel.onResetButtonClicked.observe(this, Observer {
             mViewModel.hitGetAllSearchPostsDataApi()
+            rg_categories.removeAllViews()
+            createRadioButton(categoryList)
+            spinner_city.setSelection(0)
+            spinner_country.setSelection(0)
+
         })
 
         mViewModel.onApplyFilterButtonClicked.observe(this, Observer {
-            mViewModel.hitApplyFiltersApi("", "", "", "")
+            if(spinner_city.selectedItemPosition == 0 || spinner_country.selectedItemPosition == 0){
+                mViewModel.hitApplyFiltersApi(ed_search.text.toString(), "", "", categoryId)
+            }else{
+                mViewModel.hitApplyFiltersApi(ed_search.text.toString(), countryid.toString(), cityid.toString(), categoryId)
+            }
+
+
+            //isLayoutOpened = !swipeRevealLayout.isClosed
+           // if (!isLayoutOpened) {
+                swipeRevealLayout.isClosed
+                swipeRevealLayout.open(true)
+                isLayoutOpened = false
+           // }
         })
     }
 

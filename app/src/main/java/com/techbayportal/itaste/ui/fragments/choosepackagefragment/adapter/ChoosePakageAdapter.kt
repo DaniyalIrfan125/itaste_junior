@@ -130,11 +130,11 @@ class ChoosePakageAdapter(
         }
 
         fun bind(position: Int) {
-            var model = list[position]
+            val model = list[position]
             tvPackageType!!.text = model.name
             tv_price!!.text = model.price.toString()
 
-            tvWeeklyUpdates!!.text = "- "+ model.weekly_update
+            tvWeeklyUpdates!!.text = "- " + model.weekly_update
             tvCancelAnytime!!.text = "- "+model.cancelation_time
 
             tvPostsPerWeek!!.text = model.post_week

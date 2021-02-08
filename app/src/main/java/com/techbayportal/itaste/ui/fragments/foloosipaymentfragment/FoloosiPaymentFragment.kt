@@ -89,7 +89,7 @@ class FoloosiPaymentFragment : BaseFragment<FragmentFoloosiPaymentBinding, Foloo
 
     override fun onTransactionSuccess(transactionId: String?) {
         Timber.d("Transaction Id $transactionId")
-        navigateAfterSuccessFulPayment()
+       // navigateAfterSuccessFulPayment()
         Toast.makeText(requireContext(), "Payment Successful", Toast.LENGTH_SHORT).show()
     }
 
