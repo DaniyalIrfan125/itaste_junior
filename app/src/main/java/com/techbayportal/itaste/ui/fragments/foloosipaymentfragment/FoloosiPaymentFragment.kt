@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.Observable
 import androidx.databinding.library.baseAdapters.BR
 import com.foloosi.core.FPayListener
 import com.foloosi.core.FoloosiLog
@@ -17,6 +18,8 @@ import com.foloosi.models.OrderData
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.data.remote.Resource
+import com.techbayportal.itaste.data.remote.Resource.Companion.loading
 import com.techbayportal.itaste.databinding.FragmentFoloosiPaymentBinding
 import com.techbayportal.itaste.databinding.LayoutHomefragmentBinding
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
@@ -37,13 +40,15 @@ class FoloosiPaymentFragment : BaseFragment<FragmentFoloosiPaymentBinding, Foloo
         get() = BR.viewModel
 
     lateinit var mView: View
-    var total = 0.0
+    private var total = 0.0
+    var orderId = 0
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //total = getIntent().getDoubleExtra(AppConstants.DataStore.DURATION,0.0)
         initialisingPayment()
+        subscribeToNetworkLiveData()
 
     }
 
@@ -65,7 +70,7 @@ class FoloosiPaymentFragment : BaseFragment<FragmentFoloosiPaymentBinding, Foloo
             total = sharedViewModel.packagePrice.toDouble()
             orderData.orderAmount = total // in double format ##,###.##
             val rand = Random()
-            val orderId = rand.nextInt(100000)
+            orderId = rand.nextInt(100000)
             orderData.customColor = "#ff962d" // make payment page loading color as app color.
             orderData.orderId = orderId.toString() // unique order id.
             orderData.orderDescription = sharedViewModel.packageType // any description.
@@ -90,7 +95,8 @@ class FoloosiPaymentFragment : BaseFragment<FragmentFoloosiPaymentBinding, Foloo
     override fun onTransactionSuccess(transactionId: String?) {
         Timber.d("Transaction Id $transactionId")
        // navigateAfterSuccessFulPayment()
-        Toast.makeText(requireContext(), "Payment Successful", Toast.LENGTH_SHORT).show()
+       // Toast.makeText(requireContext(), "Payment Successful", Toast.LENGTH_SHORT).show()
+        mViewModel.hitCheckOutApi(orderId,sharedViewModel.packageId,total.toInt())
     }
 
     override fun onTransactionFailure(error: String?) {
@@ -102,6 +108,29 @@ class FoloosiPaymentFragment : BaseFragment<FragmentFoloosiPaymentBinding, Foloo
         val intent = Intent(requireContext(), MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+    }
+
+    override fun subscribeToNetworkLiveData() {
+        super.subscribeToNetworkLiveData()
+
+        mViewModel.getCheckoutResponse.observe(this, androidx.lifecycle.Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loading(true)
+                }
+                Resource.Status.SUCCESS -> {
+                    loading(false)
+
+                    Toast.makeText(requireContext(), "CheckOut Api hit", Toast.LENGTH_SHORT)
+                        .show()
+                }
+                Resource.Status.ERROR -> {
+                    loading(false)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
     }
 
 

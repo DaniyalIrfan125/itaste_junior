@@ -8,6 +8,7 @@ data class PackagesResponse(
 
 
 data class PackagesResponseData(
+    val id: Int,
     val name: String,
     val price: Int,
     val post_per_week: Int,

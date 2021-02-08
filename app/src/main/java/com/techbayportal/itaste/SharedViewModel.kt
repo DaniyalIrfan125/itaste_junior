@@ -56,4 +56,5 @@ class SharedViewModel : BaseViewModel() {
 
     var packagePrice = 0
     var packageType :String = ""
+    var packageId :Int = 0
 }

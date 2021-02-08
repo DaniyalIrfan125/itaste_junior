@@ -310,8 +310,8 @@ class MainRepository @Inject constructor(
         return apiService.searchApi("application/json", auth, keyword)
     }
 
-    suspend fun checkOutApi(auth: String, post_id: ArrayList<String>, quantity : ArrayList<String>, ammount : ArrayList<String> ): Response<BlockVendorResponse> {
-        return apiService.checkOutApi("application/json", auth, post_id, quantity, ammount)
+    suspend fun checkOutApi(auth: String, transaction_id: Int, package_id : Int, amount : Int ): Response<SuccessResponse> {
+        return apiService.checkOutApi("application/json", auth, transaction_id, package_id, amount)
     }
 
 }

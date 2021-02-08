@@ -65,6 +65,7 @@ class ChoosePakageFragment : BaseFragment<LayoutChoosepackagefragmentBinding,Cho
                     packagePriceCheck = packagesResponseData.price
                     sharedViewModel.packagePrice = packagesResponseData.price
                     sharedViewModel.packageType = packagesResponseData.name
+                    sharedViewModel.packageId = packagesResponseData.id
 
                    // Toast.makeText(requireContext(), "Packages get ${packagesResponseData.price}", Toast.LENGTH_SHORT).show()
                 }

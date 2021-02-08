@@ -49,6 +49,8 @@ class SearchViewModel @ViewModelInject constructor(
     val getSearchResponse: LiveData<Resource<SearchAndFilterResponse>>
         get() = _getSearchResponse
 
+
+
     fun onResetButtonClicked() {
         onResetButtonClicked.call()
     }
@@ -203,4 +205,7 @@ class SearchViewModel @ViewModelInject constructor(
             } else _getSearchResponse.postValue(Resource.error("No Internet Connection", null))
         }
     }
+
+
+
 }
