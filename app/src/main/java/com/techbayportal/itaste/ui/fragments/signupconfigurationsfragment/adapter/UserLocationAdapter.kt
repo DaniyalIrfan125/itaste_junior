@@ -104,22 +104,6 @@ class UserLocationAdapter(
 
             }
 
-
-            /*if (model.flag != null && model.flag.isNotEmpty()) {
-                Picasso.get().load(model.flag).fit().centerCrop()
-                    .into(ivCountryFlag, object :
-                        Callback {
-                        override fun onSuccess() {
-                            Timber.d("on success")
-                            //bind.spinkit.visibility = View.GONE
-                        }
-
-                        override fun onError(e: Exception?) {
-                           // holder.bind.spinkit.visibility = View.GONE
-                        }
-                    })
-            }*/
-
         }
 
 

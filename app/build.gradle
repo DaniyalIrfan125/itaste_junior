@@ -189,6 +189,8 @@ dependencies {
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
+    implementation 'com.foloosi:FoloosiSDK:1.1.2'
+
 }
 protobuf {
     protoc {

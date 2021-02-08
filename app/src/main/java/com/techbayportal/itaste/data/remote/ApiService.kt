@@ -344,7 +344,7 @@ interface ApiService {
 
     //Api call after payment is done in payment method
     @FormUrlEncoded
-    @POST("vendor/block")
+    @POST("")
     suspend fun checkOutApi(
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,

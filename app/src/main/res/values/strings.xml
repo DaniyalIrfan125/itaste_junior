@@ -302,6 +302,7 @@
     <string name="Please_write_Existing_Password">Please write Existing Password!</string>
     <string name="bug_report_submitted">Bug Report Submitted</string>
     <string name="reset">Reset</string>
+    <string name="foloosi_key">test_$2y$10$maycAof2s0Hp0e22bLmHIegqpu3CF5RzMf5lmyga92OU-6p1ZVMvO</string>
 
 
 </resources>

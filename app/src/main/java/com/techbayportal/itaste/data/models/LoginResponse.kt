@@ -20,6 +20,7 @@ public data class Data(
     val role: String,
     val access_token: String,
     val country_id: String,
+    val city_id: String,
     val is_payment_update: Boolean
 
 

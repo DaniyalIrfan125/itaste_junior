@@ -119,7 +119,7 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
         locationAdapter = LocationsAdapter(locationsList,object :LocationsAdapter.ClickItemListener{
             override fun onClicked(getAllCountriesData: GetAllCountriesData) {
                 //Call Update Loc API
-                sharedViewModel.userUpdatedCountryId = getAllCountriesData.id.toInt()
+                sharedViewModel.userUpdatedCountryId = getAllCountriesData.id
                 sharedViewModel._homeConfigBottomSheetClickId.postValue(AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION)
 
             }

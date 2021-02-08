@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
@@ -41,6 +42,8 @@ class ChoosePakageFragment : BaseFragment<LayoutChoosepackagefragmentBinding,Cho
     var darkMode :Boolean = false
     lateinit var dataStoreProvider: DataStoreProvider
 
+    var packagePriceCheck = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mViewModel.hitGetPackagesApi()
@@ -57,13 +60,14 @@ class ChoosePakageFragment : BaseFragment<LayoutChoosepackagefragmentBinding,Cho
     }
 
     private fun initializing() {
-        choosePakageAdapter = ChoosePakageAdapter(packagesList,requireContext(),
-            object : ChoosePakageAdapter.ClickItemListener{
+        choosePakageAdapter = ChoosePakageAdapter(packagesList, requireContext(), object : ChoosePakageAdapter.ClickItemListener{
                 override fun onClicked(packagesResponseData: PackagesResponseData) {
-                    Toast.makeText(requireContext(), "Packages get ${packagesResponseData.name}", Toast.LENGTH_SHORT).show()
+                    packagePriceCheck = packagesResponseData.price
+                    sharedViewModel.packagePrice = packagesResponseData.price
+                    sharedViewModel.packageType = packagesResponseData.name
+
+                   // Toast.makeText(requireContext(), "Packages get ${packagesResponseData.price}", Toast.LENGTH_SHORT).show()
                 }
-
-
             })
 
         recycler_choosepakage.adapter = choosePakageAdapter
@@ -86,7 +90,6 @@ class ChoosePakageFragment : BaseFragment<LayoutChoosepackagefragmentBinding,Cho
                         packagesList.addAll(it.data.data)
                         choosePakageAdapter.notifyDataSetChanged()
                     }
-
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -105,6 +108,13 @@ class ChoosePakageFragment : BaseFragment<LayoutChoosepackagefragmentBinding,Cho
         })
 
         mViewModel.onProceedButtonClicked.observe(this, Observer {
+           // Toast.makeText(requireContext(), "Packages price is: $packagePrice", Toast.LENGTH_SHORT).show()
+
+            if(packagePriceCheck != 0){
+                Navigation.findNavController(mView).navigate(R.id.action_choosePakageFragment_to_foloosiPaymentFragment)
+            }else{
+                Snackbar.make(requireView(), "Please select your package!", Snackbar.LENGTH_SHORT).show()
+            }
 
         })
 

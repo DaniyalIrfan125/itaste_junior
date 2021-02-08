@@ -315,7 +315,7 @@ class SignUpVendorFragment :
 
                     if(it.data != null){
                         val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, vendorUserName, it.data.data.phone, it.data.data.email,
-                            it.data.data.profile_pic,it.data.data.role, accessToken,it.data.data.country_id, it.data.data.is_payment_update)
+                            it.data.data.profile_pic,it.data.data.role, accessToken,it.data.data.country_id, it.data.data.city_id, it.data.data.is_payment_update)
                         val loginResponse = LoginResponse("update vendor profile", userData, "")
                         //LoginSession.getInstance().setLoginResponse(loginResponse)
                         mViewModel.saveUserObj(loginResponse)

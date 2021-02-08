@@ -53,4 +53,7 @@ class SharedViewModel : BaseViewModel() {
 
     var test = false;
     var testId :Int = 0
+
+    var packagePrice = 0
+    var packageType :String = ""
 }

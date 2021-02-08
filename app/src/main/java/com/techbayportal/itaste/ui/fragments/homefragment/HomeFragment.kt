@@ -64,6 +64,29 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     lateinit var getHomeScreenPostsData: GetHomeScreenPostsData
     var vendorPostsList = ArrayList<GetHomeScreenPostsData>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeToNetworkLiveData()
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mView = view
+        initilizing()
+        mViewModel.hitGetHomeScreenInfoApi()
+        dataStoreProvider = DataStoreProvider(requireContext())
+        subscribeToObserveDarkActivation()
+        sharedViewModel.test = true
+
+
+        if (this::getHomeScreenResponse.isInitialized) {
+            setData(getHomeScreenResponse)
+        }
+
+
+
+    }
+
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
@@ -87,27 +110,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         })
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        subscribeToNetworkLiveData()
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        mView = view
-        initilizing()
-        dataStoreProvider = DataStoreProvider(requireContext())
-        subscribeToObserveDarkActivation()
-        sharedViewModel.test = true
-
-
-        if (this::getHomeScreenResponse.isInitialized) {
-            setData(getHomeScreenResponse)
-        }
-
-        mViewModel.hitGetHomeScreenInfoApi()
-
-    }
 
        private fun initilizing() {
         homerRecyclerAdpater = HomeRecyclerAdapter(vendorsDataList, requireContext())
@@ -327,8 +330,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     //vendor post item clicked
     override fun onChildItemClick(position: Int) {
 
-        Navigation.findNavController(iv_icon)
-            .navigate(R.id.action_homeFragment_to_postDetailFragment)
+        Navigation.findNavController(iv_icon).navigate(R.id.action_homeFragment_to_postDetailFragment)
     }
 
     private fun subscribeToObserveDarkActivation() {

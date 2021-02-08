@@ -26,7 +26,6 @@ import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_profilefragment.*
-import kotlinx.android.synthetic.main.layout_profilefragment.spinKit
 import kotlinx.android.synthetic.main.layout_profilefragment.tv_profileName
 import java.lang.Exception
 
@@ -161,14 +160,14 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
             if(vendorProfileDetailData.image.isNotEmpty()){
                 Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage , object :Callback{
                     override fun onSuccess() {
-                        if(spinKit != null){
-                            spinKit.visibility = View.GONE
+                        if(sp_Profile != null){
+                            sp_Profile.visibility = View.GONE
                         }
                     }
                     override fun onError(e: Exception?) {
-                        Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
-                        if(spinKit != null){
-                            spinKit.visibility = View.GONE
+                        if(sp_Profile != null){
+                            Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
+                            sp_Profile.visibility = View.GONE
                         }
 
                     }

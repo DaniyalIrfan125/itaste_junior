@@ -46,7 +46,15 @@
     <fragment
         android:id="@+id/choosePakageFragment"
         android:name="com.techbayportal.itaste.ui.fragments.choosepackagefragment.ChoosePakageFragment"
-        android:label="ChoosePakageFragment" />
+        android:label="ChoosePakageFragment" >
+        <action
+            android:id="@+id/action_choosePakageFragment_to_foloosiPaymentFragment"
+            app:destination="@id/foloosiPaymentFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.techbayportal.itaste.ui.fragments.profilefragment.ProfileFragment"
@@ -321,4 +329,8 @@
         android:id="@+id/signUpVendorFragment2"
         android:name="com.techbayportal.itaste.ui.fragments.signupvendorfragment.SignUpVendorFragment"
         android:label="SignUpVendorFragment" />
+    <fragment
+        android:id="@+id/foloosiPaymentFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.foloosipaymentfragment.FoloosiPaymentFragment"
+        android:label="FoloosiPaymentFragment" />
 </navigation>

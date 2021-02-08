@@ -156,6 +156,8 @@ class SearchRecyclerAdapter(
 
         }
 
+
+
         holder.itemView.img_first.setOnClickListener(View.OnClickListener {
 
            // callback.methodName(model[0].id)

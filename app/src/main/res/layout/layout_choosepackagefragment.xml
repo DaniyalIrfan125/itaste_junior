@@ -112,6 +112,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_20sdp"
                 android:orientation="horizontal"
+                tools:listitem="@layout/item_pakages_layout"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 

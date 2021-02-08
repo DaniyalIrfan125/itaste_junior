@@ -14,13 +14,18 @@ import com.techbayportal.itaste.data.models.NotificationResponseData
 import com.techbayportal.itaste.data.models.PackagesResponseData
 import com.techbayportal.itaste.ui.fragments.notificationfragment.adapter.NotificationFragmentAdapter
 
-class ChoosePakageAdapter(private val list: List<PackagesResponseData>, val context: Context,  private val listener: ClickItemListener) :
+class ChoosePakageAdapter(
+    private val list: List<PackagesResponseData>,
+    val context: Context,
+    private val listener: ClickItemListener) :
     RecyclerView.Adapter<ChoosePakageAdapter.ViewHolder>() {
 
-    private var row_index = -1
+    private var rowIndex = -1
 
     interface ClickItemListener {
-        fun onClicked(packagesResponseData: PackagesResponseData)
+        fun onClicked(packagesResponseData: PackagesResponseData){
+
+        }
 
     }
 
@@ -32,19 +37,14 @@ class ChoosePakageAdapter(private val list: List<PackagesResponseData>, val cont
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(position)
 
-        holder.linear!!.setOnClickListener(View.OnClickListener { v: View? ->
+        /*holder.linear!!.setOnClickListener(View.OnClickListener { v: View? ->
 
-            row_index = position
+            rowIndex = position
             notifyDataSetChanged()
-        })
+        })*/
 
-        if (row_index == position) {
-            holder.linear!!.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    R.color.colorOrange
-                )
-            )
+        if (rowIndex == position) {
+            holder.linear!!.setBackgroundColor(ContextCompat.getColor(context, R.color.colorOrange))
 
 
             holder.ivPackageIcon!!.setColorFilter(ContextCompat.getColor(context, R.color.colorBlack))
@@ -61,12 +61,7 @@ class ChoosePakageAdapter(private val list: List<PackagesResponseData>, val cont
 
 
         } else {
-            holder.linear!!.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    R.color.itemPackageBgColor
-                )
-            )
+            holder.linear!!.setBackgroundColor(ContextCompat.getColor(context, R.color.itemPackageBgColor))
 
 
             holder.ivPackageIcon!!.setColorFilter(ContextCompat.getColor(context, R.color.titleTextColorBlack))
@@ -147,6 +142,7 @@ class ChoosePakageAdapter(private val list: List<PackagesResponseData>, val cont
 
             itemView.setOnClickListener {
                 listener.onClicked(model)
+                rowIndex = position
                 notifyDataSetChanged()
             }
 

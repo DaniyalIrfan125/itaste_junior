@@ -21,7 +21,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginEnd="@dimen/_2sdp"
                 android:scaleType="fitXY"
-                android:src="@drawable/img_food_first" />
+                />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:src="@drawable/img_big_second" />
+                />
 
             <ImageView
                 android:layout_width="@dimen/_15sdp"
