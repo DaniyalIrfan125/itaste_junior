@@ -302,6 +302,13 @@ interface ApiService {
         @Header("Authorization") authHeader: String
     ): Response<GetCategoriesResponse>
 
+
+    @GET("category/getAll")
+    suspend fun getAllCategories(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetAllCategoriesResponse>
+
     @GET("suggestion-time")
     suspend fun getTimeSuggestion(
         @Header("Accept") acceptJson: String,

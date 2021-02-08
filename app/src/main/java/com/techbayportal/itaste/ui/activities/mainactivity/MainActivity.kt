@@ -73,9 +73,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val navController = navHostFragment.navController
 
         NavigationUI.setupWithNavController(bottom_navigation, navController)
-        relative_addButton.setOnClickListener(View.OnClickListener {
-            Toast.makeText(applicationContext, "clicked add button", Toast.LENGTH_SHORT).show()
-        })
+
+
+
+        relative_addButton.setOnClickListener {
+            navController.navigate(R.id.selectPostFragment)
+        }
 
         if (loginSession != null) {
             //removing add Post button if user is logged in

@@ -59,12 +59,10 @@ class SharedViewModel : BaseViewModel() {
     var userUpdatedCountryId : Int = 0
     var vendorProfileId : Int = 0
 
-
     var test = false;
-
+    var testId :Int = 0
 
     var packagePrice = 0
     var packageType :String = ""
     var packageId :Int = 0
-    var testId: String = "0"
 }
