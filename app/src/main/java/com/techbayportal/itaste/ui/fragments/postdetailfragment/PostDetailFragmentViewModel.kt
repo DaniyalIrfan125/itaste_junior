@@ -41,6 +41,11 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
         get() = _favoriteUnfavoriteCommentReponse
 
 
+    private val _postDeleteReponse = MutableLiveData<Resource<PostDetailResponse>>()
+    val postDeleteResponse: LiveData<Resource<PostDetailResponse>>
+        get() = _postDeleteReponse
+
+
     var onVendorProfileHeaderClicked = SingleLiveEvent<Any>()
     var onSendButtonClicked = SingleLiveEvent<Any>()
     val onBackButtonClicked = SingleLiveEvent<Any>()
@@ -241,6 +246,42 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
                     _getCategoriesResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _getCategoriesResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+
+    fun deletePost(
+        postId: Int
+    ) {
+        viewModelScope.launch {
+            _postDeleteReponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.deletePost(
+                        "Bearer ${loginSession!!.data.access_token}",
+                        postId
+                    ).let {
+                        if (it.isSuccessful) {
+                            _postDeleteReponse.postValue(Resource.success(it.body()!!))
+
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _postDeleteReponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _postDeleteReponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _postDeleteReponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _postDeleteReponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

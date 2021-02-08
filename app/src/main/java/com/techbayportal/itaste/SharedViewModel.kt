@@ -23,14 +23,14 @@ class SharedViewModel : BaseViewModel() {
     var userType = "user"
     var otpVerifyCode = ""
     var userModel = UserModel()
-    val isDarkMode :Boolean = false
+    val isDarkMode: Boolean = false
     val localProfilePic: File? = null
     var selectedPostImageFile = MutableLiveData<File>()
-    var isEditPost : Boolean = false
+    var isEditPost: Boolean = false
     var isEditBottomSheetClicked = MutableLiveData<Boolean>(false)
     var isPostUpdated = MutableLiveData<Boolean>()
-    var categoriesResponse : MutableLiveData<List<GetCategoriesResponse.Data>> = MutableLiveData()
-//    val countriesList = ArrayList<GetAllCountriesData>()
+    var categoriesResponse: MutableLiveData<List<GetCategoriesResponse.Data>> = MutableLiveData()
+    var isPostDetailDeleteClicked = MutableLiveData<Boolean>(false)
 
 
     //var isSelectedCountryId : MutableLiveData<Int>? = null
@@ -43,8 +43,8 @@ class SharedViewModel : BaseViewModel() {
 
     val _homeConfigBottomSheetClickId = MutableLiveData<Int>()
     val homeItemBottomSheetClickId = MutableLiveData<Int>()
-   // val homeConfigBottomSheetClickId: LiveData<Int>
-       // get() = _homeConfigBottomSheetClickId
+    // val homeConfigBottomSheetClickId: LiveData<Int>
+    // get() = _homeConfigBottomSheetClickId
 
     val _countriesList = MutableLiveData<GetAllCountriesResponse>()
     val countriesList: LiveData<GetAllCountriesResponse>
@@ -54,8 +54,8 @@ class SharedViewModel : BaseViewModel() {
     var bugReportMessage = ""
     //var bugReportMessage = MutableLiveData<String>()
 
-    var userUpdatedCountryId : Int = 0
+    var userUpdatedCountryId: Int = 0
 
     var test = false;
-    var testId :String = "0"
+    var testId: String = "0"
 }

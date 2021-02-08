@@ -316,5 +316,6 @@
     <string name="tv_viewAll">View All </string>
     <string name="tv_comments">Comments</string>
     <string name="tv_update">Update</string>
+    <string name="tv_post_delete">Post Deleted Successfully!</string>
 
 </resources>

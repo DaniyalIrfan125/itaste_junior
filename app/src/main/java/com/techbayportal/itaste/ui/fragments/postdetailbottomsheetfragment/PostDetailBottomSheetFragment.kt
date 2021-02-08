@@ -40,17 +40,24 @@ class PostDetailBottomSheetFragment : BottomSheetDialogFragment() {
 
 
 
-        btn_cancel.setOnClickListener(View.OnClickListener {
+        btn_cancel.setOnClickListener {
             dismiss()
-        })
+        }
 
-        linear_edit.setOnClickListener(View.OnClickListener {
+        linear_edit.setOnClickListener {
 
 
             sharedViewModel.isEditBottomSheetClicked.value = true
             dismiss()
 
-        })
+        }
+
+
+        linear_delete.setOnClickListener {
+            sharedViewModel.isPostDetailDeleteClicked .value= true
+            dismiss()
+        }
+
     }
 
 

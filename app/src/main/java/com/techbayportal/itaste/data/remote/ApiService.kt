@@ -365,4 +365,12 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Query("comment_id") commentId: Int
     ): Response<CommentFavouriteResponse>
+
+
+    @POST("post/delete")
+    suspend fun deletePost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") posdtId: Int
+    ): Response<PostDetailResponse>
 }

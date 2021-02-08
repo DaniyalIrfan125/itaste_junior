@@ -68,6 +68,38 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
     override fun subscribeToNetworkLiveData() {
         super.subscribeToNetworkLiveData()
 
+        mViewModel.postDeleteResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+
+                        MotionToast.createToast(
+                            requireActivity(),
+                            getString(R.string.tv_success),
+                            getString(R.string.tv_post_delete),
+                            MotionToast.TOAST_SUCCESS,
+                            MotionToast.GRAVITY_BOTTOM,
+                            MotionToast.SHORT_DURATION,
+                            ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
+                        )
+
+                        Navigation.findNavController(radioGroup)
+                            .popBackStack(R.id.homeFragment, false)
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+
+
         mViewModel.getCategoriesResponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -316,6 +348,14 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                 mViewModel.postDetailCall(14)
                 sharedViewModel.isPostUpdated.value = false
             }
+        })
+
+        sharedViewModel.isPostDetailDeleteClicked.observe(this, Observer {
+            if (it) {
+                mViewModel.deletePost(12)
+                sharedViewModel.isPostDetailDeleteClicked.value = false
+            }
+
         })
 
     }

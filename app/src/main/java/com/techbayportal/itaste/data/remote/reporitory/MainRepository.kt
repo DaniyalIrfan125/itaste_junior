@@ -347,4 +347,9 @@ class MainRepository @Inject constructor(
     suspend fun favouriteUnFavoriteComment(auth: String, commentId: Int): Response<CommentFavouriteResponse> {
         return apiService.favouriteUnfavouriteComment("application/json", auth,commentId)
     }
+
+
+    suspend fun deletePost(auth: String, postId: Int): Response<PostDetailResponse> {
+        return apiService.deletePost("application/json", auth,postId)
+    }
 }
