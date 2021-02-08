@@ -5,9 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
+import com.techbayportal.itaste.utils.LoginSession
 import com.techbayportal.itaste.utils.NetworkHelper
 import com.techbayportal.itaste.utils.SingleLiveEvent
 import com.techbayportal.itaste.utils.extractErrorMessage
@@ -16,8 +18,10 @@ import java.io.File
 
 class SignupVendorViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val dataStoreProvider: DataStoreProvider
 ) : BaseViewModel() {
+
 
     val _getAllCountriesResponse = MutableLiveData<Resource<GetAllCountriesResponse>>()
     val getCountriesResponse: LiveData<Resource<GetAllCountriesResponse>>
@@ -30,6 +34,10 @@ class SignupVendorViewModel @ViewModelInject constructor(
     private val _signUpVendorResponse = MutableLiveData<Resource<SignUpResponse>>()
     val signUpVendorResponse: LiveData<Resource<SignUpResponse>>
         get() = _signUpVendorResponse
+
+    val _getSwitchToPremiumResponse = MutableLiveData<Resource<VendorPersonalProfileResponse>>()
+    val getSwitchToPremiumResponse: LiveData<Resource<VendorPersonalProfileResponse>>
+        get() = _getSwitchToPremiumResponse
 
     val onBackButtonClicked = SingleLiveEvent<Any>()
     val onSignUpVendorButtonClicked = SingleLiveEvent<Any>()
@@ -116,7 +124,39 @@ class SignupVendorViewModel @ViewModelInject constructor(
         }
     }
 
-    init {
-        getAllCountries()
+    fun hitSwitchToPremiumApi(country_id: Int, city_id: Int, description: String) {
+        val loginSession = LoginSession.getInstance().getLoginResponse()
+        viewModelScope.launch {
+            _getSwitchToPremiumResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.switchToPremium("Bearer ${loginSession!!.data.access_token}", country_id, city_id, description).let {
+                        if (it.isSuccessful) {
+                            _getSwitchToPremiumResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _getSwitchToPremiumResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _getSwitchToPremiumResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getSwitchToPremiumResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _getSwitchToPremiumResponse.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
+    fun saveUserObj(loginResponse: LoginResponse){
+        viewModelScope.launch {
+            dataStoreProvider.saveUserObj(loginResponse)
+        }
+        LoginSession.getInstance().setLoginResponse(loginResponse)
     }
 }

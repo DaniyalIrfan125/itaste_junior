@@ -8,7 +8,7 @@
 
     </data>
     <RelativeLayout
-        android:id="@+id/rvNotificationItem"
+        android:id="@+id/rl_notification_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/_25sdp"
@@ -23,38 +23,46 @@
             android:weightSum="10"
             android:layout_marginBottom="@dimen/_10sdp">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="51dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/sivInfluancerImage"
+                    android:id="@+id/siv_notification_user_image"
                     android:layout_width="47dp"
                     android:layout_height="47dp"
                     android:layout_margin="@dimen/_3sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/icon_user_dp"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
 
-            </LinearLayout>
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/sk_notification_left"
+                    style="@style/SpinKitView.Large.Pulse"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/colorOrange" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="6.5"
                 android:gravity="center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/_15sdp">
 
                 <TextView
+                    android:id="@+id/tv_notification_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_light"
-                    android:text="Syra Ahmed and 38 others liked your food post."
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="12sp"
                     >
@@ -62,6 +70,7 @@
                 </TextView>
 
                 <TextView
+                    android:id="@+id/tv_notification_timestamp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_light"
@@ -73,24 +82,30 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:gravity="end">
 
                 <ImageView
-                    android:id="@+id/outlinedButton"
+                    android:id="@+id/iv_notification_post"
                     android:layout_width="50dp"
                     android:layout_height="48dp"
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
-                    android:src="@drawable/img_food_second"
                     android:text="Unblock"
-
                     android:textAllCaps="false" />
 
-            </LinearLayout>
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/sk_notification_right"
+                    style="@style/SpinKitView.Large.Pulse"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/colorOrange" />
+
+            </RelativeLayout>
 
 
         </LinearLayout>

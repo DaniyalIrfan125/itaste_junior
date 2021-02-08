@@ -71,8 +71,8 @@ class MainRepository @Inject constructor(
             userModel.password,
             userModel.country_id,
             userModel.city_id,
-            userModel.days_of_week,
-            userModel.is_deliverable,
+           // userModel.days_of_week,
+           // userModel.is_deliverable,
             userModel.password_confirmation,
             userModel.description
         )
@@ -133,7 +133,7 @@ class MainRepository @Inject constructor(
         email: String,
         phone: String,
         profilePic: File?
-    ): Response<SuccessResponse> {
+    ): Response<UserPersonalProfileResponse> {
 
         val profilePicRequestBody: RequestBody? =
             profilePic?.asRequestBody("image/*".toMediaTypeOrNull())
@@ -172,14 +172,14 @@ class MainRepository @Inject constructor(
         auth: String,
         first_name: String,
         last_name: String,
-        bio: String,
+        description: String,
         phone: String,
         email: String,
         profilePic: File?,
-        country_id: String,
-        city_id: String
+        country_id: Int,
+        city_id: Int
 
-    ): Response<SuccessResponse> {
+    ): Response<VendorPersonalProfileResponse> {
         val profilePicRequestBody: RequestBody? =
             profilePic?.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = profilePicRequestBody?.let {
@@ -195,7 +195,7 @@ class MainRepository @Inject constructor(
                 auth,
                 first_name,
                 last_name,
-                bio,
+                description,
                 phone,
                 email,
                 country_id,
@@ -207,7 +207,7 @@ class MainRepository @Inject constructor(
                 auth,
                 first_name,
                 last_name,
-                bio,
+                description,
                 phone,
                 email,
                 profilePicMultiPartBody!!,
@@ -215,6 +215,27 @@ class MainRepository @Inject constructor(
                 city_id
             )
         }
+    }
+
+    suspend fun switchToPremium(
+        auth: String,
+        country_id: Int,
+        city_id: Int,
+       // days_of_week: ArrayList<String>,
+      //  is_deliverable: Int,
+        description: String
+
+    ): Response<VendorPersonalProfileResponse> {
+
+        return apiService.switchToPremium(
+            "application/json",
+            auth,
+            country_id,
+            city_id,
+          //  days_of_week,
+         //   is_deliverable,
+            description
+        )
     }
 
     suspend fun changePassword(
@@ -259,6 +280,38 @@ class MainRepository @Inject constructor(
 
     suspend fun blockVendor(auth: String, vendorId: Int): Response<BlockVendorResponse> {
         return apiService.blockVendor("application/json", auth, vendorId)
+    }
+
+    suspend fun getAllCategories(auth: String): Response<GetAllCategoriesResponse> {
+        return apiService.getAllCategories("application/json", auth)
+    }
+
+    suspend fun getHomeScreenInfo(auth: String): Response<GetHomeScreenResponse> {
+        return apiService.getHomeScreenInfo("application/json", auth)
+    }
+
+    suspend fun getNotifications(auth: String): Response<NotificationResponse> {
+        return apiService.getNotifications("application/json", auth)
+    }
+
+    suspend fun getPackages(): Response<PackagesResponse> {
+        return apiService.getPackages()
+    }
+
+    suspend fun getAllSearchPostsApi(auth: String): Response<SearchAndFilterResponse> {
+        return apiService.getAllSearchPostsApi("application/json", auth)
+    }
+
+    suspend fun searchAndFilterApi(auth: String, keyword : String, country_id:String, city_id :String, category_id :String): Response<SearchAndFilterResponse> {
+        return apiService.searchAndFilterApi("application/json", auth, keyword, country_id, city_id, category_id)
+    }
+
+    suspend fun searchApi(auth: String, keyword:String): Response<SearchAndFilterResponse> {
+        return apiService.searchApi("application/json", auth, keyword)
+    }
+
+    suspend fun checkOutApi(auth: String, transaction_id: Int, package_id : Int, amount : Int ): Response<SuccessResponse> {
+        return apiService.checkOutApi("application/json", auth, transaction_id, package_id, amount)
     }
 
     suspend fun getCategories(auth: String) =

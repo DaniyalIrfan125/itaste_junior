@@ -13,5 +13,14 @@
             android:layout_width="@dimen/_130sdp"
             android:layout_height="@dimen/_105sdp" />
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/sk_postImage"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            app:SpinKit_Color="@color/colorOrange" />
+
     </RelativeLayout>
 </layout>

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
@@ -18,7 +19,8 @@ import java.io.File
 
 class VendorProfileViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val dataStoreProvider: DataStoreProvider
 ) : BaseViewModel() {
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
@@ -30,8 +32,8 @@ class VendorProfileViewModel @ViewModelInject constructor(
     val getVendorPersonalProfileResponse: LiveData<Resource<VendorPersonalProfileResponse>>
         get() = _getVendorPersonalProfileResponse
 
-    val _getUpdateVendorPersonalProfileResponse = MutableLiveData<Resource<SuccessResponse>>()
-    val getUpdateVendorPersonalProfileResponse: LiveData<Resource<SuccessResponse>>
+    val _getUpdateVendorPersonalProfileResponse = MutableLiveData<Resource<VendorPersonalProfileResponse>>()
+    val getUpdateVendorPersonalProfileResponse: LiveData<Resource<VendorPersonalProfileResponse>>
         get() = _getUpdateVendorPersonalProfileResponse
 
     val _getAllCountriesResponse = MutableLiveData<Resource<GetAllCountriesResponse>>()
@@ -83,7 +85,9 @@ class VendorProfileViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitUpdateVendorPersonalProfile( first_name:String, last_name:String, bio:String, phone :String ,email: String, profilePic:File?, country_id: String, city_id: String) {
+    fun hitUpdateVendorPersonalProfile( first_name:String, last_name:String, bio:String, phone :String ,email: String, profilePic:File?, country_id: Int, city_id: Int) {
+        var days_of_week1 : ArrayList<String> = ArrayList()
+        days_of_week1.add("monday")
         viewModelScope.launch {
             _getUpdateVendorPersonalProfileResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
@@ -145,7 +149,12 @@ class VendorProfileViewModel @ViewModelInject constructor(
         }
     }
 
-    init {
-        getAllCountries()
+    fun saveUserObj(loginResponse: LoginResponse){
+        viewModelScope.launch {
+            dataStoreProvider.saveUserObj(loginResponse)
+        }
+        LoginSession.getInstance().setLoginResponse(loginResponse)
     }
+
+
 }

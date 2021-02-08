@@ -6,9 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.flexbox.FlexboxLayoutManager
 import com.techbayportal.itaste.R
-import com.techbayportal.itaste.ui.fragments.searchfragment.adapter.SearchRecyclerAdapter
 
 class CartsAdapter (private val list: List<Int>, val context: Context) :
     RecyclerView.Adapter<CartsAdapter.ViewHolder>() {

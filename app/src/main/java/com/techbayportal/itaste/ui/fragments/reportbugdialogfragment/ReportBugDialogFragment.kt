@@ -36,6 +36,7 @@ class ReportBugDialogFragment : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         sharedViewModel = ViewModelProviders.of(requireActivity()).get(SharedViewModel::class.java)
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -86,7 +87,6 @@ class ReportBugDialogFragment : DialogFragment() {
         if (tv_bug_report.text.isNotEmpty()) {
             tv_bug_report.setText(sharedViewModel.bugReportMessage)
             sharedViewModel.reportBugButtonsClicked.postValue(AppConstants.ReportBugDialog.SUBMIT)
-           // Toast.makeText(requireContext(), "Message:: ${tv_bug_report.text}", Toast.LENGTH_SHORT).show()
         }else{
             tv_errorReportMessage.visibility = View.VISIBLE
             tv_bug_report.background = ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary_bug)

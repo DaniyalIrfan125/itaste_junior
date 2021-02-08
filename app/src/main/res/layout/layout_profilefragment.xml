@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.techbayportal.itaste.ui.fragments.profilefragment.ProfileViewModel" />
@@ -27,24 +28,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:onClick="@{()->viewModel.onBackButtonClicked()}">
+                android:onClick="@{()->viewModel.onBackButtonClicked()}"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
                     android:src="@drawable/icon_backarrow"
-                    app:tint="@color/mainIconColor"
-                    android:layout_marginStart="@dimen/_15sdp"/>
+                    app:tint="@color/mainIconColor" />
 
                 <TextView
                     android:id="@+id/tv_vendorUserName"
-                    android:layout_marginStart="@dimen/_10sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="end"
-                    android:text="edtamer008"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="12sp" />
 
@@ -56,8 +56,8 @@
                 android:layout_height="66dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_15sdp"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvCancel"
@@ -100,15 +100,13 @@
                         android:layout_gravity="center"
                         android:padding="@dimen/_1sdp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/image_face"
                         app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                         app:strokeColor="@color/colorWhite"
 
                         app:strokeWidth="@dimen/_1sdp" />
 
-                    <com.github.ybq.android.spinkit.SpinKitView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/spinKit"
+                    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/sp_Profile"
                         style="@style/SpinKitView.Large.Pulse"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -155,7 +153,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
                         android:lineSpacingExtra="3sp"
-                        android:text="Ed Tamer"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -172,7 +169,6 @@
                     android:layout_marginStart="@dimen/_3sdp"
                     android:fontFamily="@font/roboto_regular"
                     android:lineSpacingExtra="2sp"
-                    android:text="Cooking is about passion, so it may look slightly \n temperamental in a way that it's too assertive to \n the naked eye. Gordon Ramsay"
                     android:textAlignment="center"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp" />
@@ -212,7 +208,6 @@
                             android:layout_marginEnd="@dimen/_3sdp"
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="3sp"
-                            android:text="20"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -242,7 +237,6 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="3sp"
-                            android:text="120"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
 
@@ -271,11 +265,11 @@
                             android:layout_marginStart="@dimen/_3sdp"
                             android:fontFamily="@font/roboto_bold"
                             android:lineSpacingExtra="3sp"
-                            android:text="100"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/linear_buttons"
@@ -285,63 +279,111 @@
                     android:layout_marginStart="@dimen/_25sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_25sdp"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
+                    android:orientation="vertical">
 
-                    <com.balysv.materialripple.MaterialRippleLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        app:mrl_rippleColor="@color/titleTextColorBlack">
+                    <LinearLayout
+                        android:id="@+id/ll_update_payment"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
 
-                        <Button
-                            android:id="@+id/btn_directMessage"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="6dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="@drawable/btn_direct_message_curve"
-                            android:fontFamily="@font/roboto_regular"
-                            android:lineSpacingExtra="@dimen/_3sdp"
-                            android:text="@string/direct_message"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="14sp">
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:id="@+id/btn_updatePayment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            app:mrl_rippleColor="@color/titleTextColorBlack"
+                            android:onClick="@{()->viewModel.onUpdateButtonClicked()}">
 
-                        </Button>
-                    </com.balysv.materialripple.MaterialRippleLayout>
+                            <Button
 
-                    <com.balysv.materialripple.MaterialRippleLayout
-                        android:id="@+id/ripple"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_5sdp"
-                        android:layout_weight="1"
-                        app:mrl_rippleColor="@color/colorLightOrange">
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/btn_curve_small"
+                                android:fontFamily="@font/roboto_regular"
+                                android:lineSpacingExtra="@dimen/_3sdp"
+                                android:text="Update Payment"
 
-                        <Button
-                            android:id="@+id/btn_follow"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="6dp"
-                            android:layout_marginTop="6dp"
-                            android:layout_marginEnd="6dp"
-                            android:layout_marginBottom="6dp"
-                            android:background="@drawable/btn_orange_curve_profile"
-                            android:fontFamily="@font/roboto_regular"
-                            android:lineSpacingExtra="@dimen/_3sdp"
-                            android:text="@string/follow"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="14sp"
-                            android:onClick="@{()->viewModel.onFollowButtonClicked()}">
+                                android:textAllCaps="false"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="14sp">
 
-                        </Button>
-                    </com.balysv.materialripple.MaterialRippleLayout>
+                            </Button>
+                        </com.balysv.materialripple.MaterialRippleLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_message_follow_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        android:visibility="gone"
+                        >
+
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            app:mrl_rippleColor="@color/titleTextColorBlack">
+
+                            <Button
+                                android:id="@+id/btn_directMessage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/btn_direct_message_curve"
+                                android:fontFamily="@font/roboto_regular"
+                                android:lineSpacingExtra="@dimen/_3sdp"
+                                android:text="@string/direct_message"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp">
+
+                            </Button>
+                        </com.balysv.materialripple.MaterialRippleLayout>
+
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:id="@+id/ripple"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:layout_weight="1"
+                            app:mrl_rippleColor="@color/colorLightOrange">
+
+                            <Button
+                                android:id="@+id/btn_follow"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/btn_orange_curve_profile"
+                                android:fontFamily="@font/roboto_regular"
+                                android:lineSpacingExtra="@dimen/_3sdp"
+                                android:onClick="@{()->viewModel.onFollowButtonClicked()}"
+                                android:text="@string/follow"
+                                android:textAllCaps="false"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="14sp">
+
+                            </Button>
+                        </com.balysv.materialripple.MaterialRippleLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_profilePosts"
@@ -350,7 +392,57 @@
                     android:layout_below="@+id/linear_buttons"
                     android:layout_marginTop="@dimen/_10sdp" />
 
+                <LinearLayout
+                    android:id="@+id/ll_noPosts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_buttons"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/noPostsBgColor"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/icon_no_posts"
+                        app:tint="@color/noPostsTextColor"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="center"
+                        android:text="@string/no_posts_yet"
+                        android:textColor="@color/noPostsTextColor"
+                        android:textSize="18sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_50sdp"
+                        android:layout_marginEnd="@dimen/_50sdp"
+                        android:fontFamily="@font/roboto_light"
+                        android:gravity="center"
+                        android:text="@string/there_is_nothing_to_show_yet_you_need_to_update_your_payment_to_start_posting"
+                        android:textColor="@color/noPostsTextColor"
+                        android:textSize="14sp">
+
+                    </TextView>
+
+                </LinearLayout>
+
             </RelativeLayout>
+
         </androidx.core.widget.NestedScrollView>
     </RelativeLayout>
 </layout>

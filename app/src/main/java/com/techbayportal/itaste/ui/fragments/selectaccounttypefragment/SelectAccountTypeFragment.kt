@@ -52,9 +52,6 @@ class SelectAccountTypeFragment : BaseFragment<LayoutAccounttypefragmentBinding,
         super.subscribeToNavigationLiveData()
 
         mViewModel.onExploreFoodClicked.observe(this, androidx.lifecycle.Observer {
-          /*  GlobalScope.launch {
-                dataStoreProvider.storeUserType("user")
-            }*/
 
             sharedViewModel.userType = AppConstants.UserTypeKeys.USER
 
@@ -68,9 +65,9 @@ class SelectAccountTypeFragment : BaseFragment<LayoutAccounttypefragmentBinding,
         })
 
         mViewModel.onShowcaseFoodClicked.observe(this, androidx.lifecycle.Observer {
-           /* GlobalScope.launch {
-                dataStoreProvider.storeUserType("vendor")
-            }*/
+            GlobalScope.launch {
+                dataStoreProvider.switchToPremium(false)
+            }
 
             sharedViewModel.userType = AppConstants.UserTypeKeys.VENDOR
 
@@ -90,6 +87,9 @@ class SelectAccountTypeFragment : BaseFragment<LayoutAccounttypefragmentBinding,
 
     //observing User type vendor or user
     private fun checkUserTypeSelected() {
+        GlobalScope.launch {
+            dataStoreProvider.switchToPremium(false)
+        }
         if (sharedViewModel.userType == AppConstants.UserTypeKeys.USER) {
             rl_explore_food.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
             rl_showcase_food.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)

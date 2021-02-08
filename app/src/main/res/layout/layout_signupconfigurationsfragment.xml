@@ -12,8 +12,8 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/mainBackground"
-        android:layout_marginTop="@dimen/_50sdp">
+        android:paddingTop="@dimen/_50sdp"
+        android:background="@color/mainBackground">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -89,7 +89,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:gravity="center"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_50sdp"
+                    android:layout_marginEnd="@dimen/_50sdp"
                     android:fontFamily="@font/roboto_regular"
                     android:letterSpacing="-0.03"
                     android:lineSpacingExtra="3sp"
@@ -202,7 +205,10 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/roboto_regular"
+                    android:layout_marginStart="@dimen/_55sdp"
+                    android:layout_marginEnd="@dimen/_55sdp"
                     android:letterSpacing="-0.03"
+                    android:gravity="center"
                     android:lineSpacingExtra="3sp"
                     android:text="@string/choose_in_which_country_of_gulf_you_are_nlocated_right_now"
                     android:textAlignment="center"

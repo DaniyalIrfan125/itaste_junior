@@ -56,19 +56,9 @@ class ForgotPasswordFragment :
 
     fun validationsCheck() {
         if (!TextUtils.isEmpty(ed_phoneNumber.text)) {
-            if (ed_phoneNumber.text.toString().length == 10) {
-
-
                 //Navigation.findNavController(btn_next).navigate(R.id.action_forgotPasswordFragment_to_otpverificationFragment)
                 sharedViewModel.verifyOtpHoldPhoneNumber = ed_phoneNumber.text.toString()
                 mViewModel.forgotPasswordApiCall(et_country_code.selectedCountryCodeWithPlus + ed_phoneNumber.text.toString())
-            } else {
-                tv_errorForgotPassword.text = "Invalid Phone Number!"
-
-                tv_errorForgotPassword.visibility = View.VISIBLE
-                ed_forgotPasswordEmail.background =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
-            }
 
         } else {
             tv_errorForgotPassword.text = getString(R.string.Pleasewritephonenumber)

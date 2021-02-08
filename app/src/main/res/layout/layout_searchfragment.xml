@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -17,14 +18,15 @@
         android:layout_marginBottom="@dimen/_2sdp"
         android:background="@color/layoutSearchBgColor"
         android:nestedScrollingEnabled="true"
+        app:mode="same_level"
         app:dragEdge="right"
-        app:mode="same_level">
+        >
 
         <LinearLayout
             android:layout_width="@dimen/_250sdp"
             android:layout_height="match_parent"
             android:layout_weight="1.2"
-            android:background="@color/mainBackground"
+            android:background="@color/filterScreen"
             android:orientation="vertical">
 
             <ScrollView
@@ -38,15 +40,48 @@
                     android:layout_marginStart="@dimen/_15sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:lineSpacingExtra="2sp"
+                            android:text="@string/search_filter"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="20sp" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_bold"
-                        android:lineSpacingExtra="2sp"
-                        android:text="@string/search_filter"
-                        android:textColor="@color/titleTextColorBlack"
-                        android:textSize="20sp" />
+                        <LinearLayout
+                            android:id="@+id/ll_reset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:paddingStart="@dimen/_15sdp"
+                            android:paddingEnd="@dimen/_15sdp"
+                            android:gravity="center_vertical"
+                            android:clickable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:focusable="true"
+                            android:onClick="@{()->viewModel.onResetButtonClicked()}">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
+                                android:text="@string/reset"
+                                android:textColor="@color/colorOrange"
+                                android:textSize="16sp" />
+
+                        </LinearLayout>
+
+
+
+
+                    </RelativeLayout>
+
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -63,7 +98,8 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_10sdp">
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -92,20 +128,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:progress="50" />
+                        android:progress="50"
+                        android:visibility="gone" />
 
                     <RadioGroup
                         android:id="@+id/groupradio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp"
-                        android:orientation='vertical'>
+                        android:orientation='vertical'
+                        android:visibility="gone">
 
                         <RadioButton
-                            android:buttonTint="@color/colorOrange"
                             android:id="@+id/radia_id1"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorOrange"
                             android:fontFamily="@font/roboto_regular"
                             android:text="@string/deliverable"
                             android:textColor="@color/titleTextColorBlack"
@@ -113,10 +151,10 @@
 
 
                         <RadioButton
-                            android:buttonTint="@color/colorOrange"
                             android:id="@+id/radia_id4"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:buttonTint="@color/colorOrange"
                             android:fontFamily="@font/roboto_regular"
                             android:text="@string/not_deliverable"
                             android:textColor="@color/titleTextColorBlack"
@@ -136,23 +174,27 @@
                     <Spinner
                         android:id="@+id/spinner_country"
                         android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_30sdp"
                         android:layout_height="@dimen/_27sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@drawable/spinner_background_search"
                         android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textColorHint="@color/titleTextColorBlack" />
 
                     <Spinner
                         android:id="@+id/spinner_city"
                         android:layout_width="match_parent"
+                        android:paddingStart="@dimen/_10sdp"
+                        android:paddingEnd="@dimen/_30sdp"
                         android:layout_height="@dimen/_27sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@drawable/spinner_background_search"
                         android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/colorBlack"
+                        android:textColor="@color/titleTextColorBlack"
                         android:textColorHint="@color/titleTextColorBlack" />
 
                     <Spinner
@@ -163,8 +205,9 @@
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:background="@drawable/spinner_background_search"
                         android:fontFamily="@font/roboto_regular"
-                        android:textColor="@color/colorBlack"
-                        android:textColorHint="@color/titleTextColorBlack" />
+                        android:textColor="@color/titleTextColorBlack"
+                        android:textColorHint="@color/titleTextColorBlack"
+                        android:visibility="gone" />
 
 
                     <TextView
@@ -178,8 +221,25 @@
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
+                    <!--<androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_userLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        tools:listitem="@layout/item_rv_food_types"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
+                    </androidx.recyclerview.widget.RecyclerView>-->
                     <RadioGroup
+                        android:id="@+id/rg_categories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation='vertical'></RadioGroup>
+
+                    <!--<RadioGroup
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -244,7 +304,7 @@
                             android:textSize="16sp" />
 
 
-                    </RadioGroup>
+                    </RadioGroup>-->
 
 
                     <com.balysv.materialripple.MaterialRippleLayout
@@ -258,7 +318,7 @@
                         app:mrl_rippleColor="@color/colorLightOrange">
 
                         <Button
-                            android:id="@+id/btn_login"
+                            android:id="@+id/btn_applyFilters"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_margin="@dimen/_5sdp"
@@ -268,7 +328,8 @@
                             android:text="@string/apply"
                             android:textAllCaps="true"
                             android:textColor="@color/colorBlack"
-                            android:textSize="16sp">
+                            android:textSize="16sp"
+                            android:onClick="@{()->viewModel.onApplyFilterButtonClicked()}">
 
                         </Button>
                     </com.balysv.materialripple.MaterialRippleLayout>
@@ -302,16 +363,30 @@
                     android:layout_toStartOf="@+id/img_filter"
                     android:background="@drawable/ed_blackboundary">
 
-
-                    <ImageView
-                        android:id="@+id/searchIcon"
+                    <RelativeLayout
+                        android:id="@+id/rl_search"
                         android:layout_width="@dimen/_17sdp"
                         android:layout_height="@dimen/_17sdp"
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="16dp"
-                        android:src="@drawable/icon_search"
-                        app:tint="@color/mainIconColor" />
+                        android:layout_marginStart="16dp">
+
+                        <ImageView
+                            android:id="@+id/searchIcon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/icon_search"
+                            app:tint="@color/mainIconColor" />
+
+                        <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/spinKit"
+                            style="@style/SpinKitView.Large.Circle"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone"
+                            app:SpinKit_Color="@color/colorOrange" />
+                    </RelativeLayout>
 
                     <EditText
                         android:id="@+id/ed_search"
@@ -321,7 +396,7 @@
                         android:layout_marginTop="@dimen/_6sdp"
                         android:layout_marginEnd="@dimen/_7sdp"
                         android:layout_marginBottom="@dimen/_6sdp"
-                        android:layout_toEndOf="@+id/searchIcon"
+                        android:layout_toEndOf="@+id/rl_search"
                         android:background="@color/transparent"
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="center_vertical|start"
@@ -339,14 +414,14 @@
                 </RelativeLayout>
 
                 <ImageView
-                    app:tint="@color/mainIconColor"
                     android:id="@+id/img_filter"
                     android:layout_width="@dimen/_25sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="@dimen/_5sdp"
-                    android:src="@drawable/icon_filter" />
+                    android:src="@drawable/icon_filter"
+                    app:tint="@color/mainIconColor" />
 
             </RelativeLayout>
 
@@ -355,6 +430,7 @@
                 android:id="@+id/recycler_searchposts"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/mainBackground"
                 android:orientation="vertical" />
 
         </LinearLayout>

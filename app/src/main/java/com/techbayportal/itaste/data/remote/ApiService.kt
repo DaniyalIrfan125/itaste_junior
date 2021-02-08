@@ -47,11 +47,10 @@ interface ApiService {
         @Query("phone") phone: String?,
         @Query("email") email: String?,
         @Query("password") password: String?,
-        @Query("country_id") country_id: String?,
-        @Query("city_id") city_id: String?,
-        // @Query("days_of_week") days_of_week: MutableList<DaysOfWeek>?,
-        @Query("days_of_week[]") days_of_week: List<String>,
-        @Query("is_deliverable") is_deliverable: Int?,
+        @Query("country_id") country_id: Int?,
+        @Query("city_id") city_id: Int?,
+        //  @Query("days_of_week[]") days_of_week: List<String>,
+        //  @Query("is_deliverable") is_deliverable: Int?,
         @Query("password_confirmation") password_confirmation: String?,
         @Query("description") description: String?
 
@@ -110,9 +109,9 @@ interface ApiService {
     ): Response<ResendOtpResponse>
 
 
-    /* @GET("countries")
-     suspend fun getAllCountries(
-     ): Response<GetAllCountriesResponse>*/
+   /* @GET("countries")
+    suspend fun getAllCountries(
+    ): Response<GetAllCountriesResponse>*/
 
     @GET("countries")
     suspend fun getAllCountriesForHome(
@@ -146,7 +145,7 @@ interface ApiService {
         @Field("country_id") country_id: Int?
     ): Response<GetAllCountriesResponse>
 
-
+   
     @GET("user/personal-profile")
     suspend fun getUserPersonalProfile(
         @Header("Accept") acceptJson: String,
@@ -163,7 +162,7 @@ interface ApiService {
         @Query("email") email: String,
         @Query("phone") phone: String,
         @Part profilePic: MultipartBody.Part
-    ): Response<SuccessResponse>
+    ): Response<UserPersonalProfileResponse>
 
 
     @POST("user/update-profile")
@@ -174,7 +173,7 @@ interface ApiService {
         @Query("last") last: String,
         @Query("email") email: String,
         @Query("phone") phone: String
-    ): Response<SuccessResponse>
+    ): Response<UserPersonalProfileResponse>
 
     @GET("vendor/personal-profile")
     suspend fun getVendorPersonalProfile(
@@ -187,40 +186,52 @@ interface ApiService {
     suspend fun updateVendorPersonalProfile(
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
-        @Query("first_name") first_name: String,
-        @Query("last_name") last_name: String,
-        @Query("bio") bio: String,
+        @Query("first") first_name: String,
+        @Query("last") last_name: String,
+        @Query("description") description: String,
         @Query("phone") phone: String,
         @Query("email") email: String,
         @Part profilePic: MultipartBody.Part,
-        @Query("country_id") country_id: String,
-        @Query("city_id") city_id: String
+        @Query("country_id") country_id: Int,
+        @Query("city_id") city_id: Int
 
-    ): Response<SuccessResponse>
+    ): Response<VendorPersonalProfileResponse>
 
 
     @POST("vendor/update-profile")
     suspend fun updateVendorPersonalProfileWithoutPic(
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
-        @Query("first_name") first_name: String,
-        @Query("last_name") last_name: String,
-        @Query("bio") bio: String,
+        @Query("first") first_name: String,
+        @Query("last") last_name: String,
+        @Query("description") description: String,
         @Query("phone") phone: String,
         @Query("email") email: String,
-        @Query("country_id") country_id: String,
-        @Query("city_id") city_id: String
-    ): Response<SuccessResponse>
+        @Query("country_id") country_id: Int,
+        @Query("city_id") city_id: Int
+    ): Response<VendorPersonalProfileResponse>
+
+    @POST("vendor/update-profile")
+    suspend fun switchToPremium(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("country_id") country_id: Int,
+        @Query("city_id") city_id: Int,
+        //  @Query("days_of_week[]") days_of_week: List<String>,
+        //  @Query("is_deliverable") is_deliverable: Int,
+        @Query("description") description: String
+    ): Response<VendorPersonalProfileResponse>
 
     @FormUrlEncoded
     @POST("password-change")
     suspend fun changePassword(
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
-        @Field("old_password") old_password: String?,
+        @Field("old_password") old_password : String?,
         @Field("new_password") new_password: String?,
         @Field("password_confirmation") password_confirmation: String?
     ): Response<SuccessResponse>
+
 
 
     @POST("logout")
@@ -349,6 +360,57 @@ interface ApiService {
         @Query("post_id") postId: Int,
         @Query("comments") comment: String
     ): Response<PostCommentResponse>
+    @GET("home-screen")
+    suspend fun getHomeScreenInfo(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetHomeScreenResponse>
+
+    @GET("notifications")
+    suspend fun getNotifications(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<NotificationResponse>
+
+    @GET("packages")
+    suspend fun getPackages(
+    ): Response<PackagesResponse>
+
+    @GET("post/all")
+    suspend fun getAllSearchPostsApi(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<SearchAndFilterResponse>
+
+    @GET("post/all")
+    suspend fun searchAndFilterApi(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("keyword") keyword: String,
+        @Query("country_id") country_id: String,
+        @Query("city_id") city_id: String,
+        @Query("category_id") category_id: String
+    ): Response<SearchAndFilterResponse>
+
+
+    @GET("post/all")
+    suspend fun searchApi(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("keyword") keyword: String
+    ): Response<SearchAndFilterResponse>
+
+
+    //Api call after payment is done in payment method
+    @FormUrlEncoded
+    @POST("checkout")
+    suspend fun checkOutApi(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Field("transaction_id") transaction_id: Int,
+        @Field("package_id") quantity: Int,
+        @Field("amount") amount: Int
+    ): Response<SuccessResponse>
 
 
     @POST("post/set-favourite")

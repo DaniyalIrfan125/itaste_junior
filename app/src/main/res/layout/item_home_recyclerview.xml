@@ -18,13 +18,26 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/_10sdp"
-            android:src="@drawable/image_face"
             app:strokeColor="@color/colorOrange"
             android:scaleType="centerCrop"
             app:strokeWidth="@dimen/_1sdp"
             android:padding="@dimen/_1sdp"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spinKit"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/img_profile"
+            android:layout_alignTop="@+id/img_profile"
+            android:layout_alignEnd="@+id/img_profile"
+            android:layout_alignBottom="@+id/img_profile"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            app:SpinKit_Color="@color/colorOrange" />
 
         <ImageView
             app:tint="@color/mainIconColor"
@@ -58,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:lineSpacingExtra="3sp"
-                android:text="Ed Tamer"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="16sp"
                 android:textStyle="normal" />
@@ -82,7 +94,6 @@
                     android:layout_marginStart="@dimen/_3sdp"
                     android:fontFamily="@font/roboto_regular"
                     android:lineSpacingExtra="2sp"
-                    android:text="Jumeirah JLT, Dubai, UAE"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="12sp" />
             </LinearLayout>

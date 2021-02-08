@@ -15,7 +15,7 @@
     <color name="colorGrey">#e1e1e1</color>
     <color name="colorGreyCircle">#ababab</color>
     <color name="colorGreyBackground">#f5f5f5</color>
-    <color name="topbar_greyColor">#eeeeee</color>
+    <color name="topbar_greyColor">#2a2a2a</color>
     <color name="dark_grey">#bfbfbf</color>
     <color name="color_darkGrey">#707070</color>
     <color name="mainBackground" >#1a1a1a</color>
@@ -44,6 +44,7 @@
     <color name="notificationLlBgColor">#1a1a1a</color>
     <color name="itemTimeBgColor">#141414</color>
     <color name="cartItemBgColor">#2b2b2b</color>
+    <color name="noPostsBgColor">#343434</color>
     <color name="layoutSearchBgColor">#161616</color>
     <color name="itemPackageBgColor">#131313</color>
 
@@ -51,8 +52,13 @@
 
     <color name="otpTimerColor">#FFFFFF</color>
 
-    <color name="permission_alert_bg">#1a1a1a</color>
-    <color name="permission_alert_color">#ffffff</color>
+    <color name="location_text">#575757</color>
+    <color name="shimmer_item_color">#808080</color>
+
+    <color name="sameBlackTitleText">#1a1a1a</color>
+    <color name="noPostsTextColor">#a1a1a1</color>
+
+    <color name="filterScreen">#161616</color>
 
 
 </resources>

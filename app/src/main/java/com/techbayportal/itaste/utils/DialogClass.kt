@@ -18,18 +18,6 @@ import kotlinx.android.synthetic.main.fragment_my_profile.*
 
 class DialogClass {
 
-
-
-    interface ClickListener {
-        fun onSingalItemBtnClick(dialog: Dialog)
-        fun onMultipleItemBtnClick(dialog: Dialog)
-        fun onAuctionItemBtnClick(dialog: Dialog)
-        fun onCloseBtn()
-    }
-
-
-
-
     companion object {
 
         fun loadingDialog(context: Context):Dialog {
@@ -41,19 +29,18 @@ class DialogClass {
             return dialog
         }
 
-        //observing data from data store and showing
-
         fun errorDialog(context: Context,errorMessage:String ,isDarkMode : Boolean) {
             val dialog = Dialog(context)
             dialog.setContentView(R.layout.layout_error_loading_page)
-
-
-
-            // set the custom dialog components - text, image and button
             val titleText = dialog.findViewById<TextView>(R.id.tv_title)
+            val btnOk = dialog.findViewById<Button>(R.id.btn_ok)
             titleText.text = context.getString(R.string.error_loading_page)
 
             val iv_image = dialog.findViewById<ImageView>(R.id.iv_image)
+
+            btnOk.setOnClickListener {v: View? ->
+                dialog.dismiss()
+            }
 
             if (isDarkMode) {
                 iv_image.setImageResource(R.drawable.icon_error_img_white)
@@ -64,8 +51,6 @@ class DialogClass {
             val errorTextMessage = dialog.findViewById<TextView>(R.id.tv_description)
             errorTextMessage.text = errorMessage
 
-
-
           //  val dialogButton = dialog.findViewById<Button>(R.id.btn_dialog_okay)
 //        // if button is clicked, close the custom dialog
           //  dialogButton.setOnClickListener { v: View? -> dialog.dismiss() }
@@ -73,71 +58,35 @@ class DialogClass {
             dialog.show()
         }
 
-
-       /* fun placeBidDialog(context: Context) {
+        fun successDialog(context: Context,successMessage:String ,isDarkMode : Boolean) {
             val dialog = Dialog(context)
-            dialog.setContentView(R.layout.dialog_layout_place_bid)
-
-            val recyclerView = dialog.findViewById<RecyclerView>(R.id.recyclerPostBidItems)
-            val adapter = PostBidAdapter()
-            recyclerView.adapter = adapter
-
-            val dialogButton = dialog.findViewById<RelativeLayout>(R.id.closeBtn)
-//        // if button is clicked, close the custom dialog
-            dialogButton.setOnClickListener { v: View? -> dialog.dismiss() }
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.show()
-        }
+            dialog.setContentView(R.layout.layout_success_dialog)
 
 
-        fun addPostDialog(context: Context, clickListener: ClickListener):Dialog {
-            val dialog = Dialog(context)
-            dialog.setContentView(R.layout.dialog_layout_post)
 
-            val closeButton = dialog.findViewById<RelativeLayout>(R.id.closeBtn)
-            val sellItemButton = dialog.findViewById<Button>(R.id.sellItemBtn)
-            val auctionItemButton = dialog.findViewById<Button>(R.id.auctionItemBtn)
-//        // if button is clicked, close the custom dialog
-            closeButton.setOnClickListener { v: View? ->
+            // set the custom dialog components - text, image and button
+            val titleText = dialog.findViewById<TextView>(R.id.tv_title_success)
+            val descText = dialog.findViewById<TextView>(R.id.tv_description_success)
+            val btnOk = dialog.findViewById<Button>(R.id.btn_ok_success)
+            titleText.text = context.getString(R.string.you_are_all_set)
+
+            val iv_image = dialog.findViewById<ImageView>(R.id.iv_image_success)
+
+            btnOk.setOnClickListener {v: View? ->
                 dialog.dismiss()
-                clickListener.onCloseBtn()
             }
 
-            sellItemButton.setOnClickListener { v: View? ->
-                sellItemDialog(dialog, context, clickListener)
+            if (isDarkMode) {
+                iv_image.setImageResource(R.drawable.icon_success_dialog_darkmode)
+            } else {
+                iv_image.setImageResource(R.drawable.icon_success_dialog)
             }
 
-            auctionItemButton.setOnClickListener { v: View? ->
-                clickListener.onAuctionItemBtnClick(dialog)
-            }
-
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            return dialog
-        }
-
-        fun sellItemDialog(addPostDialog: Dialog, context: Context, clickListener: ClickListener) {
-
-            val dialog = Dialog(context)
-            dialog.setContentView(R.layout.dialog_layout_sell_item)
-
-            val closeButton = dialog.findViewById<RelativeLayout>(R.id.closeBtn)
-            val singalSellItemBtn = dialog.findViewById<Button>(R.id.singalSellItemBtn)
-            val multiplySellItemBtn = dialog.findViewById<Button>(R.id.multiplySellItemBtn)
-//        // if button is clicked, close the custom dialog
-            closeButton.setOnClickListener { v: View? -> dialog.dismiss() }
-
-            singalSellItemBtn.setOnClickListener { v: View? ->
-                clickListener.onSingalItemBtnClick(dialog)
-                addPostDialog.dismiss()
-            }
-
-            multiplySellItemBtn.setOnClickListener { v: View? ->
-                clickListener.onMultipleItemBtnClick(dialog)
-                addPostDialog.dismiss()
-            }
+            val successTextMessage = dialog.findViewById<TextView>(R.id.tv_description_success)
+            successTextMessage.text = successMessage
 
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog.show()
-        }*/
+        }
     }
 }

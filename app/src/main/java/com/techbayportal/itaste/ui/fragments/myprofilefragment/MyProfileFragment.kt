@@ -5,18 +5,16 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
-import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
-import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentMyProfileBinding
 import com.techbayportal.itaste.ui.activities.signupactivity.SignupActivity
@@ -24,12 +22,10 @@ import com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDi
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.android.synthetic.main.fragment_my_profile.*
-import kotlinx.android.synthetic.main.fragment_my_profile.img_back
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 @AndroidEntryPoint
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>() {
@@ -41,9 +37,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         get() = BR.viewModel
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
+    lateinit var mView: View
 
     lateinit var dataStoreProvider: DataStoreProvider
-    lateinit var reportBugDialogFragment: ReportBugDialogFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,13 +49,6 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        subscribeToObserveDarkModeDataStore()
-        subscribeToObserveLanguage()
-
-
-
         switch_darkMode?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 GlobalScope.launch {
@@ -74,16 +63,57 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
+        super.onViewCreated(view, savedInstanceState)
+        mView = view
+        subscribeToObserveDarkModeDataStore()
+        subscribeToObserveLanguage()
+        initializing()
+
+
+    }
+
+    private fun initializing() {
+        if (loginSession != null) {
+//Set these as live data and then observe
+
+            tv_userName.text = loginSession.data.first + " " + loginSession.data.last
+
+            Picasso.get().load(loginSession.data.profile_pic).fit().centerCrop()
+                .into(siv_userImage, object :
+                    Callback {
+                    override fun onSuccess() {
+                        if(sk_myProfile != null){
+                            sk_myProfile.visibility = View.GONE
+                        }
+
+                    }
+
+                    override fun onError(e: Exception?) {
+                        Picasso.get().load(R.drawable.placeholder_image).into(siv_userImage)
+                        if(sk_myProfile != null){
+                            sk_myProfile.visibility = View.GONE
+                        }
+
+                    }
+                })
+
+
+            if (loginSession.data.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
+                ll_switchToPremium.visibility = View.GONE
+                tv_description_switch_to_premium.visibility = View.GONE
+
+            }
+
+        }
+
     }
 
     override fun subscribeToShareLiveData() {
         super.subscribeToShareLiveData()
 
         sharedViewModel.reportBugButtonsClicked.observe(this, Observer {
-            if(it == AppConstants.ReportBugDialog.SUBMIT){
-                if(it != -1){
-                   // Toast.makeText(requireContext(), "Submit Clicked", Toast.LENGTH_SHORT).show()
-
+            if (it == AppConstants.ReportBugDialog.SUBMIT) {
+                if (it != -1) {
                     mViewModel.hitReportBugApi(sharedViewModel.bugReportMessage)
                 }
                 sharedViewModel.reportBugButtonsClicked.value = -1
@@ -110,11 +140,10 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    /*GlobalScope.launch {
-                        dataStoreProvider.saveUserObj(null!!)
-                    }*/
 
+                    //setting login session to null
                     LoginSession.getInstance().setLoginResponse(null)
+                    //clearing user object after logout
                     GlobalScope.launch {
                         dataStoreProvider.clearUserObj()
                     }
@@ -123,7 +152,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode )
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })
@@ -136,26 +165,29 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
 
-                    Toast.makeText(requireContext(), "Report Submitted", Toast.LENGTH_SHORT).show()
-                   // reportBugDialogFragment.dismiss()
+                    DialogClass.successDialog(
+                        requireContext(),
+                        getString(R.string.bug_report_submitted),
+                        baseDarkMode
+                    )
+                    //Closing report a bug dialog fragment
+                    Navigation.findNavController(mView).popBackStack()
 
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
-                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode )
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
             }
         })
     }
 
 
-
-
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
         mViewModel.onBackButtonClicked.observe(this, Observer {
-            Navigation.findNavController(img_back).popBackStack()
+            Navigation.findNavController(mView).popBackStack()
         })
 
         mViewModel.onEditProfileClicked.observe(this, Observer {
@@ -163,10 +195,10 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
             if (loginSession != null) {
                 if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
 
-                    Navigation.findNavController(tv_editProfile).navigate(R.id.action_myProfileFragment_to_userProfileFragment)
-                    //flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    Navigation.findNavController(tv_editProfile)
+                        .navigate(R.id.action_myProfileFragment_to_userProfileFragment)
 
-                } else {
+                } else if (loginSession.data.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
                     Navigation.findNavController(tv_editProfile)
                         .navigate(R.id.action_myProfileFragment_to_vendorProfileFragment)
                 }
@@ -205,13 +237,18 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         })
 
         mViewModel.onLogoutClicked.observe(this, Observer {
-
             mViewModel.hitLogout()
+        })
 
-
+        mViewModel.onSwitchToPremiumClicked.observe(this, Observer {
+            GlobalScope.launch {
+                dataStoreProvider.switchToPremium(true)
+            }
+            Navigation.findNavController(tv_blockedAccounts)
+                .navigate(R.id.action_myProfileFragment_to_signUpVendorFragment2)
+            //  navigateToMainNavForVendorSignUp()
         })
     }
-
 
 
     private fun navigateToLoginScreen() {
@@ -219,15 +256,22 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
 
+    }
+
+    private fun navigateToMainNavForVendorSignUp() {
+        val intent = Intent(activity, SignupActivity::class.java)
+        intent.putExtra("OPEN_SIGNUP_SCREEN", "sign_up_vendor")
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
 
     }
+
     private fun subscribeToObserveLanguage() {
         //observing data from data store and showing
         dataStoreProvider.languageFlow.asLiveData().observe(viewLifecycleOwner, Observer {
 
             if (it != null) {
                 if (it == "ar") {
-                    // tv_language_name.text = getString(R.string.arabic)
 
                     mycart_fwd_arrow.rotation = 180F
                     change_password_fwd_arrow.rotation = 180F
@@ -236,21 +280,11 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                     delete_account_fwd_arrow.rotation = 180F
                     blocked_account_fwd_arrow.rotation = 180F
                     logout_fwd_arrow.rotation = 180F
-
-                  //  iv_cart.rotation = 180F
-                  //  iv_moon.rotation = 180F
-
-
-                } else {
-                    // tv_language_name.text = getString(R.string.english)
                 }
-            } else {
-                // tv_language_name.text = getString(R.string.english)
             }
         })
 
     }
-    
 
 
 }

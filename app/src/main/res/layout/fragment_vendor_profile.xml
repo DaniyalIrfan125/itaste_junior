@@ -65,10 +65,19 @@
                             android:layout_margin="@dimen/_3sdp"
                             android:elevation="@dimen/_3sdp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/icon_profile"
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                             tools:layout_editor_absoluteX="116dp"
                             tools:layout_editor_absoluteY="61dp" />
+
+                        <com.github.ybq.android.spinkit.SpinKitView
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            android:id="@+id/sk_vendorProfile"
+                            style="@style/SpinKitView.Large.Pulse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_centerInParent="true"
+                            app:SpinKit_Color="@color/colorOrange" />
 
                     </RelativeLayout>
 
@@ -81,7 +90,6 @@
                         android:fontFamily="@font/roboto_bold"
                         android:gravity="center_horizontal"
                         android:lineSpacingExtra="3sp"
-                        android:hint="Ben Harp"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="15sp" />
 
@@ -292,6 +300,7 @@
                             android:fontFamily="@font/roboto_light"
                             android:imeOptions="actionNext"
                             android:hint="@string/bio"
+                            android:maxLines="4"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="12sp">
 
@@ -523,6 +532,7 @@
                                     android:fontFamily="@font/roboto_light"
                                     android:textColor="@color/titleTextColorBlack"
                                     android:textColorHint="@color/titleTextColorBlack"
+
                                     />
 
                                 <TextView

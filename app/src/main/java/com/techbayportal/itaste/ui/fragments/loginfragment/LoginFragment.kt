@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.remote.Resource
@@ -25,6 +26,8 @@ import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_loginfragment.*
 import kotlinx.android.synthetic.main.layout_signupfragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -76,10 +79,21 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
                     loadingDialog.show()
                 }
                 Resource.Status.SUCCESS -> {
+
+                    if(it.data != null){
+                        if(it.data.data.role.equals(AppConstants.UserTypeKeys.USER,false)){
+                            GlobalScope.launch {
+                                dataStoreProvider.switchToPremium(false)
+                            }
+                        }
+                    }
+
+
                     it?.let {
                         loadingDialog.dismiss()
                         mViewModel.saveUserObj(it.data!!)
                         sharedViewModel.testId = it.data.data.id
+
                        // sharedViewModel.verifyOtpHoldPhoneNumber = editTextEmail.text.toString()
                         navigateToMainActivity()
 

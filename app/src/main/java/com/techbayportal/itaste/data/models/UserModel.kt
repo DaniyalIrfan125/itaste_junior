@@ -17,11 +17,10 @@ class UserModel {
 
     //vendor fields
 
-    var country_id : String = ""
-    var city_id : String = ""
-    //var days_of_week : MutableList<DaysOfWeek> = mutableListOf()
-    var days_of_week : ArrayList<String> = ArrayList()
-    var is_deliverable : Int? = 0
+    var country_id : Int = 0
+    var city_id : Int = 0
+   // var days_of_week : ArrayList<String> = ArrayList()
+   // var is_deliverable : Int? = 0
     var password_confirmation : String = ""
     var description : String = ""
 

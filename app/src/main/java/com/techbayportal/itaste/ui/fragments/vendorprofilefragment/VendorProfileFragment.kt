@@ -13,17 +13,17 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.opensooq.supernova.gligar.GligarPicker
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
-import com.techbayportal.itaste.data.models.GetAllCitiesData
-import com.techbayportal.itaste.data.models.GetAllCountriesData
-import com.techbayportal.itaste.data.models.VendorPersonalProfileResponseData
+import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentVendorProfileBinding
 import com.techbayportal.itaste.utils.DialogClass
+import com.techbayportal.itaste.utils.LoginSession
 import com.techbayportal.itaste.utils.ProfileSpinnerAdapter
 import com.techbayportal.itaste.utils.SpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,8 +57,8 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     private val countriesList = arrayListOf<GetAllCountriesData>()
     private val citiesList = arrayListOf<GetAllCitiesData>()
     var countryid: String = "0"
-    var selectedCountryId: String = "0"
-    var cityid: String = "0"
+    var selectedCountryId: Int = 0
+    var cityid: Int = 0
 
     var compressedProfileImageFile: File? = null
 
@@ -72,6 +72,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fieldTextWatcher()
+        mViewModel.getAllCountries()
         setCountriesData()
         mView = view
         if (this::vendorPersonalProfileResponseData.isInitialized) {
@@ -155,14 +156,26 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                     if (et_country_code.fullNumberWithPlus != vendorPersonalProfileResponseData.phone) {
                         sharedViewModel.isUpdatePhone = true
                         sharedViewModel.isForGotVerify = false
-                        sharedViewModel.verifyOtpHoldNewPhoneNumber =
-                            et_country_code.fullNumberWithPlus
-                        Navigation.findNavController(mView)
-                            .navigate(R.id.action_vendorProfileFragment_to_otpverificationFragment2)
+                        sharedViewModel.verifyOtpHoldNewPhoneNumber = et_country_code.fullNumberWithPlus
+                        Navigation.findNavController(mView).navigate(R.id.action_vendorProfileFragment_to_otpverificationFragment2)
 
                     } else {
                         mViewModel.hitGetVendorPersonalProfile()
                     }
+
+                    val accessToken = LoginSession.getInstance().getLoginResponse()!!.data.access_token
+                  //  val countryId = LoginSession.getInstance().getLoginResponse()!!.data.country_id
+                   // val isPaymentUpdated = LoginSession.getInstance().getLoginResponse()!!.data.is_payment_update
+                    val vendorUserName = LoginSession.getInstance().getLoginResponse()!!.data.username
+
+                    if(it.data != null){
+                        val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, vendorUserName, it.data.data.phone,  it.data.data.email,
+                             it.data.data.profile_pic, it.data.data.role,  accessToken, it.data.data.country_id, it.data.data.city_id,  it.data.data.is_payment_update)
+                        val loginResponse = LoginResponse("update vendor profile", userData, "")
+                        //LoginSession.getInstance().setLoginResponse(loginResponse)
+                        mViewModel.saveUserObj(loginResponse)
+                    }
+
 
                 }
                 Resource.Status.ERROR -> {
@@ -189,7 +202,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                         if (countriesList[index].select) {
                            var countryidL = countriesList[index].id
                             sp_vendorCountry.setSelection(index)
-                            mViewModel.getAllCities(countryidL.toInt())
+                            mViewModel.getAllCities(countryidL)
 
                             return@Observer
                         }
@@ -244,9 +257,9 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                             if (Patterns.EMAIL_ADDRESS.matcher(et_vendorEmail.text.toString())
                                     .matches()
                             ) {
-                                if (sp_vendorCountry.selectedItemPosition != -1) {
+                              //  if (sp_vendorCountry.selectedItemPosition != -1 ) {
                                     tv_error_vendorCountry.visibility = View.GONE
-                                    if (sp_vendorCity.selectedItemPosition != -1 && cityid != "0") {
+                                    if (sp_vendorCity.selectedItemPosition != -1 && cityid != 0) {
                                         tv_error_vendorCity.visibility = View.GONE
                                         if (profileImageFile != null) {
 
@@ -284,10 +297,10 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                                         tv_error_vendorCity.text = getString(R.string.selectcity)
                                         tv_error_vendorCity.visibility = View.VISIBLE
                                     }
-                                } else {
+                               /* } else {
                                     tv_error_vendorCountry.text = getString(R.string.selectcountry)
                                     tv_error_vendorCountry.visibility = View.VISIBLE
-                                }
+                                }*/
                             } else {
                                 tv_error_vendorEmail.text = getString(R.string.writevalidemail)
                                 tv_error_vendorEmail.visibility = View.VISIBLE
@@ -394,12 +407,9 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                     position: Int,
                     id: Long
                 ) {
-                    if (position > 0) {
                         countriesList[position].id
                         selectedCountryId = countriesList[position].id
-                        mViewModel.getAllCities(selectedCountryId.toInt())
-
-                    }
+                        mViewModel.getAllCities(selectedCountryId)
                 }
             }
     }
@@ -407,17 +417,27 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
     private fun setData(vendorPersonalProfileResponseData: VendorPersonalProfileResponseData) {
         try {
             tv_vendorName.text =
-                "${vendorPersonalProfileResponseData.first_name} ${vendorPersonalProfileResponseData.last_name}"
-            et_vendorFirstName.setText(vendorPersonalProfileResponseData.first_name)
-            et_vendorLastName.setText(vendorPersonalProfileResponseData.last_name)
-            et_vendorBio.setText(vendorPersonalProfileResponseData.bio)
+                "${vendorPersonalProfileResponseData.first} ${vendorPersonalProfileResponseData.last}"
+            et_vendorFirstName.setText(vendorPersonalProfileResponseData.first)
+            et_vendorLastName.setText(vendorPersonalProfileResponseData.last)
+            et_vendorBio.setText(vendorPersonalProfileResponseData.description)
             et_country_code.fullNumber = vendorPersonalProfileResponseData.phone
             sharedViewModel.verifyOtpHoldPhoneNumber =
                 vendorPersonalProfileResponseData.phone
             et_vendorEmail.setText(vendorPersonalProfileResponseData.email)
             Picasso.get()
                 .load(vendorPersonalProfileResponseData.profile_pic).fit().centerCrop()
-                .into(siv_vendorProfilePic)
+                .into(siv_vendorProfilePic, object :Callback{
+                    override fun onSuccess() {
+                        sk_vendorProfile.visibility = View.GONE
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        Picasso.get().load(R.drawable.placeholder_image).into(siv_vendorProfilePic)
+                        sk_vendorProfile.visibility = View.GONE
+                    }
+
+                })
         } catch (e: Exception) {
         }
     }

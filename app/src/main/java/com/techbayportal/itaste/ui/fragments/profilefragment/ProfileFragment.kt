@@ -25,8 +25,8 @@ import com.techbayportal.itaste.ui.fragments.signupconfigurationsfragment.adapte
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_changepasswordfragment.*
 import kotlinx.android.synthetic.main.layout_profilefragment.*
+import kotlinx.android.synthetic.main.layout_profilefragment.tv_profileName
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -38,7 +38,8 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
-     var vendorProfileDetailData: VendorProfileDetailData? = null
+    private lateinit var mView: View
+    lateinit var vendorProfileDetailData: VendorProfileDetailData
 
     val postsList = ArrayList<PostDetailData>()
     private lateinit var postsRecyclerAdapter: PostsRecyclerAdapter
@@ -50,21 +51,19 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
-       // mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
-        mViewModel.hitGetVendorProfileDetails(177)
-       // mViewModel.hitSetFollowApi(31)
+//        mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
+        mViewModel.hitGetVendorProfileDetails(31)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mView = view
         initializing()
-        //isFallowingVendor(isFallowing)
 
-        if (vendorProfileDetailData != null) {
-            setData(vendorProfileDetailData!!)
+        if (this::vendorProfileDetailData.isInitialized) {
+            setData(vendorProfileDetailData)
         }
-
 
     }
 
@@ -72,7 +71,6 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
        postsRecyclerAdapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener{
             override fun onClicked(postDetailData: PostDetailData) {
                 Toast.makeText(requireContext(), "Location selected: ${postDetailData.id}", Toast.LENGTH_SHORT).show()
-                Navigation.findNavController(recycler_profilePosts).navigate(R.id.action_profileFragment_to_postdetailfragment)
             }
         })
         recycler_profilePosts.adapter = postsRecyclerAdapter
@@ -93,11 +91,16 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         super.subscribeToNavigationLiveData()
 
         mViewModel.onBackButtonClicked.observe(this, Observer {
-            Navigation.findNavController(tv_vendorUserName).popBackStack()
+            Navigation.findNavController(img_back).popBackStack()
         })
 
         mViewModel.onFollowButtonClicked.observe(this, Observer {
-            mViewModel.hitSetFollowApi(loginSession!!.data.id.toInt())
+            mViewModel.hitSetFollowApi(loginSession!!.data.id)
+        })
+
+        mViewModel.onUpdateButtonClicked.observe(this, Observer {
+            // Navigation.findNavController(btn_updatePayment).navigate(R.id.action_profileFragment_to_choosePakageFragment)
+            Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_choosePakageFragment)
         })
     }
 
@@ -112,7 +115,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     vendorProfileDetailData = it.data!!.data
-                    setData(it.data.data)
+                    setData(vendorProfileDetailData)
                    // postsRecyclerAdapter.notifyDataSetChanged()
                 }
                 Resource.Status.ERROR -> {
@@ -142,12 +145,10 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     }
     private fun isFallowingVendor(isFallowing :Boolean){
         if(isFallowing){
-            Toast.makeText(requireContext(), "IS Following: $isFallowing", Toast.LENGTH_SHORT).show()
             btn_follow.text = getString(R.string.following)
             btn_follow.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.btn_direct_message_curve)
         }else{
-            Toast.makeText(requireContext(), "IS Following: $isFallowing", Toast.LENGTH_SHORT).show()
             btn_follow.text = getString(R.string.follow)
             btn_follow.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.btn_orange_curve_profile)
@@ -156,25 +157,55 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
 
     private fun setData(vendorProfileDetailData: VendorProfileDetailData){
         try {
-            Picasso.get().load(vendorProfileDetailData.image).fit().placeholder(R.drawable.placeholder_image).centerCrop().into(sivProfileImage , object :Callback{
-                override fun onSuccess() {
-                    spinKit.visibility = View.GONE
-                }
+            if(vendorProfileDetailData.image.isNotEmpty()){
+                Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage , object :Callback{
+                    override fun onSuccess() {
+                        if(sp_Profile != null){
+                            sp_Profile.visibility = View.GONE
+                        }
+                    }
+                    override fun onError(e: Exception?) {
+                        if(sp_Profile != null){
+                            Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
+                            sp_Profile.visibility = View.GONE
+                        }
 
-                override fun onError(e: Exception?) {
-                    spinKit.visibility = View.GONE
-                }
+                    }
+                })
+            }
 
-            })
             tv_vendorUserName.text = vendorProfileDetailData.username
-            tv_profileName.text = vendorProfileDetailData.first_name + vendorProfileDetailData.last_name
+            tv_profileName.text = vendorProfileDetailData.first +" " +vendorProfileDetailData.last
             tv_details.text = vendorProfileDetailData.bio
             tv_postCounts.text = vendorProfileDetailData.total_post.toString()
             tv_likesCount.text = vendorProfileDetailData.total_likes.toString()
             tv_followersCount.text = vendorProfileDetailData.total_followers.toString()
             if(!vendorProfileDetailData.posts.isNullOrEmpty()){
+                ll_noPosts.visibility = View.GONE
+                postsList.clear()
                 postsList.addAll(vendorProfileDetailData.posts)
                 postsRecyclerAdapter.notifyDataSetChanged()
+            }
+            else{
+                ll_noPosts.visibility = View.VISIBLE
+            }
+
+            if(vendorProfileDetailData.is_follow){
+                btn_follow.text = getString(R.string.following)
+                btn_follow.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.btn_direct_message_curve)
+            }else{
+                btn_follow.text = getString(R.string.follow)
+                btn_follow.background =
+                    ContextCompat.getDrawable(requireContext(), R.drawable.btn_orange_curve_profile)
+            }
+
+            if(!vendorProfileDetailData.is_payment_update){
+                ll_update_payment.visibility = View.VISIBLE
+                ll_message_follow_button.visibility = View.GONE
+            }else{
+                ll_update_payment.visibility = View.GONE
+                ll_message_follow_button.visibility = View.VISIBLE
             }
         } catch (e: Exception) {
         }

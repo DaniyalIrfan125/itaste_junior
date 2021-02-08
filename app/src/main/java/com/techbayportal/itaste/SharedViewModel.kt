@@ -24,6 +24,9 @@ class SharedViewModel : BaseViewModel() {
     var otpVerifyCode = ""
     var userModel = UserModel()
     val isDarkMode: Boolean = false
+    var userModelLiveData = MutableLiveData<UserModel>()
+
+
     val localProfilePic: File? = null
     var selectedPostImageFile = MutableLiveData<File>()
     var isEditPost: Boolean = false
@@ -43,8 +46,8 @@ class SharedViewModel : BaseViewModel() {
 
     val _homeConfigBottomSheetClickId = MutableLiveData<Int>()
     val homeItemBottomSheetClickId = MutableLiveData<Int>()
-    // val homeConfigBottomSheetClickId: LiveData<Int>
-    // get() = _homeConfigBottomSheetClickId
+   // val homeConfigBottomSheetClickId: LiveData<Int>
+       // get() = _homeConfigBottomSheetClickId
 
     val _countriesList = MutableLiveData<GetAllCountriesResponse>()
     val countriesList: LiveData<GetAllCountriesResponse>
@@ -52,10 +55,16 @@ class SharedViewModel : BaseViewModel() {
 
     val reportBugButtonsClicked = MutableLiveData<Int>()
     var bugReportMessage = ""
-    //var bugReportMessage = MutableLiveData<String>()
 
-    var userUpdatedCountryId: Int = 0
+    var userUpdatedCountryId : Int = 0
+    var vendorProfileId : Int = 0
+
 
     var test = false;
+
+
+    var packagePrice = 0
+    var packageType :String = ""
+    var packageId :Int = 0
     var testId: String = "0"
 }

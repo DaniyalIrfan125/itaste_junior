@@ -11,25 +11,32 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.opensooq.supernova.gligar.GligarPicker
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.data.models.Data
+import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.models.UserPersonalProfileResponseData
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentUserProfileBinding
 import com.techbayportal.itaste.utils.DialogClass
+import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import id.zelory.compressor.Compressor
 import id.zelory.compressor.constraint.format
 import id.zelory.compressor.constraint.quality
 import id.zelory.compressor.constraint.size
+import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_user_profile.*
 import kotlinx.android.synthetic.main.fragment_user_profile.et_country_code
 import kotlinx.android.synthetic.main.fragment_user_profile.img_back
+import kotlinx.android.synthetic.main.fragment_user_profile.tv_userName
 import kotlinx.android.synthetic.main.fragment_vendor_profile.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -77,7 +84,7 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
 
         if (data != null) {
             if (requestCode == AppConstants.USER_PROFILE_PIC_CODE) {
-                val imagePath = data?.extras?.getStringArray(GligarPicker.IMAGES_RESULT)!![0]
+                val imagePath = data.extras?.getStringArray(GligarPicker.IMAGES_RESULT)!![0]
                 profileImageFile = File(imagePath)
 
                 if (profileImageFile != null) {
@@ -120,6 +127,15 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
                     loadingDialog.dismiss()
                     userPersonalProfileResponseData = it.data!!.data
                     setData(userPersonalProfileResponseData)
+                    //mViewModel.saveUserObj(it.data!!.data)
+                   /* val accessToken = LoginSession.getInstance().getLoginResponse()!!.data.access_token
+                    val countryId = LoginSession.getInstance().getLoginResponse()!!.data.country_id
+                    val isPaymentUpdated = LoginSession.getInstance().getLoginResponse()!!.data.is_payment_update
+
+                    val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, it.data.data.username, it.data.data.phone, it.data.data.email,
+                        it.data.data.profile_pic, it.data.data.role, accessToken,countryId, isPaymentUpdated)
+                    val loginResponse = LoginResponse("update profile", userData, "")
+                    LoginSession.getInstance().setLoginResponse(loginResponse)*/
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -148,6 +164,19 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
                     } else {
                         mViewModel.hitGetUserPersonalProfile()
                     }
+                    val accessToken = LoginSession.getInstance().getLoginResponse()!!.data.access_token
+                    val countryId = LoginSession.getInstance().getLoginResponse()!!.data.country_id
+                    val cityId = LoginSession.getInstance().getLoginResponse()!!.data.city_id
+                    val isPaymentUpdated = LoginSession.getInstance().getLoginResponse()!!.data.is_payment_update
+
+                    if(it.data != null){
+                        val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, it.data.data.username, it.data.data.phone, it.data.data.email,
+                            it.data.data.profile_pic, it.data.data.role, accessToken,countryId,cityId, isPaymentUpdated)
+                        val loginResponse = LoginResponse("update profile", userData, "")
+                        //LoginSession.getInstance().setLoginResponse(loginResponse)
+                        mViewModel.saveUserObj(loginResponse)
+                    }
+
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -174,6 +203,7 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
                                         et_userUserEmail.text.toString(),
                                         et_country_code.fullNumberWithPlus,
                                         compressedProfileImageFile!!)
+
                                 } else {
                                     Toast.makeText(
                                         requireContext(),
@@ -254,18 +284,37 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
     private fun setData(userPersonalProfileResponseData: UserPersonalProfileResponseData) {
         try {
             tv_userName.text =
-                "${userPersonalProfileResponseData.first_name} ${userPersonalProfileResponseData.last_name}"
-            et_userFirstName.setText(userPersonalProfileResponseData.first_name)
-            et_userLastName.setText(userPersonalProfileResponseData.last_name)
+                "${userPersonalProfileResponseData.first} ${userPersonalProfileResponseData.last}"
+            et_userFirstName.setText(userPersonalProfileResponseData.first)
+            et_userLastName.setText(userPersonalProfileResponseData.last)
             et_country_code.fullNumber = userPersonalProfileResponseData.phone
             sharedViewModel.verifyOtpHoldPhoneNumber = userPersonalProfileResponseData.phone
             et_userUserEmail.setText(userPersonalProfileResponseData.email)
-            Picasso.get()
-                .load(userPersonalProfileResponseData.profile_pic).fit().centerCrop()
-                .into(siv_userProfilePic)
+
+                Picasso.get()
+                    .load(userPersonalProfileResponseData.profile_pic).fit().centerCrop()
+                    .into(siv_userProfilePic ,object :Callback{
+                        override fun onSuccess() {
+                            if(sk_userProfile != null) {
+                                sk_userProfile.visibility = View.GONE
+                            }
+                        }
+
+                        override fun onError(e: java.lang.Exception?) {
+                            Picasso.get().load(R.drawable.placeholder_image).into(siv_userProfilePic)
+                            if(sk_userProfile != null) {
+                                sk_userProfile.visibility = View.GONE
+                            }
+                        }
+
+                    })
+
+
         } catch (e: Exception) {
         }
 
     }
+
+
 
 }

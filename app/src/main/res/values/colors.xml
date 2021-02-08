@@ -40,10 +40,12 @@
     <color name="etBgStrokeColor">#1a1a1a</color>
     <color name="directMessageBgUserColor">#e1e1e1</color>
     <color name="notificationLlBgColor">#eeeeee</color>
+    <color name="notificationItemClickBgColor">#eeeeee</color>
     <color name="itemTimeBgColor">#eeeeee</color>
     <color name="cartItemBgColor">#eeeeee</color>
     <color name="layoutSearchBgColor">#eeeeee</color>
-    <color name="itemPackageBgColor">#FFFFFF</color>
+    <color name="noPostsBgColor">#eeeeee</color>
+    <color name="itemPackageBgColor">#f5f5f5</color>
 
     <color name="mainIconColor">#000000</color>
 
@@ -56,15 +58,13 @@
     <color name="camera_text_color">#ff962d</color>
 
     <color name="toolbar_bg">#ff962d</color>
+    <color name="location_text">#8C8C8C</color>
 
+    <color name="shimmer_item_color">#808080</color>
 
-
-
-
-
-
-
-
+    <color name="sameBlackTitleText">#1a1a1a</color>
+    <color name="noPostsTextColor">#1a1a1a</color>
+    <color name="filterScreen">#f9f9f9</color>
 
 
 </resources>

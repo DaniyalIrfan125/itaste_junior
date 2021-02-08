@@ -12,7 +12,7 @@
                     <stroke android:width="0.5dip" android:color="@color/titleTextColorBlack" />
 
                     <corners android:radius="@dimen/_20sdp" />
-                    <solid android:color="#FFFFFF" />
+                    <solid android:color="@color/filterScreen" />
                 </shape>
             </item>
 

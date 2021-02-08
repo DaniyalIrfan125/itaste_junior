@@ -46,7 +46,15 @@
     <fragment
         android:id="@+id/choosePakageFragment"
         android:name="com.techbayportal.itaste.ui.fragments.choosepackagefragment.ChoosePakageFragment"
-        android:label="ChoosePakageFragment" />
+        android:label="ChoosePakageFragment" >
+        <action
+            android:id="@+id/action_choosePakageFragment_to_foloosiPaymentFragment"
+            app:destination="@id/foloosiPaymentFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.techbayportal.itaste.ui.fragments.profilefragment.ProfileFragment"
@@ -59,6 +67,13 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
 
+        <action
+            android:id="@+id/action_profileFragment_to_choosePakageFragment"
+            app:destination="@id/choosePakageFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/savedPostsFragment"
@@ -97,48 +112,53 @@
     <dialog
         android:id="@+id/homeConfigurationBottomSheetFragment"
         android:name="com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment"
-        android:label="HomeConfigurationBottomSheetFragment">
+        android:label="HomeConfigurationBottomSheetFragment" >
         <action
             android:id="@+id/action_homeConfigurationBottomSheetFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </dialog>
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.techbayportal.itaste.ui.fragments.postdetailfragment.PostDetailFragment"
-        android:label="PostDetailFragment">
+        android:label="PostDetailFragment" >
         <action
             android:id="@+id/action_postDetailFragment_to_profileFragment"
             app:destination="@id/profileFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_postDetailFragment_to_chatFragment2"
             app:destination="@id/chatFragment2"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_postDetailFragment_to_postFragment"
             app:destination="@id/postFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_postDetailFragment_to_postDetailBottomSheetFragment"
             app:destination="@id/postDetailBottomSheetFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/chatFragment2"
         android:name="com.techbayportal.itaste.ui.fragments.chatfragment.ChatFragment"
-        android:label="ChatFragment" />
+        android:label="ChatFragment"
+        />
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.techbayportal.itaste.ui.fragments.notificationfragment.NotificationFragment"
@@ -146,14 +166,14 @@
     <fragment
         android:id="@+id/directMessagesFragment"
         android:name="com.techbayportal.itaste.ui.fragments.directmessagesfragment.DirectMessagesFragment"
-        android:label="DirectMessagesFragment">
+        android:label="DirectMessagesFragment" >
         <action
             android:id="@+id/action_directMessagesFragment_to_newMessageFragment"
             app:destination="@id/newMessageFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
-            app:popExitAnim="@anim/exit_to_right" />
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/myProfileFragment"
@@ -210,10 +230,25 @@
             app:popExitAnim="@anim/exit_to_right" />
         <action
             android:id="@+id/action_myProfileFragment_to_welcomefragment"
-            app:destination="@id/welcomefragment" />
+            app:destination="@id/welcomefragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_myProfileFragment_to_vendorProfileFragment"
-            app:destination="@id/vendorProfileFragment" />
+            app:destination="@id/vendorProfileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_signUpVendorFragment2"
+            app:destination="@id/signUpVendorFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment"
@@ -221,7 +256,11 @@
         android:label="UserProfileFragment">
         <action
             android:id="@+id/action_userProfileFragment_to_otpverificationFragment2"
-            app:destination="@id/otpverificationFragment2" />
+            app:destination="@id/otpverificationFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <dialog
         android:id="@+id/reportBugDialogFragment"
@@ -294,12 +333,24 @@
         android:label="VendorProfileFragment">
         <action
             android:id="@+id/action_vendorProfileFragment_to_otpverificationFragment2"
-            app:destination="@id/otpverificationFragment2" />
+            app:destination="@id/otpverificationFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/otpverificationFragment2"
         android:name="com.techbayportal.itaste.ui.fragments.otpverificationfragment.OtpverificationFragment"
         android:label="OtpverificationFragment" />
+    <fragment
+        android:id="@+id/signUpVendorFragment2"
+        android:name="com.techbayportal.itaste.ui.fragments.signupvendorfragment.SignUpVendorFragment"
+        android:label="SignUpVendorFragment" />
+    <fragment
+        android:id="@+id/foloosiPaymentFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.foloosipaymentfragment.FoloosiPaymentFragment"
+        android:label="FoloosiPaymentFragment" />
     <fragment
         android:id="@+id/selectPostFragment"
         android:name="com.techbayportal.itaste.ui.fragments.selectpostfragment.SelectPostFragment"

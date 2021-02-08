@@ -15,7 +15,8 @@ import com.techbayportal.itaste.data.models.GetAllCountriesData
 import java.lang.Exception
 
 
-class LocationsAdapter (private val list: List<GetAllCountriesData>,
+class LocationsAdapter (
+    private val list: List<GetAllCountriesData>,
     private val listener: ClickItemListener
 )
 
@@ -26,8 +27,6 @@ class LocationsAdapter (private val list: List<GetAllCountriesData>,
 
     interface ClickItemListener {
         fun onClicked(getAllCountriesData: GetAllCountriesData){
-
-
         }
     }
 
@@ -104,6 +103,7 @@ class LocationsAdapter (private val list: List<GetAllCountriesData>,
 
             itemView.setOnClickListener {
                 listener.onClicked(model)
+                notifyDataSetChanged()
             }
         }
     }

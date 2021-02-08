@@ -79,7 +79,8 @@ class ChangePasswordFragment :
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
 
-                    navigateToLoginScreen()
+
+                   // navigateToLoginScreen()
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()

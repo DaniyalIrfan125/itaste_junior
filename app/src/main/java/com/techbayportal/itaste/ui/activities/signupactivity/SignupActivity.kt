@@ -24,19 +24,25 @@ class SignupActivity : BaseActivity<ActivitySignupBinding, SignupViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         val intent = intent
-        val fragmentName = intent.getStringExtra("OPEN_SIGNUP_SCREEN")
+        var fragmentName = intent.getStringExtra("OPEN_SIGNUP_SCREEN")
+
 
         if (fragmentName == "sign_up") {
-            val navHostFragment =
-                supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
             val navController = navHostFragment.navController
             val navInflater = navController.navInflater
             val graph = navInflater.inflate(R.navigation.signup_graph)
             graph.startDestination = R.id.selectAccountTypeFragment2
             navController.graph = graph
 
+        }else if(fragmentName == "sign_up_vendor"){
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            val navController = navHostFragment.navController
+            val navInflater = navController.navInflater
+            val graph = navInflater.inflate(R.navigation.signup_graph)
+            graph.startDestination = R.id.signUpVendorFragment
+            navController.graph = graph
         }
     }
 
