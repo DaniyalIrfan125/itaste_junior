@@ -24,8 +24,8 @@ data class Post(
 )
 
 data class Vendor(
-    val first_name: String,
-    val last_name: String,
+    val first: String,
+    val last: String,
     val location: String,
     val profilePic: String,
     val vendor_id: Int
@@ -33,9 +33,9 @@ data class Vendor(
 
 data class Comment(
     val comment: String,
-    val first_name: String,
+    val first: String,
     val id: Int,
-    val last_name: String,
+    val last: String,
     val profilePic: String,
     val total_likes: Int,
     val user_id: Int

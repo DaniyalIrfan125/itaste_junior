@@ -405,4 +405,8 @@ class MainRepository @Inject constructor(
     suspend fun deletePost(auth: String, postId: Int): Response<PostDetailResponse> {
         return apiService.deletePost("application/json", auth,postId)
     }
+
+    suspend fun allowComments(auth:String,postId: Int, allowComments: Int): Response<AllowCommentsResponse> {
+        return apiService.allowComments("application/json", auth,postId,allowComments)
+    }
 }

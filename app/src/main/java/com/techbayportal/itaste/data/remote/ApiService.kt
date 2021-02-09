@@ -109,9 +109,9 @@ interface ApiService {
     ): Response<ResendOtpResponse>
 
 
-   /* @GET("countries")
-    suspend fun getAllCountries(
-    ): Response<GetAllCountriesResponse>*/
+    /* @GET("countries")
+     suspend fun getAllCountries(
+     ): Response<GetAllCountriesResponse>*/
 
     @GET("countries")
     suspend fun getAllCountriesForHome(
@@ -145,7 +145,7 @@ interface ApiService {
         @Field("country_id") country_id: Int?
     ): Response<GetAllCountriesResponse>
 
-   
+
     @GET("user/personal-profile")
     suspend fun getUserPersonalProfile(
         @Header("Accept") acceptJson: String,
@@ -227,11 +227,10 @@ interface ApiService {
     suspend fun changePassword(
         @Header("Accept") acceptJson: String,
         @Header("Authorization") authHeader: String,
-        @Field("old_password") old_password : String?,
+        @Field("old_password") old_password: String?,
         @Field("new_password") new_password: String?,
         @Field("password_confirmation") password_confirmation: String?
     ): Response<SuccessResponse>
-
 
 
     @POST("logout")
@@ -344,7 +343,6 @@ interface ApiService {
     ): Response<AddPostResponse>
 
 
-
     @POST("post/update")
     suspend fun updatePost(
         @Header("Accept") acceptJson: String,
@@ -367,6 +365,7 @@ interface ApiService {
         @Query("post_id") postId: Int,
         @Query("comments") comment: String
     ): Response<PostCommentResponse>
+
     @GET("home-screen")
     suspend fun getHomeScreenInfo(
         @Header("Accept") acceptJson: String,
@@ -442,4 +441,13 @@ interface ApiService {
         @Header("Authorization") authHeader: String,
         @Query("post_id") posdtId: Int
     ): Response<PostDetailResponse>
+
+
+    @POST("post/comment-status")
+    suspend fun allowComments(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") posdtId: Int,
+        @Query("allow_comments") allowComments: Int
+    ): Response<AllowCommentsResponse>
 }

@@ -34,6 +34,8 @@ class SharedViewModel : BaseViewModel() {
     var isPostUpdated = MutableLiveData<Boolean>()
     var categoriesResponse: MutableLiveData<List<GetCategoriesResponse.Data>> = MutableLiveData()
     var isPostDetailDeleteClicked = MutableLiveData<Boolean>(false)
+    var isCommentOffClicked = MutableLiveData<Boolean>(null)
+    var isCommentsAreOnOrOff = MutableLiveData<String>("")
 
 
     //var isSelectedCountryId : MutableLiveData<Int>? = null

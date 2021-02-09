@@ -75,7 +75,6 @@
                             android:layout_margin="@dimen/_3sdp"
                             android:elevation="@dimen/_3sdp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/icon_male_dp"
                             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                             tools:layout_editor_absoluteX="116dp"
                             tools:layout_editor_absoluteY="61dp" />
@@ -153,7 +152,7 @@
 
         </RelativeLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/relative_top"
@@ -397,7 +396,8 @@ enim ipsam voluptatem quia voluptas sit asperna."
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rvPostComments"
                                 android:layout_width="match_parent"
-                                android:layout_height="300dp"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
                                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 tools:listitem="@layout/item_profile_comment">
 
@@ -427,7 +427,7 @@ enim ipsam voluptatem quia voluptas sit asperna."
 
                 </LinearLayout>
             </RelativeLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
 
     </RelativeLayout>

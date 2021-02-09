@@ -26,14 +26,13 @@
                 android:gravity="center_vertical">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/sivInfluancerImage"
+                    android:id="@+id/user_Image"
                     android:layout_width="55dp"
                     android:layout_height="55dp"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/_3sdp"
                     android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/icon_user_dp"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />

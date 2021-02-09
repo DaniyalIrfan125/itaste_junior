@@ -181,6 +181,7 @@
     <string name="edit_post">Edit Post</string>
     <string name="delete_post">Delete Post</string>
     <string name="turn_off_commenting">Turn off commenting</string>
+    <string name="turn_on_commenting">Turn on commenting</string>
     <string name="share_to_dots">Share to…</string>
 
     //ProfileFragment

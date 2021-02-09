@@ -34,7 +34,7 @@ class PostCommentsAdapter(
         fun bindData(position: Int) {
 
             itemBinding.tvUserName.text =
-                commentsList[position].first_name + " " + commentsList[position].last_name
+                commentsList[position].first + " " + commentsList[position].last
             itemBinding.tvComment.text = commentsList[position].comment
             itemBinding.mLikeButton.isLiked = commentsList[position].total_likes != 0
 
@@ -62,9 +62,7 @@ class PostCommentsAdapter(
             })
 
 
-//            itemBinding.root.setOnClickListener {
-//                onClickListener.onItemClickListener()
-//            }
+
         }
     }
 
@@ -93,6 +91,10 @@ class PostCommentsAdapter(
             } else {
                 for (i in 0 until commentsList.size) {
                     count = i
+                }
+
+                if(count > 6){
+                    count = 6
                 }
             }
             return count

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -39,6 +40,13 @@ class PostDetailBottomSheetFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        sharedViewModel.isCommentsAreOnOrOff.observe(this, Observer {
+            if (it == "off") {
+                tv_commenting.setText(R.string.turn_on_commenting)
+            } else {
+                tv_commenting.setText(R.string.turn_off_commenting)
+            }
+        })
 
         btn_cancel.setOnClickListener {
             dismiss()
@@ -54,10 +62,15 @@ class PostDetailBottomSheetFragment : BottomSheetDialogFragment() {
 
 
         linear_delete.setOnClickListener {
-            sharedViewModel.isPostDetailDeleteClicked .value= true
+            sharedViewModel.isPostDetailDeleteClicked.value = true
             dismiss()
         }
 
+
+        linear_turnOffCommenting.setOnClickListener {
+            sharedViewModel.isCommentOffClicked.value = sharedViewModel.isCommentsAreOnOrOff.value == "off"
+            dismiss()
+        }
     }
 
 

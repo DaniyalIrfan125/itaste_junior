@@ -30,13 +30,19 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
     val postCommentResponse: LiveData<Resource<PostCommentResponse>>
         get() = _postCommentResponse
 
-    private val _favoriteUnfavoriteReponse = MutableLiveData<Resource<SetFavouriteUnFavouriteResponse>>()
+    private val _favoriteUnfavoriteReponse =
+        MutableLiveData<Resource<SetFavouriteUnFavouriteResponse>>()
     val favoriteUnfavoriteReponse: LiveData<Resource<SetFavouriteUnFavouriteResponse>>
         get() = _favoriteUnfavoriteReponse
 
 
+    private val _allowCommentsResponse =
+        MutableLiveData<Resource<AllowCommentsResponse>>()
+    val allowCommentsResponse: LiveData<Resource<AllowCommentsResponse>>
+        get() = _allowCommentsResponse
 
-    private val _favoriteUnfavoriteCommentReponse = MutableLiveData<Resource<CommentFavouriteResponse>>()
+    private val _favoriteUnfavoriteCommentReponse =
+        MutableLiveData<Resource<CommentFavouriteResponse>>()
     val favoriteUnfavoriteCommentReponse: LiveData<Resource<CommentFavouriteResponse>>
         get() = _favoriteUnfavoriteCommentReponse
 
@@ -108,10 +114,9 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
     }
 
 
-
     fun postCommentCall(
         postId: Int,
-        comment:String
+        comment: String
     ) {
         viewModelScope.launch {
             _postCommentResponse.postValue(Resource.loading(null))
@@ -176,7 +181,12 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
                 } catch (e: Exception) {
                     _favoriteUnfavoriteReponse.postValue(Resource.error("" + e.message, null))
                 }
-            } else _favoriteUnfavoriteReponse.postValue(Resource.error("No internet connection", null))
+            } else _favoriteUnfavoriteReponse.postValue(
+                Resource.error(
+                    "No internet connection",
+                    null
+                )
+            )
         }
     }
 
@@ -195,7 +205,12 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
                             _favoriteUnfavoriteCommentReponse.postValue(Resource.success(it.body()!!))
 
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
-                            _favoriteUnfavoriteCommentReponse.postValue(Resource.error(it.message(), null))
+                            _favoriteUnfavoriteCommentReponse.postValue(
+                                Resource.error(
+                                    it.message(),
+                                    null
+                                )
+                            )
                         } else {
                             val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
                             _favoriteUnfavoriteCommentReponse.postValue(
@@ -208,12 +223,21 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    _favoriteUnfavoriteCommentReponse.postValue(Resource.error("" + e.message, null))
+                    _favoriteUnfavoriteCommentReponse.postValue(
+                        Resource.error(
+                            "" + e.message,
+                            null
+                        )
+                    )
                 }
-            } else _favoriteUnfavoriteCommentReponse.postValue(Resource.error("No internet connection", null))
+            } else _favoriteUnfavoriteCommentReponse.postValue(
+                Resource.error(
+                    "No internet connection",
+                    null
+                )
+            )
         }
     }
-
 
 
     private val _getCategoriesResponse = MutableLiveData<Resource<GetCategoriesResponse>>()
@@ -250,7 +274,6 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
     }
 
 
-
     fun deletePost(
         postId: Int
     ) {
@@ -282,6 +305,43 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
                     _postDeleteReponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _postDeleteReponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    fun allowComments(
+        postId: Int,
+        allowComments: Int
+    ) {
+        viewModelScope.launch {
+            _allowCommentsResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.allowComments(
+                        "Bearer ${loginSession!!.data.access_token}",
+                        postId,
+                        allowComments
+                    ).let {
+                        if (it.isSuccessful) {
+                            _allowCommentsResponse.postValue(Resource.success(it.body()!!))
+
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _allowCommentsResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _allowCommentsResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _allowCommentsResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _allowCommentsResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

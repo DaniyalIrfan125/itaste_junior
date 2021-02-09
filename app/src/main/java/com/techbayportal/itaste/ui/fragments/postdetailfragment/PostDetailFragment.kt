@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -28,9 +29,11 @@ import com.techbayportal.itaste.ui.fragments.postdetailfragment.itemclicklistene
 import com.techbayportal.itaste.ui.fragments.postfragment.adapter.TimeDurationAdapter
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.FileUtils
+import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_post_detail.*
 import kotlinx.android.synthetic.main.fragment_post_detail.img_back
+import kotlinx.android.synthetic.main.item_order_chat_item.*
 import kotlinx.android.synthetic.main.layout_postfragment.*
 import kotlinx.android.synthetic.main.layout_profile_chat_comment.*
 import kotlinx.android.synthetic.main.layout_write_message.*
@@ -54,6 +57,8 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
     var commentsList: ArrayList<Comment> = ArrayList()
     lateinit var commentsAdapter: PostCommentsAdapter
     val bottomSheet = PostDetailBottomSheetFragment()
+
+    var postDetailResponse: PostDetailResponse? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,7 +136,8 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                     it?.let { it ->
                         loadingDialog.dismiss()
                         it.data?.let {
-                            populateDate(it)
+                            postDetailResponse = it
+                            populateDate(postDetailResponse!!)
                         }
 
                     }
@@ -203,6 +209,29 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                 }
             }
         })
+
+
+
+        mViewModel.allowCommentsResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+                            mViewModel.postDetailCall(14)
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
     }
 
     private fun populateDate(it: PostDetailResponse) {
@@ -241,7 +270,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
             tv_viewAllComments.visibility = View.GONE
         }
 
-        tv_vendorName.text = it.data.vendor.first_name + " " + it.data.vendor.last_name
+        tv_vendorName.text = it.data.vendor.first + " " + it.data.vendor.last
         tv_vendorLocation.text = it.data.vendor.location
         tv_title.text = it.data.post.caption
         tv_price.text = it.data.post.price.toString() + " " + getString(R.string.aed)
@@ -251,6 +280,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         tv_time.text = getString(R.string.tv_cooking_time_is) + " : " + it.data.post.cooking_time
         mLikeButton.isLiked = it.data.post.is_favourite
 
+        sharedViewModel.isCommentsAreOnOrOff.value = it.data.post.allow_comments
     }
 
     override fun subscribeToNavigationLiveData() {
@@ -327,6 +357,10 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         initialising()
 
 
+        postDetailResponse?.let {
+            populateDate(it)
+        }
+
     }
 
 
@@ -358,11 +392,43 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
 
         })
 
+        sharedViewModel.isCommentOffClicked.observe(this, Observer {
+            it?.let {
+                if (it) {
+                    mViewModel.allowComments(14, 1)
+                    sharedViewModel.isCommentOffClicked.value = null
+                } else {
+                    mViewModel.allowComments(14, 0)
+                    sharedViewModel.isCommentOffClicked.value = null
+                }
+            }
+        })
+
     }
 
     private fun initialising() {
         commentsAdapter = PostCommentsAdapter(this, commentsList, false)
         mViewDataBinding.rvPostComments.adapter = commentsAdapter
+
+        if (LoginSession.getInstance().getLoginResponse() != null) {
+            Picasso.get().load(LoginSession.getInstance().getLoginResponse()!!.data.profile_pic)
+                .fit().centerCrop().into(user_Image, object :
+                    Callback {
+                    override fun onSuccess() {
+
+                    }
+
+                    override fun onError(e: Exception?) {
+                        user_Image.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.placeholder_image
+                            )
+                        )
+                    }
+                })
+
+        }
     }
 
     override fun onItemClickListener() {

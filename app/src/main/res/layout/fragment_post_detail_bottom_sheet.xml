@@ -114,6 +114,7 @@
             </View>
 
             <LinearLayout
+                android:id="@+id/linear_turnOffCommenting"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_25sdp"
@@ -126,6 +127,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_commenting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
