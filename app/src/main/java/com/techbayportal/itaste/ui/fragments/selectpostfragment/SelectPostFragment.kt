@@ -24,15 +24,19 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutSelectpostBinding
 import com.techbayportal.itaste.ui.fragments.selectpostfragment.adapter.SelectPostsAdapter
+import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.FileUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_savedposts.recycler_posts
 import kotlinx.android.synthetic.main.layout_selectpost.*
 import kotlinx.android.synthetic.main.layout_signupfragment.*
 import java.io.File
 
 
+@AndroidEntryPoint
 class SelectPostFragment : BaseFragment<LayoutSelectpostBinding, SelectPostViewModel>() {
     override val layoutId: Int
         get() = R.layout.layout_selectpost
@@ -47,12 +51,19 @@ class SelectPostFragment : BaseFragment<LayoutSelectpostBinding, SelectPostViewM
     var selectedImageFile: File? = null
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subscribeToNetworkLiveData()
+
+        mViewModel.getCategories()
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initlialising()
         clickListener()
-
 
 
     }
@@ -65,7 +76,7 @@ class SelectPostFragment : BaseFragment<LayoutSelectpostBinding, SelectPostViewM
 
         adapter.setOnClickListener(object : SelectPostsAdapter.OnClickListener {
             override fun onEntryClick(position: Int) {
-                selectedImageFile = FileUtils.getFile(requireContext(),imagesList[position])
+                selectedImageFile = FileUtils.getFile(requireContext(), imagesList[position])
                 Glide.with(requireContext()).load(imagesList[position]).into(imageView)
             }
 
@@ -131,13 +142,38 @@ class SelectPostFragment : BaseFragment<LayoutSelectpostBinding, SelectPostViewM
                 if (selectedImageFile != null) {
                     //calling method to compress image
                     sharedViewModel.selectedPostImageFile.value = selectedImageFile
-                    Navigation.findNavController(imageView).navigate(R.id.action_selectPostFragment_addposts_fragment)
+                    Navigation.findNavController(imageView)
+                        .navigate(R.id.action_selectPostFragment_addposts_fragment)
                 }
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    override fun subscribeToNetworkLiveData() {
+        super.subscribeToNetworkLiveData()
+
+        mViewModel.getCategoriesResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+                            sharedViewModel.categoriesResponse.value = it.data
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+    }
 
     fun getLocalImagePaths(): ArrayList<Uri> {
         val result = ArrayList<Uri>()

@@ -109,7 +109,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                     it?.let { it ->
                         loadingDialog.dismiss()
                         it.data?.let {
-                            sharedViewModel.categoriesResponse!!.value = it.data
+                            sharedViewModel.categoriesResponse.value = it.data
                         }
 
                     }
