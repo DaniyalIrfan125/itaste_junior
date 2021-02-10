@@ -51,12 +51,18 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
     val postDeleteResponse: LiveData<Resource<PostDetailResponse>>
         get() = _postDeleteReponse
 
+    private val _savePostResponse =
+        MutableLiveData<Resource<SavePostResponse>>()
+    val savePostResponse: LiveData<Resource<SavePostResponse>>
+        get() = _savePostResponse
+
 
     var onVendorProfileHeaderClicked = SingleLiveEvent<Any>()
     var onSendButtonClicked = SingleLiveEvent<Any>()
     val onBackButtonClicked = SingleLiveEvent<Any>()
     val onEditPostButtonClicked = SingleLiveEvent<Any>()
     val onMoreButtonClicked = SingleLiveEvent<Any>()
+    val onSaveButtonClicked = SingleLiveEvent<Any>()
 
     fun onVendorProfileHeaderClicked() {
         onVendorProfileHeaderClicked.call()
@@ -76,6 +82,10 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
 
     fun onMoreButtonClicked() {
         onMoreButtonClicked.call()
+    }
+
+    fun onSavePostButtonClicked() {
+        onSaveButtonClicked.call()
     }
 
 
@@ -342,6 +352,41 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
                     _allowCommentsResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _allowCommentsResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+    fun savePost(
+        postId: Int
+    ) {
+        viewModelScope.launch {
+            _savePostResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.savePost(
+                        "Bearer ${loginSession!!.data.access_token}",
+                        postId
+                    ).let {
+                        if (it.isSuccessful) {
+                            _savePostResponse.postValue(Resource.success(it.body()!!))
+
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _savePostResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _savePostResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _savePostResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _savePostResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

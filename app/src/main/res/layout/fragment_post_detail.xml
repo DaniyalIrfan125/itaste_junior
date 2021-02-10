@@ -55,7 +55,7 @@
                     android:layout_height="66dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:orientation="horizontal"
                     android:weightSum="10">
 
@@ -64,7 +64,7 @@
                         android:id="@+id/ll_dp"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
+                        android:layout_weight="2.4"
                         android:gravity="center_vertical"
                         android:onClick="@{()->viewModel.onVendorProfileHeaderClicked()}">
 
@@ -92,7 +92,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="7"
+                        android:layout_weight="6.8"
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
@@ -130,6 +130,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.5"
                         android:gravity="center"
+                        android:visibility="gone"
                         android:onClick="@{()->viewModel.onMoreButtonClicked()}">
 
                         <ImageView
@@ -143,6 +144,44 @@
                             app:tint="@color/mainIconColor" />
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linear_savesPost"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.8"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="visible"
+                        android:onClick="@{()->viewModel.onSavePostButtonClicked()}">
+
+                        <ImageView
+                            android:id="@+id/img_SavePost"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_gravity="center"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/img_savepost"
+                            android:textAllCaps="false"
+                            app:tint="@color/mainIconColor" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
+                            android:textStyle="normal"
+                            android:textSize="7sp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:text="@string/tv_Save_post"
+                            />
+
+                    </LinearLayout>
+
+
+
 
 
                 </LinearLayout>

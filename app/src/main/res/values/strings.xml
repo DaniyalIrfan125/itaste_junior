@@ -337,5 +337,6 @@
     <string name="tv_comments">Comments</string>
     <string name="tv_update">Update</string>
     <string name="tv_post_delete">Post Deleted Successfully!</string>
+    <string name="tv_Save_post">Save post</string>
 
 </resources>

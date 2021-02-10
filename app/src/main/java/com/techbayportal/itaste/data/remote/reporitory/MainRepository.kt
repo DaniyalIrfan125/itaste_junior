@@ -409,4 +409,14 @@ class MainRepository @Inject constructor(
     suspend fun allowComments(auth:String,postId: Int, allowComments: Int): Response<AllowCommentsResponse> {
         return apiService.allowComments("application/json", auth,postId,allowComments)
     }
+
+
+    suspend fun savePost(auth:String,postId: Int): Response<SavePostResponse> {
+        return apiService.savePost("application/json", auth,postId)
+    }
+
+
+    suspend fun getAllSavedPost(auth:String): Response<GetAllSavedPost> {
+        return apiService.getAllSavedPost("application/json", auth)
+    }
 }

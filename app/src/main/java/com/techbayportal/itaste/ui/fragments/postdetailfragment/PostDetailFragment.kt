@@ -232,6 +232,25 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                 }
             }
         })
+
+
+        mViewModel.savePostResponse .observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
     }
 
     private fun populateDate(it: PostDetailResponse) {
@@ -285,6 +304,12 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
+
+        mViewModel.onSaveButtonClicked.observe(this, Observer {
+
+            mViewModel.savePost(14)
+       //     img_SavePost.setImageDrawable(R.drawable.)
+        })
 
         mViewModel.onVendorProfileHeaderClicked.observe(this, Observer {
             Navigation.findNavController(ll_dp)

@@ -450,4 +450,20 @@ interface ApiService {
         @Query("post_id") posdtId: Int,
         @Query("allow_comments") allowComments: Int
     ): Response<AllowCommentsResponse>
+
+    @POST("post/save-post")
+    suspend fun savePost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") posdtId: Int
+    ): Response<SavePostResponse>
+
+
+    @GET("post/get-saved-post")
+    suspend fun getAllSavedPost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetAllSavedPost>
+
+
 }
