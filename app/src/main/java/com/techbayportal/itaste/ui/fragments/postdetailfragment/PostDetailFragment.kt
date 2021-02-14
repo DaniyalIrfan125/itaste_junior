@@ -234,7 +234,39 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         })
 
 
-        mViewModel.savePostResponse .observe(this, Observer {
+        mViewModel.addToCartResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+                        it.data?.let {
+
+                            //show success dialog
+
+                            MotionToast.createToast(
+                                requireActivity(),
+                                "Post added to cart",
+                                "Post added to cart",
+                                MotionToast.TOAST_SUCCESS,
+                                MotionToast.GRAVITY_BOTTOM,
+                                MotionToast.SHORT_DURATION,
+                                ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
+                            )
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+        mViewModel.savePostResponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
@@ -243,6 +275,21 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                     it?.let { it ->
                         loadingDialog.dismiss()
 
+                        if (it.data!!.data.is_save) {
+                            img_SavePost.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    requireContext(),
+                                    R.drawable.icon_savedpost
+                                )
+                            )
+                        } else {
+                            img_SavePost.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    requireContext(),
+                                    R.drawable.img_savepost
+                                )
+                            )
+                        }
                     }
                 }
                 Resource.Status.ERROR -> {
@@ -308,7 +355,12 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         mViewModel.onSaveButtonClicked.observe(this, Observer {
 
             mViewModel.savePost(14)
-       //     img_SavePost.setImageDrawable(R.drawable.)
+
+
+        })
+
+        mViewModel.onAddButtonClicked.observe(this, Observer {
+            mViewModel.addToCart(14)
         })
 
         mViewModel.onVendorProfileHeaderClicked.observe(this, Observer {

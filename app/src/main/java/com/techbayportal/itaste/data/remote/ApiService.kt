@@ -496,4 +496,12 @@ interface ApiService {
         @Query("post_id") postId : Int
     ): Response<RemoveCartResponse>
 
+
+    @POST("cart/add")
+    suspend fun addToCart(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId : Int
+    ): Response<AddToCartResponse>
+
 }

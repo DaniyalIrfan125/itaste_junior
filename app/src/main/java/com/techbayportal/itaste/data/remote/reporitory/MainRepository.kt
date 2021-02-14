@@ -468,5 +468,7 @@ class MainRepository @Inject constructor(
         return apiService.removeCartItem("application/json", auth,postId )
     }
 
-
+    suspend fun addToCart(auth: String,postId: Int): Response<AddToCartResponse> {
+        return apiService.addToCart("application/json", auth,postId )
+    }
 }

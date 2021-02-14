@@ -284,9 +284,10 @@
                             android:gravity="end">
 
                             <com.balysv.materialripple.MaterialRippleLayout
-                                android:id="@+id/rippleConfirm"
+                                android:id="@+id/rippleConfir"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 android:layout_marginTop="@dimen/_5sdp"
                                 app:mrl_rippleColor="#838282">
 
@@ -298,10 +299,33 @@
                                     android:layout_marginEnd="2dp"
                                     android:background="@drawable/btn_curve_small"
                                     android:onClick="@{()->viewModel.onEditPostButtonClicked()}"
-                                    android:text="Edit Post"
+                                    android:text="@string/btn_editpost"
                                     android:textAllCaps="false"
                                     android:textColor="@color/titleTextColorBlack" />
                             </com.balysv.materialripple.MaterialRippleLayout>
+
+
+                            <com.balysv.materialripple.MaterialRippleLayout
+                                android:id="@+id/rippleConfirm"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+                                app:mrl_rippleColor="@color/colorLightOrange">
+
+                                <Button
+                                    android:id="@+id/btn_addtocart"
+                                    android:layout_width="110dp"
+                                    android:layout_height="34dp"
+                                    android:layout_gravity="end"
+                                    android:layout_marginEnd="2dp"
+                                    android:background="@drawable/layout_add_cart"
+                                    android:onClick="@{()->viewModel.onAddToCart()}"
+                                    android:text="@string/btn_add_to_cart"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/titleTextColorBlack" />
+
+                            </com.balysv.materialripple.MaterialRippleLayout>
+
 
                         </LinearLayout>
 
