@@ -101,7 +101,7 @@ class HomeRecyclerAdapter(
             tv_address!!.text = model.location
 
             img_profile?.setOnClickListener {
-                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV,model.id)
+                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV, model.id)
 
             }
 
@@ -119,8 +119,7 @@ class HomeRecyclerAdapter(
                 }
             })
 
-            recyclerView!!.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            recyclerView!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
             itemView
 

@@ -44,10 +44,18 @@
             app:popExitAnim="@anim/exit_to_right" />
         <action
             android:id="@+id/action_homeFragment_to_contactUsFragment"
-            app:destination="@id/contactUsFragment" />
+            app:destination="@id/contactUsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_homeFragment_to_reportBugDialogFragment"
-            app:destination="@id/reportBugDialogFragment" />
+            app:destination="@id/reportBugDialogFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/choosePakageFragment"
@@ -128,7 +136,11 @@
             app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_homeConfigurationBottomSheetFragment_to_contactUsFragment"
-            app:destination="@id/contactUsFragment" />
+            app:destination="@id/contactUsFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </dialog>
     <fragment
         android:id="@+id/postDetailFragment"
@@ -325,7 +337,11 @@
             app:popExitAnim="@anim/exit_to_right" />
         <action
             android:id="@+id/action_settingsFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
+            app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/changeLanguageFragment"

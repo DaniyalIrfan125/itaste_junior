@@ -52,7 +52,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
 //        mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
-        mViewModel.hitGetVendorProfileDetails(31)
+        mViewModel.hitGetVendorProfileDetails(sharedViewModel.vendorProfileId)
 
     }
 

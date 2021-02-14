@@ -64,6 +64,7 @@ class GetAllSavesPostRecyclerAdapterMultiSelection(
         holder.bi.relativePost.setOnClickListener(View.OnClickListener { view ->
             if (itemClick == null) return@OnClickListener
             itemClick!!.onItemClick(view, list[position], position)
+
         })
         holder.bi.relativePost.setOnLongClickListener(OnLongClickListener { view ->
             if (itemClick == null) {

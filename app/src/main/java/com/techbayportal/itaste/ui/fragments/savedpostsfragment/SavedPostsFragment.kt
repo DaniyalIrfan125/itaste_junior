@@ -2,6 +2,7 @@ package com.techbayportal.itaste.ui.fragments.savedpostsfragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,6 +18,7 @@ import com.techbayportal.itaste.ui.fragments.savedpostsfragment.adapter.GetAllSa
 import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_savedposts.*
+import timber.log.Timber
 
 @AndroidEntryPoint
 class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewModel>() {
@@ -145,6 +147,9 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
             override fun onItemClick(view: View?, inbox: GetAllSavedData?, position: Int) {
                 if (postsRecyclerAdapter.selectedItemCount() > 0) {
                     toggleSelection(position)
+                } else{
+                    Timber.d("SavePost item clicked : $position")
+
                 }
             }
 
@@ -172,8 +177,7 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
 
     private fun RecyclerView.autoFitColumns(columnWidth: Int) {
         val displayMetrics = this.context.resources.displayMetrics
-        val noOfColumns =
-            ((displayMetrics.widthPixels / displayMetrics.density) / columnWidth).toInt()
+        val noOfColumns = ((displayMetrics.widthPixels / displayMetrics.density) / columnWidth).toInt()
         this.layoutManager = GridLayoutManager(this.context, noOfColumns)
     }
 

@@ -60,6 +60,7 @@ class SharedViewModel : BaseViewModel() {
 
     var userUpdatedCountryId : Int = 0
     var vendorProfileId : Int = 0
+    var vendorPostItemId : Int = 0
 
     var test = false;
     var testId :Int = 0

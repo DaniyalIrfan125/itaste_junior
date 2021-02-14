@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.*
 import android.widget.Toast
+import androidx.core.view.isNotEmpty
 import androidx.databinding.library.baseAdapters.BR
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
@@ -136,7 +137,10 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding, WebViewViewModel>()
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                swipeRefreshLayout.isRefreshing = false
+                if(swipeRefreshLayout.isNotEmpty()){
+                    swipeRefreshLayout.isRefreshing = false
+                }
+
                 super.onPageFinished(view, url)
             }
 

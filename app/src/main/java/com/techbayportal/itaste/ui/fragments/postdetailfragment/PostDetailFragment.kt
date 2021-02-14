@@ -63,7 +63,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel.postDetailCall(14)
+        mViewModel.postDetailCall(sharedViewModel.vendorPostItemId)
         mViewModel.getCategories()
 
         subscribeToNetworkLiveData()
@@ -268,11 +268,16 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         Picasso.get().load(it.data.vendor.profilePic).fit().centerCrop().into(img_profile, object :
             Callback {
             override fun onSuccess() {
-                spinKit_profile.visibility = View.GONE
+                if(spinKit_profile != null){
+                    spinKit_profile.visibility = View.GONE
+                }
             }
 
             override fun onError(e: Exception?) {
-                spinKit_profile.visibility = View.GONE
+                if(spinKit_profile != null){
+                    spinKit_profile.visibility = View.GONE
+                }
+
             }
         })
 

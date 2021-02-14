@@ -51,8 +51,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
     lateinit var mView: View
 
-    var thisVendorId: Int = 0
-
     val bottomSheet = HomeConfigurationBottomSheetFragment()
     private val homeItemBottomSheet = HomeItemBottomSheetFragment()
 
@@ -101,9 +99,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         super.subscribeToNavigationLiveData()
 
         mViewModel.onHomeConfigButtonClicked.observe(this, Observer {
-//            Navigation.findNavController(iv_home_configuration)
-//                .navigate(R.id.action_homeFragment_to_homeConfigurationBottomSheetFragment)
-            //
+//            Navigation.findNavController(iv_home_configuration).navigate(R.id.action_homeFragment_to_homeConfigurationBottomSheetFragment)
+
             bottomSheet.show(requireActivity().supportFragmentManager, "bottomSheet")
 
             if (loginSession != null) {
@@ -135,7 +132,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 /*if(!loginSession.data.is_payment_update){
                     Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_profileFragment)
                 }*/
-
             }
         }
 
@@ -151,11 +147,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 if (it != -1) {
                     // bottomSheet.dismiss()
                     if (this::mView.isInitialized) {
-                        Navigation.findNavController(mView)
-                            .navigate(R.id.action_homeFragment_to_settingsFragment)
+                        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_settingsFragment)
                     }
-
-
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
             }
@@ -163,10 +156,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 if (it != -1) {
                     //call api to select country
                     if (this::mView.isInitialized) {
-                        Navigation.findNavController(mView)
-                            .navigate(R.id.action_homeFragment_to_contactUsFragment)
+                        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_contactUsFragment)
                     }
-
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
             }
@@ -193,7 +184,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         sharedViewModel.homeItemBottomSheetClickId.observe(this, Observer {
             if (it == AppConstants.HomeItemBottomSheet.BLOCK_VENDOR) {
                 if (it != -1) {
-                    mViewModel.hitBlockAccountApi(31)
+                    /*hitting blocked account api to block a vendor - passing the id of the vendor which is clicked*/
+                    mViewModel.hitBlockAccountApi(sharedViewModel.vendorProfileId)
                     sharedViewModel.homeItemBottomSheetClickId.value = -1
                 }
             }
@@ -226,18 +218,17 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     override fun onItemClickListener(type: String, id :Int) {
         when (type) {
             AppConstants.RecyclerViewKeys.HOME_RV -> {
+                /*reciving click on vendor item click on Home and saving vendor id in sharedViewModel*/
                 sharedViewModel.vendorProfileId = id
-                Navigation.findNavController(img_dots)
-                    .navigate(R.id.action_homeFragment_to_profileFragment)
-
+                Navigation.findNavController(img_dots).navigate(R.id.action_homeFragment_to_profileFragment)
             }
+
             AppConstants.RecyclerViewKeys.HOME_RV_CHILD -> {
                 Toast.makeText(context, "Home Child", Toast.LENGTH_SHORT).show()
             }
 
             AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS -> {
-                Navigation.findNavController(iv_home_configuration)
-                    .navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
+                Navigation.findNavController(iv_home_configuration).navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
             }
         }
     }
@@ -253,7 +244,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                     loadingDialog.dismiss()
                     countriesList.addAll(it.data!!.data)
                     sharedViewModel._countriesList.value = it.data
-
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -293,6 +283,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                     loadingDialog.dismiss()
                     mViewModel.hitGetHomeScreenInfoApi()
                 }
+
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
                     DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
@@ -318,14 +309,13 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                     recycler_home.visibility = View.VISIBLE
                     rl_promotion.visibility = View.VISIBLE
 
-
                 }
                 Resource.Status.ERROR -> {
                     shimmerFrameLayout.visibility = View.GONE
                     recycler_home.visibility = View.VISIBLE
                     rl_promotion.visibility = View.VISIBLE
                    // loadingDialog.dismiss()
-                   // DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
 
             }
@@ -402,7 +392,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                         Picasso.get().load(R.drawable.placeholder_image).into(iv_home_banner)
                         spinKit.visibility = View.GONE
                     }
-
                 }
 
             })
@@ -415,14 +404,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 vendorsDataList.addAll(homeScreenResponse.data)
                 homerRecyclerAdpater.notifyDataSetChanged()
             }
-
-            
-
-
-
         } catch (e: Exception) {
         }
-
     }
 
     override fun onResume() {
@@ -437,8 +420,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
     //vendor post item clicked
     override fun onChildItemClick(position: Int) {
-
-        Navigation.findNavController(iv_icon).navigate(R.id.action_homeFragment_to_postDetailFragment)
+        sharedViewModel.vendorPostItemId = position
+        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_postDetailFragment)
     }
 
     private fun subscribeToObserveDarkActivation() {
