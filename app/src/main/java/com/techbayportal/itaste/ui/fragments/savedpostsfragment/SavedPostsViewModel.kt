@@ -57,7 +57,7 @@ class SavedPostsViewModel @ViewModelInject constructor(
             if (networkHelper.isNetworkConnected()) {
                 try {
                     mainRepository.getAllSavedPost(
-                        "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDZlNmM4OGI2MDFjY2YwYWJkMDQ4ZmQwYTg1NDNmY2ZiY2FiOTlkNjdjYjQ2MzhkODAwODVkYTZmMGEwMjEyMjQ2YjUxOTg4NmZlY2JlMzgiLCJpYXQiOjE2MTI5NTA0NDUsIm5iZiI6MTYxMjk1MDQ0NSwiZXhwIjoxNjQ0NDg2NDQ1LCJzdWIiOiIxNzciLCJzY29wZXMiOltdfQ.BMqYqfg9zV62zaNRf49KHGq2Va7h9A5XQ9qSm4P0SAK-CFAfM9MD4htDoBdN05U8qQLoVD5g1pDPLLAwtxxndwMgTVP9IvoqurXlnCldGJj_zIyH0zhEGhpwbNa1PzVFm_Y0n9Ng7MGSEza5eY_mNVtr7Z96cwWkdmSOjlTzdFliNtA-U1l-VwfsFPwBdZlN6J5Hr7OkGR-qfzgscLWAPOdQnBnUjOtC4TZaWhDmMwxBkPB2SvudmuxNAh9t-jNUILoPfgl1AqvrjEzLH9X_nsPu7wayl6azQrfLbhxsyibSbOAtkdIdB15jO1Zx6X9M74jJuy_f7MAuozt0r33sUunE6yrXaqX32Aa4rbPPcgRhvQUt1L8hPqvbPPeFpRDvwDy_Rzys0t9v3bu3VduztdhqiXFZmZvFjPk5uPJ4qkBHGyAQgilZZlZ7JMNXxcbWHc0dxE8L00wiqa4gR-mylsAptCoLgHsX_EulvJ-Tq7ZEjh0BFiDl39GosnmclpUhhkkw6GHN7zDEtXOmoD8LvgMHJmvvfKQHOxl-55YFNoggeDsa0FgjM1zqO3O_mpFNDGBUxGXiHpDVnxVDjuyRwAAh8h_PJYa4kBOcOTtoYuZAAo2fLu6h6OFEkC7cqQw2FqcBdQt0ERFmQuc6VMH6RkwXHBl-sq6lrYdMNqed1-A"
+                        "Bearer ${loginSession!!.data.access_token}"
                     ).let {
                         if (it.isSuccessful) {
                             _getSavedPostResponse.postValue(Resource.success(it.body()!!))
@@ -91,7 +91,7 @@ class SavedPostsViewModel @ViewModelInject constructor(
             if (networkHelper.isNetworkConnected()) {
                 try {
                     mainRepository.removeSavedPost(
-                        "Bearer " + "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDZlNmM4OGI2MDFjY2YwYWJkMDQ4ZmQwYTg1NDNmY2ZiY2FiOTlkNjdjYjQ2MzhkODAwODVkYTZmMGEwMjEyMjQ2YjUxOTg4NmZlY2JlMzgiLCJpYXQiOjE2MTI5NTA0NDUsIm5iZiI6MTYxMjk1MDQ0NSwiZXhwIjoxNjQ0NDg2NDQ1LCJzdWIiOiIxNzciLCJzY29wZXMiOltdfQ.BMqYqfg9zV62zaNRf49KHGq2Va7h9A5XQ9qSm4P0SAK-CFAfM9MD4htDoBdN05U8qQLoVD5g1pDPLLAwtxxndwMgTVP9IvoqurXlnCldGJj_zIyH0zhEGhpwbNa1PzVFm_Y0n9Ng7MGSEza5eY_mNVtr7Z96cwWkdmSOjlTzdFliNtA-U1l-VwfsFPwBdZlN6J5Hr7OkGR-qfzgscLWAPOdQnBnUjOtC4TZaWhDmMwxBkPB2SvudmuxNAh9t-jNUILoPfgl1AqvrjEzLH9X_nsPu7wayl6azQrfLbhxsyibSbOAtkdIdB15jO1Zx6X9M74jJuy_f7MAuozt0r33sUunE6yrXaqX32Aa4rbPPcgRhvQUt1L8hPqvbPPeFpRDvwDy_Rzys0t9v3bu3VduztdhqiXFZmZvFjPk5uPJ4qkBHGyAQgilZZlZ7JMNXxcbWHc0dxE8L00wiqa4gR-mylsAptCoLgHsX_EulvJ-Tq7ZEjh0BFiDl39GosnmclpUhhkkw6GHN7zDEtXOmoD8LvgMHJmvvfKQHOxl-55YFNoggeDsa0FgjM1zqO3O_mpFNDGBUxGXiHpDVnxVDjuyRwAAh8h_PJYa4kBOcOTtoYuZAAo2fLu6h6OFEkC7cqQw2FqcBdQt0ERFmQuc6VMH6RkwXHBl-sq6lrYdMNqed1-A",
+                        "Bearer ${loginSession!!.data.access_token}",
                         postId
                     ).let {
                         if (it.isSuccessful) {
