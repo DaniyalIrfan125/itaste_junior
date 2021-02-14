@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.RadioButton
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
@@ -24,11 +23,9 @@ import com.techbayportal.itaste.ui.fragments.searchfragment.adapter.SearchRecycl
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.SearchFilterSpinnerAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_vendor_profile.*
 import kotlinx.android.synthetic.main.layout_searchfragment.*
 import kotlinx.android.synthetic.main.layout_searchfragment.spinner_city
 import kotlinx.android.synthetic.main.layout_searchfragment.spinner_country
-import kotlinx.android.synthetic.main.layout_signupvendorfragment.*
 import timber.log.Timber
 
 
@@ -74,16 +71,16 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
         swipeRevealLayout.setLockDrag(true)
         img_filter.setOnClickListener {
 
-            isLayoutOpened = !swipeRevealLayout.isClosed
-            isLayoutOpened = if (!isLayoutOpened) {
+
+            if (!isLayoutOpened) {
                 swipeRevealLayout.open(true)
                 mViewModel.hitGetAllCategoriesApi()
                 mViewModel.getAllCountries()
 
-                true
+                isLayoutOpened = true
             } else {
                 swipeRevealLayout.close(true)
-                false
+                isLayoutOpened = false
             }
         }
 
@@ -92,11 +89,6 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
 
             requireContext()
         )
-//        recycler_searchposts.adapter = SearchRecyclerAdapter(
-//            mainArrayList,
-//
-//            requireContext()
-//        )
 
         recycler_searchposts.adapter = searchRecyclerAdapter
         recycler_searchposts.layoutManager = LinearLayoutManager(context)
@@ -138,8 +130,8 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                 }
             }
         }
+        Timber.d("val: $mainArrayList")
 
-        Log.d("val", mainArrayList.toString())
     }
 
     private fun initializing() {
@@ -166,13 +158,10 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    //allPostsList.clear()
-                    //  allPostsList.addAll(it.data!!.data)
 
                     splitArray(it.data!!.data)
                     searchRecyclerAdapter.notifyDataSetChanged()
-
-                    Toast.makeText(requireContext(), "All Posts", Toast.LENGTH_SHORT).show()
+                    Timber.d("Search: All Posts")
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -258,8 +247,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                     allPostsList.addAll(it.data!!.data)
                     splitArray(it.data.data)
                     searchRecyclerAdapter.notifyDataSetChanged()
-                    Toast.makeText(requireContext(), "All data after filter", Toast.LENGTH_SHORT)
-                        .show()
+                    Timber.d("Search: All data after filter")
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -282,8 +270,8 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                     allPostsList.addAll(it.data!!.data)
                     splitArray(it.data.data)
                     searchRecyclerAdapter.notifyDataSetChanged()
-                    Toast.makeText(requireContext(), "search applied", Toast.LENGTH_SHORT)
-                        .show()
+                    Timber.d("Search: search applied")
+
                 }
                 Resource.Status.ERROR -> {
                     searchApiStatus = true
@@ -342,22 +330,36 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             spinner_city.setSelection(0)
             spinner_country.setSelection(0)
 
+            //if side Filter is open then close it
+            if (!isLayoutOpened) {
+                swipeRevealLayout.open(true)
+                isLayoutOpened = true
+            } else {
+                swipeRevealLayout.close(true)
+                isLayoutOpened = false
+            }
+
         })
 
         mViewModel.onApplyFilterButtonClicked.observe(this, Observer {
-            if(spinner_city.selectedItemPosition == 0 || spinner_country.selectedItemPosition == 0){
+            if (spinner_city.selectedItemPosition == 0 || spinner_country.selectedItemPosition == 0) {
                 mViewModel.hitApplyFiltersApi(ed_search.text.toString(), "", "", categoryId)
-            }else{
-                mViewModel.hitApplyFiltersApi(ed_search.text.toString(), countryid.toString(), cityid.toString(), categoryId)
+            } else {
+                mViewModel.hitApplyFiltersApi(
+                    ed_search.text.toString(),
+                    countryid.toString(),
+                    cityid.toString(),
+                    categoryId
+                )
             }
-
-
-            //isLayoutOpened = !swipeRevealLayout.isClosed
-           // if (!isLayoutOpened) {
-                swipeRevealLayout.isClosed
+            //if side Filter is open then close it
+            if (!isLayoutOpened) {
                 swipeRevealLayout.open(true)
+                isLayoutOpened = true
+            } else {
+                swipeRevealLayout.close(true)
                 isLayoutOpened = false
-           // }
+            }
         })
     }
 
@@ -379,14 +381,6 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             rg_categories.addView(rb[i])
         }
 
-    }
-
-    private fun setData(data: List<SearchAndFilterResponseData>) {
-        if (data.isNotEmpty()) {
-
-            searchResultList.addAll(data)
-            searchRecyclerAdapter.notifyDataSetChanged()
-        }
     }
 
     private fun loading(isLoading: Boolean) {

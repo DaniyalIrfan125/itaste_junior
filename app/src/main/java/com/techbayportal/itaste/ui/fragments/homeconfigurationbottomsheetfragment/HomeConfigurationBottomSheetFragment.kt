@@ -76,10 +76,11 @@ class HomeConfigurationBottomSheetFragment : BottomSheetDialogFragment() {
         })
         tv_turnOffNotifications.setOnClickListener(View.OnClickListener {
            // sharedViewModel._homeConfigBottomSheetClickId.value = AppConstants.HomeConfigBottomSheet.TURN_OFF_NOTIFICATION
-            Toast.makeText(requireContext(), "notify 1", Toast.LENGTH_SHORT).show()
+          //  Toast.makeText(requireContext(), "notify 1", Toast.LENGTH_SHORT).show()
 
         })
         ll_contactUs.setOnClickListener(View.OnClickListener {
+            dismiss()
             sharedViewModel._homeConfigBottomSheetClickId.value = AppConstants.HomeConfigBottomSheet.CONTACT_US
 
         })

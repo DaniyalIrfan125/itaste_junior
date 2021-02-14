@@ -36,7 +36,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    val loginSession = LoginSession.getInstance().getLoginResponse()
+    //val loginSession = LoginSession.getInstance().getLoginResponse()
     lateinit var mView: View
 
     lateinit var dataStoreProvider: DataStoreProvider
@@ -73,12 +73,12 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     }
 
     private fun initializing() {
-        if (loginSession != null) {
+        if ( LoginSession.getInstance().getLoginResponse() != null) {
 //Set these as live data and then observe
 
-            tv_userName.text = loginSession.data.first + " " + loginSession.data.last
+            tv_userName.text =  LoginSession.getInstance().getLoginResponse()?.data?.first + " " +  LoginSession.getInstance().getLoginResponse()?.data?.last
 
-            Picasso.get().load(loginSession.data.profile_pic).fit().centerCrop()
+            Picasso.get().load( LoginSession.getInstance().getLoginResponse()?.data?.profile_pic).fit().centerCrop()
                 .into(siv_userImage, object :
                     Callback {
                     override fun onSuccess() {
@@ -89,8 +89,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                     }
 
                     override fun onError(e: Exception?) {
-                        Picasso.get().load(R.drawable.placeholder_image).into(siv_userImage)
+
                         if(sk_myProfile != null){
+                            Picasso.get().load(R.drawable.placeholder_image).into(siv_userImage)
                             sk_myProfile.visibility = View.GONE
                         }
 
@@ -98,7 +99,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 })
 
 
-            if (loginSession.data.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
+            if ( LoginSession.getInstance().getLoginResponse()?.data?.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
                 ll_switchToPremium.visibility = View.GONE
                 tv_description_switch_to_premium.visibility = View.GONE
 
@@ -192,13 +193,13 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
 
         mViewModel.onEditProfileClicked.observe(this, Observer {
 
-            if (loginSession != null) {
-                if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
+            if ( LoginSession.getInstance().getLoginResponse() != null) {
+                if ( LoginSession.getInstance().getLoginResponse()?.data?.role.equals(AppConstants.UserTypeKeys.USER, true)) {
 
                     Navigation.findNavController(tv_editProfile)
                         .navigate(R.id.action_myProfileFragment_to_userProfileFragment)
 
-                } else if (loginSession.data.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
+                } else if ( LoginSession.getInstance().getLoginResponse()?.data?.role.equals(AppConstants.UserTypeKeys.VENDOR, true)) {
                     Navigation.findNavController(tv_editProfile)
                         .navigate(R.id.action_myProfileFragment_to_vendorProfileFragment)
                 }
@@ -222,8 +223,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         })
 
         mViewModel.onReportBugClicked.observe(this, Observer {
-            Navigation.findNavController(tv_reportBug)
-                .navigate(R.id.action_myProfileFragment_to_reportBugDialogFragment)
+            Navigation.findNavController(tv_reportBug).navigate(R.id.action_myProfileFragment_to_reportBugDialogFragment)
         })
 
         mViewModel.onDeleteAccountClicked.observe(this, Observer {

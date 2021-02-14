@@ -41,10 +41,78 @@
             android:layout_height="match_parent"
             android:fillViewport="true">
 
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeRefreshLayout"
+                android:layout_below="@+id/relative_top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerFrameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+
+
+
+                    <!-- Adding 6 rows of placeholders -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_90sdp"
+                            android:background="@color/shimmer_item_color">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_15sdp"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_10sdp"
+                                    android:layout_height="@dimen/_10sdp"
+                                    android:layout_gravity="center_vertical"
+                                    android:scaleType="centerInside"
+                                    android:background="@color/shimmer_item_color" />
+
+                                <TextView
+                                    android:layout_width="@dimen/_60sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_5sdp"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:lineSpacingExtra="2sp"
+
+                                    android:background="@color/shimmer_item_color"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <include layout="@layout/item_home_rv_placeholder" />
+                        <include layout="@layout/item_home_rv_placeholder" />
+                        <include layout="@layout/item_home_rv_placeholder" />
+                        <include layout="@layout/item_home_rv_placeholder" />
+                        <include layout="@layout/item_home_rv_placeholder" />
+                        <include layout="@layout/item_home_rv_placeholder" />
+
+
+
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <RelativeLayout
                     android:id="@+id/rl_promotion"
@@ -92,68 +160,6 @@
                     </LinearLayout>
                 </RelativeLayout>
 
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/shimmerFrameLayout"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-
-
-            <!-- Adding 6 rows of placeholders -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_90sdp"
-                    android:background="@color/shimmer_item_color">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="fitXY"
-                        />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/_10sdp"
-                            android:layout_height="@dimen/_10sdp"
-                            android:layout_gravity="center_vertical"
-                            android:scaleType="centerInside"
-                            android:background="@color/shimmer_item_color" />
-
-                        <TextView
-                            android:layout_width="@dimen/_60sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:fontFamily="@font/roboto_regular"
-                            android:lineSpacingExtra="2sp"
-
-                            android:background="@color/shimmer_item_color"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-                </RelativeLayout>
-
-                <include layout="@layout/item_home_rv_placeholder" />
-                <include layout="@layout/item_home_rv_placeholder" />
-                <include layout="@layout/item_home_rv_placeholder" />
-                <include layout="@layout/item_home_rv_placeholder" />
-                <include layout="@layout/item_home_rv_placeholder" />
-                <include layout="@layout/item_home_rv_placeholder" />
-
-
-
-            </LinearLayout>
-            </com.facebook.shimmer.ShimmerFrameLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_home"
@@ -164,6 +170,7 @@
                     android:visibility="gone"/>
 
             </LinearLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         </androidx.core.widget.NestedScrollView>
 

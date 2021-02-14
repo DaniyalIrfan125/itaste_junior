@@ -65,4 +65,16 @@ class SharedViewModel : BaseViewModel() {
     var packagePrice = 0
     var packageType :String = ""
     var packageId :Int = 0
+
+    var aboutUsWebViewTitle = ""
+    var aboutUsWebViewURL = ""
+    var isFromAboutUs : Boolean = false
+
+    var tAndCTitle = ""
+    var tAndCWebViewURL = ""
+    var isFromTAndC : Boolean = false
+
+    var helpAndFaqsTitle = ""
+    var helpAndFaqsWebViewURL = ""
+    var isFromHelpAndFaqs : Boolean = false
 }

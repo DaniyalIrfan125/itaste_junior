@@ -42,6 +42,12 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_reportBugDialogFragment"
+            app:destination="@id/reportBugDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/choosePakageFragment"
@@ -120,6 +126,9 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_homeConfigurationBottomSheetFragment_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
     </dialog>
     <fragment
         android:id="@+id/postDetailFragment"
@@ -314,6 +323,9 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
+        <action
+            android:id="@+id/action_settingsFragment_to_webViewFragment"
+            app:destination="@id/webViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/changeLanguageFragment"
@@ -363,4 +375,8 @@
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right" />
     </fragment>
+    <fragment
+        android:id="@+id/webViewFragment"
+        android:name="com.techbayportal.itaste.ui.fragments.webviewfragment.WebViewFragment"
+        android:label="WebViewFragment" />
 </navigation>

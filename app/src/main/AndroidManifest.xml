@@ -24,7 +24,8 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.activities.splashactivity.SplashActivity">
+        <activity android:name=".ui.activities.splashactivity.SplashActivity"
+            android:configChanges="uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,17 +33,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activities.signupactivity.SignupActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".ui.activities.signupactivity.SignupActivity"
+            android:configChanges="uiMode">
 
 
         </activity>
 
-        <activity android:name=".ui.activities.mainactivity.MainActivity">
+        <activity android:name=".ui.activities.mainactivity.MainActivity"
+            android:configChanges="uiMode">
 
         </activity>
     </application>

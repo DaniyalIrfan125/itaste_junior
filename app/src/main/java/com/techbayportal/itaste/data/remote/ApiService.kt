@@ -161,7 +161,7 @@ interface ApiService {
         @Query("last") last: String,
         @Query("email") email: String,
         @Query("phone") phone: String,
-        @Part profilePic: MultipartBody.Part
+        @Part profile_pic: MultipartBody.Part
     ): Response<UserPersonalProfileResponse>
 
 
@@ -191,7 +191,7 @@ interface ApiService {
         @Query("description") description: String,
         @Query("phone") phone: String,
         @Query("email") email: String,
-        @Part profilePic: MultipartBody.Part,
+        @Part profile_pic: MultipartBody.Part,
         @Query("country_id") country_id: Int,
         @Query("city_id") city_id: Int
 

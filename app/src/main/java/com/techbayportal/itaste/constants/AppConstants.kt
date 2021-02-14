@@ -42,11 +42,13 @@ object AppConstants {
     }
 
     @IntDef(
-        HomeItemBottomSheet.BLOCK_VENDOR
+        HomeItemBottomSheet.BLOCK_VENDOR,
+        HomeItemBottomSheet.REPORT
     )
     annotation class HomeItemBottomSheet {
         companion object {
             const val BLOCK_VENDOR = 1
+            const val REPORT = 2
 
         }
     }
