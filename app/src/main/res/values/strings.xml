@@ -46,6 +46,7 @@
     <string name="deliverable">Deliverable</string>
     <string name="not_deliverable">Not Deliverable</string>
     <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="tv_delete">Delete</string>
 
     //Forget Password Fragment
     <string name="enter_your_n_email">Enter your <br> </br>Email</string>
