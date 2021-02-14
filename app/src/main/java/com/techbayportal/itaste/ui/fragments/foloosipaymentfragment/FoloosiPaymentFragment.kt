@@ -89,7 +89,7 @@ class FoloosiPaymentFragment : BaseFragment<FragmentFoloosiPaymentBinding, Foloo
 
     override fun onTransactionCancelled() {
         Timber.d("Transaction Cancelled")
-        DialogClass.errorDialog(requireContext(),"Ooops!\n Transaction Cancelled", baseDarkMode)
+       // DialogClass.errorDialog(requireContext(),"Ooops!\n Transaction Cancelled", baseDarkMode)
     }
 
     override fun onTransactionSuccess(transactionId: String?) {
@@ -101,7 +101,7 @@ class FoloosiPaymentFragment : BaseFragment<FragmentFoloosiPaymentBinding, Foloo
 
     override fun onTransactionFailure(error: String?) {
         Timber.d("Transaction Error $error")
-        DialogClass.errorDialog(requireContext(),error!!, baseDarkMode)
+       // DialogClass.errorDialog(requireContext(),error!!, baseDarkMode)
     }
 
     private fun navigateAfterSuccessFulPayment(){

@@ -36,6 +36,12 @@ class HomeItemBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        ll_report.setOnClickListener(View.OnClickListener {
+            dismiss()
+            sharedViewModel.homeItemBottomSheetClickId.postValue(AppConstants.HomeItemBottomSheet.REPORT)
+
+        })
+
         ll_blockVendor.setOnClickListener(View.OnClickListener {
             sharedViewModel.homeItemBottomSheetClickId.postValue(AppConstants.HomeItemBottomSheet.BLOCK_VENDOR)
             dismiss()

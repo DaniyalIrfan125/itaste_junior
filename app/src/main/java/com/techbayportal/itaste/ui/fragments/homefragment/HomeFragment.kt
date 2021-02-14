@@ -1,5 +1,6 @@
 package com.techbayportal.itaste.ui.fragments.homefragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
@@ -18,6 +20,7 @@ import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutHomefragmentBinding
+import com.techbayportal.itaste.ui.activities.signupactivity.SignupActivity
 import com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment
 import com.techbayportal.itaste.ui.fragments.homefragment.adapter.HomeRecyclerAdapter
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
@@ -26,10 +29,14 @@ import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
+import kotlinx.android.synthetic.main.fragment_web_view.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.spinKit
 import kotlinx.android.synthetic.main.layout_homefragment.*
+import kotlinx.android.synthetic.main.layout_homefragment.swipeRefreshLayout
 import kotlinx.android.synthetic.main.layout_profilefragment.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -83,8 +90,10 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             setData(getHomeScreenResponse)
         }
 
-
-
+        swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
+            swipeRefreshLayout.isRefreshing = false
+            mViewModel.hitGetHomeScreenInfoApi()
+        })
     }
 
 
@@ -136,6 +145,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     override fun subscribeToShareLiveData() {
         super.subscribeToShareLiveData()
 
+        //Observing Click for Home Configuration Bottom Sheet
         sharedViewModel._homeConfigBottomSheetClickId.observe(this, Observer {
             if (it == AppConstants.HomeConfigBottomSheet.SETTINGS) {
                 if (it != -1) {
@@ -148,10 +158,30 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
-            } else if (it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION) {
+            }
+            else if (it == AppConstants.HomeConfigBottomSheet.CONTACT_US) {
+                if (it != -1) {
+                    //call api to select country
+                    if (this::mView.isInitialized) {
+                        Navigation.findNavController(mView)
+                            .navigate(R.id.action_homeFragment_to_contactUsFragment)
+                    }
+
+                    sharedViewModel._homeConfigBottomSheetClickId.value = -1
+                }
+            }
+
+            else if (it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION) {
                 if (it != -1) {
                     //call api to select country
                     mViewModel.hitUpdateUserLocationFromHome(sharedViewModel.userUpdatedCountryId)
+
+                    sharedViewModel._homeConfigBottomSheetClickId.value = -1
+                }
+            } else if (it == AppConstants.HomeConfigBottomSheet.LOGOUT ){
+                if (it != -1) {
+                    //call api to logout
+                    mViewModel.hitLogout()
 
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
@@ -159,12 +189,34 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
         })
 
+        //Observing Clicks for HomeItemBottomSheet
         sharedViewModel.homeItemBottomSheetClickId.observe(this, Observer {
             if (it == AppConstants.HomeItemBottomSheet.BLOCK_VENDOR) {
                 if (it != -1) {
                     mViewModel.hitBlockAccountApi(31)
                     sharedViewModel.homeItemBottomSheetClickId.value = -1
                 }
+            }
+        })
+
+
+        sharedViewModel.homeItemBottomSheetClickId.observe(this, Observer {
+            if (it == AppConstants.HomeItemBottomSheet.REPORT) {
+                if (it != -1) {
+                    Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_reportBugDialogFragment)
+
+                    sharedViewModel.homeItemBottomSheetClickId.value = -1
+                }
+            }
+        })
+
+        //Observing Submit button click on repport a bug bottom sheet
+        sharedViewModel.reportBugButtonsClicked.observe(this, Observer {
+            if (it == AppConstants.ReportBugDialog.SUBMIT) {
+                if (it != -1) {
+                    mViewModel.hitReportBugApi(sharedViewModel.bugReportMessage)
+                }
+                sharedViewModel.reportBugButtonsClicked.value = -1
             }
         })
     }
@@ -278,6 +330,62 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
             }
         })
+
+        mViewModel.logoutResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+
+                    //setting login session to null
+                    LoginSession.getInstance().setLoginResponse(null)
+                    //clearing user object after logout
+                    GlobalScope.launch {
+                        dataStoreProvider.clearUserObj()
+                    }
+                    navigateToLoginScreen()
+
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+
+        mViewModel.getReportBugResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+
+                    DialogClass.successDialog(
+                        requireContext(),
+                        getString(R.string.bug_report_submitted),
+                        baseDarkMode
+                    )
+                    //Closing report a bug dialog fragment
+                    Navigation.findNavController(mView).popBackStack()
+
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+    }
+
+    private fun navigateToLoginScreen() {
+        val intent = Intent(activity, SignupActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
 
     }
 

@@ -338,6 +338,9 @@
     <string name="tv_comments">Comments</string>
     <string name="tv_update">Update</string>
     <string name="tv_post_delete">Post Deleted Successfully!</string>
+    <string name="go_back">Go Back</string>
+    <string name="terms_and_conditions">Terms and Conditions</string>
+    <string name="help_and_FAQs">Help and FAQs</string>
     <string name="tv_Save_post">Save post</string>
 
 </resources>

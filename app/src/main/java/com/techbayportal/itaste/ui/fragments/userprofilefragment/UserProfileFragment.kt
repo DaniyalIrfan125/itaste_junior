@@ -171,7 +171,7 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
 
                     if(it.data != null){
                         val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, it.data.data.username, it.data.data.phone, it.data.data.email,
-                            it.data.data.profile_pic, it.data.data.role, accessToken,countryId,cityId, isPaymentUpdated)
+                            it.data.data.profile_pic, it.data.data.role, accessToken,"","", isPaymentUpdated)
                         val loginResponse = LoginResponse("update profile", userData, "")
                         //LoginSession.getInstance().setLoginResponse(loginResponse)
                         mViewModel.saveUserObj(loginResponse)

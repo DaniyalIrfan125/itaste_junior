@@ -5,435 +5,453 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.techbayportal.itaste.ui.fragments.settingsfragment.SettingsFragmentViewModel" />
     </data>
-<RelativeLayout
-    android:background="@color/mainBackground"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.settingsfragment.SettingsFragment">
-
 
     <RelativeLayout
-        android:id="@+id/relative_top"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp">
-
-        <LinearLayout
-            android:id="@+id/img_back"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:onClick="@{()->viewModel.onBackButtonClicked()}">
-
-            <ImageView
-                app:tint="@color/mainIconColor"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_gravity="center"
-                android:src="@drawable/icon_backarrow" />
-        </LinearLayout>
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:fontFamily="@font/roboto_bold"
-            android:gravity="center"
-            android:text="@string/settings"
-            android:textColor="@color/titleTextColorBlack"
-            android:textSize="22sp">
-
-        </TextView>
-
-    </RelativeLayout>
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:layout_below="@+id/relative_top">
+        android:background="@color/mainBackground"
+        tools:context=".ui.fragments.settingsfragment.SettingsFragment">
+
 
         <RelativeLayout
+            android:id="@+id/relative_top"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="@dimen/_50sdp">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/img_back"
+                android:layout_width="@dimen/_50sdp"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onBackButtonClicked()}">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_backarrow"
+                    app:tint="@color/mainIconColor" />
+            </LinearLayout>
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:text="@string/settings"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="22sp">
+
+            </TextView>
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relative_top"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:id="@+id/linear"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_25sdp"
-                    android:layout_marginEnd="@dimen/_25sdp"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_info" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/about_us"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/colorGreyView">
-
-                    </View>
-
-                    <LinearLayout
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_language" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/change_langauge"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/colorGreyView">
-
-                    </View>
-
-                    <LinearLayout
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_detail_document" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/tearms_amp_conditions"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/colorGreyView">
-
-                    </View>
-
-                    <LinearLayout
-                        android:onClick="@{()->viewModel.onContactUsClicked()}"
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_at_rate" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/contact_us"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/colorGreyView">
-
-                    </View>
-
-                    <LinearLayout
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_about" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/help_amp_faqs"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/colorGreyView">
-
-                    </View>
-
-                    <LinearLayout
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_shout" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/ads"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            app:tint="@color/colorGreyView"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/colorGreyView">
-
-                    </View>
-
-                    <LinearLayout
-                        android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_45sdp"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_power_off" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_15sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/log_out"
-                            android:textColor="@color/titleTextColorBlack"
-                            android:textSize="16sp" />
-
-                        <ImageView
-                            app:tint="@color/mainIconColor"
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/colorGreyView">
-
-                    </View>
-
-                    <LinearLayout
+                        android:id="@+id/linear"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_15sdp"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:layout_marginStart="@dimen/_25sdp"
+                        android:layout_marginEnd="@dimen/_25sdp"
+                        android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.6"
-                            android:src="@drawable/icon_premium_orange" />
-
-
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.onAboutUsClicked()}"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_info"
+                                app:tint="@color/mainIconColor" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/about_us"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow"
+                                app:tint="@color/mainIconColor" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.onChangeLanguageClicked()}"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_language"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/change_langauge"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow"
+                                app:tint="@color/mainIconColor" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.onTermAndCondClicked()}"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_detail_document"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/tearms_amp_conditions"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow"
+                                app:tint="@color/mainIconColor" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.onContactUsClicked()}"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_at_rate"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/contact_us"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow"
+                                app:tint="@color/mainIconColor" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.onHelpAndFaqsClicked()}"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_about"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/help_amp_faqs"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow"
+                                app:tint="@color/mainIconColor" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.onAdsClicked()}"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_shout" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/ads"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow"
+                                app:tint="@color/colorGreyView" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:onClick="@{()->viewModel.onLogoutClicked()}"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <ImageView
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.6"
+                                android:src="@drawable/icon_power_off"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/log_out"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow"
+                                app:tint="@color/mainIconColor" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
+                            android:id="@+id/ll_switch_to_premium"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_regular"
-                            android:text="@string/switch_to_premium_account"
-                            android:textColor="@color/colorOrange"
-                            android:textSize="14sp" />
+                            android:orientation="vertical">
 
-                        <ImageView
-                            android:layout_width="@dimen/_15sdp"
-                            android:layout_height="@dimen/_8sdp"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.4"
-                            android:src="@drawable/icon_forward_arrow"
-                            android:visibility="invisible"/>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_15sdp"
+                                android:onClick="@{()->viewModel.onSwitchedToPremiumClicked()}"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <ImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.6"
+                                    android:src="@drawable/icon_premium_orange" />
+
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/roboto_regular"
+                                    android:text="@string/switch_to_premium_account"
+                                    android:textColor="@color/colorOrange"
+                                    android:textSize="14sp" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/_15sdp"
+                                    android:layout_height="@dimen/_8sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.4"
+                                    android:src="@drawable/icon_forward_arrow"
+                                    android:visibility="invisible" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_20sdp"
+                                android:layout_marginBottom="@dimen/_20sdp"
+                                android:fontFamily="@font/roboto_light"
+                                android:text="@string/switching_to_premium_account_will_let_you_post_your_products_and_show_case_them_but_you_can_still_watch_what_others_are_on_to"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
                     </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_20sdp"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="@string/switching_to_premium_account_will_let_you_post_your_products_and_show_case_them_but_you_can_still_watch_what_others_are_on_to"
-                        android:textColor="@color/titleTextColorBlack"
-                        android:textSize="15sp"
-                        android:layout_marginBottom="@dimen/_20sdp"/>
 
                 </LinearLayout>
-            </LinearLayout>
-        </RelativeLayout>
-    </ScrollView>
-</RelativeLayout>
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
 </layout>
 

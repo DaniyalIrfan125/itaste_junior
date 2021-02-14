@@ -168,7 +168,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                    // val isPaymentUpdated = LoginSession.getInstance().getLoginResponse()!!.data.is_payment_update
                     val vendorUserName = LoginSession.getInstance().getLoginResponse()!!.data.username
 
-                    if(it.data != null){
+                    if(it.data != null && it.data.data.profile_pic.isNotEmpty()){
                         val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, vendorUserName, it.data.data.phone,  it.data.data.email,
                              it.data.data.profile_pic, it.data.data.role,  accessToken, it.data.data.country_id, it.data.data.city_id,  it.data.data.is_payment_update)
                         val loginResponse = LoginResponse("update vendor profile", userData, "")
@@ -270,7 +270,7 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
                                                     et_vendorBio.text.toString(),
                                                     et_country_code.fullNumberWithPlus,
                                                     et_vendorEmail.text.toString(),
-                                                    profileImageFile!!,
+                                                    compressedProfileImageFile!!,
                                                     selectedCountryId,
                                                     cityid
                                                 )
@@ -425,8 +425,8 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
             sharedViewModel.verifyOtpHoldPhoneNumber =
                 vendorPersonalProfileResponseData.phone
             et_vendorEmail.setText(vendorPersonalProfileResponseData.email)
-            Picasso.get()
-                .load(vendorPersonalProfileResponseData.profile_pic).fit().centerCrop()
+            
+            Picasso.get().load(vendorPersonalProfileResponseData.profile_pic).fit().centerCrop()
                 .into(siv_vendorProfilePic, object :Callback{
                     override fun onSuccess() {
                         sk_vendorProfile.visibility = View.GONE
