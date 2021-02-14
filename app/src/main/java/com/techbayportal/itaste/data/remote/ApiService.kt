@@ -472,4 +472,36 @@ interface ApiService {
         @Query(value = "post_id[]") postId: List<Int>
     ): Response<RemoveSavedPost>
 
+  @GET("cart/get")
+    suspend fun getCart(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String
+    ): Response<GetCartResponse>
+
+
+    @POST("cart/update-quantity")
+    suspend fun addRemoveCart(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId : Int,
+        @Query("quantity") quantitiy : Int
+    ): Response<GetCartResponse>
+
+
+
+    @POST("cart/delete")
+    suspend fun removeCartItem(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId : Int
+    ): Response<RemoveCartResponse>
+
+
+    @POST("cart/add")
+    suspend fun addToCart(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query("post_id") postId : Int
+    ): Response<AddToCartResponse>
+
 }

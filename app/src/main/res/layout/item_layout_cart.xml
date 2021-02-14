@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.chauthai.swipereveallayout.SwipeRevealLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_130sdp"
     android:layout_marginBottom="@dimen/_2sdp"
@@ -10,6 +11,7 @@
 
     <!-- Your secondary layout here -->
     <RelativeLayout
+        android:id="@+id/delete_Cart"
         android:layout_width="@dimen/_70sdp"
         android:layout_height="match_parent"
         android:background="@color/colorErrorRed">
@@ -31,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
-                android:text="Delete"
+                android:text="@string/tv_delete"
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -44,19 +46,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/img_product"
-            android:layout_width="@dimen/_115sdp"
-            android:layout_height="@dimen/_115sdp"
+        <RelativeLayout
+            android:id="@+id/relative_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/_5sdp" />
+            android:layout_marginStart="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="@dimen/_115sdp"
+                android:layout_height="@dimen/_115sdp"
+                />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/sk_postImage"
+                style="@style/SpinKitView.Large.Pulse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:SpinKit_Color="@color/colorOrange" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_toEndOf="@+id/img_product">
+            android:layout_toEndOf="@+id/relative_img">
 
             <RelativeLayout
                 android:id="@+id/relative_top"
@@ -94,10 +112,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:lineSpacingExtra="3sp"
-                        android:text="Ed Tamer"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        tools:text="Ed Tamer" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -105,11 +123,11 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            app:tint="@color/mainIconColor"
                             android:layout_width="@dimen/_8sdp"
                             android:layout_height="@dimen/_8sdp"
                             android:layout_gravity="center_vertical"
-                            android:src="@drawable/img_location" />
+                            android:src="@drawable/img_location"
+                            app:tint="@color/mainIconColor" />
 
                         <TextView
                             android:id="@+id/tv_address"
@@ -118,9 +136,9 @@
                             android:layout_marginStart="@dimen/_3sdp"
                             android:fontFamily="@font/roboto_regular"
                             android:lineSpacingExtra="2sp"
-                            android:text="Jumeirah JLT, Dubai, UAE"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="10sp" />
+                            android:textSize="10sp"
+                            tools:text="Jumeirah JLT, Dubai, UAE" />
                     </LinearLayout>
 
 
@@ -129,6 +147,7 @@
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@+id/relative_bottom"
@@ -137,11 +156,11 @@
                 android:layout_marginStart="@dimen/_5sdp"
                 android:fontFamily="@font/roboto_light"
                 android:lineSpacingExtra="2sp"
-                android:text="Sed ut perspiciatis unde omnis iste natus e
-santium doloremque laudantium, totamre
-ab illo inventore veritatis et quas..."
                 android:textColor="@color/titleTextColorBlack"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                tools:text="Sed ut perspiciatis unde omnis iste natus e
+santium doloremque laudantium, totamre
+ab illo inventore veritatis et quas..." />
 
             <RelativeLayout
                 android:id="@+id/relative_bottom"
@@ -217,10 +236,10 @@ ab illo inventore veritatis et quas..."
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:text="1"
                             android:fontFamily="@font/roboto_regular"
                             android:textColor="@color/color_darkGrey"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            tools:text="1" />
 
 
                     </RelativeLayout>

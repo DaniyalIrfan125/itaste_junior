@@ -46,6 +46,7 @@
     <string name="deliverable">Deliverable</string>
     <string name="not_deliverable">Not Deliverable</string>
     <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="tv_delete">Delete</string>
 
     //Forget Password Fragment
     <string name="enter_your_n_email">Enter your <br> </br>Email</string>
@@ -184,6 +185,9 @@
     <string name="turn_off_commenting">Turn off commenting</string>
     <string name="turn_on_commenting">Turn on commenting</string>
     <string name="share_to_dots">Share to…</string>
+    <string name="btn_editpost">Edit Post</string>
+    <string name="btn_add_to_cart">Add to cart</string>
+
 
     //ProfileFragment
     <string name="posts">Posts</string>

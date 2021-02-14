@@ -63,6 +63,7 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
     val onEditPostButtonClicked = SingleLiveEvent<Any>()
     val onMoreButtonClicked = SingleLiveEvent<Any>()
     val onSaveButtonClicked = SingleLiveEvent<Any>()
+    val onAddButtonClicked = SingleLiveEvent<Any>()
 
     fun onVendorProfileHeaderClicked() {
         onVendorProfileHeaderClicked.call()
@@ -78,6 +79,10 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
 
     fun onEditPostButtonClicked() {
         onEditPostButtonClicked.call()
+    }
+
+    fun onAddToCart() {
+        onAddButtonClicked.call()
     }
 
     fun onMoreButtonClicked() {
@@ -387,6 +392,48 @@ class PostDetailFragmentViewModel @ViewModelInject constructor(
                     _savePostResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _savePostResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+
+
+    private val _addToCartResponse =
+        MutableLiveData<Resource<AddToCartResponse>>()
+    val addToCartResponse: LiveData<Resource<AddToCartResponse>>
+        get() = _addToCartResponse
+
+    fun addToCart(
+        postId: Int
+    ) {
+        viewModelScope.launch {
+            _addToCartResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.addToCart(
+                        "Bearer ${loginSession!!.data.access_token}",
+                        postId
+
+                    ).let {
+                        if (it.isSuccessful) {
+                            _addToCartResponse.postValue(Resource.success(it.body()!!))
+
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                            _addToCartResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _addToCartResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _addToCartResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _addToCartResponse.postValue(Resource.error("No internet connection", null))
         }
     }
 

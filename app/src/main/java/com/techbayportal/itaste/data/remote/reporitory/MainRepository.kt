@@ -455,4 +455,20 @@ class MainRepository @Inject constructor(
     suspend fun removeSavedPost(auth: String, postsIds: ArrayList<Int>): Response<RemoveSavedPost> {
         return apiService.removeSavedPost("application/json", auth,postsIds)
     }
+
+    suspend fun getCart(auth: String): Response<GetCartResponse> {
+        return apiService.getCart("application/json", auth)
+    }
+
+    suspend fun addRemoveCart(auth: String,postId: Int, quantity : Int): Response<GetCartResponse> {
+        return apiService.addRemoveCart("application/json", auth,postId ,quantity)
+    }
+
+    suspend fun removeItemCart(auth: String,postId: Int): Response<RemoveCartResponse> {
+        return apiService.removeCartItem("application/json", auth,postId )
+    }
+
+    suspend fun addToCart(auth: String,postId: Int): Response<AddToCartResponse> {
+        return apiService.addToCart("application/json", auth,postId )
+    }
 }
