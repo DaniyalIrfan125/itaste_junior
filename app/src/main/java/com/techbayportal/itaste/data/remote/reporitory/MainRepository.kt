@@ -71,8 +71,8 @@ class MainRepository @Inject constructor(
             userModel.password,
             userModel.country_id,
             userModel.city_id,
-           // userModel.days_of_week,
-           // userModel.is_deliverable,
+            // userModel.days_of_week,
+            // userModel.is_deliverable,
             userModel.password_confirmation,
             userModel.description
         )
@@ -221,8 +221,8 @@ class MainRepository @Inject constructor(
         auth: String,
         country_id: Int,
         city_id: Int,
-       // days_of_week: ArrayList<String>,
-      //  is_deliverable: Int,
+        // days_of_week: ArrayList<String>,
+        //  is_deliverable: Int,
         description: String
 
     ): Response<VendorPersonalProfileResponse> {
@@ -232,8 +232,8 @@ class MainRepository @Inject constructor(
             auth,
             country_id,
             city_id,
-          //  days_of_week,
-         //   is_deliverable,
+            //  days_of_week,
+            //   is_deliverable,
             description
         )
     }
@@ -302,15 +302,33 @@ class MainRepository @Inject constructor(
         return apiService.getAllSearchPostsApi("application/json", auth)
     }
 
-    suspend fun searchAndFilterApi(auth: String, keyword : String, country_id:String, city_id :String, category_id :String): Response<SearchAndFilterResponse> {
-        return apiService.searchAndFilterApi("application/json", auth, keyword, country_id, city_id, category_id)
+    suspend fun searchAndFilterApi(
+        auth: String,
+        keyword: String,
+        country_id: String,
+        city_id: String,
+        category_id: String
+    ): Response<SearchAndFilterResponse> {
+        return apiService.searchAndFilterApi(
+            "application/json",
+            auth,
+            keyword,
+            country_id,
+            city_id,
+            category_id
+        )
     }
 
-    suspend fun searchApi(auth: String, keyword:String): Response<SearchAndFilterResponse> {
+    suspend fun searchApi(auth: String, keyword: String): Response<SearchAndFilterResponse> {
         return apiService.searchApi("application/json", auth, keyword)
     }
 
-    suspend fun checkOutApi(auth: String, transaction_id: Int, package_id : Int, amount : Int ): Response<SuccessResponse> {
+    suspend fun checkOutApi(
+        auth: String,
+        transaction_id: Int,
+        package_id: Int,
+        amount: Int
+    ): Response<SuccessResponse> {
         return apiService.checkOutApi("application/json", auth, transaction_id, package_id, amount)
     }
 
@@ -326,7 +344,7 @@ class MainRepository @Inject constructor(
         caption: String,
         price: Double,
         cookingTime: String,
-        description:String,
+        description: String,
         allowComments: Int,
         auth: String
     ): Response<AddPostResponse> {
@@ -354,12 +372,12 @@ class MainRepository @Inject constructor(
 
 
     suspend fun updatePost(
-        postId:Int,
+        postId: Int,
         categoryId: Int,
         caption: String,
         price: Double,
         cookingTime: String,
-        description:String,
+        description: String,
         allowComments: Int,
         auth: String
     ): Response<UpdatePostResponse> {
@@ -381,42 +399,60 @@ class MainRepository @Inject constructor(
 
 
     suspend fun getEditPost(auth: String, postId: Int): Response<EditPostResponse> {
-       return apiService.getEditPost("application/json", auth, postId)
+        return apiService.getEditPost("application/json", auth, postId)
     }
 
     suspend fun getPostDetail(auth: String, postId: Int): Response<PostDetailResponse> {
         return apiService.getPostDetail("application/json", auth, postId)
     }
 
-    suspend fun postComment(auth: String, postId: Int,comment: String): Response<PostCommentResponse> {
-        return apiService.postComment("application/json", auth, postId,comment)
+    suspend fun postComment(
+        auth: String,
+        postId: Int,
+        comment: String
+    ): Response<PostCommentResponse> {
+        return apiService.postComment("application/json", auth, postId, comment)
     }
 
-    suspend fun favouriteUnFavoritePost(auth: String, postId: Int): Response<SetFavouriteUnFavouriteResponse> {
+    suspend fun favouriteUnFavoritePost(
+        auth: String,
+        postId: Int
+    ): Response<SetFavouriteUnFavouriteResponse> {
         return apiService.favouriteUnfavouritePost("application/json", auth, postId)
     }
 
 
-    suspend fun favouriteUnFavoriteComment(auth: String, commentId: Int): Response<CommentFavouriteResponse> {
-        return apiService.favouriteUnfavouriteComment("application/json", auth,commentId)
+    suspend fun favouriteUnFavoriteComment(
+        auth: String,
+        commentId: Int
+    ): Response<CommentFavouriteResponse> {
+        return apiService.favouriteUnfavouriteComment("application/json", auth, commentId)
     }
 
 
     suspend fun deletePost(auth: String, postId: Int): Response<PostDetailResponse> {
-        return apiService.deletePost("application/json", auth,postId)
+        return apiService.deletePost("application/json", auth, postId)
     }
 
-    suspend fun allowComments(auth:String,postId: Int, allowComments: Int): Response<AllowCommentsResponse> {
-        return apiService.allowComments("application/json", auth,postId,allowComments)
+    suspend fun allowComments(
+        auth: String,
+        postId: Int,
+        allowComments: Int
+    ): Response<AllowCommentsResponse> {
+        return apiService.allowComments("application/json", auth, postId, allowComments)
     }
 
 
-    suspend fun savePost(auth:String,postId: Int): Response<SavePostResponse> {
-        return apiService.savePost("application/json", auth,postId)
+    suspend fun savePost(auth: String, postId: Int): Response<SavePostResponse> {
+        return apiService.savePost("application/json", auth, postId)
     }
 
 
-    suspend fun getAllSavedPost(auth:String): Response<GetAllSavedPost> {
+    suspend fun getAllSavedPost(auth: String): Response<GetAllSavedPost> {
         return apiService.getAllSavedPost("application/json", auth)
+    }
+
+    suspend fun removeSavedPost(auth: String, postsIds: ArrayList<Int>): Response<RemoveSavedPost> {
+        return apiService.removeSavedPost("application/json", auth,postsIds)
     }
 }

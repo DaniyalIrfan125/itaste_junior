@@ -11,18 +11,15 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.data.models.GetAllSavedData
-import com.techbayportal.itaste.data.models.GetAllSavedPost
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutSavedpostsBinding
-import com.techbayportal.itaste.ui.fragments.profilefragment.adapter.PostsRecyclerAdapter
-import com.techbayportal.itaste.ui.fragments.savedpostsfragment.adapter.GetAllSavedPostRecyclerAdapter
+import com.techbayportal.itaste.ui.fragments.savedpostsfragment.adapter.GetAllSavesPostRecyclerAdapterMultiSelection
 import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_savedposts.*
 
 @AndroidEntryPoint
-class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewModel>(),
-    GetAllSavedPostRecyclerAdapter.ClickItemListener {
+class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewModel>() {
     override val layoutId: Int
         get() = R.layout.layout_savedposts
     override val viewModel: Class<SavedPostsViewModel>
@@ -30,7 +27,9 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
     override val bindingVariable: Int
         get() = BR.viewModel
 
-    lateinit var postsRecyclerAdapter: GetAllSavedPostRecyclerAdapter
+
+    private var selectedPostItems: ArrayList<Int> = ArrayList()
+    lateinit var postsRecyclerAdapter: GetAllSavesPostRecyclerAdapterMultiSelection
     var getAllSavedData: ArrayList<GetAllSavedData> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +53,41 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
                     it?.let { it ->
                         loadingDialog.dismiss()
 
+                        getAllSavedData.clear()
                         getAllSavedData.addAll(it.data!!.data)
+
+                        postsRecyclerAdapter.clearSelection()
+                        ripple_remove.visibility = View.GONE
                         postsRecyclerAdapter.notifyDataSetChanged()
+
+                        if(getAllSavedData.size == 0 ){
+                            ll_noPosts.visibility = View.VISIBLE
+                        }
+                        else{
+                            ll_noPosts.visibility = View.GONE
+                        }
+
+                    }
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+            }
+        })
+
+
+
+        mViewModel.removeSavedPostResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    it?.let { it ->
+                        loadingDialog.dismiss()
+
+                        mViewModel.allSavedPost()
 
                     }
                 }
@@ -73,21 +105,68 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
         mViewModel.onBackButtonClicked.observe(this, Observer {
             Navigation.findNavController(img_back).popBackStack()
         })
+
+        mViewModel.onRemoveButtonClicked.observe(this, Observer {
+            if (postsRecyclerAdapter.getSelectedItems().isNotEmpty()) {
+                selectedPostItems.clear()
+
+                for (postIds in postsRecyclerAdapter.getSelectedItems()) {
+                    selectedPostItems.add(getAllSavedData[postIds].id)
+                }
+
+                mViewModel.removeSavedPost(selectedPostItems)
+            }
+        })
+        mViewModel.onCancelButtonClicked.observe(this, Observer {
+            postsRecyclerAdapter.clearSelection()
+            ripple_remove.visibility = View.GONE
+
+        })
+
+
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        postsRecyclerAdapter = GetAllSavedPostRecyclerAdapter(
-            getAllSavedData, this)
+        postsRecyclerAdapter = GetAllSavesPostRecyclerAdapterMultiSelection(
+            requireContext(), getAllSavedData
+        )
 
 
         recycler_posts.adapter = postsRecyclerAdapter
         recycler_posts.layoutManager =
             GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
         recycler_posts.autoFitColumns(110)
+
+        postsRecyclerAdapter.setItemClick(object :
+            GetAllSavesPostRecyclerAdapterMultiSelection.OnItemClick {
+            override fun onItemClick(view: View?, inbox: GetAllSavedData?, position: Int) {
+                if (postsRecyclerAdapter.selectedItemCount() > 0) {
+                    toggleSelection(position)
+                }
+            }
+
+            override fun onLongPress(view: View?, inbox: GetAllSavedData?, position: Int) {
+                toggleSelection(position)
+            }
+        })
+
+
+    }
+
+    /*
+       toggle selection of items and show the count of selected items on the action bar
+     */
+    private fun toggleSelection(position: Int) {
+        postsRecyclerAdapter.toggleSelection(position)
+        val count: Int = postsRecyclerAdapter.selectedItemCount()
+        if (count == 0) {
+            ripple_remove.visibility = View.GONE
+        } else {
+            ripple_remove.visibility = View.VISIBLE
+        }
     }
 
 
@@ -98,8 +177,5 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
         this.layoutManager = GridLayoutManager(this.context, noOfColumns)
     }
 
-    override fun onClicked(postDetailData: GetAllSavedData) {
-        TODO("Not yet implemented")
-    }
 
 }

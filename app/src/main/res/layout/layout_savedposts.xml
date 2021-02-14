@@ -32,11 +32,11 @@
                 android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
                 <ImageView
-                    app:tint="@color/mainIconColor"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
+                    android:contentDescription="@string/back_icon"
                     android:src="@drawable/icon_backarrow"
-                    android:contentDescription="@string/back_icon"/>
+                    app:tint="@color/mainIconColor" />
             </LinearLayout>
 
 
@@ -81,10 +81,12 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/linear_cancel"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:onClick="@{() -> viewModel.onCancelButtonClicked() }">
 
                         <TextView
                             android:id="@+id/tvCancel"
@@ -92,7 +94,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_regular"
                             android:gravity="end"
-                            android:text="@string/select"
+                            android:text="@string/cancel"
                             android:textColor="@color/colorOrange"
                             android:textSize="14sp" />
 
@@ -107,11 +109,90 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_below="@+id/relative_top"
             android:id="@+id/recycler_posts"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/relative_top" />
 
+        <LinearLayout
+            android:id="@+id/ll_noPosts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+           android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                android:src="@drawable/icon_no_posts"
+                app:tint="@color/noPostsTextColor"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:text="@string/no_posts_yet"
+                android:textColor="@color/noPostsTextColor"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center"
+                android:text="@string/there_is_nothing_to_show_yet_you_need_to_update_your_payment_to_start_posting"
+                android:textColor="@color/noPostsTextColor"
+                android:textSize="14sp">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/ripple_remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:visibility="gone"
+            app:mrl_rippleColor="@color/colorLightOrange">
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/btn_curve_orange"
+                android:fontFamily="@font/roboto_bold"
+                android:lineSpacingExtra="@dimen/_3sdp"
+                android:onClick="@{() -> viewModel.onRemoveButtonClicked()}"
+                android:text="@string/remove"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp">
+
+            </Button>
+        </com.balysv.materialripple.MaterialRippleLayout>
 
     </RelativeLayout>
 

@@ -465,5 +465,11 @@ interface ApiService {
         @Header("Authorization") authHeader: String
     ): Response<GetAllSavedPost>
 
+    @POST("post/remove-post")
+    suspend fun removeSavedPost(
+        @Header("Accept") acceptJson: String,
+        @Header("Authorization") authHeader: String,
+        @Query(value = "post_id[]") postId: List<Int>
+    ): Response<RemoveSavedPost>
 
 }

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
+        android:id="@+id/relative_post"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_1sdp"
@@ -14,13 +15,21 @@
             android:layout_height="@dimen/_105sdp" />
 
         <com.github.ybq.android.spinkit.SpinKitView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/sk_postImage"
             style="@style/SpinKitView.Large.Pulse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:SpinKit_Color="@color/colorOrange" />
+
+
+        <ImageView
+            android:id="@+id/img_tick"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:visibility="gone"
+            android:src="@drawable/img_tick" />
 
     </RelativeLayout>
 </layout>
