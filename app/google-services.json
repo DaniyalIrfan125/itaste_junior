@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "641558980550",
+    "project_id": "itaste-2740a",
+    "storage_bucket": "itaste-2740a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641558980550:android:876ba54a4621e3f368b4c7",
+        "android_client_info": {
+          "package_name": "com.techbayportal.itaste"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "641558980550-3j393m4ua5e5gb9ok4sk2339cjcq0pv1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.techbayportal.itaste",
+            "certificate_hash": "65e7687426a8a31bbd1ebb075e3a0aeb0508186a"
+          }
+        },
+        {
+          "client_id": "641558980550-gna9cs089cols3gaanus2uuggbr1c1rj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHQYGUAVumLDKV0ssy0rKg4_vDMlRI08A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641558980550-gna9cs089cols3gaanus2uuggbr1c1rj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

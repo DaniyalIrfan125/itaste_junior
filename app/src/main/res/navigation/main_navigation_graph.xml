@@ -92,7 +92,11 @@
     <fragment
         android:id="@+id/savedPostsFragment"
         android:name="com.techbayportal.itaste.ui.fragments.savedpostsfragment.SavedPostsFragment"
-        android:label="SavedPostsFragment" />
+        android:label="SavedPostsFragment" >
+        <action
+            android:id="@+id/action_savedPostsFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.techbayportal.itaste.ui.fragments.searchfragment.SearchFragment"

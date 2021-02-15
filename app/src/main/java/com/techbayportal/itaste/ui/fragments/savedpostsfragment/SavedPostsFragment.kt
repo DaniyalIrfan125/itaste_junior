@@ -2,7 +2,6 @@ package com.techbayportal.itaste.ui.fragments.savedpostsfragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,6 +17,9 @@ import com.techbayportal.itaste.ui.fragments.savedpostsfragment.adapter.GetAllSa
 import com.techbayportal.itaste.utils.DialogClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_savedposts.*
+import kotlinx.android.synthetic.main.layout_savedposts.img_back
+import kotlinx.android.synthetic.main.layout_savedposts.recycler_posts
+import kotlinx.android.synthetic.main.layout_selectpost.*
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -30,6 +32,7 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
         get() = BR.viewModel
 
 
+    lateinit var mView: View
     private var selectedPostItems: ArrayList<Int> = ArrayList()
     lateinit var postsRecyclerAdapter: GetAllSavesPostRecyclerAdapterMultiSelection
     var getAllSavedData: ArrayList<GetAllSavedData> = ArrayList()
@@ -131,7 +134,7 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mView = view
         postsRecyclerAdapter = GetAllSavesPostRecyclerAdapterMultiSelection(
             requireContext(), getAllSavedData
         )
@@ -149,6 +152,9 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
                     toggleSelection(position)
                 } else{
                     Timber.d("SavePost item clicked : $position")
+                    sharedViewModel.postId = position
+                    Navigation.findNavController(mView).navigate(R.id.action_savedPostsFragment_to_postDetailFragment)
+
 
                 }
             }

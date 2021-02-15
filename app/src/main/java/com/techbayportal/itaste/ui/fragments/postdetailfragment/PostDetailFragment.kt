@@ -3,7 +3,6 @@ package com.techbayportal.itaste.ui.fragments.postdetailfragment
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
@@ -17,28 +16,20 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.data.models.Comment
-import com.techbayportal.itaste.data.models.GetTimeSuggestionData
 import com.techbayportal.itaste.data.models.PostDetailResponse
-import com.techbayportal.itaste.data.models.PostDetailResponseData
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentPostDetailBinding
-import com.techbayportal.itaste.ui.fragments.homeconfigurationbottomsheetfragment.HomeConfigurationBottomSheetFragment
 import com.techbayportal.itaste.ui.fragments.postdetailbottomsheetfragment.PostDetailBottomSheetFragment
 import com.techbayportal.itaste.ui.fragments.postdetailfragment.adapter.PostCommentsAdapter
 import com.techbayportal.itaste.ui.fragments.postdetailfragment.itemclicklistener.PostCommentsRvClickListener
-import com.techbayportal.itaste.ui.fragments.postfragment.adapter.TimeDurationAdapter
 import com.techbayportal.itaste.utils.DialogClass
-import com.techbayportal.itaste.utils.FileUtils
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_post_detail.*
 import kotlinx.android.synthetic.main.fragment_post_detail.img_back
-import kotlinx.android.synthetic.main.item_order_chat_item.*
 import kotlinx.android.synthetic.main.layout_postfragment.*
 import kotlinx.android.synthetic.main.layout_profile_chat_comment.*
-import kotlinx.android.synthetic.main.layout_write_message.*
 import kotlinx.android.synthetic.main.layout_write_message.tvPostMessage
-import timber.log.Timber
 import www.sanju.motiontoast.MotionToast
 import java.lang.Exception
 
@@ -63,7 +54,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewModel.postDetailCall(sharedViewModel.vendorPostItemId)
+        mViewModel.postDetailCall(sharedViewModel.postId)
         mViewModel.getCategories()
 
         subscribeToNetworkLiveData()
@@ -159,7 +150,8 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                     it?.let { it ->
                         loadingDialog.dismiss()
 
-                        mViewModel.postDetailCall(14)
+                        //added post id
+                        mViewModel.postDetailCall(sharedViewModel.postId)
 
                     }
                 }
@@ -221,7 +213,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                     it?.let { it ->
                         loadingDialog.dismiss()
                         it.data?.let {
-                            mViewModel.postDetailCall(14)
+                            mViewModel.postDetailCall(sharedViewModel.postId)
                         }
 
                     }
@@ -245,8 +237,9 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                         it.data?.let {
 
                             //show success dialog
+                            DialogClass.successDialog(requireContext(), getString(R.string.post_added_to_cart), baseDarkMode)
 
-                            MotionToast.createToast(
+                            /*MotionToast.createToast(
                                 requireActivity(),
                                 "Post added to cart",
                                 "Post added to cart",
@@ -254,7 +247,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                                 MotionToast.GRAVITY_BOTTOM,
                                 MotionToast.SHORT_DURATION,
                                 ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
-                            )
+                            )*/
                         }
 
                     }
@@ -359,13 +352,13 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
 
         mViewModel.onSaveButtonClicked.observe(this, Observer {
 
-            mViewModel.savePost(14)
+            mViewModel.savePost(sharedViewModel.postId)
 
 
         })
 
         mViewModel.onAddButtonClicked.observe(this, Observer {
-            mViewModel.addToCart(14)
+            mViewModel.addToCart(sharedViewModel.postId)
         })
 
         mViewModel.onVendorProfileHeaderClicked.observe(this, Observer {
@@ -401,18 +394,18 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
 
         mLikeButton.setOnLikeListener(object : OnLikeListener {
             override fun liked(likeButton: LikeButton?) {
-                mViewModel.favouriteUnFavouriteCall(14)
+                mViewModel.favouriteUnFavouriteCall(sharedViewModel.postId)
             }
 
             override fun unLiked(likeButton: LikeButton?) {
-                mViewModel.favouriteUnFavouriteCall(14)
+                mViewModel.favouriteUnFavouriteCall(sharedViewModel.postId)
             }
         })
 
         tvPostMessage.setOnClickListener {
             if (!TextUtils.isEmpty(ed_comment.text)) {
 
-                mViewModel.postCommentCall(14, ed_comment.text.toString())
+                mViewModel.postCommentCall(sharedViewModel.postId, ed_comment.text.toString())
                 ed_comment.setText("")
             } else {
                 Snackbar.make(
@@ -461,14 +454,14 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         sharedViewModel.isPostUpdated.observe(this, Observer {
             if (it) {
 
-                mViewModel.postDetailCall(14)
+                mViewModel.postDetailCall(sharedViewModel.postId)
                 sharedViewModel.isPostUpdated.value = false
             }
         })
 
         sharedViewModel.isPostDetailDeleteClicked.observe(this, Observer {
             if (it) {
-                mViewModel.deletePost(12)
+                mViewModel.deletePost(sharedViewModel.postId)
                 sharedViewModel.isPostDetailDeleteClicked.value = false
             }
 
@@ -477,10 +470,10 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         sharedViewModel.isCommentOffClicked.observe(this, Observer {
             it?.let {
                 if (it) {
-                    mViewModel.allowComments(14, 1)
+                    mViewModel.allowComments(sharedViewModel.postId, 1)
                     sharedViewModel.isCommentOffClicked.value = null
                 } else {
-                    mViewModel.allowComments(14, 0)
+                    mViewModel.allowComments(sharedViewModel.postId, 0)
                     sharedViewModel.isCommentOffClicked.value = null
                 }
             }

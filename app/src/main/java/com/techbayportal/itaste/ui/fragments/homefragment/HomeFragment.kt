@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
@@ -28,13 +27,10 @@ import com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment.HomeIte
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
-import kotlinx.android.synthetic.main.fragment_web_view.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.*
 import kotlinx.android.synthetic.main.item_home_recyclerview.spinKit
 import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_homefragment.swipeRefreshLayout
-import kotlinx.android.synthetic.main.layout_profilefragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.lang.Exception
@@ -420,7 +416,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
     //vendor post item clicked
     override fun onChildItemClick(position: Int) {
-        sharedViewModel.vendorPostItemId = position
+        sharedViewModel.postId = position
         Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_postDetailFragment)
     }
 

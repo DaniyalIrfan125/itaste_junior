@@ -142,8 +142,7 @@ class SelectPostFragment : BaseFragment<LayoutSelectpostBinding, SelectPostViewM
                 if (selectedImageFile != null) {
                     //calling method to compress image
                     sharedViewModel.selectedPostImageFile.value = selectedImageFile
-                    Navigation.findNavController(imageView)
-                        .navigate(R.id.action_selectPostFragment_addposts_fragment)
+                    Navigation.findNavController(imageView).navigate(R.id.action_selectPostFragment_addposts_fragment)
                 }
             }
         }

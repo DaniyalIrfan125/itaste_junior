@@ -27,6 +27,7 @@ import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_profilefragment.*
 import kotlinx.android.synthetic.main.layout_profilefragment.tv_profileName
+import timber.log.Timber
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -70,7 +71,10 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
     private fun initializing() {
        postsRecyclerAdapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener{
             override fun onClicked(postDetailData: PostDetailData) {
-                Toast.makeText(requireContext(), "Location selected: ${postDetailData.id}", Toast.LENGTH_SHORT).show()
+                sharedViewModel.postId = postDetailData.id
+                Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_postdetailfragment)
+                //Toast.makeText(requireContext(), "Location selected: ${postDetailData.id}", Toast.LENGTH_SHORT).show()
+                Timber.d("Location selected: ${postDetailData.id}")
             }
         })
         recycler_profilePosts.adapter = postsRecyclerAdapter
@@ -99,7 +103,6 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         })
 
         mViewModel.onUpdateButtonClicked.observe(this, Observer {
-            // Navigation.findNavController(btn_updatePayment).navigate(R.id.action_profileFragment_to_choosePakageFragment)
             Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_choosePakageFragment)
         })
     }
