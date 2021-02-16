@@ -19,6 +19,7 @@ data class Post(
     val id: Int,
     val image: String,
     val is_favourite: Boolean,
+    val is_save : Boolean,
     val price: Double,
     val total_likes: Int
 )
