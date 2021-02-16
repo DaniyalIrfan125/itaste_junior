@@ -186,14 +186,14 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
     override fun onStop() {
         super.onStop()
 
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+      //  requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
 
     }
 
     override fun onStart() {
         super.onStart()
 
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+     //   requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
     }
 
     private fun subscribeToObserveDarkActivation() {
