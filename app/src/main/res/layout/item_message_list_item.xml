@@ -8,49 +8,60 @@
     </data>
 
     <RelativeLayout
+        android:id="@+id/rl_inboxItem"
         android:layout_width="match_parent"
         android:layout_height="68dp"
         android:background="@color/directMessageBgUserColor">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:layout_alignParentEnd="true"
-            android:orientation="horizontal"
-            android:weightSum="10"
+            android:layout_height="45dp"
             android:layout_centerVertical="true"
+            android:orientation="horizontal"
             android:paddingStart="@dimen/_25sdp"
             android:paddingEnd="@dimen/_25sdp">
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <RelativeLayout
+                android:id="@+id/rl_siv_userImage"
+                android:layout_width="43dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
                 android:gravity="center">
 
                 <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/sivInfluancerImage"
+                    android:id="@+id/siv_userImage"
                     android:layout_width="43dp"
                     android:layout_height="43dp"
-                    android:layout_margin="@dimen/_3sdp"
-                    android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
                     android:src="@drawable/icon_user_dp"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
 
-            </LinearLayout>
+                <com.github.ybq.android.spinkit.SpinKitView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sk_inboxImage"
+                    style="@style/SpinKitView.Large.Pulse"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/colorOrange" />
 
-            <LinearLayout
-                android:layout_width="0dp"
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_userDetails"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="7"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="0dp"
+                android:layout_toStartOf="@+id/iv_onlineStatus"
+                android:layout_toEndOf="@+id/rl_siv_userImage"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_userName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:text="Syra Al Ameri"
@@ -60,8 +71,11 @@
                 </TextView>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/noOfMessages"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_userName"
+                    android:layout_marginTop="0dp"
                     android:fontFamily="@font/roboto_light"
                     android:text="3 new messages"
                     android:textColor="@color/titleTextColorBlack"
@@ -69,24 +83,20 @@
 
                 </TextView>
 
-            </LinearLayout>
+            </RelativeLayout>
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="end">
 
-                <ImageView
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:src="@drawable/layout_circle_online" />
+            <ImageView
+                android:id="@+id/iv_onlineStatus"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:layout_marginEnd="0dp"
+                android:src="@drawable/layout_circle_online" />
 
-            </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </RelativeLayout>
 
 </layout>

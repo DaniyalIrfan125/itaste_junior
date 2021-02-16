@@ -4,10 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.techbayportal.itaste.baseclasses.BaseViewModel
-import com.techbayportal.itaste.data.models.GetAllCountriesData
-import com.techbayportal.itaste.data.models.GetAllCountriesResponse
-import com.techbayportal.itaste.data.models.GetCategoriesResponse
-import com.techbayportal.itaste.data.models.UserModel
+import com.techbayportal.itaste.data.models.*
 import java.io.File
 
 
@@ -23,6 +20,8 @@ class SharedViewModel : BaseViewModel() {
     var userType = "user"
     var otpVerifyCode = ""
     var userModel = UserModel()
+    var vendorDetailsForCart : CartVendor? = null
+    var cartPost : CartPost? = null
     val isDarkMode: Boolean = false
     var userModelLiveData = MutableLiveData<UserModel>()
 

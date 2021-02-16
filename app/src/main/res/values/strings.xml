@@ -347,5 +347,6 @@
     <string name="help_and_FAQs">Help and FAQs</string>
     <string name="tv_Save_post">Save post</string>
     <string name="post_added_to_cart">Post added to cart</string>
+    <string name="hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you">Hello, I saw this post of yours yesterday and I couldn\'t stop myself from ordering it. I need to know if you are still deliveri- ng this or not? Also how much are you charging for delivery service? Good Day to you!</string>
 
 </resources>

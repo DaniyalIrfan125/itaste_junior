@@ -35,10 +35,6 @@
             android:fontFamily="@font/roboto_regular"
             android:lineSpacingExtra="3sp"
             android:padding="@dimen/_8sdp"
-            android:text="Hello and Good Day to you as well.
-Yes, I am still delivering those and
-service will cost you 10 AED.
-Thank you."
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp"
             android:textStyle="normal"
@@ -46,18 +42,37 @@ Thank you."
             app:layout_constraintStart_toEndOf="@id/sivInfluancerImage"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/ll_timeStamp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
-            android:text="Text message \n Received 13:00 pm, Today"
-            android:textColor="@color/colorChatDetailGray"
-            android:textSize="10sp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="@+id/tvMessage"
             app:layout_constraintStart_toStartOf="@+id/tvMessage"
             app:layout_constraintTop_toBottomOf="@+id/tvMessage">
 
-        </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="Text message"
+                android:textColor="@color/colorChatDetailGray"
+                android:textSize="10sp">
+
+            </TextView>
+            <TextView
+                android:id="@+id/tv_messageTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="Received 13:00 pm, Today"
+                android:textColor="@color/colorChatDetailGray"
+                android:textSize="10sp">
+
+            </TextView>
+        </LinearLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

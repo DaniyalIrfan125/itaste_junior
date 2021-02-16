@@ -27,8 +27,6 @@ import com.techbayportal.itaste.ui.fragments.homeitembottomsheetfragment.HomeIte
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.item_home_recyclerview.*
-import kotlinx.android.synthetic.main.item_home_recyclerview.spinKit
 import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_homefragment.swipeRefreshLayout
 import kotlinx.coroutines.GlobalScope
@@ -56,9 +54,9 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     val countriesList = ArrayList<GetAllCountriesData>()
 
     lateinit var homerRecyclerAdpater: HomeRecyclerAdapter
-    var vendorsDataList : ArrayList<GetHomeScreenData> = ArrayList()
+    var vendorsDataList: ArrayList<GetHomeScreenData> = ArrayList()
 
-    lateinit var getHomeScreenData : GetHomeScreenData
+    lateinit var getHomeScreenData: GetHomeScreenData
     var getHomeScreenData1 = ArrayList<GetHomeScreenData>()
     lateinit var getHomeScreenResponse: GetHomeScreenResponse
 
@@ -113,8 +111,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     }
 
 
-
-       private fun initilizing() {
+    private fun initilizing() {
         homerRecyclerAdpater = HomeRecyclerAdapter(vendorsDataList, requireContext())
         recycler_home.layoutManager = LinearLayoutManager(context)
         recycler_home.adapter = homerRecyclerAdpater
@@ -143,29 +140,28 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 if (it != -1) {
                     // bottomSheet.dismiss()
                     if (this::mView.isInitialized) {
-                        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_settingsFragment)
+                        Navigation.findNavController(mView)
+                            .navigate(R.id.action_homeFragment_to_settingsFragment)
                     }
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
-            }
-            else if (it == AppConstants.HomeConfigBottomSheet.CONTACT_US) {
+            } else if (it == AppConstants.HomeConfigBottomSheet.CONTACT_US) {
                 if (it != -1) {
                     //call api to select country
                     if (this::mView.isInitialized) {
-                        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_contactUsFragment)
+                        Navigation.findNavController(mView)
+                            .navigate(R.id.action_homeFragment_to_contactUsFragment)
                     }
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
-            }
-
-            else if (it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION) {
+            } else if (it == AppConstants.HomeConfigBottomSheet.UPDATE_LOCATION) {
                 if (it != -1) {
                     //call api to select country
                     mViewModel.hitUpdateUserLocationFromHome(sharedViewModel.userUpdatedCountryId)
 
                     sharedViewModel._homeConfigBottomSheetClickId.value = -1
                 }
-            } else if (it == AppConstants.HomeConfigBottomSheet.LOGOUT ){
+            } else if (it == AppConstants.HomeConfigBottomSheet.LOGOUT) {
                 if (it != -1) {
                     //call api to logout
                     mViewModel.hitLogout()
@@ -191,7 +187,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         sharedViewModel.homeItemBottomSheetClickId.observe(this, Observer {
             if (it == AppConstants.HomeItemBottomSheet.REPORT) {
                 if (it != -1) {
-                    Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_reportBugDialogFragment)
+                    Navigation.findNavController(mView)
+                        .navigate(R.id.action_homeFragment_to_reportBugDialogFragment)
 
                     sharedViewModel.homeItemBottomSheetClickId.value = -1
                 }
@@ -211,12 +208,13 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
 
     //Home Screen RecyclearViews Items Clicks
-    override fun onItemClickListener(type: String, id :Int) {
+    override fun onItemClickListener(type: String, id: Int) {
         when (type) {
             AppConstants.RecyclerViewKeys.HOME_RV -> {
                 /*reciving click on vendor item click on Home and saving vendor id in sharedViewModel*/
                 sharedViewModel.vendorProfileId = id
-                Navigation.findNavController(img_dots).navigate(R.id.action_homeFragment_to_profileFragment)
+                Navigation.findNavController(mView)
+                    .navigate(R.id.action_homeFragment_to_profileFragment)
             }
 
             AppConstants.RecyclerViewKeys.HOME_RV_CHILD -> {
@@ -224,7 +222,8 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             }
 
             AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS -> {
-                Navigation.findNavController(iv_home_configuration).navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
+                Navigation.findNavController(iv_home_configuration)
+                    .navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
             }
         }
     }
@@ -292,10 +291,10 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
             when (it.status) {
                 Resource.Status.LOADING -> {
-                   // loadingDialog.show()
+                    // loadingDialog.show()
                 }
                 Resource.Status.SUCCESS -> {
-                   // loadingDialog.dismiss()
+                    // loadingDialog.dismiss()
                     getHomeScreenResponse = it.data!!
 
                     setData(getHomeScreenResponse)
@@ -310,7 +309,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                     shimmerFrameLayout.visibility = View.GONE
                     recycler_home.visibility = View.VISIBLE
                     rl_promotion.visibility = View.VISIBLE
-                   // loadingDialog.dismiss()
+                    // loadingDialog.dismiss()
                     DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
 
@@ -375,27 +374,28 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
     }
 
-    private fun setData(homeScreenResponse: GetHomeScreenResponse){
+    private fun setData(homeScreenResponse: GetHomeScreenResponse) {
         try {
-            Picasso.get().load(homeScreenResponse.promotion.banner).fit().centerCrop().into(iv_home_banner , object :
-                Callback {
-                override fun onSuccess() {
-                    spinKit.visibility = View.GONE
-                }
-
-                override fun onError(e: Exception?) {
-                    if(iv_home_banner != null){
-                        Picasso.get().load(R.drawable.placeholder_image).into(iv_home_banner)
-                        spinKit.visibility = View.GONE
+            Picasso.get().load(homeScreenResponse.promotion.banner).fit().centerCrop()
+                .into(iv_home_banner, object :
+                    Callback {
+                    override fun onSuccess() {
+                        sk_home.visibility = View.GONE
                     }
-                }
 
-            })
+                    override fun onError(e: Exception?) {
+                        if (iv_home_banner != null) {
+                            Picasso.get().load(R.drawable.placeholder_image).into(iv_home_banner)
+                            sk_home.visibility = View.GONE
+                        }
+                    }
+
+                })
             tv_bannerTimer.text = homeScreenResponse.promotion.offer_end
             getHomeScreenData1 = homeScreenResponse.data
             //sharedViewModel.vendorProfileId = getHomeScreenData.id
 
-            if(!homeScreenResponse.data.isNullOrEmpty()){
+            if (!homeScreenResponse.data.isNullOrEmpty()) {
                 vendorsDataList.clear()
                 vendorsDataList.addAll(homeScreenResponse.data)
                 homerRecyclerAdpater.notifyDataSetChanged()

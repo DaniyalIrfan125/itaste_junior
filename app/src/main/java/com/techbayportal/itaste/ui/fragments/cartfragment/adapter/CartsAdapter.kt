@@ -16,6 +16,8 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.data.models.Cart
+import com.techbayportal.itaste.data.models.CartPost
+import com.techbayportal.itaste.data.models.CartVendor
 
 class CartsAdapter(
     private val list: List<Cart>,
@@ -28,7 +30,7 @@ class CartsAdapter(
     interface ClickItemListener {
         fun addQuantityClicked(position: Int, postId: Int, quantitiy: Int)
         fun minusQuantityClicked(position: Int, postId: Int, quantitiy: Int)
-        fun sendMessageClicked(postId: Int)
+        fun sendMessageClicked(cartPost: CartPost, vendor : CartVendor)
         fun onDeleteItem(postId: Int, position: Int)
     }
 
@@ -152,6 +154,11 @@ class CartsAdapter(
 
             delete_Cart?.setOnClickListener {
                 itemClickListener.onDeleteItem(getCartData.post.id, position)
+            }
+
+            btn_sendMessage?.setOnClickListener{
+                itemClickListener.sendMessageClicked(getCartData.post, getCartData.vendor)
+
             }
         }
 

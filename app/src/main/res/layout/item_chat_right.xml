@@ -21,7 +21,7 @@
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
 
         <TextView
-            android:id="@+id/tvMessage"
+            android:id="@+id/tvMessageRight"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_32sdp"
@@ -31,29 +31,44 @@
             android:backgroundTint="@color/colorChatItemBg"
             android:fontFamily="@font/roboto_regular"
             android:padding="@dimen/_8sdp"
-            android:text=" Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna"
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp"
             android:textStyle="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/sivInfluancerImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/ll_timeStamp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_light"
-            android:gravity="end"
-            android:text="Sent 13:00 pm, Today"
-            android:textColor="@color/colorChatDetailGray"
-            android:textSize="10sp"
-            app:layout_constraintEnd_toEndOf="@+id/tvMessage"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@+id/tvMessageRight"
             app:layout_constraintStart_toStartOf="@+id/tvMessage"
-            app:layout_constraintTop_toBottomOf="@+id/tvMessage">
+            app:layout_constraintTop_toBottomOf="@+id/tvMessageRight">
 
-        </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="Text message"
+                android:textColor="@color/colorChatDetailGray"
+                android:textSize="10sp"
+                android:visibility="gone">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_messageTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/colorChatDetailGray"
+                android:textSize="10sp">
+
+            </TextView>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

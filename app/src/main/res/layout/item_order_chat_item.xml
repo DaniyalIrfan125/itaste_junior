@@ -35,22 +35,33 @@
             app:layout_constraintStart_toEndOf="@id/sivInfluancerImage"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/imageView"
                 android:layout_width="105dp"
                 android:layout_height="105dp"
-                app:cardCornerRadius="8dp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:layout_marginStart="15dp"
+                android:layout_marginBottom="@dimen/_5sdp"
                 android:layout_marginEnd="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/tvMessage"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="105dp"
-                android:layout_height="105dp"
-                android:src="@drawable/icon_egg_bread_img" />
+                <ImageView
+                    android:id="@+id/iv_orderImage"
+                    android:layout_width="105dp"
+                    android:layout_height="105dp" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sk_orderImage"
+                    style="@style/SpinKitView.Large.Pulse"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/colorOrange" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -64,25 +75,19 @@
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tvMessage"
+                app:layout_constraintStart_toStartOf="@+id/tv_orderMessage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tvMessage"
+                android:id="@+id/tv_orderMessage"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_regular"
                 android:lineSpacingExtra="3sp"
-                android:paddingBottom="@dimen/_8sdp"
+                android:layout_marginStart="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_8sdp"
-                android:text="Hello, I saw this post of yours
-yesterday and I couldn't stop
-myself from ordering it. I need
-to know if you are still deliveri-
-ng this or not?
-Also how much are you
-charging for delivery service?
-Good Day to you!"
+                android:paddingBottom="@dimen/_8sdp"
+                android:text="@string/hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you"
                 android:textColor="@color/titleTextColorBlack"
                 android:textSize="12sp"
                 android:textStyle="normal"
@@ -90,7 +95,6 @@ Good Day to you!"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toBottomOf="@+id/tvOrderId" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

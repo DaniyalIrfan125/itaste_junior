@@ -104,7 +104,11 @@
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.techbayportal.itaste.ui.fragments.cartfragment.CartFragment"
-        android:label="CartFragment" />
+        android:label="CartFragment" >
+        <action
+            android:id="@+id/action_cartFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/postFragment"
         android:name="com.techbayportal.itaste.ui.fragments.postfragment.PostFragment"

@@ -9,6 +9,8 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.data.models.Cart
+import com.techbayportal.itaste.data.models.CartPost
+import com.techbayportal.itaste.data.models.CartVendor
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutCartfragmentBinding
 import com.techbayportal.itaste.ui.fragments.cartfragment.adapter.CartsAdapter
@@ -33,6 +35,8 @@ class CartFragment : BaseFragment<LayoutCartfragmentBinding, CartViewModel>(),
     lateinit var cartsAdapter: CartsAdapter
     var cartsDataArrayList: ArrayList<Cart> = ArrayList()
     var deletePosition = 0
+
+    lateinit var mView:View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -151,7 +155,7 @@ class CartFragment : BaseFragment<LayoutCartfragmentBinding, CartViewModel>(),
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        mView = view
         cartsAdapter = CartsAdapter(
             cartsDataArrayList,
             requireContext(),
@@ -171,7 +175,11 @@ class CartFragment : BaseFragment<LayoutCartfragmentBinding, CartViewModel>(),
         mViewModel.addRemoveCartQuantity(postId, quantitiy)
     }
 
-    override fun sendMessageClicked(postId: Int) {
+    override fun sendMessageClicked(cartPost : CartPost, vendor: CartVendor) {
+        sharedViewModel.vendorDetailsForCart = vendor
+        sharedViewModel.cartPost = cartPost
+
+        Navigation.findNavController(mView).navigate(R.id.action_cartFragment_to_chatFragment2)
 
     }
 
