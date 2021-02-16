@@ -346,5 +346,6 @@
     <string name="terms_and_conditions">Terms and Conditions</string>
     <string name="help_and_FAQs">Help and FAQs</string>
     <string name="tv_Save_post">Save post</string>
+    <string name="post_added_to_cart">Post added to cart</string>
 
 </resources>

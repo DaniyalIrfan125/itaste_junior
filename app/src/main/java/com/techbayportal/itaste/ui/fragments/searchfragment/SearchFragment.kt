@@ -74,8 +74,20 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
 
             if (!isLayoutOpened) {
                 swipeRevealLayout.open(true)
-                mViewModel.hitGetAllCategoriesApi()
-                mViewModel.getAllCountries()
+                if(categoryList.isNullOrEmpty()){
+                    mViewModel.hitGetAllCategoriesApi()
+                }
+
+                /*Check for not rastrain filter values when filter is applied and drawer is opened again*/
+                if(countriesList.isNullOrEmpty()){
+                    if(citiesList.isNullOrEmpty()){
+                        mViewModel.getAllCountries()
+                        citiesList.add(0, GetAllCitiesData(0, "Select City", true))
+                        mViewDataBinding.spinnerCity.adapter = SearchFilterSpinnerAdapter(citiesList)
+                    }
+
+                }
+
 
                 isLayoutOpened = true
             } else {
@@ -181,8 +193,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
                     countriesList.clear()
                     countriesList.add(0, GetAllCountriesData(0, "Select Country", "", true))
                     countriesList.addAll(it.data!!.data)
-                    mViewDataBinding.spinnerCountry.adapter =
-                        SearchFilterSpinnerAdapter(countriesList)
+                    mViewDataBinding.spinnerCountry.adapter = SearchFilterSpinnerAdapter(countriesList)
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
