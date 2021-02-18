@@ -165,20 +165,30 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
         super.subscribeToNavigationLiveData()
 
         mViewModel.onLoginClicked.observe(this, androidx.lifecycle.Observer {
-
+            GlobalScope.launch {
+                dataStoreProvider.guestMode(false)
+            }
             fieldValidationsCheck()
         })
 
         mViewModel.onForgotPasswordClicked.observe(this, androidx.lifecycle.Observer {
 
-            Navigation.findNavController(ed_enterUserName)
-                .navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+            Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
 
         })
 
         mViewModel.onSignUpClicked.observe(this, androidx.lifecycle.Observer {
-            Navigation.findNavController(ed_enterUserName)
-                .navigate(R.id.action_loginFragment_to_selectAccountTypeFragment2)
+            GlobalScope.launch {
+                dataStoreProvider.guestMode(false)
+            }
+            Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_selectAccountTypeFragment2)
+        })
+
+        mViewModel.onGuestModeButtonClicked.observe(this, androidx.lifecycle.Observer {
+            GlobalScope.launch {
+                dataStoreProvider.guestMode(true)
+            }
+            navigateToMainActivity()
         })
     }
 

@@ -188,6 +188,7 @@
                         app:mrl_rippleColor="#838282">
 
                         <Button
+                            android:onClick="@{() -> viewModel.onGuestModeButtonClicked()}"
                             android:id="@+id/btn_guest"
                             android:layout_width="match_parent"
                             android:layout_height="50dp"

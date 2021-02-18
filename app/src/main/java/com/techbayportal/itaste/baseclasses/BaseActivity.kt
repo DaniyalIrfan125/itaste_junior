@@ -7,14 +7,17 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.observe
 import com.techbayportal.itaste.R
+import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import kotlinx.android.synthetic.main.fragment_home_configuration_bottom_sheet.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 
 
@@ -24,6 +27,7 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     protected lateinit var mViewModel: V
 
     lateinit var dataStoreProvider: DataStoreProvider
+    lateinit var sharedViewModel: SharedViewModel
 
     /**
      * viewModel variable that will get value from activity which it will implement this
@@ -47,7 +51,9 @@ abstract class BaseActivity<T : ViewDataBinding, V : BaseViewModel> : AppCompatA
     override fun onCreate(savedInstanceState: Bundle?) {
         loadLocale()
         super.onCreate(savedInstanceState)
+        sharedViewModel = ViewModelProvider(this).get(SharedViewModel::class.java)
         databindingWithViewModel()
+        Timber.plant(Timber.DebugTree())
 
 
     }

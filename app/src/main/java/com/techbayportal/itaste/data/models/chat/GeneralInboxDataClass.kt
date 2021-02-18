@@ -3,7 +3,7 @@ package com.techbayportal.offsidesportsapp.data.models.chat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class GeneralInboxDataClass {
+class  GeneralInboxDataClass {
     lateinit var lastMsgTime: Date
     lateinit var id: String
     var lastMsg: String? = null
@@ -14,4 +14,5 @@ class GeneralInboxDataClass {
     var isGroupChat: Boolean = false
     var unreadMessages = 0
     var imgStr: String = ""     //todo: implement
+    var userOnlineStatus : Boolean = false
 }

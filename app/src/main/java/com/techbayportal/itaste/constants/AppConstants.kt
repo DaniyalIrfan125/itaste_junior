@@ -81,11 +81,14 @@ object AppConstants {
         }
     }
 
-    @StringDef(UserTypeKeys.USER, UserTypeKeys.VENDOR)
+    @StringDef(UserTypeKeys.USER,
+        UserTypeKeys.VENDOR,
+    UserTypeKeys.GUEST)
     annotation class UserTypeKeys {
         companion object {
             const val USER = "user"
             const val VENDOR = "vendor"
+            const val GUEST = "guest"
         }
     }
 
@@ -128,6 +131,7 @@ object AppConstants {
             const val IS_DARK_MODE = "is_dark_mode"
             const val LANGUAGE_PREF = "language_pref"
             const val SWITCH_TO_PREMIUM = "switch_to_premium"
+            const val GUEST_MODE = "guest_mode"
         }
     }
 

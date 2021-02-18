@@ -27,6 +27,7 @@ class DataStoreProvider(context: Context) {
         val IS_DARK_MODE = preferencesKey<String>(AppConstants.DataStore.IS_DARK_MODE)
         val LANGUAGE_PREF = preferencesKey<String>(AppConstants.DataStore.LANGUAGE_PREF)
         val SWITCH_TO_PREMIUM = preferencesKey<Boolean>(AppConstants.DataStore.SWITCH_TO_PREMIUM)
+        val GUEST_MODE = preferencesKey<Boolean>(AppConstants.DataStore.GUEST_MODE)
 
     }
 
@@ -59,6 +60,13 @@ class DataStoreProvider(context: Context) {
     suspend fun switchToPremium(switchToPremium: Boolean){
         dataStore.edit {
             it[SWITCH_TO_PREMIUM] = switchToPremium
+        }
+    }
+
+    //Guest Mode
+    suspend fun guestMode(guestMode: Boolean){
+        dataStore.edit {
+            it[GUEST_MODE] = guestMode
         }
     }
 
@@ -134,6 +142,10 @@ class DataStoreProvider(context: Context) {
 
     val switchToPremiumFlow: Flow<Boolean> = dataStore.data.map {
         it[SWITCH_TO_PREMIUM] ?: false
+    }
+
+    val guestModeFlow: Flow<Boolean> = dataStore.data.map {
+        it[GUEST_MODE] ?: false
     }
 
 

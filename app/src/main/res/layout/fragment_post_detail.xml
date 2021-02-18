@@ -213,7 +213,7 @@
                         android:layout_marginTop="0dp">
 
                         <com.github.ybq.android.spinkit.SpinKitView
-                            android:id="@+id/spinKit_post"
+                            android:id="@+id/spinKit_post1"
                             style="@style/SpinKitView.Large.Pulse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

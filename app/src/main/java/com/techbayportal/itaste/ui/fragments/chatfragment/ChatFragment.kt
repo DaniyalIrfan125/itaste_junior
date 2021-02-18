@@ -15,14 +15,13 @@ import com.google.firebase.ktx.Firebase
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
-import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.databinding.FragmentChatBinding
 import com.techbayportal.itaste.ui.fragments.chatfragment.adapter.ChatAdapter
 import com.techbayportal.itaste.ui.fragments.chatfragment.itemClickListener.ChatRvItemClickListener
 import com.techbayportal.offsidesportsapp.data.models.chat.ChatMessageDataClass
 import com.techbayportal.offsidesportsapp.data.models.chat.GeneralInboxDataClass
 import com.techbayportal.offsidesportsapp.data.models.chat.UserInfoClass
-import com.techbayportal.offsidesportsapp.data.models.chat.UserStatusDataClass
+import com.techbayportal.itaste.data.models.chat.UserStatusDataClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.layout_write_message.*
@@ -334,7 +333,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
                     chatAdapter.notifyDataSetChanged()
                 }
             } else if( value != null && value.documents.isEmpty()){
-                sendOrderDetailsMessage("XXYYZZ", sharedViewModel.cartPost!!.image,getString(R.string.hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you))
+                //if(sharedViewModel.cartPost != null)
+                sendOrderDetailsMessage(sharedViewModel.cartPost!!.id.toString(), sharedViewModel.cartPost!!.image,getString(R.string.hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you))
             }
         }
 

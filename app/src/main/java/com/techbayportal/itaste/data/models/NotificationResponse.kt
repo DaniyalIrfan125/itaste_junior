@@ -10,6 +10,9 @@ data class NotificationResponse(
 data class NotificationResponseData(
     val id: Int,
     val heading: String,
+    val is_seen: String,
     val image_left: String,
-    val image_right: String
+    val image_right: String,
+    val path_id: String,
+    val type: String
 )

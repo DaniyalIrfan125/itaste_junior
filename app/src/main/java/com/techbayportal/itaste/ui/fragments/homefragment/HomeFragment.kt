@@ -9,6 +9,9 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
@@ -31,7 +34,9 @@ import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_homefragment.swipeRefreshLayout
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
+import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), HomeRvClickListener {
@@ -63,6 +68,9 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     lateinit var getHomeScreenPostsData: GetHomeScreenPostsData
     var vendorPostsList = ArrayList<GetHomeScreenPostsData>()
 
+    //chat
+    var userRef: DocumentReference? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
@@ -72,8 +80,20 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         super.onViewCreated(view, savedInstanceState)
         mView = view
         initilizing()
-        mViewModel.hitGetHomeScreenInfoApi()
         dataStoreProvider = DataStoreProvider(requireContext())
+
+        dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+            if(it){
+                mViewModel.hitGetHomeScreenInfoApiForGuest()
+                Timber.d("Guest Mode On")
+            }else{
+                mViewModel.hitGetHomeScreenInfoApi()
+                Timber.d("Guest Mode Off")
+            }
+
+        })
+
+
         subscribeToObserveDarkActivation()
         sharedViewModel.test = true
 
@@ -84,7 +104,16 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
         swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            mViewModel.hitGetHomeScreenInfoApi()
+            dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+                if(it){
+                    mViewModel.hitGetHomeScreenInfoApiForGuest()
+                    Timber.d("Guest Mode On Refresh")
+                }else{
+                    mViewModel.hitGetHomeScreenInfoApi()
+                    Timber.d("Guest Mode Off Refresh")
+                }
+
+            })
         })
     }
 
@@ -304,6 +333,37 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                     recycler_home.visibility = View.VISIBLE
                     rl_promotion.visibility = View.VISIBLE
 
+                    updateUserInfo()
+
+                }
+                Resource.Status.ERROR -> {
+                    shimmerFrameLayout.visibility = View.GONE
+                    recycler_home.visibility = View.VISIBLE
+                    rl_promotion.visibility = View.VISIBLE
+                    // loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+
+        mViewModel.getHomeScreenForGuestResponse.observe(this, Observer {
+
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    // loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    // loadingDialog.dismiss()
+                    getHomeScreenResponse = it.data!!
+
+                    setData(getHomeScreenResponse)
+                    homerRecyclerAdpater.notifyDataSetChanged()
+                    shimmerFrameLayout.stopShimmer()
+                    shimmerFrameLayout.visibility = View.GONE
+                    recycler_home.visibility = View.VISIBLE
+                    rl_promotion.visibility = View.VISIBLE
+
                 }
                 Resource.Status.ERROR -> {
                     shimmerFrameLayout.visibility = View.GONE
@@ -413,11 +473,49 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         shimmerFrameLayout.stopShimmer()
         super.onPause()
     }
+    override fun onStop() {
+        super.onStop()
+        userRef?.apply {
+            setUserOffline()
+        }
+    }
 
     //vendor post item clicked
     override fun onChildItemClick(position: Int) {
         sharedViewModel.postId = position
         Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_postDetailFragment)
+    }
+
+    private fun updateUserInfo() {
+       if(loginSession != null){
+           loginSession.data.apply {
+               userRef = Firebase.firestore.collection("UserStatus").document(id.toString())
+               val onLineHashMap = hashMapOf(
+                   Pair("userId", id),
+                   Pair("userName", first +" " +last),
+                   Pair("state", "online"),
+                   Pair("imgStr", profile_pic)
+               )
+               userRef!!.set(onLineHashMap)
+           }
+       }
+
+    }
+
+    private fun setUserOffline() {
+        if( loginSession != null){
+            loginSession.data.apply {
+                val offLineHashMap = hashMapOf(
+                    Pair("userId", id),
+                    Pair("userName", first +" " +last),
+//            Pair("lastSeen",SelectUserActivity.currentTime()),
+                    Pair("state", "offline"),
+                    Pair("imgStr", profile_pic)
+                )
+                userRef!!.set(offLineHashMap)
+            }
+        }
+
     }
 
     private fun subscribeToObserveDarkActivation() {

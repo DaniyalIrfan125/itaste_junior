@@ -297,11 +297,11 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         Picasso.get().load(it.data.post.image).fit().centerCrop().into(imageProduct, object :
             Callback {
             override fun onSuccess() {
-                spinKit_post.visibility = View.GONE
+                spinKit_post1.visibility = View.GONE
             }
 
             override fun onError(e: Exception?) {
-                spinKit_post.visibility = View.GONE
+                spinKit_post1.visibility = View.GONE
             }
         })
 

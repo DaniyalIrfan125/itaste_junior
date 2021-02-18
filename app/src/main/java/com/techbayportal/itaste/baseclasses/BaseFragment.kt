@@ -22,6 +22,7 @@ import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.ui.activities.mainactivity.MainActivity
 import com.techbayportal.itaste.ui.fragments.reportbugdialogfragment.ReportBugDialogFragment
 import com.techbayportal.itaste.utils.DialogClass
+import timber.log.Timber
 
 
 abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment() {
@@ -117,6 +118,7 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
         mViewModel = ViewModelProviders.of(this).get(viewModel)
         sharedViewModel = ViewModelProviders.of(requireActivity()).get(SharedViewModel::class.java)
         loadingDialog = DialogClass.loadingDialog(requireContext())
+        Timber.plant(Timber.DebugTree())
     }
 
 

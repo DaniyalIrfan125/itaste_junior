@@ -96,6 +96,8 @@ class ChatAdapter(
             is ViewHolderClassLeft -> {
                 holder.itemBinding.tvMessage.text = chatModel.message
                 holder.itemBinding.tvMessageTime.text = getFormattedTime(chatModel.createdAt)
+                holder.itemBinding.sivUserPicLeft
+                
             }
             is ViewHolderClassRight -> {
                 holder.itemBinding.tvMessageRight.text = chatModel.message

@@ -12,6 +12,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -45,6 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //dataStoreProviderBase = DataStoreProvider(this)
@@ -70,6 +74,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             })
         }
     }
+
+
 
     private fun initialising() {
         progress_bar = findViewById(R.id.progress_bar)
@@ -113,13 +119,21 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         }
 
-        if (loginSession != null) {
+        if (loginSession != null ) {
             //removing add Post button if user is logged in
             if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
                 relative_addButton.isVisible = false
             }
 
         }
+
+        dataStoreProvider.guestModeFlow.asLiveData().observe(this, Observer {
+            if(it){
+                relative_addButton.isVisible = false
+                Timber.d("Guest Mode On")
+            }
+
+        })
 
         bottom_navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             if (navController.currentDestination != null) {
@@ -163,6 +177,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             true
         })
     }
+
+
 
     open fun showProgressBar() {
         progress_bar.visibility = View.VISIBLE

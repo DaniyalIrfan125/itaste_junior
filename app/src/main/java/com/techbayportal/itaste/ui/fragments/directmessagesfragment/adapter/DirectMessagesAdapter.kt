@@ -46,7 +46,13 @@ class DirectMessagesAdapter (
            // itemBinding.sivUserImage.loadPerson(data.imgStr)
             itemBinding.tvUserName.text = data.senderName
             /*update this with number of unread messages*/
-            itemBinding.noOfMessages.text = data.unreadMessages.toString() + "Unread Messages"
+            itemBinding.noOfMessages.text = data.unreadMessages.toString() + " new messages"
+            if(data.userOnlineStatus){
+                itemBinding.ivOnlineStatus.visibility = View.VISIBLE
+            }else{
+                itemBinding.ivOnlineStatus.visibility = View.GONE
+            }
+
         }
     }
 

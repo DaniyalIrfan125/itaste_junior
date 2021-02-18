@@ -44,6 +44,7 @@ class LoginViewModel @ViewModelInject constructor(
     val onLoginClicked = SingleLiveEvent<Any>()
     val onForgotPasswordClicked = SingleLiveEvent<Any>()
     val onSignUpClicked = SingleLiveEvent<Any>()
+    val onGuestModeButtonClicked = SingleLiveEvent<Any>()
 
     fun onLoginClicked() {
         onLoginClicked.call()
@@ -57,8 +58,8 @@ class LoginViewModel @ViewModelInject constructor(
         onSignUpClicked.call()
     }
 
-    fun onContinueAsGuestClicked() {
-
+    fun onGuestModeButtonClicked() {
+        onGuestModeButtonClicked.call()
     }
 
     fun loginApiCall(emailPhone: String, password: String) {

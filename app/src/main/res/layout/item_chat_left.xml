@@ -14,11 +14,10 @@
         >
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/sivInfluancerImage"
+            android:id="@+id/siv_userPicLeft"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
             android:layout_marginEnd="@dimen/_8sdp"
-            android:src="@drawable/icon_male_dp"
             app:layout_constraintBottom_toBottomOf="@id/tvMessage"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -65,7 +64,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_light"
-                android:text="Received 13:00 pm, Today"
                 android:textColor="@color/colorChatDetailGray"
                 android:textSize="10sp">
 

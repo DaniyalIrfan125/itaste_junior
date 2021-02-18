@@ -191,7 +191,14 @@
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.techbayportal.itaste.ui.fragments.notificationfragment.NotificationFragment"
-        android:label="NotificationFragment" />
+        android:label="NotificationFragment" >
+        <action
+            android:id="@+id/action_notificationFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_notificationFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/directMessagesFragment"
         android:name="com.techbayportal.itaste.ui.fragments.directmessagesfragment.DirectMessagesFragment"
@@ -199,6 +206,13 @@
         <action
             android:id="@+id/action_directMessagesFragment_to_newMessageFragment"
             app:destination="@id/newMessageFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_directMessagesFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"

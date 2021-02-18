@@ -290,6 +290,10 @@ class MainRepository @Inject constructor(
         return apiService.getHomeScreenInfo("application/json", auth)
     }
 
+    /*suspend fun getHomeScreenInfo(auth: String): Response<GetHomeScreenResponse> {
+        return apiService.getHomeScreenInfo("application/json", auth)
+    }*/
+
     suspend fun getNotifications(auth: String): Response<NotificationResponse> {
         return apiService.getNotifications("application/json", auth)
     }

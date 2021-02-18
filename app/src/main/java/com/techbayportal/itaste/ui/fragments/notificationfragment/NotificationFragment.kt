@@ -22,6 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_bloked_accounts.*
 import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.android.synthetic.main.item_notification.*
+import timber.log.Timber
 import javax.security.auth.callback.Callback
 
 @AndroidEntryPoint
@@ -55,6 +56,21 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding, Notificat
         notificationFragmentAdapter = NotificationFragmentAdapter(requireContext(), notificationDataList,
             object : NotificationFragmentAdapter.ClickItemListener{
                 override fun onClicked(notificationResponseData: NotificationResponseData) {
+                    when (notificationResponseData.type) {
+                        "post" -> {
+                            Timber.d("Move to the Post")
+                            sharedViewModel.postId = notificationResponseData.path_id.toInt()
+                            Navigation.findNavController(mView).navigate(R.id.action_notificationFragment_to_postDetailFragment)
+                        }
+                        "vendor" -> {
+                            Timber.d("Move to the Vendor Profile")
+                            sharedViewModel.postId = notificationResponseData.path_id.toInt()
+                            Navigation.findNavController(mView).navigate(R.id.action_notificationFragment_to_profileFragment)
+                        }
+                        else -> {
+                            Timber.d("Any Other Notification")
+                        }
+                    }
 
                 }
 

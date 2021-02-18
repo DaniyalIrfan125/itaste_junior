@@ -40,6 +40,10 @@ class HomeViewModel @ViewModelInject constructor(
     val getHomeScreenResponse: LiveData<Resource<GetHomeScreenResponse>>
         get() = _getHomeScreenResponse
 
+    val _getHomeScreenForGuestResponse = MutableLiveData<Resource<GetHomeScreenResponse>>()
+    val getHomeScreenForGuestResponse: LiveData<Resource<GetHomeScreenResponse>>
+        get() = _getHomeScreenForGuestResponse
+
     val _getReportBugResponse = MutableLiveData<Resource<SuccessResponse>>()
     val getReportBugResponse: LiveData<Resource<SuccessResponse>>
         get() = _getReportBugResponse
@@ -157,6 +161,34 @@ class HomeViewModel @ViewModelInject constructor(
                     _getHomeScreenResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _getHomeScreenResponse.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
+    fun hitGetHomeScreenInfoApiForGuest() {
+        viewModelScope.launch {
+            _getHomeScreenForGuestResponse.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.getHomeScreenInfo("").let {
+                        if (it.isSuccessful) {
+                            _getHomeScreenForGuestResponse.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _getHomeScreenForGuestResponse.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _getHomeScreenForGuestResponse.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getHomeScreenForGuestResponse.postValue(Resource.error("" + e.message, null))
+                }
+            } else _getHomeScreenForGuestResponse.postValue(Resource.error("No Internet Connection", null))
         }
     }
 
