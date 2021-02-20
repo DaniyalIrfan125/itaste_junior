@@ -3,12 +3,15 @@ package com.techbayportal.itaste.data.local.datastore
 import android.content.Context
 import androidx.datastore.preferences.createDataStore
 import androidx.datastore.preferences.edit
+import androidx.datastore.preferences.emptyPreferences
 import androidx.datastore.preferences.preferencesKey
 import com.google.gson.Gson
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.models.LoginResponse
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
+import java.io.IOException
 
 class DataStoreProvider(context: Context) {
 
@@ -28,6 +31,7 @@ class DataStoreProvider(context: Context) {
         val LANGUAGE_PREF = preferencesKey<String>(AppConstants.DataStore.LANGUAGE_PREF)
         val SWITCH_TO_PREMIUM = preferencesKey<Boolean>(AppConstants.DataStore.SWITCH_TO_PREMIUM)
         val GUEST_MODE = preferencesKey<Boolean>(AppConstants.DataStore.GUEST_MODE)
+        val KEY_FCM = preferencesKey<String>(AppConstants.DataStore.FCM_KEY)
 
     }
 
@@ -107,6 +111,13 @@ class DataStoreProvider(context: Context) {
         }
     }
 
+    //Store fcmToken
+    suspend fun setFcm(fcm: String) {
+        dataStore.edit {
+            it[KEY_FCM] = fcm
+        }
+    }
+
     //Create an Localization flow
     val localizationFlow: Flow<Boolean> = dataStore.data.map {
         it[IS_LOCALIZATION_KEY] ?: false
@@ -146,6 +157,20 @@ class DataStoreProvider(context: Context) {
 
     val guestModeFlow: Flow<Boolean> = dataStore.data.map {
         it[GUEST_MODE] ?: false
+    }
+
+    fun getFcm(): Flow<String> {
+        return dataStore.data
+            .catch { exception ->
+                // dataStore.data throws an IOException when an error is encountered when reading data
+                if (exception is IOException) {
+                    emit(emptyPreferences())
+                } else {
+                    throw exception
+                }
+            }.map {
+                it[KEY_FCM] ?: ""
+            }
     }
 
 

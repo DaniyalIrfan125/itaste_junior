@@ -12,9 +12,9 @@
     </data>
 
     <RelativeLayout
-        android:background="@color/mainBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/mainBackground"
         tools:context=".ui.fragments.directmessagesfragment.DirectMessagesFragment">
 
         <RelativeLayout
@@ -31,11 +31,11 @@
                 android:onClick="@{()->viewModel.onBackButtonClicked()}">
 
 
-            <ImageView
-                app:tint="@color/mainIconColor"
-                android:layout_width="@dimen/_15sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:src="@drawable/icon_backarrow"/>
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:src="@drawable/icon_backarrow"
+                    app:tint="@color/mainIconColor" />
             </LinearLayout>
 
 
@@ -87,7 +87,6 @@
                         android:onClick="@{()->viewModel.onNewMessageIconClicked()}">
 
                         <ImageView
-                            app:tint="@color/mainIconColor"
                             android:id="@+id/outlinedButton"
                             android:layout_width="@dimen/_14sdp"
                             android:layout_height="@dimen/_14sdp"
@@ -95,7 +94,8 @@
                             android:scaleType="fitXY"
                             android:src="@drawable/icon_edit"
                             android:text="Unblock"
-                            android:textAllCaps="false" />
+                            android:textAllCaps="false"
+                            app:tint="@color/mainIconColor" />
 
                     </LinearLayout>
 
@@ -117,65 +117,65 @@
             android:orientation="vertical">
 
             <SearchView
-                app:tint="@color/mainIconColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_curve_gray"
+                android:queryHint="Search in chat"
                 android:searchIcon="@drawable/icon_search"
-                android:queryHint="Search in chat">
+                app:tint="@color/mainIconColor">
 
             </SearchView>
 
 
-
         </LinearLayout>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_25sdp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/message"
+            android:textColor="@color/titleTextColorBlack">
+
+        </TextView>
+
+        <RelativeLayout
             android:id="@+id/llUserList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear"
+            android:layout_below="@+id/tv_message"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_marginBottom="0dp"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_25sdp"
-                android:layout_marginEnd="@dimen/_25sdp"
-                android:fontFamily="@font/roboto_regular"
-                android:text="@string/message"
-                android:textColor="@color/titleTextColorBlack">
-
-            </TextView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUsersForChat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/linear"
                 android:layout_marginTop="7dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_message_list_item">
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <LinearLayout
+            <RelativeLayout
                 android:id="@+id/llNoMessages"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="@dimen/_14sdp"
                 android:layout_marginEnd="0dp"
                 android:layout_marginBottom="0dp"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/ll_middle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -220,8 +220,8 @@
                 </LinearLayout>
 
 
-            </LinearLayout>
-        </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
 
 
     </RelativeLayout>

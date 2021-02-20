@@ -7,9 +7,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
-import retrofit2.http.Multipart
 import java.io.File
 import javax.inject.Inject
 
@@ -20,8 +18,8 @@ class MainRepository @Inject constructor(
 
     suspend fun getPosts() = apiService.getPosts()
 
-    suspend fun login(email: String, password: String) =
-        apiService.login("application/json", email, password)
+    suspend fun login(email: String, password: String, fcm_token : String) =
+        apiService.login("application/json", email, password, fcm_token)
 
     //Sign Up User
     suspend fun signUp(userModel: UserModel): Response<SignUpResponse> {
@@ -29,7 +27,7 @@ class MainRepository @Inject constructor(
         val profilePicRequestBody: RequestBody =
             userModel.profileImage.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = MultipartBody.Part.createFormData(
-            "profilePic",
+            "profile_pic",
             System.currentTimeMillis().toString() + ".png",
             profilePicRequestBody
         )
@@ -55,7 +53,7 @@ class MainRepository @Inject constructor(
         val profilePicRequestBody: RequestBody =
             userModel.profileImage.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = MultipartBody.Part.createFormData(
-            "profilePic",
+            "profile_pic",
             System.currentTimeMillis().toString() + ".png",
             profilePicRequestBody
         )
@@ -139,7 +137,7 @@ class MainRepository @Inject constructor(
             profilePic?.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = profilePicRequestBody?.let {
             MultipartBody.Part.createFormData(
-                "profilePic",
+                "profile_pic",
                 System.currentTimeMillis().toString() + ".png",
                 it
             )
@@ -184,7 +182,7 @@ class MainRepository @Inject constructor(
             profilePic?.asRequestBody("image/*".toMediaTypeOrNull())
         val profilePicMultiPartBody = profilePicRequestBody?.let {
             MultipartBody.Part.createFormData(
-                "profilePic",
+                "profile_pic",
                 System.currentTimeMillis().toString() + ".png",
                 it
             )
@@ -286,8 +284,8 @@ class MainRepository @Inject constructor(
         return apiService.getAllCategories("application/json", auth)
     }
 
-    suspend fun getHomeScreenInfo(auth: String): Response<GetHomeScreenResponse> {
-        return apiService.getHomeScreenInfo("application/json", auth)
+    suspend fun getHomeScreenInfo(auth: String, fcm_token: String): Response<GetHomeScreenResponse> {
+        return apiService.getHomeScreenInfo("application/json", auth, fcm_token)
     }
 
     /*suspend fun getHomeScreenInfo(auth: String): Response<GetHomeScreenResponse> {

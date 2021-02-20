@@ -9,8 +9,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.databinding.ItemMessageListItemBinding
-import com.techbayportal.itaste.ui.fragments.directmessagesfragment.itemClickListener.DirectMessagesRvItemClickListener
-import com.techbayportal.offsidesportsapp.data.models.chat.GeneralInboxDataClass
+import com.techbayportal.itaste.data.models.chat.GeneralInboxDataClass
 import java.lang.Exception
 
 class DirectMessagesAdapter (
@@ -46,7 +45,12 @@ class DirectMessagesAdapter (
            // itemBinding.sivUserImage.loadPerson(data.imgStr)
             itemBinding.tvUserName.text = data.senderName
             /*update this with number of unread messages*/
-            itemBinding.noOfMessages.text = data.unreadMessages.toString() + " new messages"
+            if(data.unreadMessages != 0){
+                itemBinding.noOfMessages.text = data.unreadMessages.toString() + " new messages"
+            }else{
+                itemBinding.noOfMessages.text = data.lastMsg
+            }
+
             if(data.userOnlineStatus){
                 itemBinding.ivOnlineStatus.visibility = View.VISIBLE
             }else{

@@ -96,12 +96,39 @@ class ChatAdapter(
             is ViewHolderClassLeft -> {
                 holder.itemBinding.tvMessage.text = chatModel.message
                 holder.itemBinding.tvMessageTime.text = getFormattedTime(chatModel.createdAt)
-                holder.itemBinding.sivUserPicLeft
+                if(chatModel.imgStr.isNotEmpty()){
+                    Picasso.get().load(chatModel.imgStr).fit().centerCrop()
+                        .into(holder.itemBinding.sivUserPicLeft, object : Callback {
+                            override fun onSuccess() {
+                                holder.itemBinding.skUserPicLeft.visibility = View.GONE
+                            }
+
+                            override fun onError(e: Exception?) {
+                                Picasso.get().load(R.drawable.placeholder_image).into(holder.itemBinding.sivUserPicLeft)
+                                holder.itemBinding.skUserPicLeft.visibility = View.GONE
+                            }
+
+                        })
+                }
                 
             }
             is ViewHolderClassRight -> {
                 holder.itemBinding.tvMessageRight.text = chatModel.message
                 holder.itemBinding.tvMessageTime.text = getFormattedTime(chatModel.createdAt)
+                if(chatModel.imgStr.isNotEmpty()){
+                    Picasso.get().load(chatModel.imgStr).fit().centerCrop()
+                        .into(holder.itemBinding.sivUserPicRight, object : Callback {
+                            override fun onSuccess() {
+                                holder.itemBinding.skUserPicRight.visibility = View.GONE
+                            }
+
+                            override fun onError(e: Exception?) {
+                                Picasso.get().load(R.drawable.placeholder_image).into(holder.itemBinding.sivUserPicRight)
+                                holder.itemBinding.skUserPicRight.visibility = View.GONE
+                            }
+
+                        })
+                }
 
             }
         }

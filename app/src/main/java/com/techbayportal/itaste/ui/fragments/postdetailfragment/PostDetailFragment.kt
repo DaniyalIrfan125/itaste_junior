@@ -38,6 +38,7 @@ import java.lang.Exception
 class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFragmentViewModel>(),
     PostCommentsRvClickListener {
 
+
     override val layoutId: Int
         get() = R.layout.fragment_post_detail
     override val viewModel: Class<PostDetailFragmentViewModel>
@@ -50,6 +51,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
     val bottomSheet = PostDetailBottomSheetFragment()
 
     var postDetailResponse: PostDetailResponse? = null
+    private var vendorId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -334,6 +336,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
             tv_viewAllComments.visibility = View.GONE
         }
 
+        vendorId = it.data.vendor.vendor_id
         tv_vendorName.text = it.data.vendor.first + " " + it.data.vendor.last
         tv_vendorLocation.text = it.data.vendor.location
         tv_title.text = it.data.post.caption
@@ -351,7 +354,6 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         super.subscribeToNavigationLiveData()
 
         mViewModel.onSaveButtonClicked.observe(this, Observer {
-
             mViewModel.savePost(sharedViewModel.postId)
 
 
@@ -362,8 +364,8 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         })
 
         mViewModel.onVendorProfileHeaderClicked.observe(this, Observer {
-            Navigation.findNavController(ll_dp)
-                .navigate(R.id.action_postDetailFragment_to_profileFragment)
+            sharedViewModel.vendorProfileId = vendorId
+            Navigation.findNavController(ll_dp).navigate(R.id.action_postDetailFragment_to_profileFragment)
         })
 
         mViewModel.onSendButtonClicked.observe(this, Observer {

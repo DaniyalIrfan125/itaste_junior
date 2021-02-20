@@ -62,12 +62,12 @@ class LoginViewModel @ViewModelInject constructor(
         onGuestModeButtonClicked.call()
     }
 
-    fun loginApiCall(emailPhone: String, password: String) {
+    fun loginApiCall(emailPhone: String, password: String, fcm_token:String) {
         viewModelScope.launch {
             _loginResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.login(emailPhone, password).let {
+                    mainRepository.login(emailPhone, password, fcm_token).let {
                         if (it.isSuccessful) {
                             _loginResponse.postValue(Resource.success(it.body()!!))
                            // LoginSession.getInstance().setLoginResponse(it.body())
@@ -83,6 +83,12 @@ class LoginViewModel @ViewModelInject constructor(
                     _loginResponse.postValue(Resource.error(""+e.message, null))
                 }
             } else _loginResponse.postValue(Resource.error("No internet connection", null))
+        }
+    }
+
+    fun setFcm(token: String) {
+        viewModelScope.launch {
+            dataStoreProvider.setFcm(token)
         }
     }
 }

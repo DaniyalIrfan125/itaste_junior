@@ -17,7 +17,8 @@ interface ApiService {
     suspend fun login(
         @Header("Accept") acceptJson: String,
         @Field("username") email: String?,
-        @Field("password") password: String?
+        @Field("password") password: String?,
+        @Field("fcm_token") fcm_token: String
     ): Response<LoginResponse>
 
 
@@ -29,7 +30,7 @@ interface ApiService {
         @Query("last") last: String?,
         @Query("username") username: String?,
         @Query("phone") phone: String?,
-        @Part profileImage: MultipartBody.Part,
+        @Part profile_pic: MultipartBody.Part,
         @Query("email") email: String?,
         @Query("password") password: String?,
         @Query("role") role: String?
@@ -43,7 +44,7 @@ interface ApiService {
         @Query("first") first: String?,
         @Query("last") last: String?,
         @Query("username") username: String?,
-        @Part profilePic: MultipartBody.Part,
+        @Part profile_pic: MultipartBody.Part,
         @Query("phone") phone: String?,
         @Query("email") email: String?,
         @Query("password") password: String?,
@@ -366,10 +367,12 @@ interface ApiService {
         @Query("comments") comment: String
     ): Response<PostCommentResponse>
 
+
     @GET("home-screen")
     suspend fun getHomeScreenInfo(
         @Header("Accept") acceptJson: String,
-        @Header("Authorization") authHeader: String
+        @Header("Authorization") authHeader: String,
+        @Query("fcm_token") fcm_token: String
     ): Response<GetHomeScreenResponse>
 
     @GET("notifications")

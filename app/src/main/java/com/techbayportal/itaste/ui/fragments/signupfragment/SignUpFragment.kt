@@ -10,11 +10,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
-import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 import com.opensooq.supernova.gligar.GligarPicker
-import com.rilixtech.widget.countrycodepicker.CountryCodePicker.OnCountryChangeListener
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R

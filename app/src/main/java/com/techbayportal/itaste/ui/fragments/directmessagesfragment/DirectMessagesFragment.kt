@@ -11,14 +11,12 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.data.models.CartVendor
-import com.techbayportal.itaste.data.models.chat.UserOnlineStatusModel
 import com.techbayportal.itaste.databinding.FragmentDirectMessagesBinding
 import com.techbayportal.itaste.ui.fragments.directmessagesfragment.adapter.DirectMessagesAdapter
-import com.techbayportal.itaste.ui.fragments.directmessagesfragment.itemClickListener.DirectMessagesRvItemClickListener
+import com.techbayportal.itaste.utils.LoginSession
 import com.techbayportal.offsidesportsapp.data.models.chat.ChatMessageDataClass
-import com.techbayportal.offsidesportsapp.data.models.chat.GeneralInboxDataClass
+import com.techbayportal.itaste.data.models.chat.GeneralInboxDataClass
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_direct_messages.*
 import kotlinx.android.synthetic.main.fragment_direct_messages.img_back
 import timber.log.Timber
@@ -39,6 +37,8 @@ class DirectMessagesFragment :
     private var currentUserId = ""
     private lateinit var adapter: DirectMessagesAdapter
 
+    val loginSession = LoginSession.getInstance().getLoginResponse()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,13 +47,13 @@ class DirectMessagesFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        currentUserId = sharedViewModel.userModel.id.toString()
+        currentUserId = loginSession!!.data.id.toString()
 
         adapter = DirectMessagesAdapter(inboxArray, object : DirectMessagesAdapter.ClickListener {
             override fun onClick(data: GeneralInboxDataClass) {
-               // Toast.makeText(context, " Inbox ItemClicked : ${data.id}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, " Inbox ItemClicked : ${data.senderId}", Toast.LENGTH_SHORT).show()
                 Timber.d("Inbox ItemClicked : ${data.senderId}")
-                sharedViewModel.vendorDetailsForCart = CartVendor("", data.senderName,data.senderId.toInt(), "",data.imgStr)
+                sharedViewModel.vendorDetailsForCart = CartVendor("", data.senderName, data.senderId.toInt(), "",data.imgStr)
                 sharedViewModel.cartPost = null
                 Navigation.findNavController(ll_new_message).navigate(R.id.action_directMessagesFragment_to_chatFragment2)
             }
@@ -83,15 +83,17 @@ class DirectMessagesFragment :
         val fireStoreObj = FirebaseFirestore.getInstance()
         inboxArray.clear()
         fireStoreObj.collection("Chats")
-            .whereArrayContains("usersId", currentUserId)
+            .whereArrayContains("usersId", loginSession!!.data.id.toString())
             .orderBy("lastMsgTime", Query.Direction.ASCENDING)
             .whereEqualTo("groupChat", false).get()
             .addOnSuccessListener {
                 it.documents.forEach { doc ->
                     val inboxData = doc.toObject(GeneralInboxDataClass::class.java)!!
-                    val chatUser = inboxData.users.find { user -> user.id != currentUserId }
-                    fireStoreObj.collection("UserStatus")
-                        .document("219")
+                    val chatUser = inboxData.users.find { user -> user.id != loginSession!!.data.id.toString() }
+
+                    //added for online status
+                   /* fireStoreObj.collection("UserStatus")
+                        .document(chatUser!!.id)
                         .get()
                         .addOnSuccessListener {statusDoc ->
                             val onlineStatusData = statusDoc.toObject(UserOnlineStatusModel::class.java)!!
@@ -105,7 +107,7 @@ class DirectMessagesFragment :
                         }
                         .addOnFailureListener{exception ->
                             exception
-                        }
+                        }*/
                     fireStoreObj.collection("Chats")
                         .document(inboxData.id)
                         .collection("Threads")
@@ -117,7 +119,7 @@ class DirectMessagesFragment :
                                 messageArray.documents.forEach { messageDoc ->
                                     val messageData =
                                         messageDoc.toObject(ChatMessageDataClass::class.java)
-                                    if (!messageData!!.deletedFor.contains(currentUserId))
+                                    if (!messageData!!.deletedFor.contains(loginSession!!.data.id.toString()))
                                         filteredMessagesArray.add(messageData)
                                 }
 
@@ -131,7 +133,7 @@ class DirectMessagesFragment :
 
                                 var unreadCount = 0
                                 filteredMessagesArray.forEach { messgeDoc ->
-                                    if (messgeDoc.seenBy.isEmpty() && messgeDoc.senderId != currentUserId) {
+                                    if (messgeDoc.seenBy.isEmpty() && messgeDoc.senderId != loginSession!!.data.id.toString()) {
                                         unreadCount++
                                     }
                                 }
@@ -140,10 +142,12 @@ class DirectMessagesFragment :
                                 adapter.notifyDataSetChanged()
                             } else {
                             }
-                            //showPlaceholder()
+                         //   showPlaceholder()
+                            //llNoMessages.visibility  =View.VISIBLE
                         }
                         .addOnFailureListener { messageArrayExcpetion ->
-                            // showPlaceholder()
+                           //  showPlaceholder()
+                            //llNoMessages.visibility  =View.VISIBLE
 
                             messageArrayExcpetion
                             Timber.d("$messageArrayExcpetion")
@@ -151,12 +155,18 @@ class DirectMessagesFragment :
                 }
             }.addOnFailureListener { inboxException ->
                 // showPlaceholder()
+                //llNoMessages.visibility  =View.VISIBLE
                 inboxException
             }
     }
 
     private fun  getOnlineStatus(){
 
+    }
+
+    private fun showPlaceholder(){
+        llNoMessages.visibility = View.VISIBLE
+        rvUsersForChat.visibility = View.GONE
     }
 
 

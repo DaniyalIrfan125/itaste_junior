@@ -9,9 +9,11 @@ import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
@@ -36,7 +38,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
-import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), HomeRvClickListener {
@@ -49,6 +50,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         get() = BR.viewModel
 
     lateinit var mView: View
+    var fcmToken: String = ""
 
     val bottomSheet = HomeConfigurationBottomSheetFragment()
     private val homeItemBottomSheet = HomeItemBottomSheetFragment()
@@ -79,15 +81,16 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mView = view
+        fetchFcm()
         initilizing()
         dataStoreProvider = DataStoreProvider(requireContext())
 
         dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
             if(it){
-                mViewModel.hitGetHomeScreenInfoApiForGuest()
+                mViewModel.hitGetHomeScreenInfoApiForGuest("")
                 Timber.d("Guest Mode On")
             }else{
-                mViewModel.hitGetHomeScreenInfoApi()
+                mViewModel.hitGetHomeScreenInfoApi(fcmToken)
                 Timber.d("Guest Mode Off")
             }
 
@@ -106,10 +109,10 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             swipeRefreshLayout.isRefreshing = false
             dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
                 if(it){
-                    mViewModel.hitGetHomeScreenInfoApiForGuest()
+                    mViewModel.hitGetHomeScreenInfoApiForGuest(fcmToken)
                     Timber.d("Guest Mode On Refresh")
                 }else{
-                    mViewModel.hitGetHomeScreenInfoApi()
+                    mViewModel.hitGetHomeScreenInfoApi(fcmToken)
                     Timber.d("Guest Mode Off Refresh")
                 }
 
@@ -305,7 +308,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 }
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
-                    mViewModel.hitGetHomeScreenInfoApi()
+                    mViewModel.hitGetHomeScreenInfoApi(fcmToken)
                 }
 
                 Resource.Status.ERROR -> {
@@ -516,6 +519,23 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             }
         }
 
+    }
+
+    private fun fetchFcm() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.w("Fetching FCM registration token failed")
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            val token = task.result
+            Timber.d("FCM token: $token")
+
+            if (token != null) {
+                fcmToken = token
+                mViewModel.setFcm(token)
+            }
+        })
     }
 
     private fun subscribeToObserveDarkActivation() {

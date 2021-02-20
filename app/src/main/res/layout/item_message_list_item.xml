@@ -32,7 +32,6 @@
                     android:layout_width="43dp"
                     android:layout_height="43dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/icon_user_dp"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
                     tools:layout_editor_absoluteY="61dp" />
@@ -77,7 +76,7 @@
                     android:layout_below="@+id/tv_userName"
                     android:layout_marginTop="0dp"
                     android:fontFamily="@font/roboto_light"
-
+                    android:singleLine="true"
                     android:textColor="@color/titleTextColorBlack"
                     android:textSize="14sp">
 

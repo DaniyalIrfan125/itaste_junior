@@ -10,6 +10,8 @@ import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
@@ -28,6 +30,7 @@ import kotlinx.android.synthetic.main.layout_loginfragment.*
 import kotlinx.android.synthetic.main.layout_signupfragment.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 
 @AndroidEntryPoint
@@ -41,6 +44,7 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
 
     var darkMode :Boolean = false
     lateinit var dataStoreProvider: DataStoreProvider
+    var fcmToken: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -129,7 +133,8 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
                // navigateToMainActivity()
                 mViewModel.loginApiCall(
                     ed_enterUserName.text.toString(),
-                    ed_password.text.toString()
+                    ed_password.text.toString(),
+                    fcmToken
                 )
             } else {
 
@@ -151,6 +156,23 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
         }
 
 
+    }
+
+    private fun fetchFcm() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.w("Fetching FCM registration token failed")
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            val token = task.result
+            Timber.d("FCM token: $token")
+
+            if (token != null) {
+                fcmToken = token
+                mViewModel.setFcm(token)
+            }
+        })
     }
 
 

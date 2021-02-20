@@ -19,9 +19,10 @@ import com.techbayportal.itaste.databinding.FragmentChatBinding
 import com.techbayportal.itaste.ui.fragments.chatfragment.adapter.ChatAdapter
 import com.techbayportal.itaste.ui.fragments.chatfragment.itemClickListener.ChatRvItemClickListener
 import com.techbayportal.offsidesportsapp.data.models.chat.ChatMessageDataClass
-import com.techbayportal.offsidesportsapp.data.models.chat.GeneralInboxDataClass
+import com.techbayportal.itaste.data.models.chat.GeneralInboxDataClass
 import com.techbayportal.offsidesportsapp.data.models.chat.UserInfoClass
 import com.techbayportal.itaste.data.models.chat.UserStatusDataClass
+import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.layout_write_message.*
@@ -65,12 +66,13 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
     private var currentUserId = ""
     private lateinit var chatAdapter: ChatAdapter
 
+    val loginSession = LoginSession.getInstance().getLoginResponse()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
 
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,17 +91,23 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
 //        selectedImage =
 
         val userList = ArrayList<Int>()
-        userList.add(sharedViewModel.userModel.id)
+        userList.add(loginSession!!.data.id)
         userList.add(selectedId.toInt())
         val sortedArray = userList.sorted()
         chatKey = "${sortedArray[0]}_${sortedArray[1]}"
 
 
         tv_reciverName.text = selectedName
+
         tvPostMessage.setOnClickListener {
-            val msg = tv_message.text
-            sendMessage(msg.toString())
-            msg.clear()
+            if (tv_message.text.isNotEmpty()) {
+                val msg = tv_message.text
+                sendMessage(msg.toString())
+                msg.clear()
+            } else {
+
+            }
+
         }
 
 //        if (chatKey != null)
@@ -112,7 +120,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
         rvMessages.layoutManager = layoutManager
         layoutManager.reverseLayout = true
         //rvMessages.adapter = ChatAdapter(chatMessageArray, currentUserId, requireContext())
-
+        currentUserId = loginSession.data.id.toString()
         chatAdapter = ChatAdapter(chatMessageArray, currentUserId, requireContext())
         rvMessages.adapter = chatAdapter
 
@@ -135,7 +143,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
                         if (isLoadData) {
                             if ((visibleItemCount + firstVisibleItem) >= totalItemCount) {
                                 currentPage += 1
-                               // getPaginatedMessages()
+                                // getPaginatedMessages()
                                 isLoadData = false
                             }
                         }
@@ -144,8 +152,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
             }
         })
 
-        currentUserName = sharedViewModel.userModel.first + " " + sharedViewModel.userModel.last
-        currentUserId = sharedViewModel.userModel.id.toString()
+        currentUserName = loginSession.data.first + " " + loginSession.data.last
+        currentUserId = loginSession.data.id.toString()
         layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
 
     }
@@ -155,7 +163,6 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
         //dataStoreProvider = DataStoreProvider(context)
         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
     }
-
 
 
     private fun sendMessage(msg: String) {
@@ -173,7 +180,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
 
         chatRef.collection("Threads").document(secondKey)
             .set(messageObj).addOnSuccessListener {
-               // Toast.makeText(requireContext(), "Messages Sent", Toast.LENGTH_LONG).show()
+                // Toast.makeText(requireContext(), "Messages Sent", Toast.LENGTH_LONG).show()
                 Timber.d("Chat: Messages Sent")
                 tv_message.text.clear()
                 updateInbox(chatKey!!, chatRef, msg, currentDate)
@@ -182,7 +189,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
             }
     }
 
-    private fun sendOrderDetailsMessage(orderId : String, orderImage: String, orderMessage: String) {
+    private fun sendOrderDetailsMessage(orderId: String, orderImage: String, orderMessage: String) {
 
         val chatRef = firestoreRef.collection("Chats").document(chatKey!!)
         val msgRef = chatRef.collection("Threads").document()
@@ -283,7 +290,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
 
         seenListener = getReceiverSentMsgRef.addSnapshotListener { value, error ->
             if (error != null) {
-                Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_SHORT).show()
+               // Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_SHORT).show()
+                Timber.d(error.localizedMessage)
                 return@addSnapshotListener
             }
             if (value?.documents != null && value.documents.isNotEmpty()) {
@@ -313,7 +321,8 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
 
         readMessageRef.addSnapshotListener { value, error ->
             if (error != null) {
-                Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_SHORT).show()
+                Timber.d(error.localizedMessage)
                 return@addSnapshotListener
             }
             if (value != null && value.documents.isNotEmpty()) {
@@ -332,9 +341,15 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
                     isLoadData = true
                     chatAdapter.notifyDataSetChanged()
                 }
-            } else if( value != null && value.documents.isEmpty()){
-                //if(sharedViewModel.cartPost != null)
-                sendOrderDetailsMessage(sharedViewModel.cartPost!!.id.toString(), sharedViewModel.cartPost!!.image,getString(R.string.hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you))
+            } else if (value != null && value.documents.isEmpty()) {
+                if (sharedViewModel.cartPost != null) {
+                    sendOrderDetailsMessage(
+                        sharedViewModel.cartPost!!.id.toString(),
+                        sharedViewModel.cartPost!!.image,
+                        getString(R.string.hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you)
+                    )
+
+                }
             }
         }
 

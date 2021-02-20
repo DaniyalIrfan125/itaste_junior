@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
@@ -16,7 +17,9 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val dataStoreProvider: DataStoreProvider
+
 ) : BaseViewModel() {
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
@@ -136,12 +139,12 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitGetHomeScreenInfoApi() {
+    fun hitGetHomeScreenInfoApi(fcm_token : String) {
         viewModelScope.launch {
             _getHomeScreenResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getHomeScreenInfo("Bearer ${loginSession!!.data.access_token}").let {
+                    mainRepository.getHomeScreenInfo("Bearer ${loginSession!!.data.access_token}", fcm_token).let {
                         if (it.isSuccessful) {
                             _getHomeScreenResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
@@ -164,12 +167,12 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitGetHomeScreenInfoApiForGuest() {
+    fun hitGetHomeScreenInfoApiForGuest(fcm_token : String) {
         viewModelScope.launch {
             _getHomeScreenForGuestResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getHomeScreenInfo("").let {
+                    mainRepository.getHomeScreenInfo("", fcm_token).let {
                         if (it.isSuccessful) {
                             _getHomeScreenForGuestResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
@@ -242,6 +245,12 @@ class HomeViewModel @ViewModelInject constructor(
                     _getReportBugResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _getReportBugResponse.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
+    fun setFcm(token: String) {
+        viewModelScope.launch {
+            dataStoreProvider.setFcm(token)
         }
     }
 }

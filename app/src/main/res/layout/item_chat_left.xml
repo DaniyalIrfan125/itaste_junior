@@ -11,64 +11,94 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        >
+        android:layout_marginEnd="@dimen/_32sdp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/siv_userPicLeft"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            app:layout_constraintBottom_toBottomOf="@id/tvMessage"
-            app:layout_constraintStart_toStartOf="parent"
-
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-        <TextView
-            android:id="@+id/tvMessage"
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:id="@+id/ll_leftRight"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginEnd="@dimen/_32sdp"
-            android:background="@drawable/chat_round_corner"
-            android:backgroundTint="@color/colorChatItemBg"
-            android:fontFamily="@font/roboto_regular"
-            android:lineSpacingExtra="3sp"
-            android:padding="@dimen/_8sdp"
-            android:textColor="@color/titleTextColorBlack"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/sivInfluancerImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/ll_timeStamp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@+id/tvMessage"
-            app:layout_constraintStart_toStartOf="@+id/tvMessage"
-            app:layout_constraintTop_toBottomOf="@+id/tvMessage">
+            <RelativeLayout
+                android:id="@+id/rl_dp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignBottom="@id/tvMessage"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_alignParentStart="true">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/siv_userPicLeft"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="0dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/sk_userPicLeft"
+                    style="@style/SpinKitView.Large.Pulse"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:SpinKit_Color="@color/colorOrange" />
+            </RelativeLayout>
 
             <TextView
+                android:id="@+id/tvMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:text="Text message"
-                android:textColor="@color/colorChatDetailGray"
-                android:textSize="10sp">
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_toEndOf="@+id/rl_dp"
+                android:background="@drawable/chat_round_corner"
+                android:backgroundTint="@color/colorChatItemBg"
+                android:fontFamily="@font/roboto_regular"
+                android:lineSpacingExtra="3sp"
+                android:padding="@dimen/_8sdp"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toEndOf="@+id/rl_dp"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </TextView>
-            <TextView
-                android:id="@+id/tv_messageTime"
+            <LinearLayout
+                android:id="@+id/ll_timeStamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:textColor="@color/colorChatDetailGray"
-                android:textSize="10sp">
+                android:layout_below="@+id/tvMessage"
+                android:layout_marginStart="5sp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@+id/rl_dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@+id/tvMessage"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessage">
 
-            </TextView>
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="Text message"
+                    android:textColor="@color/colorChatDetailGray"
+                    android:textSize="10sp"
+                    android:visibility="gone">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/tv_messageTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_light"
+                    android:textColor="@color/colorChatDetailGray"
+                    android:textSize="10sp">
+
+                </TextView>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
 
 
 

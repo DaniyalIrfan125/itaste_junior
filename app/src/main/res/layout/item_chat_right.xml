@@ -9,65 +9,97 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_32sdp"
+        android:layout_marginTop="@dimen/_8sdp">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/siv_userPicRight"
-            android:layout_width="@dimen/_30sdp"
-            android:layout_height="@dimen/_30sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvMessage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
-
-        <TextView
-            android:id="@+id/tvMessageRight"
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:id="@+id/ll_leftRight"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_32sdp"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:background="@drawable/chat_round_corner_right"
+            app:layout_constraintTop_toTopOf="parent">
 
-            android:backgroundTint="@color/colorChatItemBg"
-            android:fontFamily="@font/roboto_regular"
-            android:padding="@dimen/_8sdp"
-            android:textColor="@color/titleTextColorBlack"
-            android:textSize="14sp"
-            android:textStyle="normal"
-            app:layout_constraintEnd_toStartOf="@+id/sivInfluancerImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <RelativeLayout
+                android:id="@+id/rl_dp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignBottom="@id/tvMessageRight"
+                android:layout_alignParentEnd="true">
 
 
-        <LinearLayout
-            android:id="@+id/ll_timeStamp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="@+id/tvMessageRight"
-            app:layout_constraintStart_toStartOf="@+id/tvMessage"
-            app:layout_constraintTop_toBottomOf="@+id/tvMessageRight">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/siv_userPicRight"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="0dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/sk_userPicRight"
+                    style="@style/SpinKitView.Large.Pulse"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    app:SpinKit_Color="@color/colorOrange" />
+
+            </RelativeLayout>
 
             <TextView
+                android:id="@+id/tvMessageRight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:text="Text message"
-                android:textColor="@color/colorChatDetailGray"
-                android:textSize="10sp"
-                android:visibility="gone">
+                android:layout_marginEnd="5sp"
+                android:layout_toStartOf="@+id/rl_dp"
+                android:background="@drawable/chat_round_corner_right"
+                android:backgroundTint="@color/colorChatItemBg"
+                android:fontFamily="@font/roboto_regular"
+                android:lineSpacingExtra="3sp"
+                android:padding="@dimen/_8sdp"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toStartOf="@+id/rl_dp"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            </TextView>
-
-            <TextView
-                android:id="@+id/tv_messageTime"
+            <LinearLayout
+                android:id="@+id/ll_timeStamp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:textColor="@color/colorChatDetailGray"
-                android:textSize="10sp">
+                android:layout_below="@+id/tvMessageRight"
+                android:layout_marginTop="0dp"
+                android:layout_toStartOf="@+id/rl_dp"
+                android:gravity="end"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="@+id/tvMessageRight"
+                app:layout_constraintStart_toStartOf="@+id/tvMessageRight"
+                app:layout_constraintTop_toBottomOf="@+id/tvMessageRight">
 
-            </TextView>
-        </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_light"
+                    android:textColor="@color/colorChatDetailGray"
+                    android:textSize="10sp"
+                    android:visibility="gone">
+
+                </TextView>
+
+                <TextView
+
+                    android:id="@+id/tv_messageTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_light"
+                    android:textColor="@color/colorChatDetailGray"
+                    android:textSize="10sp">
+
+                </TextView>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

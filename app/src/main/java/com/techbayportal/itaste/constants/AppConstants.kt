@@ -132,6 +132,7 @@ object AppConstants {
             const val LANGUAGE_PREF = "language_pref"
             const val SWITCH_TO_PREMIUM = "switch_to_premium"
             const val GUEST_MODE = "guest_mode"
+            const val FCM_KEY = "fcm_key"
         }
     }
 
