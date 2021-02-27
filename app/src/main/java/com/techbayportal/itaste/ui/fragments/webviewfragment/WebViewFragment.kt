@@ -137,7 +137,7 @@ class WebViewFragment : BaseFragment<FragmentWebViewBinding, WebViewViewModel>()
             }
 
             override fun onPageFinished(view: WebView, url: String) {
-                if(swipeRefreshLayout.isNotEmpty()){
+                if(swipeRefreshLayout.isNotEmpty() || swipeRefreshLayout != null){
                     swipeRefreshLayout.isRefreshing = false
                 }
 

@@ -23,9 +23,12 @@ import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_profile.*
+import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
+import java.util.*
 
 @AndroidEntryPoint
 class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewModel>() {
@@ -63,11 +66,36 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
-        super.onViewCreated(view, savedInstanceState)
+
+        //guest mode stuff
+        dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+            if(it){
+                Picasso.get().load(R.drawable.icon_profile).fit().centerCrop().into(siv_userImage)
+                sk_myProfile.visibility = View.GONE
+                ll_guestModeProfile.visibility = View.VISIBLE
+                ll_editProfile.visibility = View.GONE
+                linear.visibility = View.GONE
+                tv_userName.text = getString(R.string.guest_user)
+                Timber.d("Guest Mode On")
+            }else{
+                ll_guestModeProfile.visibility = View.GONE
+                ll_editProfile.visibility = View.VISIBLE
+                linear.visibility = View.VISIBLE
+                initializing()
+                Timber.d("Guest Mode Off")
+            }
+
+        })
+
         mView = view
         subscribeToObserveDarkModeDataStore()
         subscribeToObserveLanguage()
-        initializing()
+
+        super.onViewCreated(view, savedInstanceState)
+
+
+
+
 
 
     }
@@ -247,6 +275,14 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
             Navigation.findNavController(tv_blockedAccounts)
                 .navigate(R.id.action_myProfileFragment_to_signUpVendorFragment2)
             //  navigateToMainNavForVendorSignUp()
+        })
+
+        mViewModel.onLogoutOfGuestModeClicked.observe(this, Observer{
+            GlobalScope.launch {
+                dataStoreProvider.guestMode(false)
+                navigateToLoginScreen()
+            }
+
         })
     }
 

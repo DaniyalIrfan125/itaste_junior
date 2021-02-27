@@ -87,7 +87,8 @@
             app:stackFromEnd="true"
             android:orientation="vertical"
             tools:listitem="@layout/item_notification"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            >
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -141,6 +142,96 @@
             android:textColor="@color/titleTextColorBlack"
             android:textSize="14sp" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_notificationsGuest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_back_button"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:src="@drawable/icon_four_bells"
+            app:tint="@color/mainIconColor"
+            >
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:lineSpacingExtra="5sp"
+            android:text="@string/no_notifications"
+            android:textAlignment="center"
+            android:textColor="@color/titleTextColorBlack"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="@dimen/_225sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:fontFamily="@font/roboto_regular"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="3sp"
+            android:text="@string/guest_notifications_details"
+            android:textAlignment="center"
+            android:textColor="@color/titleTextColorBlack"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="@dimen/_225sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/roboto_bold"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="3sp"
+            android:text="@string/create_a_new_account"
+            android:textAlignment="center"
+            android:textColor="@color/colorOrange"
+            android:textSize="14sp" />
+
+        <com.balysv.materialripple.MaterialRippleLayout
+            android:id="@+id/ripple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            app:mrl_rippleColor="@color/colorLightOrange">
+
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/btn_curve_orange"
+                android:fontFamily="@font/roboto_bold"
+                android:lineSpacingExtra="@dimen/_3sdp"
+                android:text="@string/sign_in"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                android:onClick="@{()->viewModel.onSignInButtonClicked()}">
+
+            </Button>
+        </com.balysv.materialripple.MaterialRippleLayout>
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

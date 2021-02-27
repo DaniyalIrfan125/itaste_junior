@@ -66,5 +66,10 @@
     <color name="noPostsTextColor">#1a1a1a</color>
     <color name="filterScreen">#f9f9f9</color>
 
+    <color name="serchHitColorNewMessage">#dddddd</color>
+
+    <color name="adsIconNText">#8b8b8b</color>
+    <color name="selectPostStrip">#ffffff</color>
+
 
 </resources>

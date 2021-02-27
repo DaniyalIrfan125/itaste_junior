@@ -1,3 +1,4 @@
+
 package com.techbayportal.itaste.ui.fragments.chatfragment
 
 import android.content.Context
@@ -18,9 +19,9 @@ import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.FragmentChatBinding
 import com.techbayportal.itaste.ui.fragments.chatfragment.adapter.ChatAdapter
 import com.techbayportal.itaste.ui.fragments.chatfragment.itemClickListener.ChatRvItemClickListener
-import com.techbayportal.offsidesportsapp.data.models.chat.ChatMessageDataClass
+import com.techbayportal.itaste.data.models.chat.ChatMessageDataClass
 import com.techbayportal.itaste.data.models.chat.GeneralInboxDataClass
-import com.techbayportal.offsidesportsapp.data.models.chat.UserInfoClass
+import com.techbayportal.itaste.data.models.chat.UserInfoClass
 import com.techbayportal.itaste.data.models.chat.UserStatusDataClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
@@ -263,18 +264,12 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
             if (userStatus != null) {
                 if (userStatus.state == "offline") {
                     //  binding.userStatus.text = "Last Seen:${userStatus.lastSeen}"
-                    Toast.makeText(
-                        requireContext(),
-                        "Last Seen:${userStatus.lastSeen}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    //Toast.makeText(requireContext(), "Last Seen:${userStatus.lastSeen}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Last Seen:${userStatus.lastSeen}")
                 } else if (userStatus.state == "Online") {
-                    Toast.makeText(
-                        requireContext(),
-                        "Last Seen:${userStatus.lastSeen}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    //Toast.makeText(requireContext(), "Last Seen:${userStatus.lastSeen}", Toast.LENGTH_SHORT).show()
                     //  binding.userStatus.text = userStatus.state
+                    Timber.d("Last Seen:${userStatus.lastSeen}")
                 }
 
             }
@@ -344,7 +339,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
             } else if (value != null && value.documents.isEmpty()) {
                 if (sharedViewModel.cartPost != null) {
                     sendOrderDetailsMessage(
-                        sharedViewModel.cartPost!!.id.toString(),
+                        sharedViewModel.cartPost!!.order_no,
                         sharedViewModel.cartPost!!.image,
                         getString(R.string.hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you)
                     )

@@ -28,7 +28,7 @@ class DirectMessagesAdapter (
             itemBinding.rlInboxItem .setOnClickListener {
                 listener.onClick(data)
             }
-            if(data.imgStr .isNotEmpty()){
+            if(data.imgStr.isNotEmpty()){
                 Picasso.get().load(data.imgStr).fit().centerCrop()
                     .into(itemBinding.sivUserImage, object : Callback {
                         override fun onSuccess() {

@@ -19,7 +19,8 @@ data class CartPost(
     val description: String,
     val id: Int,
     val image: String,
-    val quantity: Int
+    val quantity: Int,
+    val order_no: String
 )
 
 data class CartVendor(
@@ -28,4 +29,6 @@ data class CartVendor(
     val id: Int,
     val last: String,
     val profile_pic: String
+
+
 )

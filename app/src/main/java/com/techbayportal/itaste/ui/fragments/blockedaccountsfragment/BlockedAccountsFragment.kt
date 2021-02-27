@@ -67,7 +67,8 @@ class BlockedAccountsFragment : BaseFragment<FragmentBlokedAccountsBinding, Bloc
         blockedAccountsAdapter = BlockedAccountsAdapter(blockedAccountsList, object : BlockedAccountsAdapter.ClickItemListener{
             override fun onClicked(getAllBlockedUserData: GetAllBlockedUserData) {
               //  Toast.makeText(requireContext(), "Account selected: ${getAllBlockedUserData.first_name}", Toast.LENGTH_SHORT).show()
-                mViewModel.hitBlockAccountApi(31)
+                //Temperory 31 was send as id below
+                mViewModel.hitBlockAccountApi(getAllBlockedUserData.id)
             }
 
         })

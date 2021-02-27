@@ -1,4 +1,4 @@
-package com.techbayportal.offsidesportsapp.data.models.chat
+package com.techbayportal.itaste.data.models.chat
 
 import java.util.*
 

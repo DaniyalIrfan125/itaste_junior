@@ -138,7 +138,6 @@
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
 
-
                         </LinearLayout>
 
                         <EditText
@@ -150,7 +149,8 @@
                             android:imeOptions="actionNext"
                             android:hint="@string/first_name"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="12sp">
+                            android:textSize="12sp"
+                            android:backgroundTint="@color/color_darkGrey">
 
                         </EditText>
 
@@ -200,7 +200,8 @@
                             android:imeOptions="actionNext"
                             android:hint="@string/last_name"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="12sp">
+                            android:textSize="12sp"
+                            android:backgroundTint="@color/color_darkGrey">
 
                         </EditText>
 
@@ -302,7 +303,8 @@
                             android:hint="@string/bio"
                             android:maxLines="4"
                             android:textColor="@color/titleTextColorBlack"
-                            android:textSize="12sp">
+                            android:textSize="12sp"
+                            android:backgroundTint="@color/color_darkGrey">
 
                         </EditText>
 
@@ -382,13 +384,14 @@
                                 app:ccp_showFlag="false"
                                 app:ccp_textColor="@color/titleTextColorBlack"
                                 app:ccp_textFont="roboto_light.ttf"
-                                app:ccp_textSize="@dimen/_10sdp" />
+                                app:ccp_textSize="@dimen/_10sdp"
+                                android:backgroundTint="@color/color_darkGrey"/>
 
                                 <View
                                     android:layout_width="match_parent"
                                     android:layout_height="1.2dp"
                                     android:layout_marginStart="@dimen/_20sdp"
-                                    android:background="@color/spinnerLinebg">
+                                    android:background="@color/color_darkGrey">
 
                                 </View>
                             </LinearLayout>
@@ -405,7 +408,8 @@
                                 android:maxLength="14"
                                 android:singleLine="true"
                                 android:textColor="@color/titleTextColorBlack"
-                                android:textSize="12sp">
+                                android:textSize="12sp"
+                                android:backgroundTint="@color/color_darkGrey">
 
 
                             </EditText>
@@ -467,7 +471,8 @@
                             android:fontFamily="@font/roboto_light"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="12sp"
-                            android:hint="@string/abc_g_com">
+                            android:hint="@string/abc_g_com"
+                            android:backgroundTint="@color/color_darkGrey">
 
                         </EditText>
 
@@ -532,6 +537,7 @@
                                     android:fontFamily="@font/roboto_light"
                                     android:textColor="@color/titleTextColorBlack"
                                     android:textColorHint="@color/titleTextColorBlack"
+                                    android:backgroundTint="@color/color_darkGrey"
 
                                     />
 
@@ -591,6 +597,7 @@
                                     android:fontFamily="@font/roboto_light"
                                     android:textColor="@color/titleTextColorBlack"
                                     android:textColorHint="@color/titleTextColorBlack"
+                                    android:backgroundTint="@color/color_darkGrey"
                                     />
 
                                 <TextView

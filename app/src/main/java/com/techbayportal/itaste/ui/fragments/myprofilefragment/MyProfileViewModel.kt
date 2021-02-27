@@ -41,6 +41,7 @@ class MyProfileViewModel @ViewModelInject constructor(
     val onBlockedAccountClicked = SingleLiveEvent<Any>()
     val onLogoutClicked = SingleLiveEvent<Any>()
     val onSwitchToPremiumClicked = SingleLiveEvent<Any>()
+    val onLogoutOfGuestModeClicked = SingleLiveEvent<Any>()
 
 
     fun onBackButtonClicked() {
@@ -82,6 +83,10 @@ class MyProfileViewModel @ViewModelInject constructor(
     fun onSwitchToPremiumClicked(){
         onSwitchToPremiumClicked.call()
     }
+    fun onLogoutOfGuestModeClicked(){
+        onLogoutOfGuestModeClicked.call()
+    }
+
 
     fun hitLogout() {
         viewModelScope.launch {

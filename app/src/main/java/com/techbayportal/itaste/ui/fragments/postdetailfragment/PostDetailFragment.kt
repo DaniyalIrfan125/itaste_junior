@@ -15,8 +15,7 @@ import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
-import com.techbayportal.itaste.data.models.Comment
-import com.techbayportal.itaste.data.models.PostDetailResponse
+import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentPostDetailBinding
 import com.techbayportal.itaste.ui.fragments.postdetailbottomsheetfragment.PostDetailBottomSheetFragment
@@ -53,6 +52,8 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
     var postDetailResponse: PostDetailResponse? = null
     private var vendorId: Int = 0
 
+    val loginSession = LoginSession.getInstance().getLoginResponse()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -74,8 +75,8 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                 Resource.Status.SUCCESS -> {
                     it?.let { it ->
                         loadingDialog.dismiss()
-
-                        MotionToast.createToast(
+                        DialogClass.successDialog(requireContext(), getString(R.string.tv_post_delete), baseDarkMode)
+                        /*MotionToast.createToast(
                             requireActivity(),
                             getString(R.string.tv_success),
                             getString(R.string.tv_post_delete),
@@ -83,7 +84,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
                             MotionToast.GRAVITY_BOTTOM,
                             MotionToast.SHORT_DURATION,
                             ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
-                        )
+                        )*/
 
                         Navigation.findNavController(radioGroup)
                             .popBackStack(R.id.homeFragment, false)
@@ -168,11 +169,11 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         mViewModel.favoriteUnfavoriteReponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    loadingDialog.show()
+                  //  loadingDialog.show()
                 }
                 Resource.Status.SUCCESS -> {
                     it?.let { it ->
-                        loadingDialog.dismiss()
+                      //  loadingDialog.dismiss()
 
 
                     }
@@ -188,11 +189,11 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         mViewModel.favoriteUnfavoriteCommentReponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
-                    loadingDialog.show()
+                   // loadingDialog.show()
                 }
                 Resource.Status.SUCCESS -> {
                     it?.let { it ->
-                        loadingDialog.dismiss()
+                       // loadingDialog.dismiss()
 
 
                     }
@@ -342,6 +343,11 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         tv_title.text = it.data.post.caption
         tv_price.text = it.data.post.price.toString() + " " + getString(R.string.aed)
         tv_description.text = it.data.post.description
+        if(it.data.post.description.isNullOrEmpty()){
+            tv_description.visibility =View.GONE
+        }else{
+            tv_description.visibility =View.VISIBLE
+        }
         tv_totalLikes.text =
             it.data.post.total_likes.toString() + " " + getString(R.string.tv_likes)
         tv_time.text = getString(R.string.tv_cooking_time_is) + " : " + it.data.post.cooking_time
@@ -364,11 +370,15 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         })
 
         mViewModel.onVendorProfileHeaderClicked.observe(this, Observer {
-            sharedViewModel.vendorProfileId = vendorId
+          //  sharedViewModel.vendorProfileId = vendorId
+            sharedViewModel.vendorHomeScreenData = GetHomeScreenData(vendorId,"","","","",arrayListOf<GetHomeScreenPostsData>())
             Navigation.findNavController(ll_dp).navigate(R.id.action_postDetailFragment_to_profileFragment)
         })
 
         mViewModel.onSendButtonClicked.observe(this, Observer {
+            sharedViewModel.vendorDetailsForCart =
+                CartVendor(sharedViewModel.vendorHomeScreenData!!.location, sharedViewModel.vendorHomeScreenData!!.first, sharedViewModel.vendorHomeScreenData!!.id, sharedViewModel.vendorHomeScreenData!!.first, sharedViewModel.vendorHomeScreenData!!.profilePic)
+           // sharedViewModel.cartPost = null
             Navigation.findNavController(iv_Chat)
                 .navigate(R.id.action_postDetailFragment_to_chatFragment2)
         })
@@ -379,8 +389,7 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
 
         mViewModel.onEditPostButtonClicked.observe(this, Observer {
             sharedViewModel.isEditPost = true
-            Navigation.findNavController(btn_edit_post)
-                .navigate(R.id.action_postDetailFragment_to_postFragment)
+            Navigation.findNavController(btn_edit_post).navigate(R.id.action_postDetailFragment_to_postFragment)
         })
 
         mViewModel.onMoreButtonClicked.observe(this, Observer {
@@ -430,9 +439,17 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         initialising()
-
+        //Check if current login vendor and selected post vendor
+        if(loginSession != null){
+            if(sharedViewModel.vendorProfileId  == loginSession.data.id){
+                rippleEdtPost.visibility = View.VISIBLE
+                rippleAddToCart.visibility = View.GONE
+            }else{
+                rippleEdtPost.visibility = View.GONE
+                rippleAddToCart.visibility = View.VISIBLE
+            }
+        }
 
         postDetailResponse?.let {
             populateDate(it)

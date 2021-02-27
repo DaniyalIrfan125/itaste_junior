@@ -42,7 +42,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/relative_top">
 
             <RelativeLayout
@@ -96,13 +96,16 @@
                         android:textSize="16sp" />
 
                     <LinearLayout
+                        android:id="@+id/ll_editProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:clickable="true"
-                        android:foreground="?attr/selectableItemBackground">
+
+                        android:foreground="?attr/selectableItemBackground"
+                        android:focusable="true">
 
                         <TextView
                             android:id="@+id/tv_editProfile"
@@ -119,6 +122,7 @@
 
                     <LinearLayout
                         android:id="@+id/linear"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_25sdp"
@@ -133,7 +137,8 @@
                             android:foreground="?attr/selectableItemBackground"
                             android:gravity="center"
                             android:orientation="horizontal"
-                            android:weightSum="2">
+                            android:weightSum="2"
+                            android:focusable="true">
 
                             <ImageView
                                 android:id="@+id/iv_cart"
@@ -154,7 +159,6 @@
                                 android:layout_marginStart="@dimen/_15sdp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
-
                                 android:text="@string/my_cart"
                                 android:textColor="@color/titleTextColorBlack"
                                 android:textSize="16sp" />
@@ -163,7 +167,6 @@
                                 android:id="@+id/mycart_fwd_arrow"
                                 android:layout_width="@dimen/_15sdp"
                                 android:layout_height="@dimen/_8sdp"
-
                                 android:layout_weight="0.4"
                                 android:src="@drawable/icon_forward_arrow" />
                         </LinearLayout>
@@ -183,7 +186,8 @@
                             android:foreground="?attr/selectableItemBackground"
                             android:gravity="center"
                             android:orientation="horizontal"
-                            android:weightSum="2">
+                            android:weightSum="2"
+                            android:focusable="true">
 
                             <ImageView
                                 app:tint="@color/mainIconColor"
@@ -589,6 +593,93 @@
                             android:textSize="15sp" />
 
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_guestModeProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_back_button"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:gravity="center"
+                        android:visibility="gone">
+
+                        <ImageView
+                            android:layout_width="@dimen/_100sdp"
+                            android:layout_height="@dimen/_100sdp"
+                            android:src="@drawable/guest_profile"
+                            app:tint="@color/mainIconColor"
+                            >
+                        </ImageView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/roboto_bold"
+                            android:lineSpacingExtra="5sp"
+                            android:text="@string/sign_in"
+                            android:textAlignment="center"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="@dimen/_225sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:letterSpacing="-0.01"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/to_control_you_have_to_sign_in"
+                            android:textAlignment="center"
+                            android:textColor="@color/titleTextColorBlack"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:layout_width="@dimen/_225sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/roboto_bold"
+                            android:letterSpacing="-0.01"
+                            android:lineSpacingExtra="3sp"
+                            android:text="@string/create_a_new_account"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorOrange"
+                            android:textSize="14sp" />
+
+                        <com.balysv.materialripple.MaterialRippleLayout
+                            android:id="@+id/ripple"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_20sdp"
+                            app:mrl_rippleColor="@color/colorLightOrange">
+
+                            <Button
+                                android:id="@+id/btn_login"
+                                android:layout_width="match_parent"
+                                android:layout_height="50dp"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginTop="6dp"
+                                android:layout_marginEnd="6dp"
+                                android:layout_marginBottom="6dp"
+                                android:background="@drawable/btn_curve_orange"
+                                android:fontFamily="@font/roboto_bold"
+                                android:lineSpacingExtra="@dimen/_3sdp"
+                                android:text="@string/log_out_of_guest_mode"
+                                android:textAllCaps="true"
+                                android:textColor="@color/colorBlack"
+                                android:textSize="16sp"
+                                android:onClick="@{()->viewModel.onLogoutOfGuestModeClicked()}">
+
+                            </Button>
+                        </com.balysv.materialripple.MaterialRippleLayout>
                     </LinearLayout>
 
                 </LinearLayout>

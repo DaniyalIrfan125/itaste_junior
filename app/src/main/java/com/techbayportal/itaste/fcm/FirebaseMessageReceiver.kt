@@ -56,7 +56,7 @@ class FirebaseMessageReceiver : FirebaseMessagingService() {
         val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         var builder =
             NotificationCompat.Builder(applicationContext, channel_id)
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.mipmap.ic_launcher_itaste_round)
                 .setSound(uri)
                 .setAutoCancel(true) //    setVibrate(new long[]{1000, 1000, 1000, 1000, 1000})
                 //  .setOnlyAlertOnce(true)
@@ -73,7 +73,7 @@ class FirebaseMessageReceiver : FirebaseMessagingService() {
                         $body
                         """.trimIndent()
                 )
-                .setSmallIcon(R.mipmap.ic_launcher_round)
+                .setSmallIcon(R.mipmap.ic_launcher_itaste_round)
         }
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -90,7 +90,7 @@ class FirebaseMessageReceiver : FirebaseMessagingService() {
         remoteViews.setTextViewText(R.id.title, title);
         remoteViews.setTextViewText(R.id.message, body);
         remoteViews.setTextViewText(R.id.body, message);
-        remoteViews.setImageViewResource(R.id.icon, R.mipmap.ic_launcher_round);
+        remoteViews.setImageViewResource(R.id.icon, R.mipmap.ic_launcher_itaste_round);
         return remoteViews;
     }
 

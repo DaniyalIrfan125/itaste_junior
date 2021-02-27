@@ -21,6 +21,7 @@ class SharedViewModel : BaseViewModel() {
     var otpVerifyCode = ""
     var userModel = UserModel()
     var vendorDetailsForCart : CartVendor? = null
+    var vendorHomeScreenData : GetHomeScreenData? = null
     var cartPost : CartPost? = null
     val isDarkMode: Boolean = false
     var userModelLiveData = MutableLiveData<UserModel>()

@@ -24,6 +24,9 @@
             android:layout_marginBottom="@dimen/_5sdp">
 
             <LinearLayout
+                android:focusable="true"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:id="@+id/img_back"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="match_parent"
@@ -79,6 +82,9 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:focusable="true"
+                        android:clickable="true"
+                        android:foreground="?attr/selectableItemBackground"
                         android:id="@+id/ll_new_message"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -108,35 +114,162 @@
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/linear"
+            android:id="@+id/ll_guestModeDirectMessage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/relative_top"
-            android:layout_marginStart="@dimen/_25sdp"
-            android:layout_marginEnd="@dimen/_25sdp"
-            android:orientation="vertical">
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <SearchView
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/guest_profile"
+                app:tint="@color/mainIconColor"></ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_bold"
+                android:lineSpacingExtra="5sp"
+                android:text="@string/sign_in"
+                android:textAlignment="center"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="25sp" />
+
+            <TextView
+                android:layout_width="@dimen/_225sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:fontFamily="@font/roboto_regular"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="3sp"
+                android:text="In order to send or receive messages you have to sign in or if you don't have an account,"
+                android:textAlignment="center"
+                android:textColor="@color/titleTextColorBlack"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="@dimen/_225sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_bold"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="3sp"
+                android:text="@string/create_a_new_account"
+                android:textAlignment="center"
+                android:textColor="@color/colorOrange"
+                android:textSize="14sp" />
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                android:id="@+id/ripple"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/layout_curve_gray"
-                android:queryHint="Search in chat"
-                android:searchIcon="@drawable/icon_search"
-                app:tint="@color/mainIconColor">
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:mrl_rippleColor="@color/colorLightOrange">
 
-            </SearchView>
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/btn_curve_orange"
+                    android:fontFamily="@font/roboto_bold"
+                    android:lineSpacingExtra="@dimen/_3sdp"
+                    android:onClick="@{()->viewModel.onSignInButtonClicked()}"
+                    android:text="@string/sign_in"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="16sp">
 
-
+                </Button>
+            </com.balysv.materialripple.MaterialRippleLayout>
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_below="@+id/relative_top"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/ed_blackboundary"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_search"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                >
+
+                <ImageView
+                    android:id="@+id/searchIcon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/icon_search"
+                    app:tint="@color/mainIconColor" />
+
+                <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/spinKit"
+                    style="@style/SpinKitView.Large.Circle"
+                    android:layout_width="@dimen/_17sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"
+                    app:SpinKit_Color="@color/colorOrange" />
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/ed_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_7sdp"
+                android:layout_marginBottom="@dimen/_6sdp"
+                android:layout_toEndOf="@+id/rl_search"
+                android:background="@color/transparent"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical|start"
+                android:hint="@string/search_in_chats"
+                android:imeOptions="actionDone"
+                android:paddingStart="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:singleLine="true"
+                android:textAlignment="viewStart"
+                android:textColor="@color/titleTextColorBlack"
+                android:textColorHint="@color/titleTextColorBlack"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/linear"
-            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
             android:fontFamily="@font/roboto_regular"
             android:text="@string/message"
             android:textColor="@color/titleTextColorBlack">

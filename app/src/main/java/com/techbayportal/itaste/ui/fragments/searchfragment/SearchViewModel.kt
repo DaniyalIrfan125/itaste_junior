@@ -36,18 +36,34 @@ class SearchViewModel @ViewModelInject constructor(
     val getAllCategoriesResponse: LiveData<Resource<GetAllCategoriesResponse>>
         get() = _getAllCategoriesResponse
 
+    val _getAllCategoriesResponseForGuest = MutableLiveData<Resource<GetAllCategoriesResponse>>()
+    val getAllCategoriesResponseForGuest: LiveData<Resource<GetAllCategoriesResponse>>
+        get() = _getAllCategoriesResponseForGuest
+
     val _getAllSearchPostsResponse = MutableLiveData<Resource<SearchAndFilterResponse>>()
     val getAllSearchPostsResponse: LiveData<Resource<SearchAndFilterResponse>>
         get() = _getAllSearchPostsResponse
+
+    val _getAllSearchPostsResponseForGuest = MutableLiveData<Resource<SearchAndFilterResponse>>()
+    val getAllSearchPostsResponseForGuest: LiveData<Resource<SearchAndFilterResponse>>
+        get() = _getAllSearchPostsResponseForGuest
 
     val _getSearchAndFilterResponse = MutableLiveData<Resource<SearchAndFilterResponse>>()
     val getSearchAndFilterResponse: LiveData<Resource<SearchAndFilterResponse>>
         get() = _getSearchAndFilterResponse
 
+    val _getSearchAndFilterResponseForGuest = MutableLiveData<Resource<SearchAndFilterResponse>>()
+    val getSearchAndFilterResponseForGuest: LiveData<Resource<SearchAndFilterResponse>>
+        get() = _getSearchAndFilterResponseForGuest
+
 
     val _getSearchResponse = MutableLiveData<Resource<SearchAndFilterResponse>>()
     val getSearchResponse: LiveData<Resource<SearchAndFilterResponse>>
         get() = _getSearchResponse
+
+    val _getSearchResponseForGuest = MutableLiveData<Resource<SearchAndFilterResponse>>()
+    val getSearchResponseForGuest: LiveData<Resource<SearchAndFilterResponse>>
+        get() = _getSearchResponseForGuest
 
 
 
@@ -121,6 +137,35 @@ class SearchViewModel @ViewModelInject constructor(
         }
     }
 
+    //categories for guest
+    fun hitGetAllCategoriesApiForGuest() {
+        viewModelScope.launch {
+            _getAllCategoriesResponseForGuest.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.getAllCategories("").let {
+                        if (it.isSuccessful) {
+                            _getAllCategoriesResponseForGuest.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _getAllCategoriesResponseForGuest.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _getAllCategoriesResponseForGuest.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getAllCategoriesResponseForGuest.postValue(Resource.error("" + e.message, null))
+                }
+            } else _getAllCategoriesResponseForGuest.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
     fun hitGetAllSearchPostsDataApi() {
         viewModelScope.launch {
             _getAllSearchPostsResponse.postValue(Resource.loading(null))
@@ -146,6 +191,35 @@ class SearchViewModel @ViewModelInject constructor(
                     _getAllSearchPostsResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _getAllSearchPostsResponse.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
+    //AllPosts for guests
+    fun hitGetAllSearchPostsDataApiForGuest() {
+        viewModelScope.launch {
+            _getAllSearchPostsResponseForGuest.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.getAllSearchPostsApi("").let {
+                        if (it.isSuccessful) {
+                            _getAllSearchPostsResponseForGuest.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _getAllSearchPostsResponseForGuest.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _getAllSearchPostsResponseForGuest.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getAllSearchPostsResponseForGuest.postValue(Resource.error("" + e.message, null))
+                }
+            } else _getAllSearchPostsResponseForGuest.postValue(Resource.error("No Internet Connection", null))
         }
     }
 
@@ -178,6 +252,35 @@ class SearchViewModel @ViewModelInject constructor(
         }
     }
 
+    //Apply filter for guests
+    fun hitApplyFiltersApiForGuest(keyword : String, country_id:String, city_id :String, category_id :String) {
+        viewModelScope.launch {
+            _getSearchAndFilterResponseForGuest.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.searchAndFilterApi("", keyword, country_id, city_id, category_id).let {
+                        if (it.isSuccessful) {
+                            _getSearchAndFilterResponseForGuest.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _getSearchAndFilterResponseForGuest.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _getSearchAndFilterResponseForGuest.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getSearchAndFilterResponseForGuest.postValue(Resource.error("" + e.message, null))
+                }
+            } else _getSearchAndFilterResponseForGuest.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
     fun hitSearchApi(keyword : String) {
         viewModelScope.launch {
             _getSearchResponse.postValue(Resource.loading(null))
@@ -203,6 +306,35 @@ class SearchViewModel @ViewModelInject constructor(
                     _getSearchResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _getSearchResponse.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
+    //Hit search api for Guests
+    fun hitSearchApiForGuest(keyword : String) {
+        viewModelScope.launch {
+            _getSearchResponseForGuest.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()) {
+                try {
+                    mainRepository.searchApi("", keyword).let {
+                        if (it.isSuccessful) {
+                            _getSearchResponseForGuest.postValue(Resource.success(it.body()!!))
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                            _getSearchResponseForGuest.postValue(Resource.error(it.message(), null))
+                        } else {
+                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
+                            _getSearchResponseForGuest.postValue(
+                                Resource.error(
+                                    extractErrorMessage(
+                                        errorMessagesJson
+                                    ), null
+                                )
+                            )
+                        }
+                    }
+                } catch (e: Exception) {
+                    _getSearchResponseForGuest.postValue(Resource.error("" + e.message, null))
+                }
+            } else _getSearchResponseForGuest.postValue(Resource.error("No Internet Connection", null))
         }
     }
 

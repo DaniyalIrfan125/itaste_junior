@@ -88,6 +88,16 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_profileFragment_to_myProfileFragment"
+            app:destination="@id/myProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/savedPostsFragment"
@@ -95,19 +105,31 @@
         android:label="SavedPostsFragment" >
         <action
             android:id="@+id/action_savedPostsFragment_to_postDetailFragment"
-            app:destination="@id/postDetailFragment" />
+            app:destination="@id/postDetailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.techbayportal.itaste.ui.fragments.searchfragment.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.techbayportal.itaste.ui.fragments.cartfragment.CartFragment"
         android:label="CartFragment" >
         <action
             android:id="@+id/action_cartFragment_to_chatFragment2"
-            app:destination="@id/chatFragment2" />
+            app:destination="@id/chatFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -194,10 +216,18 @@
         android:label="NotificationFragment" >
         <action
             android:id="@+id/action_notificationFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            app:destination="@id/profileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_notificationFragment_to_postDetailFragment"
-            app:destination="@id/postDetailFragment" />
+            app:destination="@id/postDetailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/directMessagesFragment"
@@ -304,6 +334,13 @@
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"
             app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_userProfileFragment_to_signUpVendorFragment2"
+            app:destination="@id/signUpVendorFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <dialog
         android:id="@+id/reportBugDialogFragment"
@@ -360,6 +397,13 @@
         <action
             android:id="@+id/action_settingsFragment_to_webViewFragment"
             app:destination="@id/webViewFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_settingsFragment_to_signUpVendorFragment2"
+            app:destination="@id/signUpVendorFragment2"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"

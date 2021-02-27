@@ -13,6 +13,7 @@ import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.databinding.FragmentMessageNewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_message_new.*
+import kotlinx.android.synthetic.main.layout_write_message.*
 
 @AndroidEntryPoint
 class NewMessageFragment : BaseFragment<FragmentMessageNewBinding, NewMessageViewModel>() {
@@ -23,6 +24,22 @@ class NewMessageFragment : BaseFragment<FragmentMessageNewBinding, NewMessageVie
         get() = NewMessageViewModel::class.java
     override val bindingVariable: Int
         get() = BR.viewModel
+
+    lateinit var mView: View
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mView = view
+        initializing()
+    }
+
+    private fun initializing() {
+        tv_message.hint = getString(R.string.type_message)
+
+    }
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()

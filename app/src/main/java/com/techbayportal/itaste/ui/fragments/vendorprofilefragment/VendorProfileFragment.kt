@@ -161,20 +161,22 @@ class VendorProfileFragment : BaseFragment<FragmentVendorProfileBinding, VendorP
 
                     } else {
                         mViewModel.hitGetVendorPersonalProfile()
+
+                        val accessToken = LoginSession.getInstance().getLoginResponse()!!.data.access_token
+                        //  val countryId = LoginSession.getInstance().getLoginResponse()!!.data.country_id
+                        // val isPaymentUpdated = LoginSession.getInstance().getLoginResponse()!!.data.is_payment_update
+                        val vendorUserName = LoginSession.getInstance().getLoginResponse()!!.data.username
+
+                        if(it.data != null && it.data.data.profile_pic.isNotEmpty()){
+                            val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, vendorUserName, it.data.data.phone,  it.data.data.email,
+                                it.data.data.profile_pic, it.data.data.role,  accessToken, it.data.data.country_id, it.data.data.city_id,  it.data.data.is_payment_update)
+                            val loginResponse = LoginResponse("update vendor profile", userData, "")
+                            //LoginSession.getInstance().setLoginResponse(loginResponse)
+                            mViewModel.saveUserObj(loginResponse)
+                        }
                     }
 
-                    val accessToken = LoginSession.getInstance().getLoginResponse()!!.data.access_token
-                  //  val countryId = LoginSession.getInstance().getLoginResponse()!!.data.country_id
-                   // val isPaymentUpdated = LoginSession.getInstance().getLoginResponse()!!.data.is_payment_update
-                    val vendorUserName = LoginSession.getInstance().getLoginResponse()!!.data.username
 
-                    if(it.data != null && it.data.data.profile_pic.isNotEmpty()){
-                        val userData = Data( it.data.data.id, it.data.data.first, it.data.data.last, vendorUserName, it.data.data.phone,  it.data.data.email,
-                             it.data.data.profile_pic, it.data.data.role,  accessToken, it.data.data.country_id, it.data.data.city_id,  it.data.data.is_payment_update)
-                        val loginResponse = LoginResponse("update vendor profile", userData, "")
-                        //LoginSession.getInstance().setLoginResponse(loginResponse)
-                        mViewModel.saveUserObj(loginResponse)
-                    }
 
 
                 }

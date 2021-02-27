@@ -62,7 +62,7 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
 
         if (sharedViewModel.isEditPost) {
             isEditPostClicked = true
-            mViewModel.editPostCall(14)
+            mViewModel.editPostCall(sharedViewModel.postId)
             sharedViewModel.isEditPost = false
             sharedViewModel.isEditBottomSheetClicked.value = false
 
@@ -142,15 +142,8 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
                     it?.let { it ->
                         loadingDialog.dismiss()
                         it.data?.let {
-                            MotionToast.createToast(
-                                requireActivity(),
-                                getString(R.string.tv_success),
-                                getString(R.string.tv_post_added),
-                                MotionToast.TOAST_SUCCESS,
-                                MotionToast.GRAVITY_BOTTOM,
-                                MotionToast.SHORT_DURATION,
-                                ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
-                            )
+
+                            DialogClass.successDialog(requireContext(), getString(R.string.tv_post_added), baseDarkMode)
 
                             Navigation.findNavController(radioGroup)
                                 .popBackStack(R.id.homeFragment, false)
@@ -174,7 +167,8 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
                     it?.let { it ->
                         loadingDialog.dismiss()
                         it.data?.let {
-                            MotionToast.createToast(
+                            DialogClass.successDialog(requireContext(), getString(R.string.tv_post_updated), baseDarkMode)
+                           /* MotionToast.createToast(
                                 requireActivity(),
                                 getString(R.string.tv_success),
                                 getString(R.string.tv_post_added),
@@ -182,7 +176,7 @@ class PostFragment : BaseFragment<LayoutPostfragmentBinding, PostViewModel>() {
                                 MotionToast.GRAVITY_BOTTOM,
                                 MotionToast.SHORT_DURATION,
                                 ResourcesCompat.getFont(requireActivity(), R.font.roboto_regular)
-                            )
+                            )*/
 
                             sharedViewModel.isPostUpdated.value = true
                             Navigation.findNavController(radioGroup).popBackStack()

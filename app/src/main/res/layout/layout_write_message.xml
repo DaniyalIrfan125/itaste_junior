@@ -17,7 +17,7 @@
 
         <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="52dp"
+            android:layout_height="@dimen/_35sdp"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="0dp"
@@ -40,17 +40,17 @@
                 android:hint="@string/write_a_comment"
                 android:textColorHint="@color/titleTextColorBlack"
                 android:textColor="@color/titleTextColorBlack"
-                android:paddingStart="@dimen/_20sdp"
+                android:paddingStart="@dimen/_14sdp"
                 android:textSize="14sp">
 
             </EditText>
 
             <RelativeLayout
                 android:id="@+id/tvPostMessage"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="@dimen/_6sdp"
                 android:layout_marginEnd="@dimen/_6sdp"
                 android:background="@drawable/layout_circle_orange"
                 android:gravity="center">
@@ -59,6 +59,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:foregroundGravity="center"
+                    app:tint="@color/mainBackground"
                     android:src="@drawable/icon_send_arrow">
 
                 </ImageView>

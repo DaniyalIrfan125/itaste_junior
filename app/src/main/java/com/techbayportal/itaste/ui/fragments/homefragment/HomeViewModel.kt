@@ -24,8 +24,7 @@ class HomeViewModel @ViewModelInject constructor(
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
-     val  onHomeConfigButtonClicked = SingleLiveEvent<Any>()
-    val tempClicked = SingleLiveEvent<Any>()
+    val onHomeConfigButtonClicked = SingleLiveEvent<Any>()
 
     val _getAllCountriesResponse = MutableLiveData<Resource<GetAllCountriesResponse>>()
     val getCountriesResponse: LiveData<Resource<GetAllCountriesResponse>>
@@ -62,10 +61,6 @@ class HomeViewModel @ViewModelInject constructor(
         onHomeConfigButtonClicked.call()
     }
 
-    fun tempClicked() {
-        tempClicked.call()
-    }
-
     private val _logoutResponse = MutableLiveData<Resource<SuccessResponse>>()
     val logoutResponse: LiveData<Resource<SuccessResponse>>
         get() = _logoutResponse
@@ -75,23 +70,37 @@ class HomeViewModel @ViewModelInject constructor(
             _getAllCountriesResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getAllCountriesForHome("Bearer ${loginSession!!.data.access_token}").let {
-                        if (it.isSuccessful) {
-                            _getAllCountriesResponse.postValue(Resource.success(it.body()!!))
-                        } else _getAllCountriesResponse.postValue(Resource.error(it.message(), null))
-                    }
+                    mainRepository.getAllCountriesForHome("Bearer ${loginSession!!.data.access_token}")
+                        .let {
+                            if (it.isSuccessful) {
+                                _getAllCountriesResponse.postValue(Resource.success(it.body()!!))
+                            } else _getAllCountriesResponse.postValue(
+                                Resource.error(
+                                    it.message(),
+                                    null
+                                )
+                            )
+                        }
                 } catch (e: Exception) {
-                    _getAllCountriesResponse.postValue(Resource.error(""+e.message, null))
+                    _getAllCountriesResponse.postValue(Resource.error("" + e.message, null))
                 }
-            } else _getAllCountriesResponse.postValue(Resource.error("No internet connection", null))
+            } else _getAllCountriesResponse.postValue(
+                Resource.error(
+                    "No internet connection",
+                    null
+                )
+            )
         }
     }
 
-    fun hitUpdateUserLocationFromHome(countryId : Int) {
+    fun hitUpdateUserLocationFromHome(countryId: Int) {
         viewModelScope.launch {
             _updateUserLocationResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
-                mainRepository.updateUserLocation("Bearer ${loginSession!!.data.access_token}", countryId).let {
+                mainRepository.updateUserLocation(
+                    "Bearer ${loginSession!!.data.access_token}",
+                    countryId
+                ).let {
                     if (it.isSuccessful) {
                         _updateUserLocationResponse.postValue(Resource.success(it.body()!!))
                     } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
@@ -107,7 +116,12 @@ class HomeViewModel @ViewModelInject constructor(
                         )
                     }
                 }
-            } else _updateUserLocationResponse.postValue(Resource.error("No Internet Connection", null))
+            } else _updateUserLocationResponse.postValue(
+                Resource.error(
+                    "No Internet Connection",
+                    null
+                )
+            )
         }
     }
 
@@ -116,7 +130,10 @@ class HomeViewModel @ViewModelInject constructor(
             _blockAccountResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.blockVendor("Bearer ${loginSession!!.data.access_token}", vendorId).let {
+                    mainRepository.blockVendor(
+                        "Bearer ${loginSession!!.data.access_token}",
+                        vendorId
+                    ).let {
                         if (it.isSuccessful) {
                             _blockAccountResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
@@ -139,12 +156,15 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitGetHomeScreenInfoApi(fcm_token : String) {
+    fun hitGetHomeScreenInfoApi(fcm_token: String) {
         viewModelScope.launch {
             _getHomeScreenResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.getHomeScreenInfo("Bearer ${loginSession!!.data.access_token}", fcm_token).let {
+                    mainRepository.getHomeScreenInfo(
+                        "Bearer ${loginSession!!.data.access_token}",
+                        fcm_token
+                    ).let {
                         if (it.isSuccessful) {
                             _getHomeScreenResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
@@ -167,7 +187,7 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitGetHomeScreenInfoApiForGuest(fcm_token : String) {
+    fun hitGetHomeScreenInfoApiForGuest(fcm_token: String) {
         viewModelScope.launch {
             _getHomeScreenForGuestResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
@@ -176,7 +196,12 @@ class HomeViewModel @ViewModelInject constructor(
                         if (it.isSuccessful) {
                             _getHomeScreenForGuestResponse.postValue(Resource.success(it.body()!!))
                         } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
-                            _getHomeScreenForGuestResponse.postValue(Resource.error(it.message(), null))
+                            _getHomeScreenForGuestResponse.postValue(
+                                Resource.error(
+                                    it.message(),
+                                    null
+                                )
+                            )
                         } else {
                             val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
                             _getHomeScreenForGuestResponse.postValue(
@@ -191,7 +216,12 @@ class HomeViewModel @ViewModelInject constructor(
                 } catch (e: Exception) {
                     _getHomeScreenForGuestResponse.postValue(Resource.error("" + e.message, null))
                 }
-            } else _getHomeScreenForGuestResponse.postValue(Resource.error("No Internet Connection", null))
+            } else _getHomeScreenForGuestResponse.postValue(
+                Resource.error(
+                    "No Internet Connection",
+                    null
+                )
+            )
         }
     }
 
@@ -200,17 +230,19 @@ class HomeViewModel @ViewModelInject constructor(
             _logoutResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.logout("Bearer ${loginSession!!.data.access_token}" ).let {
+                    mainRepository.logout("Bearer ${loginSession!!.data.access_token}").let {
                         if (it.isSuccessful) {
                             // clearUserObj()
                             _logoutResponse.postValue(Resource.success(it.body()!!))
-                        }else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
+                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400) {
                             _logoutResponse.postValue(Resource.error(it.message(), null))
                         } else {
                             val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
                             _logoutResponse.postValue(
                                 Resource.error(
-                                    extractErrorMessage(errorMessagesJson), null))
+                                    extractErrorMessage(errorMessagesJson), null
+                                )
+                            )
                         }
                     }
                 } catch (e: Exception) {
@@ -220,27 +252,29 @@ class HomeViewModel @ViewModelInject constructor(
         }
     }
 
-    fun hitReportBugApi(message : String) {
+    fun hitReportBugApi(message: String) {
         viewModelScope.launch {
             _getReportBugResponse.postValue(Resource.loading(null))
             if (networkHelper.isNetworkConnected()) {
                 try {
-                    mainRepository.reportBug("Bearer ${loginSession!!.data.access_token}", message).let {
-                        if (it.isSuccessful) {
-                            _getReportBugResponse.postValue(Resource.success(it.body()!!))
-                        } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
-                            _getReportBugResponse.postValue(Resource.error(it.message(), null))
-                        } else {
-                            val errorMessagesJson = it.errorBody()?.source()?.buffer?.readUtf8()!!
-                            _getReportBugResponse.postValue(
-                                Resource.error(
-                                    extractErrorMessage(
-                                        errorMessagesJson
-                                    ), null
+                    mainRepository.reportBug("Bearer ${loginSession!!.data.access_token}", message)
+                        .let {
+                            if (it.isSuccessful) {
+                                _getReportBugResponse.postValue(Resource.success(it.body()!!))
+                            } else if (it.code() == 500 || it.code() == 404 || it.code() == 400 || it.code() == 401) {
+                                _getReportBugResponse.postValue(Resource.error(it.message(), null))
+                            } else {
+                                val errorMessagesJson =
+                                    it.errorBody()?.source()?.buffer?.readUtf8()!!
+                                _getReportBugResponse.postValue(
+                                    Resource.error(
+                                        extractErrorMessage(
+                                            errorMessagesJson
+                                        ), null
+                                    )
                                 )
-                            )
+                            }
                         }
-                    }
                 } catch (e: Exception) {
                     _getReportBugResponse.postValue(Resource.error("" + e.message, null))
                 }

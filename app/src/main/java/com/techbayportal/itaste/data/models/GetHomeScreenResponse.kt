@@ -24,6 +24,7 @@ data class GetHomeScreenData(
 )
 
 data class GetHomeScreenPostsData(
+    val vendor_id : Int,
     val id: Int,
     val image: String
 )

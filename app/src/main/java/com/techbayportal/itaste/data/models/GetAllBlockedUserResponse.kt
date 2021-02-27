@@ -9,7 +9,7 @@ data class GetAllBlockedUserResponse (
 data class GetAllBlockedUserData(
     val id: Int,
     val profilePic: String,
-    val first_name: String,
-    val last_name: String,
+    val first: String,
+    val last: String,
     val username: String
 )

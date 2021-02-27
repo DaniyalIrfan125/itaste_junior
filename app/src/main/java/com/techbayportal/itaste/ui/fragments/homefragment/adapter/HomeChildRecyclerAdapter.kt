@@ -4,18 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ybq.android.spinkit.SpinKitView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.R
-import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.models.GetHomeScreenPostsData
-import com.techbayportal.itaste.databinding.ItemHomeRecyclerImageBinding
-import com.techbayportal.itaste.ui.fragments.homefragment.HomeFragment
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeChildRvClickListener
-import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
 
 class HomeChildRecyclerAdapter(private val list: ArrayList<GetHomeScreenPostsData>) :
     RecyclerView.Adapter<HomeChildRecyclerAdapter.ViewHolder>() {
@@ -60,7 +55,7 @@ class HomeChildRecyclerAdapter(private val list: ArrayList<GetHomeScreenPostsDat
             val model = list[position]
                 //val imageProduct: Int = model
             imageViewProduct?.setOnClickListener(View.OnClickListener {
-                onClickListener?.onChildItemClick(position)
+                onClickListener?.onChildItemClick(model.id, model.vendor_id)
             })
 
             try {

@@ -321,7 +321,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_weight="0.6"
-                                android:src="@drawable/icon_shout" />
+                                android:src="@drawable/icon_shout"
+                                app:tint="@color/adsIconNText"/>
 
 
                             <TextView
@@ -331,7 +332,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_regular"
                                 android:text="@string/ads"
-                                android:textColor="@color/titleTextColorBlack"
+                                android:textColor="@color/adsIconNText"
                                 android:textSize="16sp" />
 
                             <ImageView

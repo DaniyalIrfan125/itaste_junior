@@ -26,9 +26,14 @@ class NotificationFragmentViewModel @ViewModelInject constructor(
         get() = _getNotificationsResponse
 
     val onBackButtonClicked = SingleLiveEvent<Any>()
+    val onSignInButtonClicked = SingleLiveEvent<Any>()
 
     fun onBackButtonClicked() {
         onBackButtonClicked.call()
+    }
+
+    fun onSignInButtonClicked() {
+        onSignInButtonClicked.call()
     }
 
     fun hitGetNotificationApi() {

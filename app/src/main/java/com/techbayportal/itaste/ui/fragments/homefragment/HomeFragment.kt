@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
@@ -35,6 +36,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_homefragment.*
 import kotlinx.android.synthetic.main.layout_homefragment.swipeRefreshLayout
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
@@ -69,6 +71,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
     lateinit var getHomeScreenPostsData: GetHomeScreenPostsData
     var vendorPostsList = ArrayList<GetHomeScreenPostsData>()
+    private var guestModeForUiChanges: Boolean = false
 
     //chat
     var userRef: DocumentReference? = null
@@ -76,42 +79,55 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
+        dataStoreProvider = DataStoreProvider(requireContext())
+
+        GlobalScope.launch {
+            val guestMode = dataStoreProvider.guestModeFlow.first()
+            if (guestMode) {
+                guestModeForUiChanges = true
+                mViewModel.hitGetHomeScreenInfoApiForGuest("")
+                Timber.d("Guest Mode On")
+            } else {
+                guestModeForUiChanges = false
+                mViewModel.hitGetHomeScreenInfoApi(fcmToken)
+                Timber.d("Guest Mode Off")
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mView = view
         fetchFcm()
+        subscribeToObserveDataStore()
         initilizing()
-        dataStoreProvider = DataStoreProvider(requireContext())
+        if (this::getHomeScreenResponse.isInitialized) {
+            shimmerFrameLayout.stopShimmer()
+            shimmerFrameLayout.visibility = View.GONE
 
-        dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
-            if(it){
-                mViewModel.hitGetHomeScreenInfoApiForGuest("")
-                Timber.d("Guest Mode On")
-            }else{
-                mViewModel.hitGetHomeScreenInfoApi(fcmToken)
-                Timber.d("Guest Mode Off")
-            }
+            setData(getHomeScreenResponse)
+        }
 
-        })
+        if(!guestModeForUiChanges){
+            iv_home_configuration.visibility = View.VISIBLE
+        }else{
+            iv_home_configuration.visibility =View.GONE
+        }
+
+
 
 
         subscribeToObserveDarkActivation()
         sharedViewModel.test = true
 
 
-        if (this::getHomeScreenResponse.isInitialized) {
-            setData(getHomeScreenResponse)
-        }
-
         swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
             dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
-                if(it){
+                if (it) {
                     mViewModel.hitGetHomeScreenInfoApiForGuest(fcmToken)
                     Timber.d("Guest Mode On Refresh")
-                }else{
+                } else {
                     mViewModel.hitGetHomeScreenInfoApi(fcmToken)
                     Timber.d("Guest Mode Off Refresh")
                 }
@@ -120,15 +136,31 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
         })
     }
 
+    private fun subscribeToObserveDataStore() {
+
+        //observing data from data store and showing
+        dataStoreProviderBase.darkModeFlow.asLiveData().observe(this, Observer {
+            if (it) {
+
+                baseDarkMode = true
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                baseDarkMode = false
+
+            }
+        })
+
+    }
+
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
         mViewModel.onHomeConfigButtonClicked.observe(this, Observer {
-//            Navigation.findNavController(iv_home_configuration).navigate(R.id.action_homeFragment_to_homeConfigurationBottomSheetFragment)
 
             bottomSheet.show(requireActivity().supportFragmentManager, "bottomSheet")
-
             if (loginSession != null) {
                 if (loginSession.data.role.equals(AppConstants.UserTypeKeys.USER, true)) {
                     // call api only when user is logged in
@@ -136,9 +168,6 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                 }
             }
 
-        })
-
-        mViewModel.tempClicked.observe(this, Observer {
         })
     }
 
@@ -209,7 +238,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             if (it == AppConstants.HomeItemBottomSheet.BLOCK_VENDOR) {
                 if (it != -1) {
                     /*hitting blocked account api to block a vendor - passing the id of the vendor which is clicked*/
-                    mViewModel.hitBlockAccountApi(sharedViewModel.vendorProfileId)
+                    mViewModel.hitBlockAccountApi(sharedViewModel.vendorHomeScreenData!!.id)
                     sharedViewModel.homeItemBottomSheetClickId.value = -1
                 }
             }
@@ -227,7 +256,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             }
         })
 
-        //Observing Submit button click on repport a bug bottom sheet
+        //Observing Submit button click on report a bug bottom sheet
         sharedViewModel.reportBugButtonsClicked.observe(this, Observer {
             if (it == AppConstants.ReportBugDialog.SUBMIT) {
                 if (it != -1) {
@@ -240,13 +269,23 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
 
     //Home Screen RecyclearViews Items Clicks
-    override fun onItemClickListener(type: String, id: Int) {
+    override fun onItemClickListener(type: String, getHomeScreenData: GetHomeScreenData) {
         when (type) {
             AppConstants.RecyclerViewKeys.HOME_RV -> {
-                /*reciving click on vendor item click on Home and saving vendor id in sharedViewModel*/
-                sharedViewModel.vendorProfileId = id
-                Navigation.findNavController(mView)
-                    .navigate(R.id.action_homeFragment_to_profileFragment)
+
+                GlobalScope.launch {
+                    val guestMode = dataStoreProvider.guestModeFlow.first()
+                    if (!guestMode) {
+                        /*reciving click on vendor item click on Home and saving vendor id in sharedViewModel*/
+                        sharedViewModel.vendorHomeScreenData = getHomeScreenData
+                        // sharedViewModel.vendorProfileId = getHomeScreenData.id
+                        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_profileFragment)
+                        Timber.d("Guest Mode OFF")
+                    } else {
+
+                        Timber.d("Guest Mode ON: Cant Click")
+                    }
+                }
             }
 
             AppConstants.RecyclerViewKeys.HOME_RV_CHILD -> {
@@ -254,8 +293,17 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             }
 
             AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS -> {
-                Navigation.findNavController(iv_home_configuration)
-                    .navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
+
+                GlobalScope.launch {
+                    val guestMode = dataStoreProvider.guestModeFlow.first()
+                    if (!guestMode) {
+                        sharedViewModel.vendorHomeScreenData = getHomeScreenData
+                        Navigation.findNavController(iv_home_configuration).navigate(R.id.action_homeFragment_to_homeItemBottomSheetFragment)
+                        Timber.d("Guest Mode OFF")
+                    } else {
+                        Timber.d("Guest Mode ON: Cant Click")
+                    }
+                }
             }
         }
     }
@@ -324,17 +372,18 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
             when (it.status) {
                 Resource.Status.LOADING -> {
                     // loadingDialog.show()
+                    shimmerFrameLayout.startShimmer()
                 }
                 Resource.Status.SUCCESS -> {
                     // loadingDialog.dismiss()
+                    shimmerFrameLayout.stopShimmer()
                     getHomeScreenResponse = it.data!!
 
                     setData(getHomeScreenResponse)
                     homerRecyclerAdpater.notifyDataSetChanged()
                     shimmerFrameLayout.stopShimmer()
                     shimmerFrameLayout.visibility = View.GONE
-                    recycler_home.visibility = View.VISIBLE
-                    rl_promotion.visibility = View.VISIBLE
+
 
                     updateUserInfo()
 
@@ -344,6 +393,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                     recycler_home.visibility = View.VISIBLE
                     rl_promotion.visibility = View.VISIBLE
                     // loadingDialog.dismiss()
+                    shimmerFrameLayout.stopShimmer()
                     DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
                 }
 
@@ -438,12 +488,16 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     }
 
     private fun setData(homeScreenResponse: GetHomeScreenResponse) {
+        recycler_home.visibility = View.VISIBLE
+        rl_promotion.visibility = View.VISIBLE
         try {
             Picasso.get().load(homeScreenResponse.promotion.banner).fit().centerCrop()
                 .into(iv_home_banner, object :
                     Callback {
                     override fun onSuccess() {
-                        sk_home.visibility = View.GONE
+                        if (iv_home_banner != null) {
+                            sk_home.visibility = View.GONE
+                        }
                     }
 
                     override fun onError(e: Exception?) {
@@ -469,13 +523,14 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
     override fun onResume() {
         super.onResume()
-        shimmerFrameLayout.startShimmer()
+        //  shimmerFrameLayout.startShimmer()
     }
 
     override fun onPause() {
         shimmerFrameLayout.stopShimmer()
         super.onPause()
     }
+
     override fun onStop() {
         super.onStop()
         userRef?.apply {
@@ -484,33 +539,42 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
     }
 
     //vendor post item clicked
-    override fun onChildItemClick(position: Int) {
-        sharedViewModel.postId = position
-        Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_postDetailFragment)
+    override fun onChildItemClick(position: Int, vendrId :Int) {
+        GlobalScope.launch {
+            val guestMode = dataStoreProvider.guestModeFlow.first()
+            if (!guestMode) {
+                sharedViewModel.postId = position
+                sharedViewModel.vendorProfileId = vendrId
+                Navigation.findNavController(mView).navigate(R.id.action_homeFragment_to_postDetailFragment)
+                Timber.d("Guest Mode OFF")
+            } else {
+                Timber.d("Guest Mode ON: Cant Click")
+            }
+        }
     }
 
     private fun updateUserInfo() {
-       if(loginSession != null){
-           loginSession.data.apply {
-               userRef = Firebase.firestore.collection("UserStatus").document(id.toString())
-               val onLineHashMap = hashMapOf(
-                   Pair("userId", id),
-                   Pair("userName", first +" " +last),
-                   Pair("state", "online"),
-                   Pair("imgStr", profile_pic)
-               )
-               userRef!!.set(onLineHashMap)
-           }
-       }
+        if (loginSession != null) {
+            loginSession.data.apply {
+                userRef = Firebase.firestore.collection("UserStatus").document(id.toString())
+                val onLineHashMap = hashMapOf(
+                    Pair("userId", id),
+                    Pair("userName", first + " " + last),
+                    Pair("state", "online"),
+                    Pair("imgStr", profile_pic)
+                )
+                userRef!!.set(onLineHashMap)
+            }
+        }
 
     }
 
     private fun setUserOffline() {
-        if( loginSession != null){
+        if (loginSession != null) {
             loginSession.data.apply {
                 val offLineHashMap = hashMapOf(
                     Pair("userId", id),
-                    Pair("userName", first +" " +last),
+                    Pair("userName", first + " " + last),
 //            Pair("lastSeen",SelectUserActivity.currentTime()),
                     Pair("state", "offline"),
                     Pair("imgStr", profile_pic)

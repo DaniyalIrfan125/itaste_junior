@@ -141,8 +141,7 @@ class SavedPostsFragment : BaseFragment<LayoutSavedpostsBinding, SavedPostsViewM
 
 
         recycler_posts.adapter = postsRecyclerAdapter
-        recycler_posts.layoutManager =
-            GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
+        recycler_posts.layoutManager = GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
         recycler_posts.autoFitColumns(110)
 
         postsRecyclerAdapter.setItemClick(object :

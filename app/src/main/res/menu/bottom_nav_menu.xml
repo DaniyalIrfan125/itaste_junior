@@ -31,7 +31,7 @@
         android:id="@+id/directMessagesFragment"
         android:enabled="true"
         android:icon="@drawable/icon_chat"
-        android:orderInCategory="3"
+        android:orderInCategory="2"
         android:title=""
         app:showAsAction="always" />
 
@@ -39,7 +39,7 @@
         android:id="@+id/myProfileFragment"
         android:enabled="true"
         android:icon="@drawable/icon_bottom_profile"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         android:title=""
         app:showAsAction="always" />
 

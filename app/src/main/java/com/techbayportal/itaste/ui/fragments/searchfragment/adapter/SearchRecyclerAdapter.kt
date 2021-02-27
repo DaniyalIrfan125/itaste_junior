@@ -20,14 +20,20 @@ import com.techbayportal.itaste.ui.fragments.blockedaccountsfragment.adapter.Blo
 import kotlinx.android.synthetic.main.item_search_double_image.view.*
 import kotlinx.android.synthetic.main.item_search_three_image.view.*
 import kotlinx.android.synthetic.main.layout_searchfragment.view.*
+import timber.log.Timber
 import java.lang.Exception
 
 
 class SearchRecyclerAdapter(
     private val list: ArrayList<ArrayList<SearchAndFilterResponseData>>,
-    val context: Context
+    val context: Context,
+    private val listener: ClickItemListener
 
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    interface ClickItemListener {
+        fun onClicked(searchAndFilterResponseData: SearchAndFilterResponseData)
+    }
 
     inner class ViewHolderClassDouble(val itemBinding: ItemSearchDoubleImageBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -73,6 +79,9 @@ class SearchRecyclerAdapter(
         val model = list[position]
 
         //holder.itemView.img_first = model.image
+        /*
+        * Line 1 item 1
+        * */
         if (model.size == 2) {
             if (model[0].image.isNotEmpty()) {
                 Picasso.get().load(model[0].image).fit().centerCrop()
@@ -84,126 +93,116 @@ class SearchRecyclerAdapter(
                         override fun onError(e: Exception?) {
                             Picasso.get().load(R.drawable.placeholder_image)
                                 .into(holder.itemView.img_first)
-                           // holder.itemView.spinKit.visibility = View.GONE
+                            // holder.itemView.spinKit.visibility = View.GONE
                         }
 
                     })
 
                 holder.itemView.img_first.setOnClickListener(View.OnClickListener {
-                    Toast.makeText(context, "Post Clicked : ${model[0].id}", Toast.LENGTH_SHORT).show()
-                    // callback.methodName(model[0].id)
+                    // Toast.makeText(context, "Post Clicked : ${model[0].id}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Post Clicked : ${model[0].id}")
+                    listener.onClicked(model[0])
                 })
             }
 
+            /*
+        * Line 1 item 2
+        * */
             if (model[1].image.isNotEmpty()) {
                 Picasso.get().load(model[1].image).fit().centerCrop()
                     .into(holder.itemView.img_second, object : Callback {
                         override fun onSuccess() {
-                        //    holder.itemView.spinKit.visibility = View.GONE
+                            //    holder.itemView.spinKit.visibility = View.GONE
                         }
 
                         override fun onError(e: Exception?) {
                             Picasso.get().load(R.drawable.placeholder_image)
                                 .into(holder.itemView.img_second)
-                        //    holder.itemView.spinKit.visibility = View.GONE
+                            //    holder.itemView.spinKit.visibility = View.GONE
                         }
 
                     })
                 holder.itemView.img_second.setOnClickListener(View.OnClickListener {
-                    Toast.makeText(context, "Post Clicked : ${model[1].id}", Toast.LENGTH_SHORT).show()
-                    // callback.methodName(model[0].id)
+                    // Toast.makeText(context, "Post Clicked : ${model[1].id}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Post Clicked : ${model[1].id}")
+                    listener.onClicked(model[1])
                 })
             }
         } else {
 
-
+/*
+        * Line 2 item 1
+        * */
             if (model[0].image.isNotEmpty()) {
                 Picasso.get().load(model[0].image).fit().centerCrop()
                     .into(holder.itemView.img_third, object : Callback {
                         override fun onSuccess() {
-                          //  holder.itemView.spinKit.visibility = View.GONE
+                            //  holder.itemView.spinKit.visibility = View.GONE
                         }
 
                         override fun onError(e: Exception?) {
                             Picasso.get().load(R.drawable.placeholder_image)
                                 .into(holder.itemView.img_third)
-                          //  holder.itemView.spinKit.visibility = View.GONE
+                            //  holder.itemView.spinKit.visibility = View.GONE
                         }
 
                     })
 
                 holder.itemView.img_third.setOnClickListener(View.OnClickListener {
-                    Toast.makeText(context, "Post Clicked : ${model[0].id}", Toast.LENGTH_SHORT).show()
-                    // callback.methodName(model[0].id)
+                    //Toast.makeText(context, "Post Clicked : ${model[0].id}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Post Clicked : ${model[0].id}")
+                    listener.onClicked(model[0])
                 })
             }
-
+/*
+        * Line 2 item 2
+        * */
             if (model[1].image.isNotEmpty()) {
                 Picasso.get().load(model[1].image).fit().centerCrop()
                     .into(holder.itemView.img_fourth, object : Callback {
                         override fun onSuccess() {
-                         //   holder.itemView.spinKit.visibility = View.GONE
+                            //   holder.itemView.spinKit.visibility = View.GONE
                         }
 
                         override fun onError(e: Exception?) {
                             Picasso.get().load(R.drawable.placeholder_image)
                                 .into(holder.itemView.img_fourth)
-                      //      holder.itemView.spinKit.visibility = View.GONE
+                            //      holder.itemView.spinKit.visibility = View.GONE
                         }
 
                     })
                 holder.itemView.img_fourth.setOnClickListener(View.OnClickListener {
-                    Toast.makeText(context, "Post Clicked : ${model[1].id}", Toast.LENGTH_SHORT).show()
-                    // callback.methodName(model[0].id)
+                    // Toast.makeText(context, "Post Clicked : ${model[1].id}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Post Clicked : ${model[1].id}")
+                    listener.onClicked(model[1])
                 })
 
             }
+            /*
+        * Line 2 item 3
+        * */
             if (model[2].image.isNotEmpty()) {
                 Picasso.get().load(model[2].image).fit().centerCrop()
                     .into(holder.itemView.img_fifth, object : Callback {
                         override fun onSuccess() {
-                    //        holder.itemView.spinKit.visibility = View.GONE
+                            //        holder.itemView.spinKit.visibility = View.GONE
                         }
 
                         override fun onError(e: Exception?) {
                             Picasso.get().load(R.drawable.placeholder_image)
                                 .into(holder.itemView.img_fifth)
-                       //     holder.itemView.spinKit.visibility = View.GONE
+                            //     holder.itemView.spinKit.visibility = View.GONE
                         }
 
                     })
 
                 holder.itemView.img_fifth.setOnClickListener(View.OnClickListener {
-                    Toast.makeText(context, "Post Clicked : ${model[2].id}", Toast.LENGTH_SHORT).show()
-                    // callback.methodName(model[0].id)
+                    //Toast.makeText(context, "Post Clicked : ${model[2].id}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Post Clicked : ${model[2].id}")
+                    listener.onClicked(model[2])
                 })
             }
-
         }
-
-
-
-
-
-
-        /*holder.itemView.img_second.setOnClickListener(View.OnClickListener {
-            Toast.makeText(context, "Post Clicked : ${model[2].id}", Toast.LENGTH_SHORT).show()
-           // callback.methodName(model[1].id)
-        })*/
-
-
-       /* holder.itemView.img_third.setOnClickListener(View.OnClickListener {
-
-         //   callback.methodName(model[0].id)
-        })
-        holder.itemView.img_fourth.setOnClickListener(View.OnClickListener {
-
-         //   callback.methodName(model[1].id)
-        })
-        holder.itemView.img_fifth.setOnClickListener(View.OnClickListener {
-
-          //  callback.methodName(model[2].id)
-        })*/
     }
 
     override fun getItemCount(): Int {

@@ -17,7 +17,9 @@ import com.techbayportal.itaste.ui.activities.signupactivity.SignupActivity
 import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_settings.*
+import kotlinx.android.synthetic.main.fragment_settings.img_back
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -81,7 +83,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsFragmentV
         })
 
         mViewModel.onChangeLanguageClicked.observe(this, Observer {
-            // Navigation.findNavController(mView).navigate(R.id.action_settingsFragment_to_contactUsFragment)
+             Navigation.findNavController(mView).navigate(R.id.action_settingsFragment_to_changeLanguageFragment)
         })
 
         mViewModel.onTermAndCondClicked.observe(this, Observer {
@@ -114,6 +116,13 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding, SettingsFragmentV
 
         mViewModel.onLogoutClicked.observe(this, Observer {
             mViewModel.hitLogout()
+        })
+
+        mViewModel.onSwitchedToPremiumClicked.observe(this, Observer {
+            GlobalScope.launch {
+                dataStoreProvider.switchToPremium(true)
+            }
+            Navigation.findNavController(mView).navigate(R.id.action_settingsFragment_to_signUpVendorFragment2)
         })
 
     }

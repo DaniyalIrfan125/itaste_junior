@@ -1,6 +1,5 @@
 package com.techbayportal.itaste.data.models.chat
 
-import com.techbayportal.offsidesportsapp.data.models.chat.UserInfoClass
 import java.util.*
 import kotlin.collections.ArrayList
 

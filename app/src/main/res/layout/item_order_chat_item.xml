@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_8sdp">
+        android:layout_marginTop="@dimen/_8sdp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/sivInfluancerImage"
@@ -19,20 +19,31 @@
             android:layout_marginEnd="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="@id/clMessage"
             app:layout_constraintStart_toStartOf="parent"
-
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent" />
+
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/sk_userPicLeft"
+            style="@style/SpinKitView.Large.Pulse"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            app:SpinKit_Color="@color/colorOrange"
+            app:layout_constraintBottom_toBottomOf="@+id/sivInfluancerImage"
+            app:layout_constraintTop_toTopOf="@+id/sivInfluancerImage"
+            app:layout_constraintLeft_toLeftOf="@+id/sivInfluancerImage"
+            app:layout_constraintRight_toRightOf="@+id/sivInfluancerImage"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/clMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_32sdp"
             android:background="@drawable/chat_round_corner"
             android:backgroundTint="@color/colorChatItemBg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/sivInfluancerImage"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="@dimen/_5sdp">
 
 
             <androidx.cardview.widget.CardView
@@ -99,11 +110,11 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
+            android:id="@+id/tvMessageTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="3dp"
             android:fontFamily="@font/roboto_light"
-            android:text="Text message \n Received 13:00 pm, Today"
             android:textColor="@color/colorChatDetailGray"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"

@@ -61,6 +61,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         if(loginSession != null){
             dataStoreProvider.switchToPremiumFlow.asLiveData().observe(this, Observer { switchToPremium ->
                 if (switchToPremium == true) {
+                   // if (fragmentName == "profile") {
                     if (fragmentName == "profile" || !loginSession.data.is_payment_update) {
                         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
                         val navController = navHostFragment.navController

@@ -53,8 +53,6 @@ class PostDetailBottomSheetFragment : BottomSheetDialogFragment() {
         }
 
         linear_edit.setOnClickListener {
-
-
             sharedViewModel.isEditBottomSheetClicked.value = true
             dismiss()
 

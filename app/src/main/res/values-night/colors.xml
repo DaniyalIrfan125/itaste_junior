@@ -31,7 +31,7 @@
     <color name="colorAlertBox">#333333</color>
     <color name="colorBlockBtnBg">#dfdfdf</color>
     <color name="colorCommentGrey">#8f8f8f</color>
-    <color name="colorChatBg">#f8f8f8</color>
+    <color name="colorChatBg">#171717</color>
     <color name="colorGreen">#34b100</color>
     <color name="colorChatItemBg">#2a2a2a</color>
     <color name="colorChatDetailGray">#949494</color>
@@ -40,7 +40,7 @@
     <color name="bottomSheetButtonColor">#2c2c2c</color>
     <color name="btnRoundStrokeColor">#e1e1e1</color>
     <color name="etBgStrokeColor">#e4e4e4</color>
-    <color name="directMessageBgUserColor">#1a1a1a</color>
+    <color name="directMessageBgUserColor">#171717</color>
     <color name="notificationLlBgColor">#1a1a1a</color>
     <color name="itemTimeBgColor">#141414</color>
     <color name="cartItemBgColor">#2b2b2b</color>
@@ -59,6 +59,11 @@
     <color name="noPostsTextColor">#a1a1a1</color>
 
     <color name="filterScreen">#161616</color>
+
+    <color name="serchHitColorNewMessage">#3c3c3c</color>
+
+    <color name="adsIconNText">#8d8d8d</color>
+    <color name="selectPostStrip">#131313</color>
 
 
 </resources>

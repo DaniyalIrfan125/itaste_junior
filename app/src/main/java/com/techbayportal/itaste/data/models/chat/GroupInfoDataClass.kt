@@ -1,4 +1,4 @@
-package com.techbayportal.offsidesportsapp.data.models.chat
+package com.techbayportal.itaste.data.models.chat
 
 data class GroupInfoDataClass(
     val name:String,val id:String,val listOfEmployees:ArrayList<String>

@@ -27,6 +27,9 @@
                 android:id="@+id/img_back"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:onClick="@{()->viewModel.onBackButtonClicked()}"
                 android:orientation="horizontal">
@@ -56,7 +59,11 @@
                 android:layout_height="66dp"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="@dimen/_15sdp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
+                android:onClick="@{()->viewModel.onProfileSettingsClicked()}"
                 android:orientation="horizontal">
 
                 <TextView
@@ -294,11 +301,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/_5sdp"
                             android:layout_weight="1"
-                            app:mrl_rippleColor="@color/titleTextColorBlack"
-                            android:onClick="@{()->viewModel.onUpdateButtonClicked()}">
+                            android:onClick="@{()->viewModel.onUpdateButtonClicked()}"
+                            app:mrl_rippleColor="@color/titleTextColorBlack">
 
                             <Button
-
+                                android:id="@+id/button_updatePayment"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="6dp"
@@ -308,7 +315,7 @@
                                 android:background="@drawable/btn_curve_small"
                                 android:fontFamily="@font/roboto_regular"
                                 android:lineSpacingExtra="@dimen/_3sdp"
-                                android:text="Update Payment"
+                                android:text="@string/update_payment"
 
                                 android:textAllCaps="false"
                                 android:textColor="@color/titleTextColorBlack"
@@ -323,9 +330,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
-                        android:weightSum="2"
                         android:visibility="gone"
-                        >
+                        android:weightSum="2">
 
                         <com.balysv.materialripple.MaterialRippleLayout
                             android:layout_width="0dp"
@@ -345,6 +351,7 @@
                                 android:background="@drawable/btn_direct_message_curve"
                                 android:fontFamily="@font/roboto_regular"
                                 android:lineSpacingExtra="@dimen/_3sdp"
+                                android:onClick="@{()->viewModel.onDirectMessageButtonClicked()}"
                                 android:text="@string/direct_message"
                                 android:textAllCaps="false"
                                 android:textColor="@color/colorBlack"
@@ -369,11 +376,10 @@
                                 android:layout_marginTop="6dp"
                                 android:layout_marginEnd="6dp"
                                 android:layout_marginBottom="6dp"
-                                android:background="@drawable/btn_orange_curve_profile"
+                                android:background="@drawable/btn_direct_message_curve"
                                 android:fontFamily="@font/roboto_regular"
                                 android:lineSpacingExtra="@dimen/_3sdp"
                                 android:onClick="@{()->viewModel.onFollowButtonClicked()}"
-                                android:text="@string/follow"
                                 android:textAllCaps="false"
                                 android:textColor="@color/colorBlack"
                                 android:textSize="14sp">
@@ -413,7 +419,7 @@
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
                         android:src="@drawable/icon_no_posts"
-                        app:tint="@color/noPostsTextColor"/>
+                        app:tint="@color/noPostsTextColor" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -433,13 +439,63 @@
                         android:layout_marginEnd="@dimen/_50sdp"
                         android:fontFamily="@font/roboto_light"
                         android:gravity="center"
-                        android:text="@string/there_is_nothing_to_show_yet_you_need_to_update_your_payment_to_start_posting"
+                        android:text="@string/there_is_nothing_to_show_yet_you_need_to_save_some_posts"
                         android:textColor="@color/noPostsTextColor"
                         android:textSize="14sp">
 
                     </TextView>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_renew_Payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_buttons"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:background="@color/noPostsBgColor"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/icon_no_posts"
+                        app:tint="@color/noPostsTextColor" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:gravity="center"
+                        android:text="@string/payment_expired"
+                        android:textColor="@color/noPostsTextColor"
+                        android:textSize="18sp">
+
+                    </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_50sdp"
+                        android:layout_marginEnd="@dimen/_50sdp"
+                        android:fontFamily="@font/roboto_light"
+                        android:gravity="center"
+                        android:text="@string/please_renew_your_payment"
+                        android:textColor="@color/noPostsTextColor"
+                        android:textSize="14sp">
+
+                    </TextView>
+
+                </LinearLayout>
+
 
             </RelativeLayout>
 

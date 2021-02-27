@@ -13,13 +13,14 @@ data class VendorProfileDetailData(
     val last: String,
     val username: String,
     val image: String,
-    val bio: String,
+    val description: String,
     val total_post: Int,
     val total_likes: Int,
     val total_followers: Int,
     val posts: List<PostDetailData>,
     val is_follow: Boolean,
-    val is_payment_update: Boolean
+    val is_payment_update: Boolean,
+    val is_payment_expire: Boolean
 
 )
 

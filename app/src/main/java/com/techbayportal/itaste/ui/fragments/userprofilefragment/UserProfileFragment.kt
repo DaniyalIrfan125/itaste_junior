@@ -20,6 +20,7 @@ import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.Data
 import com.techbayportal.itaste.data.models.LoginResponse
 import com.techbayportal.itaste.data.models.UserPersonalProfileResponseData
@@ -59,9 +60,11 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
     var profileImageFile: File? = null
     private lateinit var mView: View
     var compressedProfileImageFile: File? = null
+    lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        dataStoreProvider = DataStoreProvider(requireContext())
         subscribeToNetworkLiveData()
         mViewModel.hitGetUserPersonalProfile()
     }
@@ -278,6 +281,13 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding, UserProfile
                 .withFragment(this)
                 .limit(1)
                 .show()
+        })
+
+        mViewModel.onSwitchToPremiumClickedClicked.observe(this, Observer {
+            GlobalScope.launch {
+                dataStoreProvider.switchToPremium(true)
+            }
+            Navigation.findNavController(mView).navigate(R.id.action_userProfileFragment_to_signUpVendorFragment2)
         })
     }
 

@@ -110,6 +110,8 @@ class SignupConfigurationsFragment :
                 Resource.Status.SUCCESS -> {
                     loadingDialog.dismiss()
                     //move to next screen
+                    setUserDisplayModePref()
+                    setUserLanguagePref()
                     navigateToMainScreen()
                 }
                 Resource.Status.ERROR -> {
@@ -148,38 +150,28 @@ class SignupConfigurationsFragment :
 
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
+
         mViewModel.onNextButtonClicked.observe(this, Observer {
             signUpConfigFieldValidations()
         })
+
         mViewModel.onDarkModeButtonClicked.observe(this, Observer {
             isDarkMode = true
-            rl_dark_mode.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
-            rl_light_mode.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
-
+            rl_dark_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
+            rl_light_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
             iv_moon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorWhite))
-            iv_sun.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.gray_image_color
-                )
-            )
+            iv_sun.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_image_color))
+
         })
 
         mViewModel.onLightModeButtonClicked.observe(this, Observer {
             isDarkMode = false
-            rl_light_mode.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
-            rl_dark_mode.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
+            rl_light_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circleorangelayout)
+            rl_dark_mode.background = ContextCompat.getDrawable(requireContext(), R.drawable.item_circle_grey)
             iv_sun.setColorFilter(ContextCompat.getColor(requireContext(), R.color.colorWhite))
-            iv_moon.setColorFilter(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.gray_image_color
-                )
-            )
+            iv_moon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_image_color))
+
+
         })
     }
 
@@ -206,9 +198,13 @@ class SignupConfigurationsFragment :
 
     private fun setUserLanguagePref() {
         if (languagePreference == "en") {
+           // activity?.finish()
             (activity as SignupActivity?)!!.setLocaleLanguage("en")
+            startActivity(Intent(context, MainActivity::class.java))
         } else if (languagePreference == "ar") {
+           // activity?.finish()
             (activity as SignupActivity?)!!.setLocaleLanguage("ar")
+            startActivity(Intent(context, MainActivity::class.java))
         }
 
     }

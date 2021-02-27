@@ -143,11 +143,12 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginStart="@dimen/_25sdp"
                 android:layout_marginEnd="@dimen/_25sdp"
+                android:focusable="true"
                 android:clickable="true"
                 android:foreground="?attr/selectableItemBackground"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:focusable="true">
+                >
 
 
                 <TextView

@@ -153,7 +153,8 @@
                             android:fontFamily="@font/roboto_light"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="12sp"
-                            android:hint="@string/first_name">
+                            android:hint="@string/first_name"
+                            android:backgroundTint="@color/color_darkGrey">
 
                         </EditText>
 
@@ -208,6 +209,7 @@
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="12sp"
                             android:hint="@string/last_name"
+                            android:backgroundTint="@color/color_darkGrey"
                            >
 
                         </EditText>
@@ -261,7 +263,8 @@
                             android:fontFamily="@font/roboto_light"
                             android:textColor="@color/titleTextColorBlack"
                             android:textSize="12sp"
-                            android:hint="@string/abc_g_com">
+                            android:hint="@string/abc_g_com"
+                            android:backgroundTint="@color/color_darkGrey">
 
                         </EditText>
                         <TextView
@@ -351,7 +354,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="1.2dp"
                                     android:layout_marginStart="@dimen/_28sdp"
-                                    android:background="@color/spinnerLinebg">
+                                    android:background="@color/color_darkGrey">
 
                                 </View>
                             </LinearLayout>
@@ -367,7 +370,8 @@
                                 android:maxLength="14"
                                 android:singleLine="true"
                                 android:textColor="@color/titleTextColorBlack"
-                                android:textSize="12sp">
+                                android:textSize="12sp"
+                                android:backgroundTint="@color/color_darkGrey">
 
 
                             </EditText>
@@ -388,7 +392,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_15sdp"
-
+                            android:onClick="@{()->viewModel.onSwitchToPremiumClickedClicked()}"
                             android:orientation="horizontal"
                             android:weightSum="2">
 

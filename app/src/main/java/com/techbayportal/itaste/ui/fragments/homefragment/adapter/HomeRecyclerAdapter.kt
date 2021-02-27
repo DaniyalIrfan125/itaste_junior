@@ -6,23 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.ybq.android.spinkit.SpinKitView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.R
-import com.techbayportal.itaste.SharedViewModel
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.models.GetHomeScreenData
-import com.techbayportal.itaste.data.models.GetHomeScreenPostsData
-import com.techbayportal.itaste.data.models.PostDetailData
-import com.techbayportal.itaste.databinding.ItemHomeRecyclerImageBinding
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeChildRvClickListener
 import com.techbayportal.itaste.ui.fragments.homefragment.itemclicklistener.HomeRvClickListener
-import com.techbayportal.itaste.ui.fragments.profilefragment.adapter.PostsRecyclerAdapter
 import java.lang.Exception
 
 class HomeRecyclerAdapter(
@@ -101,12 +94,13 @@ class HomeRecyclerAdapter(
             tv_address!!.text = model.location
 
             img_profile?.setOnClickListener {
-                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV, model.id)
+               // onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV, model.id)
+                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV, model)
 
             }
 
             img_dots?.setOnClickListener {
-                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS,-1)
+                onClickListener?.onItemClickListener(AppConstants.RecyclerViewKeys.HOME_RV_IMG_DOTS,model)
             }
 
 
@@ -114,9 +108,10 @@ class HomeRecyclerAdapter(
             recyclerView!!.adapter = homeChildRecyclerAdapter
 
             homeChildRecyclerAdapter.setOnChildClickListener(object : HomeChildRvClickListener {
-                override fun onChildItemClick(position: Int) {
-                    onClickListener?.onChildItemClick(position)
+                override fun onChildItemClick(position: Int, vendorId: Int) {
+                    onClickListener?.onChildItemClick(position, vendorId)
                 }
+
             })
 
             recyclerView!!.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)

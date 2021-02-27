@@ -1,6 +1,7 @@
 package com.techbayportal.itaste.di.module
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.techbayportal.itaste.BuildConfig
 import com.techbayportal.itaste.constants.AppConstants
@@ -20,6 +21,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -35,10 +37,20 @@ class ApplicationModule {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .writeTimeout(1, TimeUnit.MINUTES) // write timeout
+            .readTimeout(1, TimeUnit.MINUTES) // read timeout
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(ChuckerInterceptor.Builder(appContext).build())
+            .addInterceptor(ChuckerInterceptor.Builder(appContext)
+            .collector(ChuckerCollector(appContext))
+            .maxContentLength(250000L)
+            .redactHeaders(emptySet())
+            .alwaysReadResponseBody(false)
             .build()
-    } else OkHttpClient
+            )
+            .build()
+    }
+        else OkHttpClient
         .Builder()
         .build()
 

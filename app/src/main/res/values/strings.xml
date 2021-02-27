@@ -85,6 +85,9 @@
     <string name="today">Today</string>
     <string name="icon_bell">icon bell</string>
     <string name="check_out_this_section_for_app_updates_offers_and_other_general_notifications">Check out this section for app updates, offers and other general notifications</string>
+    <string name="no_notifications">No notifications</string>
+    <string name="guest_notifications_details">You are signed in as guest,in order to enjoy app features and updates. please sign in or</string>
+    <string name="create_a_new_account">create a new account!</string>
 
     //My Profile Fragment
     <string name="edit_profile">Edit Profile</string>
@@ -116,7 +119,7 @@
     <string name="delete_icon">Delete Icon</string>
     <string name="are_you_sure_you_want_to_delete_your_account_once_you_confirm_you_won_t_be_able_to_log_in_without_creating_a_new_account">Are you sure you want to delete your account? Once you confirm you won\'t be able to log in without creating a new account.</string>
     <string name="confirm">confirm</string>
-
+m
     //Account Deleted Fragment
     <string name="back_to_login_page">Back to login page</string>
     <string name="account_deleted">Account Deleted</string>
@@ -131,7 +134,7 @@
     //NewMessageFragment
     <string name="new_message">New Message</string>
     <string name="to">To</string>
-    <string name="search">Search</string>
+    <string name="search">Search…</string>
     //=>separate layout
     <string name="write_a_comment">Write a Comment</string>
 
@@ -183,8 +186,8 @@
     <string name="edit_post">Edit Post</string>
     <string name="delete_post">Delete Post</string>
     <string name="turn_off_commenting">Turn off commenting</string>
-    <string name="turn_on_commenting">Turn on commenting</string>
     <string name="share_to_dots">Share to…</string>
+    <string name="turn_on_commenting">Turn on commenting</string>
     <string name="btn_editpost">Edit Post</string>
     <string name="btn_add_to_cart">Add to cart</string>
 
@@ -270,6 +273,11 @@
 
 
     <string name="enter_your_phone_number">Enter your phone <br></br> number</string>
+    <string name="new_post">New Post</string>
+    <string name="select_picture">Please select one picture!</string>
+    <string name="tv_post">Post</string>
+
+
     <string name="optional">(optional)</string>
     <string name="writevalidemail">Please write a Valid Email!</string>
     <string name="writebio">Please write bio!</string>
@@ -310,9 +318,7 @@
     <string name="reset">Reset</string>
     <string name="foloosi_key">test_$2y$10$maycAof2s0Hp0e22bLmHIegqpu3CF5RzMf5lmyga92OU-6p1ZVMvO</string>
 
-    <string name="new_post">New Post</string>
-    <string name="select_picture">Please select one picture!</string>
-    <string name="tv_post">Post</string>
+
     <string name="ed_write_something">Write something about the picture...</string>
     <string name="ed_write_desired_price">Enter desired price</string>
     <string name="tv_how_long_will">How long it took you to cook this?</string>
@@ -348,5 +354,16 @@
     <string name="tv_Save_post">Save post</string>
     <string name="post_added_to_cart">Post added to cart</string>
     <string name="hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you">Hello, I saw this post of yours and I couldn\'t stop myself from ordering it. I need to know if you are still delivering this or not? Also how much are you charging for delivery service? Good Day to you!</string>
+    <string name="log_out_of_guest_mode">Log out of guest mode</string>
+    <string name="to_control_you_have_to_sign_in">To control you have to Sign in or</string>
+    <string name="guest_user">Guest User</string>
+    <string name="update_payment">Update Payment</string>
+    <string name="search_in_chats">Search in chats</string>
+    <string name="type_message">Type Message…</string>
+    <string name="there_is_nothing_to_show_yet_you_need_to_save_some_posts">There is nothing to show yet, you need to save some posts</string>
+    <string name="number_hint">547222799</string>
+    <string name="please_renew_your_payment">Please Renew Your Package</string>
+    <string name="payment_expired">Payment Expired</string>
+    <string name="tv_post_updated">Post Updated Successfully!</string>
 
 </resources>

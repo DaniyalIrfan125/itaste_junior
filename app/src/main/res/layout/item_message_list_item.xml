@@ -18,8 +18,8 @@
             android:layout_height="45dp"
             android:layout_centerVertical="true"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/_25sdp"
-            android:paddingEnd="@dimen/_25sdp">
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingEnd="@dimen/_20sdp">
 
             <RelativeLayout
                 android:id="@+id/rl_siv_userImage"

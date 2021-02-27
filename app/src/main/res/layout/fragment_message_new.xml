@@ -135,11 +135,13 @@
                     </TextView>
 
                     <EditText
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/transparent"
                         android:fontFamily="@font/roboto_regular"
                         android:hint="@string/search"
+                        android:textColorHint="@color/serchHitColorNewMessage"
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="20sp">
 

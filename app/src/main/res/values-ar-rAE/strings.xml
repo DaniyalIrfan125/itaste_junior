@@ -12,6 +12,7 @@
         <string name="enter_password">ادخل كلمة المرور</string>
         <string name="forgot_password">هل نسيت كلمة المرور؟</string>
         <string name="sign_in">تسجيل الدخول</string>
+    <string name="remove">يزيل</string>
         <string name="guest_mode">وضع الزائرين</string>
         <string name="it_apos_s_your_first_time_here">انها المرة الأولى لك هنا؟</string>
 
@@ -47,6 +48,7 @@
         <string name="deliverable">قابل للتوصيل</string>
         <string name="not_deliverable">غير قابل للتوصيل</string>
         <string name="change_profile_picture">تغيير صورة الملف الشخصي</string>
+    <string name="tv_delete">حذف</string>
 
         //Forget Password Fragment
 
@@ -85,6 +87,9 @@
         <string name="today">اليوم</string>
         <string name="icon_bell">icon bell</string>
         <string name="check_out_this_section_for_app_updates_offers_and_other_general_notifications">تحقق من هذا القسم للحصول على تحديثات التطبيق والعروض والإشعارات العامة الأخرى</string>
+    <string name="no_notifications">لا إشعارات</string>
+    <string name="guest_notifications_details">لقد قمت بتسجيل الدخول كضيف ، من أجل الاستمتاع بميزات وتحديثات التطبيق. الرجاء تسجيل الدخول أو</string>
+    <string name="create_a_new_account">انشاء حساب جديد!</string>
 
         //My Profile Fragment
         <string name="edit_profile">تعديل الملف الشخصي</string>
@@ -184,7 +189,10 @@
         <string name="edit_post">تعديل المنشور</string>
         <string name="delete_post">امسح المنشور</string>
         <string name="turn_off_commenting">اغلق التواصل</string>
-        <string name="share_to_dots">المشاركة ل ....</string>
+        <string name="share_to_dots">المشاركة ل …</string>
+         <string name="turn_on_commenting">بدوره على التعليق</string>
+         <string name="btn_editpost">تعديل المنشور</string>
+         <string name="btn_add_to_cart">أضف إلى السلة</string>
 
         //ProfileFragment
         <string name="posts">المنشورات</string>
@@ -240,6 +248,7 @@
     //Common
     <string name="PleasewriteUsername">الرجاء كتابة اسم المستخدم!</string>
     <string name="Pleasewritepassword">الرجاء كتابة كلمة المرور!</string>
+    <string name="password_at_least_six_character">كلمة السر ستة أحرف على الأقل!</string>
     //=>login
 
     //=>forget pasword
@@ -271,5 +280,91 @@
     <string name="select_picture">الرجاء تحديد صورة واحدة!</string>
     <string name="tv_post">بريد</string>
 
+    <string name="optional">(خياري)</string>
+    <string name="writevalidemail">الرجاء كتابة بريد إلكتروني صحيح!</string>
+    <string name="writebio">الرجاء كتابة السيرة الذاتية!</string>
+    <string name="writeusername">الرجاء كتابة اسم المستخدم!</string>
+    <string name="writelastname">الرجاء كتابة الاسم الأخير!</string>
+    <string name="writefirstname">الرجاء كتابة الاسم الأول!</string>
+    <string name="country">بلد</string>
+    <string name="change_emirates">تغيير الإمارات</string>
+    <string name="writephone">الرجاء كتابة الهاتف!</string>
+    <string name="adnan_khan">عدنان خان</string>
+    <string name="jhon_dao">جون</string>
+    <string name="dao">داو</string>
+    <string name="abc_g_com">abc@g.com</string>
+    <string name="selectcity">اختر مدينة!</string>
+    <string name="selectcountry">حدد الدولة!!</string>
+    <string name="profile_settings">إعدادات الملف الشخصي</string>
+    <string name="selectCode">حدد رمز</string>
+    <string name="following">التالي</string>
+    <string name="writereport">الرجاء كتابة رسالة!</string>
+    <string name="writename">Please write your name!</string>
+    <string name="ok">موافق!</string>
+    <string name="there_is_nothing_to_show_yet_you_need_to_update_your_payment_to_start_posting">لا يوجد شيء لعرضه حتى الآن ، تحتاج إلى تحديث دفعتك لبدء النشر.</string>
+    <string name="no_posts_yet">لا مشاركات بعد</string>
+    <string name="you_don_t_have_any_block_accounts">ليس لديك أي حسابات مجمدة.</string>
+    <string name="no_block_accounts">لا حسابات مجمعة</string>
+    <string name="selectCountry">رجاء قم بإختيار دوله</string>
+    <string name="SelectMode">الرجاء تحديد الوضع</string>
+    <string name="Select_preffered_language">الرجاء تحديد لغتك المفضلة</string>
+    <string name="success">نجاح</string>
+    <string name="you_are_all_set">أنت كل مجموعة!</string>
+    <string name="select_package">حدد الحزمة</string>
+    <string name="Password_changed_successfully">تم تغيير الرقم السري بنجاح</string>
+    <string name="New_and_confirm_password_does_not_match">جديد وتأكيد كلمة المرور لا يتطابق!</string>
+    <string name="Please_write_Confirm_Password">الرجاء كتابة تأكيد كلمة المرور!</string>
+    <string name="Please_write_New_Password">الرجاء كتابة كلمة مرور جديدة!</string>
+    <string name="Please_write_Existing_Password">الرجاء كتابة كلمة المرور الموجودة!</string>
+    <string name="bug_report_submitted">تم إرسال تقرير الخطأ</string>
+    <string name="reset">إعادة ضبط</string>
+
+
+    <string name="ed_write_something">اكتب شيئًا عن الصورة ...</string>
+    <string name="ed_write_desired_price">أدخل السعر المطلوب</string>
+    <string name="tv_how_long_will">كم استغرقت من الوقت لطهي هذا؟</string>
+    <string name="ed_enter_valid_time">أدخل وقتًا صالحًا</string>
+    <string name="ed_comments">تعليقات</string>
+    <string name="tv_once_you_turn_it_off">بمجرد إيقاف تشغيله ، لا يمكن لأحد التعليق على هذه المشاركة.</string>
+    <string name="tv_advance_Settings">إعدادات متقدمةs</string>
+    <string name="tv_choose_category">اختر الفئة</string>
+
+    //post fragment
+    <string name="tv_please_select_category">الرجاء تحديد فئة واحدة</string>
+    <string name="tv_post_added">تمت إضافة المشاركة بنجاح!</string>
+    <string name="tv_success">نجاح!</string>
+    <string name="tv_add_price">أضف السعر</string>
+    <string name="tv_description">وصف</string>
+    <string name="tv_describe">صِف منتجك …</string>
+    <string name="tv_caption">التسمية التوضيحية</string>
+    <string name="tv_write_Caption">الرجاء كتابة تعليق!</string>
+    <string name="tv_error_description">الرجاء كتابة الوصف!</string>
+    <string name="tv_write_price">الرجاء كتابة السعر!</string>
+    <string name="tv_write_timing">يرجى كتابة التوقيت!</string>
+    <string name="tv_likes">likes</string>
+    <string name="tv_cooking_time_is">وقت الطهي والتحضير</string>
+    <string name="tv_write_comment">أكتب تعليقا</string>
+    <string name="tv_plz_write_comment">الرجاء كتابة تعليق!</string>
+    <string name="tv_viewAll">مشاهدة الك </string>
+    <string name="tv_comments">تعليقات</string>
+    <string name="tv_update">تحديث</string>
+    <string name="tv_post_delete">تم حذف المشاركة بنجاح!</string>
+    <string name="go_back">عد</string>
+    <string name="terms_and_conditions">الأحكام والشروط</string>
+    <string name="help_and_FAQs">المساعدة والأسئلة الشائعة</string>
+    <string name="tv_Save_post">حفظ آخر</string>
+    <string name="post_added_to_cart">تمت إضافة المشاركة إلى عربة التسوق</string>
+    <string name="hello_i_saw_this_post_of_yours_yesterday_and_i_couldn_t_stop_myself_from_ordering_it_i_need_to_know_if_you_are_still_deliveri_ng_this_or_not_also_how_much_are_you_charging_for_delivery_service_good_day_to_you">مرحبًا ، لقد رأيت هذا المنشور الخاص بك ولم أستطع منع نفسي من طلبه. أريد أن أعرف ما إذا كنت لا تزال تقدم هذا أم لا؟ أيضا ما هي تكلفة خدمة التوصيل؟ يوم سعيد لك!</string>
+    <string name="log_out_of_guest_mode">تسجيل الخروج من وضع الضيف</string>
+    <string name="to_control_you_have_to_sign_in">للتحكم يجب عليك تسجيل الدخول أو</string>
+    <string name="guest_user">حساب زائر</string>
+    <string name="update_payment">تحديث الدفع</string>
+    <string name="search_in_chats">البحث في الدردشات</string>
+    <string name="type_message">اكتب رسالة …</string>
+    <string name="there_is_nothing_to_show_yet_you_need_to_save_some_posts">لا يوجد شيء لعرضه حتى الآن ، تحتاج إلى حفظ بعض المنشورات</string>
+    <string name="number_hint">۵۴۷۲۲۲۷۹۹</string>
+    <string name="please_renew_your_payment">الرجاء تجديد باقتك</string>
+    <string name="payment_expired">انتهى الدفع</string>
+    <string name="tv_post_updated">تم تحديث المشاركة بنجاح!</string>
 </resources>
 

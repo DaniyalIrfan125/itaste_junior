@@ -15,9 +15,7 @@ import com.squareup.picasso.Picasso
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
-import com.techbayportal.itaste.data.models.GetAllCountriesData
-import com.techbayportal.itaste.data.models.PostDetailData
-import com.techbayportal.itaste.data.models.VendorProfileDetailData
+import com.techbayportal.itaste.data.models.*
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.LayoutProfilefragmentBinding
 import com.techbayportal.itaste.ui.fragments.profilefragment.adapter.PostsRecyclerAdapter
@@ -26,12 +24,13 @@ import com.techbayportal.itaste.utils.DialogClass
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_profilefragment.*
+import kotlinx.android.synthetic.main.layout_profilefragment.img_back
 import kotlinx.android.synthetic.main.layout_profilefragment.tv_profileName
 import timber.log.Timber
 import java.lang.Exception
 
 @AndroidEntryPoint
-class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewModel>() {
+class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding, ProfileViewModel>() {
     override val layoutId: Int
         get() = R.layout.layout_profilefragment
     override val viewModel: Class<ProfileViewModel>
@@ -44,7 +43,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
 
     val postsList = ArrayList<PostDetailData>()
     private lateinit var postsRecyclerAdapter: PostsRecyclerAdapter
-    var isFallowing :Boolean = false
+    var isFallowing: Boolean = false
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
 
@@ -53,7 +52,9 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
 //        mViewModel.hitGetVendorProfileDetails(loginSession!!.data.id.toInt())
-        mViewModel.hitGetVendorProfileDetails(sharedViewModel.vendorProfileId)
+
+        mViewModel.hitGetVendorProfileDetails(sharedViewModel.vendorHomeScreenData!!.id)
+
 
     }
 
@@ -61,25 +62,49 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         super.onViewCreated(view, savedInstanceState)
         mView = view
         initializing()
+        //Check if we vendor click on his own profile
+        if (loginSession != null) {
+            if (loginSession.data.id == sharedViewModel.vendorHomeScreenData!!.id) {
+                if(loginSession.data.is_payment_update){
+                    button_updatePayment.isEnabled = false
+                    button_updatePayment.isClickable = false
+                }else{
+                    button_updatePayment.isEnabled = true
+                    button_updatePayment.isClickable = true
+                }
+                ll_update_payment.visibility = View.VISIBLE
+                ll_message_follow_button.visibility = View.GONE
+
+
+            } else {
+                ll_update_payment.visibility = View.GONE
+                ll_message_follow_button.visibility = View.VISIBLE
+            }
+        }
+
 
         if (this::vendorProfileDetailData.isInitialized) {
             setData(vendorProfileDetailData)
         }
 
+
     }
 
     private fun initializing() {
-       postsRecyclerAdapter = PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener{
-            override fun onClicked(postDetailData: PostDetailData) {
-                sharedViewModel.postId = postDetailData.id
-                Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_postdetailfragment)
-                //Toast.makeText(requireContext(), "Location selected: ${postDetailData.id}", Toast.LENGTH_SHORT).show()
-                Timber.d("Location selected: ${postDetailData.id}")
-            }
-        })
+        postsRecyclerAdapter =
+            PostsRecyclerAdapter(postsList, object : PostsRecyclerAdapter.ClickItemListener {
+                override fun onClicked(postDetailData: PostDetailData) {
+                   // sharedViewModel.postId = postDetailData.id
+                   // sharedViewModel.vendorHomeScreenData = GetHomeScreenData(postDetailData.id,"")
+                    Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_postdetailfragment)
+                    //Toast.makeText(requireContext(), "Location selected: ${postDetailData.id}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Location selected: ${postDetailData.id}")
+                }
+            })
         recycler_profilePosts.adapter = postsRecyclerAdapter
 
-        recycler_profilePosts.layoutManager =  GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
+        recycler_profilePosts.layoutManager =
+            GridLayoutManager(context, 3, LinearLayoutManager.VERTICAL, false)
         recycler_profilePosts.autoFitColumns(110)
 
     }
@@ -99,12 +124,27 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
         })
 
         mViewModel.onFollowButtonClicked.observe(this, Observer {
-            mViewModel.hitSetFollowApi(loginSession!!.data.id)
+            mViewModel.hitSetFollowApi(sharedViewModel.vendorHomeScreenData!!.id)
         })
 
         mViewModel.onUpdateButtonClicked.observe(this, Observer {
             Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_choosePakageFragment)
         })
+
+        mViewModel.onDirectMessageButtonClicked.observe(this, Observer {
+
+            sharedViewModel.vendorDetailsForCart =
+                CartVendor(sharedViewModel.vendorHomeScreenData!!.location, sharedViewModel.vendorHomeScreenData!!.first, sharedViewModel.vendorHomeScreenData!!.id, sharedViewModel.vendorHomeScreenData!!.first, sharedViewModel.vendorHomeScreenData!!.profilePic)
+            sharedViewModel.cartPost = null
+            Navigation.findNavController(mView)
+                .navigate(R.id.action_profileFragment_to_chatFragment2)
+        })
+
+        mViewModel.onProfileSettingsClicked.observe(this, Observer {
+            Navigation.findNavController(mView).navigate(R.id.action_profileFragment_to_myProfileFragment)
+        })
+
+
     }
 
     override fun subscribeToNetworkLiveData() {
@@ -119,7 +159,8 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
                     loadingDialog.dismiss()
                     vendorProfileDetailData = it.data!!.data
                     setData(vendorProfileDetailData)
-                   // postsRecyclerAdapter.notifyDataSetChanged()
+
+                    // postsRecyclerAdapter.notifyDataSetChanged()
                 }
                 Resource.Status.ERROR -> {
                     loadingDialog.dismiss()
@@ -137,6 +178,7 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
                     loadingDialog.dismiss()
                     isFallowing = it.data!!.data.follow
                     isFallowingVendor(isFallowing)
+                    mViewModel.hitGetVendorProfileDetails(sharedViewModel.vendorHomeScreenData!!.id)
 
                 }
                 Resource.Status.ERROR -> {
@@ -146,70 +188,83 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding ,ProfileViewMo
             }
         })
     }
-    private fun isFallowingVendor(isFallowing :Boolean){
-        if(isFallowing){
+
+    private fun isFallowingVendor(isFallowing: Boolean) {
+        if (isFallowing) {
             btn_follow.text = getString(R.string.following)
             btn_follow.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.btn_direct_message_curve)
-        }else{
+        } else {
             btn_follow.text = getString(R.string.follow)
             btn_follow.background =
                 ContextCompat.getDrawable(requireContext(), R.drawable.btn_orange_curve_profile)
         }
     }
 
-    private fun setData(vendorProfileDetailData: VendorProfileDetailData){
+    private fun setData(vendorProfileDetailData: VendorProfileDetailData) {
         try {
-            if(vendorProfileDetailData.image.isNotEmpty()){
-                Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop().into(sivProfileImage , object :Callback{
-                    override fun onSuccess() {
-                        if(sp_Profile != null){
-                            sp_Profile.visibility = View.GONE
-                        }
-                    }
-                    override fun onError(e: Exception?) {
-                        if(sp_Profile != null){
-                            Picasso.get().load(R.drawable.placeholder_image).into(sivProfileImage)
-                            sp_Profile.visibility = View.GONE
+            isFallowingVendor(isFallowing)
+            if (vendorProfileDetailData.image.isNotEmpty()) {
+                Picasso.get().load(vendorProfileDetailData.image).fit().centerCrop()
+                    .into(sivProfileImage, object : Callback {
+                        override fun onSuccess() {
+                            if (sp_Profile != null) {
+                                sp_Profile.visibility = View.GONE
+                            }
                         }
 
-                    }
-                })
+                        override fun onError(e: Exception?) {
+                            if (sp_Profile != null) {
+                                Picasso.get().load(R.drawable.placeholder_image)
+                                    .into(sivProfileImage)
+                                sp_Profile.visibility = View.GONE
+                            }
+
+                        }
+                    })
             }
 
             tv_vendorUserName.text = vendorProfileDetailData.username
-            tv_profileName.text = vendorProfileDetailData.first +" " +vendorProfileDetailData.last
-            tv_details.text = vendorProfileDetailData.bio
+            tv_profileName.text = vendorProfileDetailData.first + " " + vendorProfileDetailData.last
+            tv_details.text = vendorProfileDetailData.description
             tv_postCounts.text = vendorProfileDetailData.total_post.toString()
             tv_likesCount.text = vendorProfileDetailData.total_likes.toString()
             tv_followersCount.text = vendorProfileDetailData.total_followers.toString()
-            if(!vendorProfileDetailData.posts.isNullOrEmpty()){
+            if (!vendorProfileDetailData.posts.isNullOrEmpty()) {
                 ll_noPosts.visibility = View.GONE
                 postsList.clear()
                 postsList.addAll(vendorProfileDetailData.posts)
                 postsRecyclerAdapter.notifyDataSetChanged()
-            }
-            else{
+            } else {
                 ll_noPosts.visibility = View.VISIBLE
             }
 
-            if(vendorProfileDetailData.is_follow){
+            if(vendorProfileDetailData.is_payment_expire){
+                // pl update Payment
+                ll_renew_Payment.visibility = View.VISIBLE
+            }else{
+                ll_renew_Payment.visibility = View.GONE
+            }
+
+            if (vendorProfileDetailData.is_follow) {
                 btn_follow.text = getString(R.string.following)
                 btn_follow.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.btn_direct_message_curve)
-            }else{
+            } else {
                 btn_follow.text = getString(R.string.follow)
                 btn_follow.background =
                     ContextCompat.getDrawable(requireContext(), R.drawable.btn_orange_curve_profile)
             }
 
-            if(!vendorProfileDetailData.is_payment_update){
+
+
+            /*if (!vendorProfileDetailData.is_payment_update) {
                 ll_update_payment.visibility = View.VISIBLE
                 ll_message_follow_button.visibility = View.GONE
-            }else{
+            } else {
                 ll_update_payment.visibility = View.GONE
                 ll_message_follow_button.visibility = View.VISIBLE
-            }
+            }*/
         } catch (e: Exception) {
         }
 

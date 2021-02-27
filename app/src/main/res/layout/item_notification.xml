@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="51dp"
+            android:layout_height="55dp"
             android:layout_alignParentEnd="true"
             android:orientation="horizontal"
             android:layout_centerVertical="true"
@@ -25,7 +25,7 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="51dp"
+                android:layout_height="55dp"
                 android:layout_weight="2"
                 android:gravity="center_vertical">
 
@@ -34,7 +34,6 @@
                     android:layout_width="47dp"
                     android:layout_height="47dp"
                     android:layout_margin="@dimen/_3sdp"
-                    android:elevation="@dimen/_3sdp"
                     android:scaleType="fitXY"
                     app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
                     tools:layout_editor_absoluteX="116dp"
@@ -75,7 +74,6 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_light"
                     android:textColor="@color/titleTextColorBlack"
-                    android:text="2h ago"
                     android:textSize="8sp">
 
                 </TextView>

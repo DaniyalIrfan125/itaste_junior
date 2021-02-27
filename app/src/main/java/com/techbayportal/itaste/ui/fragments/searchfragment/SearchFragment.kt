@@ -5,14 +5,17 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.techbayportal.itaste.BR
 import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.GetAllCategoriesData
 import com.techbayportal.itaste.data.models.GetAllCitiesData
 import com.techbayportal.itaste.data.models.GetAllCountriesData
@@ -26,6 +29,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_searchfragment.*
 import kotlinx.android.synthetic.main.layout_searchfragment.spinner_city
 import kotlinx.android.synthetic.main.layout_searchfragment.spinner_country
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 
@@ -38,6 +44,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
     override val bindingVariable: Int
         get() = BR.viewModel
 
+    lateinit var mView: View
     var isLayoutOpened = false
     private val categoryList = ArrayList<GetAllCategoriesData>()
     private val allPostsList = ArrayList<SearchAndFilterResponseData>()
@@ -45,7 +52,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
     var threeArrayList: ArrayList<SearchAndFilterResponseData> = ArrayList()
     var mainArrayList: ArrayList<ArrayList<SearchAndFilterResponseData>> = ArrayList()
 
-
+    lateinit var dataStoreProvider: DataStoreProvider
     private val countriesList = ArrayList<GetAllCountriesData>()
     private val citiesList = ArrayList<GetAllCitiesData>()
     private val searchResultList = ArrayList<SearchAndFilterResponseData>()
@@ -62,11 +69,23 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
 
+        dataStoreProvider = DataStoreProvider(requireContext())
+        GlobalScope.launch {
+            val guestMode = dataStoreProvider.guestModeFlow.first()
+            if(guestMode){
+                mViewModel.hitGetAllSearchPostsDataApiForGuest()
+                Timber.d("Guest Mode On")
+            }else{
+                mViewModel.hitGetAllSearchPostsDataApi()
+                Timber.d("Guest Mode Off")
+            }
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mViewModel.hitGetAllSearchPostsDataApi()
+        mView = view
         initializing()
         swipeRevealLayout.setLockDrag(true)
         img_filter.setOnClickListener {
@@ -75,7 +94,17 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             if (!isLayoutOpened) {
                 swipeRevealLayout.open(true)
                 if(categoryList.isNullOrEmpty()){
-                    mViewModel.hitGetAllCategoriesApi()
+
+                    GlobalScope.launch {
+                        val guestMode = dataStoreProvider.guestModeFlow.first()
+                        if(guestMode){
+                            mViewModel.hitGetAllCategoriesApiForGuest()
+                            Timber.d("Guest Mode On")
+                        }else{
+                            mViewModel.hitGetAllCategoriesApi()
+                            Timber.d("Guest Mode Off")
+                        }
+                    }
                 }
 
                 /*Check for not rastrain filter values when filter is applied and drawer is opened again*/
@@ -96,11 +125,22 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             }
         }
 
-        searchRecyclerAdapter = SearchRecyclerAdapter(
-            mainArrayList,
+        searchRecyclerAdapter = SearchRecyclerAdapter(mainArrayList, requireContext(), object : SearchRecyclerAdapter.ClickItemListener{
+            override fun onClicked(searchAndFilterResponseData: SearchAndFilterResponseData) {
 
-            requireContext()
-        )
+                GlobalScope.launch {
+                    val guestMode = dataStoreProvider.guestModeFlow.first()
+                    if(!guestMode){
+                        sharedViewModel.postId = searchAndFilterResponseData.id
+                        Navigation.findNavController(mView).navigate(R.id.action_searchFragment_to_postDetailFragment)
+                        Timber.d("Guest Mode OFF : Clicked from Search : ${searchAndFilterResponseData.id} ")
+                    }else{
+                        Timber.d("Guest Mode On : Clicked from Search : ${searchAndFilterResponseData.id}")
+                    }
+                }
+            }
+
+        })
 
         recycler_searchposts.adapter = searchRecyclerAdapter
         recycler_searchposts.layoutManager = LinearLayoutManager(context)
@@ -150,20 +190,62 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
         ed_search.doOnTextChanged { text, start, before, count ->
             if (text!!.length > 2 && searchApiStatus) {
                 searchApiStatus = false
-                mViewModel.hitSearchApi(text.toString())
+
+                GlobalScope.launch {
+                    val guestMode = dataStoreProvider.guestModeFlow.first()
+                    if(guestMode){
+                        mViewModel.hitSearchApiForGuest(text.toString())
+                        Timber.d("Guest Mode On")
+                    }else{
+                        mViewModel.hitSearchApi(text.toString())
+                        Timber.d("Guest Mode Off")
+                    }
+                }
 
             } else if (text.length == 0) {
                 loading(false)
                 searchResultList.clear()
-                mViewModel.hitSearchApi("")
+
+
+                GlobalScope.launch {
+                    val guestMode = dataStoreProvider.guestModeFlow.first()
+                    if(guestMode){
+                        mViewModel.hitSearchApiForGuest("")
+                        Timber.d("Guest Mode On")
+                    }else{
+                        mViewModel.hitSearchApi("")
+                        Timber.d("Guest Mode Off")
+                    }
+                }
             }
         }
     }
 
     override fun subscribeToNetworkLiveData() {
         super.subscribeToNetworkLiveData()
-
+        //for user or vendor
         mViewModel.getAllSearchPostsResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+
+                    splitArray(it.data!!.data)
+                    searchRecyclerAdapter.notifyDataSetChanged()
+                    Timber.d("Search: All Posts")
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+
+        //for guest mode
+        mViewModel.getAllSearchPostsResponseForGuest.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loadingDialog.show()
@@ -225,6 +307,7 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
 
         })
 
+        //for user or vendor
         mViewModel.getAllCategoriesResponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -245,6 +328,28 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             }
         })
 
+        //for Guest
+        mViewModel.getAllCategoriesResponseForGuest.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    categoryList.clear()
+                    rg_categories.removeAllViews()
+                    categoryList.addAll(it.data!!.data)
+                    createRadioButton(categoryList)
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+
+        //for user or vendor
         mViewModel.getSearchAndFilterResponse.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
@@ -268,9 +373,58 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
             }
         })
 
+        //for Guests
+        mViewModel.getSearchAndFilterResponseForGuest.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loadingDialog.show()
+                }
+                Resource.Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    allPostsList.clear()
+                    //Close the side filter screen
 
+                    allPostsList.addAll(it.data!!.data)
+                    splitArray(it.data.data)
+                    searchRecyclerAdapter.notifyDataSetChanged()
+                    Timber.d("Search: All data after filter")
+                }
+                Resource.Status.ERROR -> {
+                    loadingDialog.dismiss()
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+
+        //for user or vendor
         //Search only with keyword
         mViewModel.getSearchResponse.observe(this, Observer {
+            when (it.status) {
+                Resource.Status.LOADING -> {
+                    loading(true)
+                }
+                Resource.Status.SUCCESS -> {
+                    searchApiStatus = true
+                    loading(false)
+                    allPostsList.addAll(it.data!!.data)
+                    splitArray(it.data.data)
+                    searchRecyclerAdapter.notifyDataSetChanged()
+                    Timber.d("Search: search applied")
+
+                }
+                Resource.Status.ERROR -> {
+                    searchApiStatus = true
+                    loading(false)
+                    DialogClass.errorDialog(requireContext(), it.message!!, baseDarkMode)
+                }
+
+            }
+        })
+
+        //for Guest
+        //Search only with keyword
+        mViewModel.getSearchResponseForGuest.observe(this, Observer {
             when (it.status) {
                 Resource.Status.LOADING -> {
                     loading(true)
@@ -335,7 +489,18 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
         }
 
         mViewModel.onResetButtonClicked.observe(this, Observer {
-            mViewModel.hitGetAllSearchPostsDataApi()
+
+            GlobalScope.launch {
+                val guestMode = dataStoreProvider.guestModeFlow.first()
+                if(guestMode){
+                    mViewModel.hitGetAllSearchPostsDataApiForGuest()
+                    Timber.d("Guest Mode On")
+                }else{
+                    mViewModel.hitGetAllSearchPostsDataApi()
+                    Timber.d("Guest Mode Off")
+                }
+            }
+
             rg_categories.removeAllViews()
             createRadioButton(categoryList)
             spinner_city.setSelection(0)
@@ -354,14 +519,30 @@ class SearchFragment : BaseFragment<LayoutSearchfragmentBinding, SearchViewModel
 
         mViewModel.onApplyFilterButtonClicked.observe(this, Observer {
             if (spinner_city.selectedItemPosition == 0 || spinner_country.selectedItemPosition == 0) {
-                mViewModel.hitApplyFiltersApi(ed_search.text.toString(), "", "", categoryId)
+
+                GlobalScope.launch {
+                    val guestMode = dataStoreProvider.guestModeFlow.first()
+                    if(guestMode){
+                        mViewModel.hitApplyFiltersApiForGuest(ed_search.text.toString(), "", "", categoryId)
+                        Timber.d("Guest Mode On")
+                    }else{
+                        mViewModel.hitApplyFiltersApi(ed_search.text.toString(), "", "", categoryId)
+                        Timber.d("Guest Mode Off")
+                    }
+                }
             } else {
-                mViewModel.hitApplyFiltersApi(
-                    ed_search.text.toString(),
-                    countryid.toString(),
-                    cityid.toString(),
-                    categoryId
-                )
+
+                GlobalScope.launch {
+                    val guestMode = dataStoreProvider.guestModeFlow.first()
+                    if(guestMode){
+                        mViewModel.hitApplyFiltersApiForGuest(ed_search.text.toString(), countryid.toString(), cityid.toString(), categoryId)
+                        Timber.d("Guest Mode On")
+                    }else{
+                        mViewModel.hitApplyFiltersApi(ed_search.text.toString(), countryid.toString(), cityid.toString(), categoryId)
+                        Timber.d("Guest Mode Off")
+                    }
+                }
+
             }
             //if side Filter is open then close it
             if (!isLayoutOpened) {

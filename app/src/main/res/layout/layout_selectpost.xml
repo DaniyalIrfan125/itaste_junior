@@ -10,7 +10,8 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/mainBackground">
 
         <RelativeLayout
             android:id="@+id/relative_top"
@@ -95,7 +96,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.25">
+                android:layout_weight="0.25"
+                android:background="@color/selectPostStrip">
 
                 <RelativeLayout
                     android:layout_width="@dimen/_80sdp"
@@ -124,7 +126,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/_15sdp"
-                    android:src="@drawable/icon_camera" />
+                    android:src="@drawable/icon_camera"
+                    app:tint="@color/mainIconColor"/>
 
             </RelativeLayout>
 

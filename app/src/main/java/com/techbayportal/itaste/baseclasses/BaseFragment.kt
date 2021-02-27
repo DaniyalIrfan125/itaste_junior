@@ -90,10 +90,9 @@ abstract class BaseFragment<T : ViewDataBinding, V : BaseViewModel> : Fragment()
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
             } else {
-
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 !sharedViewModel.isDarkMode
                 baseDarkMode = false
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
             }
         })

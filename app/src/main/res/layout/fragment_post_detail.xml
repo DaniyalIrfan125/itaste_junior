@@ -266,17 +266,17 @@
                                 android:layout_width="@dimen/_20sdp"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:layout_marginEnd="@dimen/_5sdp"
                                 android:src="@drawable/speech_bubble" />
 
                             <ImageView
                                 android:id="@+id/iv_Chat"
-                                android:layout_width="@dimen/_25sdp"
+                                android:layout_width="@dimen/_20sdp"
                                 android:layout_height="match_parent"
                                 android:layout_gravity="center"
                                 android:onClick="@{()->viewModel.onSendButtonClicked()}"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/icon_send_new" />
+
+                                android:src="@drawable/artboard" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -285,7 +285,7 @@
                             android:gravity="end">
 
                             <com.balysv.materialripple.MaterialRippleLayout
-                                android:id="@+id/rippleConfir"
+                                android:id="@+id/rippleEdtPost"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:visibility="gone"
@@ -307,10 +307,11 @@
 
 
                             <com.balysv.materialripple.MaterialRippleLayout
-                                android:id="@+id/rippleConfirm"
+                                android:id="@+id/rippleAddToCart"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/_5sdp"
+                                android:visibility="gone"
                                 app:mrl_rippleColor="@color/colorLightOrange">
 
                                 <Button
@@ -403,15 +404,6 @@
                         android:layout_marginStart="@dimen/_25sdp"
                         android:layout_marginEnd="@dimen/_25sdp"
                         android:fontFamily="@font/roboto_regular"
-                        tools:text="Sed ut perspiciatis unde omnis iste natus error sit volup
-atem accu santium doloremque laudantium, totami repa
-aperiam, ea ipsa quae ab illo inventore veritatis et qurep
-architecto beat ae vitae dicta sunt explicabo. Nemo eni
-ipsam voluptatem quia voluptas sit asperna tur aut odit
-ut fugit, sed quia conse  quia magni dolores eos qui rat
-ne voluptatem sequi nesciunt ab illo inventore veritatis
-quasi architecto beat ae vitae dicta sunt explicabo. atis
-enim ipsam voluptatem quia voluptas sit asperna."
                         android:textColor="@color/titleTextColorBlack"
                         android:textSize="14sp">
 

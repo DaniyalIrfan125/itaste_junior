@@ -63,7 +63,7 @@ class SignUpFragment : BaseFragment<LayoutSignupfragmentBinding, SignUpFragmentV
         checkUserType()
 
         et_country_code.registerPhoneNumberTextView(ed_phoneNumber);
-        ed_phoneNumber.hint = "547222799";
+        ed_phoneNumber.hint = getString(R.string.number_hint);
 
 
     }

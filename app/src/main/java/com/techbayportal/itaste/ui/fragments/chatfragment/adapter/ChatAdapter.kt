@@ -12,8 +12,7 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.databinding.ItemChatLeftBinding
 import com.techbayportal.itaste.databinding.ItemChatRightBinding
 import com.techbayportal.itaste.databinding.ItemOrderChatItemBinding
-import com.techbayportal.offsidesportsapp.data.models.chat.ChatMessageDataClass
-import kotlinx.android.synthetic.main.item_chat_right.view.*
+import com.techbayportal.itaste.data.models.chat.ChatMessageDataClass
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -41,33 +40,37 @@ class ChatAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        return if (viewType == 0) {
-            ViewHolderOrderClassLeft(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    R.layout.item_order_chat_item,
-                    parent,
-                    false
+        return when (viewType) {
+            0 -> {
+                ViewHolderOrderClassLeft(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.item_order_chat_item,
+                        parent,
+                        false
+                    )
                 )
-            )
-        } else if (viewType == 1) {
-            ViewHolderClassLeft(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    R.layout.item_chat_left,
-                    parent,
-                    false
+            }
+            1 -> {
+                ViewHolderClassLeft(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.item_chat_left,
+                        parent,
+                        false
+                    )
                 )
-            )
-        } else {
-            ViewHolderClassRight(
-                DataBindingUtil.inflate(
-                    LayoutInflater.from(parent.context),
-                    R.layout.item_chat_right,
-                    parent,
-                    false
+            }
+            else -> {
+                ViewHolderClassRight(
+                    DataBindingUtil.inflate(
+                        LayoutInflater.from(parent.context),
+                        R.layout.item_chat_right,
+                        parent,
+                        false
+                    )
                 )
-            )
+            }
         }
     }
 
@@ -92,6 +95,7 @@ class ChatAdapter(
 
                 holder.itemBinding.tvOrderId.text = "ORDER ID :: "+ chatArrayList[chatArrayList.size -1].orderId
                 holder.itemBinding.tvOrderMessage.text = chatArrayList[chatArrayList.size -1].message
+                holder.itemBinding.tvMessageTime.text = getFormattedTime(chatArrayList[chatArrayList.size -1].createdAt)
             }
             is ViewHolderClassLeft -> {
                 holder.itemBinding.tvMessage.text = chatModel.message

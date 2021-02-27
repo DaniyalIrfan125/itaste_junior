@@ -29,6 +29,7 @@ class UserProfileViewModel @ViewModelInject constructor(
     val onBackButtonClicked = SingleLiveEvent<Any>()
     var onSaveChangesButtonClicked = SingleLiveEvent<Any>()
     val onProfilePicChangeTextClicked = SingleLiveEvent<Any>()
+    val onSwitchToPremiumClickedClicked = SingleLiveEvent<Any>()
 
     val _getUserPersonalProfileResponse = MutableLiveData<Resource<UserPersonalProfileResponse>>()
     val getUserPersonalPersonalResponse: LiveData<Resource<UserPersonalProfileResponse>>
@@ -48,6 +49,10 @@ class UserProfileViewModel @ViewModelInject constructor(
 
     fun onProfilePicChangeTextClicked(){
         onProfilePicChangeTextClicked.call()
+    }
+
+    fun onSwitchToPremiumClickedClicked(){
+        onSwitchToPremiumClickedClicked.call()
     }
 
 

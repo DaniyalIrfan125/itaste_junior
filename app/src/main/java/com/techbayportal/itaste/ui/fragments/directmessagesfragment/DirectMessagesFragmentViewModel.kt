@@ -14,6 +14,7 @@ class DirectMessagesFragmentViewModel @ViewModelInject constructor(
 
     var onNewMessageIconClicked = SingleLiveEvent<Any>()
     val onBackButtonClicked = SingleLiveEvent<Any>()
+    val onSignInButtonClicked = SingleLiveEvent<Any>()
 
     fun onNewMessageIconClicked(){
         onNewMessageIconClicked.call()
@@ -21,5 +22,8 @@ class DirectMessagesFragmentViewModel @ViewModelInject constructor(
 
     fun onBackButtonClicked() {
         onBackButtonClicked.call()
+    }
+    fun onSignInButtonClicked() {
+        onSignInButtonClicked.call()
     }
 }

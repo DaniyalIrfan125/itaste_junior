@@ -93,13 +93,18 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
                     }
 
 
+
+
                     it?.let {
                         loadingDialog.dismiss()
                         mViewModel.saveUserObj(it.data!!)
                         sharedViewModel.testId = it.data.data.id
-
+                        GlobalScope.launch {
+                            dataStoreProvider.guestMode(false)
+                            navigateToMainActivity()
+                        }
                        // sharedViewModel.verifyOtpHoldPhoneNumber = editTextEmail.text.toString()
-                        navigateToMainActivity()
+
 
                     }
                 }
@@ -144,14 +149,12 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
                     tv_passwordError.text = getString(R.string.Pleasewritepassword)
                 }
                 tv_passwordError.visibility = View.VISIBLE
-                ed_password.background =
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
+                ed_password.background = ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
             }
 
         } else {
             tv_userNameError.visibility = View.VISIBLE
-            ed_enterUserName.background =
-                ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
+            ed_enterUserName.background = ContextCompat.getDrawable(requireContext(), R.drawable.ed_errorboundary)
             tv_userNameError.text = getString(R.string.PleasewriteUsername)
         }
 
@@ -189,28 +192,34 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
         mViewModel.onLoginClicked.observe(this, androidx.lifecycle.Observer {
             GlobalScope.launch {
                 dataStoreProvider.guestMode(false)
+                fieldValidationsCheck()
             }
-            fieldValidationsCheck()
+
         })
 
         mViewModel.onForgotPasswordClicked.observe(this, androidx.lifecycle.Observer {
+            GlobalScope.launch {
+                dataStoreProvider.guestMode(false)
+                Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
+            }
 
-            Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
 
         })
 
         mViewModel.onSignUpClicked.observe(this, androidx.lifecycle.Observer {
             GlobalScope.launch {
                 dataStoreProvider.guestMode(false)
+                Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_selectAccountTypeFragment2)
             }
-            Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_selectAccountTypeFragment2)
+
         })
 
         mViewModel.onGuestModeButtonClicked.observe(this, androidx.lifecycle.Observer {
             GlobalScope.launch {
                 dataStoreProvider.guestMode(true)
+                navigateToMainActivity()
             }
-            navigateToMainActivity()
+
         })
     }
 
