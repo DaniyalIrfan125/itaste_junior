@@ -13,6 +13,6 @@ class  GeneralInboxDataClass {
     var usersId = ArrayList<String>()
     var isGroupChat: Boolean = false
     var unreadMessages = 0
-    var imgStr: String = ""     //todo: implement
+    var imgStr: String = ""
     var userOnlineStatus : Boolean = false
 }

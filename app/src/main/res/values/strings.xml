@@ -362,8 +362,8 @@ m
     <string name="type_message">Type Message…</string>
     <string name="there_is_nothing_to_show_yet_you_need_to_save_some_posts">There is nothing to show yet, you need to save some posts</string>
     <string name="number_hint">547222799</string>
-    <string name="please_renew_your_payment">Please Renew Your Package</string>
-    <string name="payment_expired">Payment Expired</string>
     <string name="tv_post_updated">Post Updated Successfully!</string>
+    <string name="view_profile">View Profile</string>
+    <string name="payment_expires_description"><![CDATA[Your profile is on hold, you can\'t post anything and your profile is temporarily removed from search. To continue please pay!]]></string>
 
 </resources>

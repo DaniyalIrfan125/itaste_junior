@@ -112,7 +112,8 @@
 
                         app:strokeWidth="@dimen/_1sdp" />
 
-                    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <com.github.ybq.android.spinkit.SpinKitView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/sp_Profile"
                         style="@style/SpinKitView.Large.Pulse"
                         android:layout_width="wrap_content"
@@ -462,12 +463,12 @@
                     android:background="@color/noPostsBgColor"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <ImageView
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
-                        android:src="@drawable/icon_no_posts"
+                        android:src="@drawable/icon_payment_expire"
                         app:tint="@color/noPostsTextColor" />
 
                     <TextView
@@ -475,7 +476,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
                         android:gravity="center"
-                        android:text="@string/payment_expired"
+                        android:text="@string/update_payment"
+                        android:textStyle="bold"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:textColor="@color/noPostsTextColor"
                         android:textSize="18sp">
 
@@ -486,9 +489,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_50sdp"
                         android:layout_marginEnd="@dimen/_50sdp"
+                        android:layout_marginTop="@dimen/_2sdp"
                         android:fontFamily="@font/roboto_light"
                         android:gravity="center"
-                        android:text="@string/please_renew_your_payment"
+                        android:text="@string/payment_expires_description"
                         android:textColor="@color/noPostsTextColor"
                         android:textSize="14sp">
 

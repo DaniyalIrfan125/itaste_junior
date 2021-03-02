@@ -363,8 +363,9 @@
     <string name="type_message">اكتب رسالة …</string>
     <string name="there_is_nothing_to_show_yet_you_need_to_save_some_posts">لا يوجد شيء لعرضه حتى الآن ، تحتاج إلى حفظ بعض المنشورات</string>
     <string name="number_hint">۵۴۷۲۲۲۷۹۹</string>
-    <string name="please_renew_your_payment">الرجاء تجديد باقتك</string>
-    <string name="payment_expired">انتهى الدفع</string>
     <string name="tv_post_updated">تم تحديث المشاركة بنجاح!</string>
+    <string name="view_profile">عرض الصفحة الشخصية</string>
+    <string name="payment_expires_description">ملف التعريف الخاص بك معلق ، لا يمكنك نشر أي شيء وتم حذف ملف التعريف الخاص بك مؤقتًا من البحث. للمتابعة يرجى الدفع!</string>
+
 </resources>
 

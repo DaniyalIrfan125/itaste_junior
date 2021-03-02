@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class LoginViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
     private val networkHelper: NetworkHelper,
-    private val dataStoreProvider: DataStoreProvider
+    val dataStoreProvider: DataStoreProvider
 ) : BaseViewModel() {
 
 
@@ -91,4 +91,11 @@ class LoginViewModel @ViewModelInject constructor(
             dataStoreProvider.setFcm(token)
         }
     }
+
+    fun setGuestMode(isGuestMode :Boolean){
+        viewModelScope.launch {
+            dataStoreProvider.guestMode(isGuestMode)
+        }
+    }
+
 }

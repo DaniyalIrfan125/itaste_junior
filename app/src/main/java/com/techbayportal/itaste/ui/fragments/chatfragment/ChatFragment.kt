@@ -1,4 +1,3 @@
-
 package com.techbayportal.itaste.ui.fragments.chatfragment
 
 import android.content.Context
@@ -65,6 +64,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
 
     private var currentUserName = ""
     private var currentUserId = ""
+    private var currentUserImage = ""
     private lateinit var chatAdapter: ChatAdapter
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
@@ -87,6 +87,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
         sharedViewModel.vendorDetailsForCart?.let {
             selectedName = it.first + " " + it.last
             selectedId = it.id.toString()
+            selectedImage = it.profile_pic
         }
 
 //        selectedImage =
@@ -100,10 +101,12 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
 
         tv_reciverName.text = selectedName
 
+        currentUserImage = loginSession.data.profile_pic
+
         tvPostMessage.setOnClickListener {
             if (tv_message.text.isNotEmpty()) {
                 val msg = tv_message.text
-                sendMessage(msg.toString())
+                sendMessage(msg.toString(), currentUserImage)
                 msg.clear()
             } else {
 
@@ -166,7 +169,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
     }
 
 
-    private fun sendMessage(msg: String) {
+    private fun sendMessage(msg: String , senderImg: String) {
 
         val chatRef = firestoreRef.collection("Chats").document(chatKey!!)
         val msgRef = chatRef.collection("Threads").document()
@@ -176,6 +179,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
         messageObj.message = msg
         messageObj.senderId = currentUserId
         messageObj.senderName = currentUserName
+        messageObj.imgStr = senderImg
         messageObj.id = secondKey
         messageObj.createdAt = currentDate
 
@@ -231,13 +235,14 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
         val inboxDataClass = GeneralInboxDataClass()
         inboxDataClass.users = arrayListOf(
             UserInfoClass(selectedName, selectedId, ""),
-            UserInfoClass(currentUserName, currentUserId, "")
+            UserInfoClass(currentUserName, currentUserId, currentUserImage)
         )
 
         inboxDataClass.usersId = arrayListOf(currentUserId, selectedId)
         inboxDataClass.lastMsg = null
         inboxDataClass.id = firstKey
         inboxDataClass.lastMsgTime = Date()
+        inboxDataClass.imgStr = currentUserImage
         inboxDataClass.senderId = ""
         inboxDataClass.senderName = ""
         inboxDataClass.isGroupChat = false
@@ -285,7 +290,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatFragmentViewModel>(),
 
         seenListener = getReceiverSentMsgRef.addSnapshotListener { value, error ->
             if (error != null) {
-               // Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_SHORT).show()
+                // Toast.makeText(requireContext(), error.localizedMessage, Toast.LENGTH_SHORT).show()
                 Timber.d(error.localizedMessage)
                 return@addSnapshotListener
             }

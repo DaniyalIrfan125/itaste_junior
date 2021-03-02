@@ -130,6 +130,57 @@
                         android:orientation="vertical">
 
                         <LinearLayout
+                            android:id="@+id/ll_viewProfile"
+                            android:onClick="@{()->viewModel.onViewProfileClicked()}"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_45sdp"
+                            android:clickable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="2"
+                            android:focusable="true">
+
+                            <ImageView
+                                android:id="@+id/iv_profile"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.6"
+                                android:rotation="0"
+                                android:rotationX="0"
+                                android:rotationY="0"
+                                android:src="@drawable/icon_eye"
+                                app:tint="@color/mainIconColor" />
+
+
+                            <TextView
+                                android:id="@+id/tv_myProfile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_15sdp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto_regular"
+                                android:text="@string/view_profile"
+                                android:textColor="@color/titleTextColorBlack"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:id="@+id/viewProfile_fwd_arrow"
+                                android:layout_width="@dimen/_15sdp"
+                                android:layout_height="@dimen/_8sdp"
+                                android:layout_weight="0.4"
+                                android:src="@drawable/icon_forward_arrow" />
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/view_viewProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/colorGreyView">
+
+                        </View>
+
+                        <LinearLayout
                             android:onClick="@{()->viewModel.onMyCartClicked()}"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_45sdp"

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.SuccessResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 
 class MyProfileViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    val dataStoreProvider: DataStoreProvider
 ) : BaseViewModel() {
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
@@ -42,6 +44,7 @@ class MyProfileViewModel @ViewModelInject constructor(
     val onLogoutClicked = SingleLiveEvent<Any>()
     val onSwitchToPremiumClicked = SingleLiveEvent<Any>()
     val onLogoutOfGuestModeClicked = SingleLiveEvent<Any>()
+    val onViewProfileClicked = SingleLiveEvent<Any>()
 
 
     fun onBackButtonClicked() {
@@ -85,6 +88,9 @@ class MyProfileViewModel @ViewModelInject constructor(
     }
     fun onLogoutOfGuestModeClicked(){
         onLogoutOfGuestModeClicked.call()
+    }
+    fun onViewProfileClicked(){
+        onViewProfileClicked.call()
     }
 
 
@@ -141,7 +147,11 @@ class MyProfileViewModel @ViewModelInject constructor(
         }
     }
 
-
+    fun setGuestMode(isGuestMode :Boolean){
+        viewModelScope.launch {
+            dataStoreProvider.guestMode(isGuestMode)
+        }
+    }
 
 
 

@@ -15,6 +15,8 @@ import com.techbayportal.itaste.R
 import com.techbayportal.itaste.baseclasses.BaseFragment
 import com.techbayportal.itaste.constants.AppConstants
 import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
+import com.techbayportal.itaste.data.models.GetHomeScreenData
+import com.techbayportal.itaste.data.models.GetHomeScreenPostsData
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.databinding.FragmentMyProfileBinding
 import com.techbayportal.itaste.ui.activities.signupactivity.SignupActivity
@@ -25,6 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_my_profile.*
 import kotlinx.android.synthetic.main.fragment_notification.*
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.Exception
@@ -42,12 +45,24 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     //val loginSession = LoginSession.getInstance().getLoginResponse()
     lateinit var mView: View
 
-    lateinit var dataStoreProvider: DataStoreProvider
+   // lateinit var dataStoreProvider: DataStoreProvider
+    private var guestModeNotificationUi: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dataStoreProvider = DataStoreProvider(requireContext())
+      //  dataStoreProvider = DataStoreProvider(requireContext())
         subscribeToNetworkLiveData()
+
+        GlobalScope.launch {
+            val guestMode = mViewModel.dataStoreProvider.guestModeFlow.first()
+            if (guestMode) {
+                guestModeNotificationUi = true
+                Timber.d("Guest Mode On")
+            } else {
+                guestModeNotificationUi = false
+                Timber.d("Guest Mode Off")
+            }
+        }
 
     }
 
@@ -55,20 +70,36 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         switch_darkMode?.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 GlobalScope.launch {
-                    dataStoreProvider.storeDarkMode(true)
+                    mViewModel.dataStoreProvider.storeDarkMode(true)
                 }
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
             } else {
                 GlobalScope.launch {
-                    dataStoreProvider.storeDarkMode(false)
+                    mViewModel.dataStoreProvider.storeDarkMode(false)
                 }
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             }
         }
 
         //guest mode stuff
-        dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+
+        if (guestModeNotificationUi) {
+            Picasso.get().load(R.drawable.icon_profile).fit().centerCrop().into(siv_userImage)
+            sk_myProfile.visibility = View.GONE
+            ll_guestModeProfile.visibility = View.VISIBLE
+            ll_editProfile.visibility = View.GONE
+            linear.visibility = View.GONE
+            tv_userName.text = getString(R.string.guest_user)
+            Timber.d("Guest Mode On")
+        }else if(!guestModeNotificationUi){
+            ll_guestModeProfile.visibility = View.GONE
+            ll_editProfile.visibility = View.VISIBLE
+            linear.visibility = View.VISIBLE
+            initializing()
+            Timber.d("Guest Mode Off")
+        }
+       /* dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
             if(it){
                 Picasso.get().load(R.drawable.icon_profile).fit().centerCrop().into(siv_userImage)
                 sk_myProfile.visibility = View.GONE
@@ -85,7 +116,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 Timber.d("Guest Mode Off")
             }
 
-        })
+        })*/
 
         mView = view
         subscribeToObserveDarkModeDataStore()
@@ -131,6 +162,9 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                 ll_switchToPremium.visibility = View.GONE
                 tv_description_switch_to_premium.visibility = View.GONE
 
+            }else if(LoginSession.getInstance().getLoginResponse()?.data?.role.equals(AppConstants.UserTypeKeys.USER, true)){
+                ll_viewProfile.visibility =View.GONE
+                view_viewProfile.visibility =View.GONE
             }
 
         }
@@ -154,7 +188,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
     private fun subscribeToObserveDarkModeDataStore() {
 
         //observing data from data store and showing
-        dataStoreProvider.darkModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+        mViewModel.dataStoreProvider.darkModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
             switch_darkMode.isChecked = it
         })
 
@@ -174,7 +208,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                     LoginSession.getInstance().setLoginResponse(null)
                     //clearing user object after logout
                     GlobalScope.launch {
-                        dataStoreProvider.clearUserObj()
+                        mViewModel.dataStoreProvider.clearUserObj()
                     }
                     navigateToLoginScreen()
 
@@ -270,7 +304,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
 
         mViewModel.onSwitchToPremiumClicked.observe(this, Observer {
             GlobalScope.launch {
-                dataStoreProvider.switchToPremium(true)
+                mViewModel.dataStoreProvider.switchToPremium(true)
             }
             Navigation.findNavController(tv_blockedAccounts)
                 .navigate(R.id.action_myProfileFragment_to_signUpVendorFragment2)
@@ -278,11 +312,20 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
         })
 
         mViewModel.onLogoutOfGuestModeClicked.observe(this, Observer{
-            GlobalScope.launch {
+            navigateToLoginScreen()
+
+            /*GlobalScope.launch {
                 dataStoreProvider.guestMode(false)
                 navigateToLoginScreen()
-            }
+            }*/
 
+        })
+        mViewModel.onViewProfileClicked.observe(this, Observer{
+            sharedViewModel.vendorHomeScreenData = GetHomeScreenData(LoginSession.getInstance().getLoginResponse()!!.data.id,"","","","",
+                arrayListOf<GetHomeScreenPostsData>()
+            )
+            Navigation.findNavController(tv_blockedAccounts)
+                .navigate(R.id.action_myProfileFragment_to_profileFragment)
         })
     }
 
@@ -304,7 +347,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
 
     private fun subscribeToObserveLanguage() {
         //observing data from data store and showing
-        dataStoreProvider.languageFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+        mViewModel.dataStoreProvider.languageFlow.asLiveData().observe(viewLifecycleOwner, Observer {
 
             if (it != null) {
                 if (it == "ar") {
@@ -316,6 +359,7 @@ class MyProfileFragment : BaseFragment<FragmentMyProfileBinding, MyProfileViewMo
                     delete_account_fwd_arrow.rotation = 180F
                     blocked_account_fwd_arrow.rotation = 180F
                     logout_fwd_arrow.rotation = 180F
+                    viewProfile_fwd_arrow.rotation = 180F
                 }
             }
         })

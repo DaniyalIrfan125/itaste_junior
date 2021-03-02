@@ -44,7 +44,7 @@ class SignupConfigurationsFragment :
     lateinit var mView: View
     lateinit var userLocationAdapter: UserLocationAdapter
     var countryId: Int = 0
-    lateinit var dataStoreProvider: DataStoreProvider
+    //lateinit var dataStoreProvider: DataStoreProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +55,7 @@ class SignupConfigurationsFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mView = view
-        dataStoreProvider = DataStoreProvider(requireContext())
+       // dataStoreProvider = DataStoreProvider(requireContext())
         initializing()
 
         rg_language.setOnCheckedChangeListener { group, checkedId ->
@@ -185,12 +185,12 @@ class SignupConfigurationsFragment :
     private fun setUserDisplayModePref() {
         if (isDarkMode!!) {
             GlobalScope.launch {
-                dataStoreProvider.storeDarkMode(true)
+                mViewModel.dataStoreProvider.storeDarkMode(true)
             }
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else if (!isDarkMode!!) {
             GlobalScope.launch {
-                dataStoreProvider.storeDarkMode(false)
+                mViewModel.dataStoreProvider.storeDarkMode(false)
             }
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
@@ -208,4 +208,6 @@ class SignupConfigurationsFragment :
         }
 
     }
+
+
 }

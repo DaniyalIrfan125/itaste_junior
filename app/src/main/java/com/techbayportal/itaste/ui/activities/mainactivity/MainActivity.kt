@@ -29,6 +29,9 @@ import com.techbayportal.itaste.databinding.ActivityMainBinding
 import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -128,13 +131,23 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         }
 
-        dataStoreProvider.guestModeFlow.asLiveData().observe(this, Observer {
+        /*dataStoreProvider.guestModeFlow.asLiveData().observe(this, Observer {
             if(it){
                 relative_addButton.isVisible = false
                 Timber.d("Guest Mode On")
             }
 
-        })
+        })*/
+
+        GlobalScope.launch {
+            val guestMode = dataStoreProvider.guestModeFlow.first()
+            if (guestMode) {
+                relative_addButton.isVisible = false
+                Timber.d("Guest Mode On")
+            }
+        }
+
+
 
         bottom_navigation.setOnNavigationItemSelectedListener(BottomNavigationView.OnNavigationItemSelectedListener { item ->
             if (navController.currentDestination != null) {

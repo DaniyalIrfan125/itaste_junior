@@ -123,7 +123,20 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
 
         swipeRefreshLayout.setOnRefreshListener(SwipeRefreshLayout.OnRefreshListener {
             swipeRefreshLayout.isRefreshing = false
-            dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+
+            GlobalScope.launch {
+                val guestMode = dataStoreProvider.guestModeFlow.first()
+                if (guestMode) {
+                    guestModeForUiChanges = true
+                    mViewModel.hitGetHomeScreenInfoApiForGuest(fcmToken)
+                    Timber.d("Guest Mode On Refresh")
+                } else {
+                    guestModeForUiChanges = false
+                    mViewModel.hitGetHomeScreenInfoApi(fcmToken)
+                    Timber.d("Guest Mode Off Refresh")
+                }
+            }
+            /*dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
                 if (it) {
                     mViewModel.hitGetHomeScreenInfoApiForGuest(fcmToken)
                     Timber.d("Guest Mode On Refresh")
@@ -132,7 +145,7 @@ class HomeFragment : BaseFragment<LayoutHomefragmentBinding, HomeViewModel>(), H
                     Timber.d("Guest Mode Off Refresh")
                 }
 
-            })
+            })*/
         })
     }
 

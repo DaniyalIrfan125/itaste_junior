@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.techbayportal.itaste.baseclasses.BaseViewModel
+import com.techbayportal.itaste.data.local.datastore.DataStoreProvider
 import com.techbayportal.itaste.data.models.NotificationResponse
 import com.techbayportal.itaste.data.remote.Resource
 import com.techbayportal.itaste.data.remote.reporitory.MainRepository
@@ -16,7 +17,8 @@ import kotlinx.coroutines.launch
 
 class NotificationFragmentViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    val dataStoreProvider: DataStoreProvider
 ) : BaseViewModel() {
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
@@ -61,6 +63,12 @@ class NotificationFragmentViewModel @ViewModelInject constructor(
                     _getNotificationsResponse.postValue(Resource.error("" + e.message, null))
                 }
             } else _getNotificationsResponse.postValue(Resource.error("No Internet Connection", null))
+        }
+    }
+
+    fun setGuestMode(isGuestMode :Boolean){
+        viewModelScope.launch {
+            dataStoreProvider.guestMode(isGuestMode)
         }
     }
 }

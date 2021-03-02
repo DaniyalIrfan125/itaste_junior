@@ -25,12 +25,12 @@ import kotlinx.android.synthetic.main.fragment_direct_messages.*
 import kotlinx.android.synthetic.main.fragment_direct_messages.img_back
 import kotlinx.android.synthetic.main.fragment_direct_messages.linear
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 @AndroidEntryPoint
-class DirectMessagesFragment :
-    BaseFragment<FragmentDirectMessagesBinding, DirectMessagesFragmentViewModel>() {
+class DirectMessagesFragment : BaseFragment<FragmentDirectMessagesBinding, DirectMessagesFragmentViewModel>() {
 
     override val layoutId: Int
         get() = R.layout.fragment_direct_messages
@@ -47,19 +47,68 @@ class DirectMessagesFragment :
     private lateinit var adapter: DirectMessagesAdapter
 
     val loginSession = LoginSession.getInstance().getLoginResponse()
-    lateinit var dataStoreProvider: DataStoreProvider
+    //lateinit var dataStoreProvider: DataStoreProvider
+    private var guestModeNotificationUi: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+      //  dataStoreProvider = DataStoreProvider(requireContext())
+        //guest mode stuff
+
+        GlobalScope.launch {
+            val guestMode = mViewModel.dataStoreProvider.guestModeFlow.first()
+            if (guestMode) {
+                guestModeNotificationUi = true
+                Timber.d("Guest Mode On")
+            }else{
+                guestModeNotificationUi = false
+                Timber.d("Guest Mode Off")
+            }
+        }
 
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataStoreProvider = DataStoreProvider(requireContext())
-        //guest mode stuff
-        dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
+        if (guestModeNotificationUi) {
+            ll_guestModeDirectMessage.visibility = View.VISIBLE
+            ll_new_message.visibility = View.GONE
+            linear.visibility = View.GONE
+            tv_message.visibility = View.GONE
+            llUserList.visibility = View.GONE
+        }else if(!guestModeNotificationUi){
+            ll_guestModeDirectMessage.visibility = View.GONE
+            ll_new_message.visibility = View.VISIBLE
+            linear.visibility = View.VISIBLE
+            tv_message.visibility = View.VISIBLE
+            llUserList.visibility = View.VISIBLE
+
+            if (loginSession != null) {
+
+                currentUserId = loginSession.data.id
+                currentUserName = loginSession.data.first + " " + loginSession.data.last
+                currentUserImage = loginSession.data.profile_pic
+            }
+
+
+            adapter = DirectMessagesAdapter(inboxArray, object : DirectMessagesAdapter.ClickListener {
+                override fun onClick(data: GeneralInboxDataClass) {
+                    // Toast.makeText(context, " Inbox ItemClicked : ${data.senderId}", Toast.LENGTH_SHORT).show()
+                    Timber.d("Inbox ItemClicked : ${data.senderId}")
+                    sharedViewModel.vendorDetailsForCart = CartVendor("", data.senderName, data.senderId.toInt(), "", data.imgStr)
+                    sharedViewModel.cartPost = null
+                    Navigation.findNavController(ll_new_message)
+                        .navigate(R.id.action_directMessagesFragment_to_chatFragment2)
+                }
+
+            })
+            rvUsersForChat.adapter = adapter
+            getInboxList()
+            Timber.d("Guest Mode Off")
+        }
+        /*dataStoreProvider.guestModeFlow.asLiveData().observe(viewLifecycleOwner, Observer {
             if (it) {
                 Timber.d("Guest Mode On")
                 //Toast.makeText(context, "Guest Mode On", Toast.LENGTH_SHORT).show()
@@ -69,43 +118,10 @@ class DirectMessagesFragment :
                 tv_message.visibility = View.GONE
                 llUserList.visibility = View.GONE
             } else {
-                ll_guestModeDirectMessage.visibility = View.GONE
-                ll_new_message.visibility = View.VISIBLE
-                linear.visibility = View.VISIBLE
-                tv_message.visibility = View.VISIBLE
-                llUserList.visibility = View.VISIBLE
 
-                if (loginSession != null) {
-
-                    currentUserId = loginSession.data.id
-                    currentUserName = loginSession.data.first + " " + loginSession.data.last
-                    currentUserImage = loginSession.data.profile_pic
-                }
-
-
-                adapter = DirectMessagesAdapter(inboxArray, object : DirectMessagesAdapter.ClickListener {
-                        override fun onClick(data: GeneralInboxDataClass) {
-                           // Toast.makeText(context, " Inbox ItemClicked : ${data.senderId}", Toast.LENGTH_SHORT).show()
-                            Timber.d("Inbox ItemClicked : ${data.senderId}")
-                            sharedViewModel.vendorDetailsForCart = CartVendor(
-                                "",
-                                data.senderName,
-                                data.senderId.toInt(),
-                                "",
-                                data.imgStr
-                            )
-                            sharedViewModel.cartPost = null
-                            Navigation.findNavController(ll_new_message)
-                                .navigate(R.id.action_directMessagesFragment_to_chatFragment2)
-                        }
-
-                    })
-                rvUsersForChat.adapter = adapter
-                getInboxList()
-                Timber.d("Guest Mode Off")
             }
 
-        })
+        })*/
 
 
     }
@@ -123,10 +139,8 @@ class DirectMessagesFragment :
         })
 
         mViewModel.onSignInButtonClicked.observe(this, Observer {
-            GlobalScope.launch {
-                dataStoreProvider.guestMode(false)
-                navigateToLoginScreen()
-            }
+            mViewModel.setGuestMode(false)
+            navigateToLoginScreen()
 
         })
     }
@@ -150,8 +164,7 @@ class DirectMessagesFragment :
             .addOnSuccessListener {
                 it.documents.forEach { doc ->
                     val inboxData = doc.toObject(GeneralInboxDataClass::class.java)!!
-                    val chatUser =
-                        inboxData.users.find { user -> user.id != currentUserId.toString() }
+                    val chatUser = inboxData.users.find { user -> user.id != currentUserId.toString() }
 
                     //added for online status
                     /* fireStoreObj.collection("UserStatus")
@@ -178,9 +191,9 @@ class DirectMessagesFragment :
                         .addOnSuccessListener { messageArray ->
                             val filteredMessagesArray = arrayListOf<ChatMessageDataClass>()
                             if (messageArray.documents.isNotEmpty()) {
+                                //llNoMessages.visibility = View.GONE
                                 messageArray.documents.forEach { messageDoc ->
-                                    val messageData =
-                                        messageDoc.toObject(ChatMessageDataClass::class.java)
+                                    val messageData = messageDoc.toObject(ChatMessageDataClass::class.java)
                                     if (!messageData!!.deletedFor.contains(currentUserId.toString()))
                                         filteredMessagesArray.add(messageData)
                                 }
@@ -189,7 +202,8 @@ class DirectMessagesFragment :
 
                                 inboxData.senderId = chatUser?.id ?: "0"
                                 inboxData.senderName = chatUser?.name ?: ""
-                                inboxData.imgStr = chatUser?.imgStr ?: ""
+                                inboxData.imgStr = chatUser!!.imgStr
+                               // inboxData.imgStr = currentUserImage
                                 inboxData.lastMsg = lastMessageData.message
                                 inboxData.lastMsgTime = lastMessageData.createdAt
 
@@ -203,9 +217,11 @@ class DirectMessagesFragment :
                                 inboxArray.add(0, inboxData)
                                 adapter.notifyDataSetChanged()
                             } else {
+                                //llNoMessages.visibility  =View.VISIBLE
+                                showPlaceholder()
                             }
                             //   showPlaceholder()
-                            //llNoMessages.visibility  =View.VISIBLE
+
                         }
                         .addOnFailureListener { messageArrayExcpetion ->
                             //  showPlaceholder()

@@ -97,7 +97,11 @@
             app:popExitAnim="@anim/exit_to_right"/>
         <action
             android:id="@+id/action_profileFragment_to_myProfileFragment"
-            app:destination="@id/myProfileFragment" />
+            app:destination="@id/myProfileFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
     </fragment>
     <fragment
         android:id="@+id/savedPostsFragment"
@@ -318,6 +322,13 @@
         <action
             android:id="@+id/action_myProfileFragment_to_signUpVendorFragment2"
             app:destination="@id/signUpVendorFragment2"
+            app:enterAnim="@anim/enter_from_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"
+            app:popExitAnim="@anim/exit_to_right"/>
+        <action
+            android:id="@+id/action_myProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
             app:enterAnim="@anim/enter_from_right"
             app:exitAnim="@anim/exit_to_left"
             app:popEnterAnim="@anim/enter_from_left"

@@ -29,6 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_loginfragment.*
 import kotlinx.android.synthetic.main.layout_signupfragment.*
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -43,21 +44,22 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
         get() = BR.viewModel
 
     var darkMode :Boolean = false
-    lateinit var dataStoreProvider: DataStoreProvider
     var fcmToken: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
+
+        mViewModel.setGuestMode(false)
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataStoreProvider = DataStoreProvider(requireContext())
         subscribeToObserveDarkActivation()
         fieldTextWatcher()
 
+        mViewModel.setGuestMode(false)
         //it shuld be in splash screen
         //if user is logi or not
 
@@ -87,8 +89,10 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
                     if(it.data != null){
                         if(it.data.data.role.equals(AppConstants.UserTypeKeys.USER,false)){
                             GlobalScope.launch {
-                                dataStoreProvider.switchToPremium(false)
+                                mViewModel.dataStoreProvider.switchToPremium(false)
+//                                dataStoreProvider.switchToPremium(false)
                             }
+
                         }
                     }
 
@@ -100,7 +104,8 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
                         mViewModel.saveUserObj(it.data!!)
                         sharedViewModel.testId = it.data.data.id
                         GlobalScope.launch {
-                            dataStoreProvider.guestMode(false)
+
+                            mViewModel.setGuestMode(false)
                             navigateToMainActivity()
                         }
                        // sharedViewModel.verifyOtpHoldPhoneNumber = editTextEmail.text.toString()
@@ -189,34 +194,34 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
     override fun subscribeToNavigationLiveData() {
         super.subscribeToNavigationLiveData()
 
-        mViewModel.onLoginClicked.observe(this, androidx.lifecycle.Observer {
+        mViewModel.onLoginClicked.observe(this, Observer{
             GlobalScope.launch {
-                dataStoreProvider.guestMode(false)
+                //mViewModel.setGuestMode(false)
                 fieldValidationsCheck()
             }
 
         })
 
-        mViewModel.onForgotPasswordClicked.observe(this, androidx.lifecycle.Observer {
+        mViewModel.onForgotPasswordClicked.observe(this, Observer {
             GlobalScope.launch {
-                dataStoreProvider.guestMode(false)
+                mViewModel.setGuestMode(false)
                 Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_forgotPasswordFragment)
             }
 
 
         })
 
-        mViewModel.onSignUpClicked.observe(this, androidx.lifecycle.Observer {
+        mViewModel.onSignUpClicked.observe(this, Observer {
             GlobalScope.launch {
-                dataStoreProvider.guestMode(false)
+                mViewModel.setGuestMode(false)
                 Navigation.findNavController(ed_enterUserName).navigate(R.id.action_loginFragment_to_selectAccountTypeFragment2)
             }
 
         })
 
-        mViewModel.onGuestModeButtonClicked.observe(this, androidx.lifecycle.Observer {
+        mViewModel.onGuestModeButtonClicked.observe(this, Observer {
             GlobalScope.launch {
-                dataStoreProvider.guestMode(true)
+                mViewModel.setGuestMode(true)
                 navigateToMainActivity()
             }
 
@@ -240,7 +245,7 @@ class LoginFragment : BaseFragment<LayoutLoginfragmentBinding, LoginViewModel>()
     private fun subscribeToObserveDarkActivation() {
 
         //observing data from data store and showing
-        dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
+        mViewModel.dataStoreProvider.darkModeFlow.asLiveData().observe(this, Observer {
             //  switch_darkMode.isChecked = it
             if (it != null) {
                 if(it == true){

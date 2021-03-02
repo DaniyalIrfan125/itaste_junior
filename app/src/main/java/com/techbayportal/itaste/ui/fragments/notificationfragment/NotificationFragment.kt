@@ -24,6 +24,7 @@ import com.techbayportal.itaste.ui.activities.signupactivity.SignupActivity
 import com.techbayportal.itaste.ui.fragments.notificationfragment.adapter.NotificationFragmentAdapter
 import com.techbayportal.itaste.ui.fragments.notificationfragment.itemclicklistener.NotificationRvItemClickListener
 import com.techbayportal.itaste.utils.DialogClass
+import com.techbayportal.itaste.utils.LoginSession
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_bloked_accounts.*
 import kotlinx.android.synthetic.main.fragment_notification.*
@@ -46,30 +47,34 @@ class NotificationFragment :
     override val bindingVariable: Int
         get() = BR.viewModel
 
-   // lateinit var notificationResponse: NotificationResponse
+    // val loginSession = LoginSession.getInstance().getLoginResponse()
+
+    // lateinit var notificationResponse: NotificationResponse
     var notificationDataList = ArrayList<NotificationResponseData>()
     lateinit var mView: View
     lateinit var notificationFragmentAdapter: NotificationFragmentAdapter
 
-    lateinit var dataStoreProvider: DataStoreProvider
+   // lateinit var dataStoreProvider: DataStoreProvider
     private var guestModeNotificationUi: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         subscribeToNetworkLiveData()
-        dataStoreProvider = DataStoreProvider(requireContext())
+       // dataStoreProvider = DataStoreProvider(requireContext())
 
-        GlobalScope.launch {
-            val guestMode = dataStoreProvider.guestModeFlow.first()
-            if (guestMode) {
-                guestModeNotificationUi = true
-                Timber.d("Guest Mode On")
-            } else {
-                guestModeNotificationUi = false
-                mViewModel.hitGetNotificationApi()
-                Timber.d("Guest Mode Off")
-            }
+
+            GlobalScope.launch {
+                val guestMode = mViewModel.dataStoreProvider.guestModeFlow.first()
+                if (guestMode) {
+                    guestModeNotificationUi = true
+                    Timber.d("Guest Mode On")
+                } else if (!guestMode) {
+                    guestModeNotificationUi = false
+                    mViewModel.hitGetNotificationApi()
+                    Timber.d("Guest Mode Off")
+                }
         }
+
 
     }
 
@@ -79,8 +84,10 @@ class NotificationFragment :
         initializing()
         if (guestModeNotificationUi) {
             ll_notificationsGuest.visibility = View.VISIBLE
-        }else{
-            if(notificationDataList.isEmpty()){
+            ll_no_notifications.visibility = View.GONE
+        } else {
+            ll_notificationsGuest.visibility = View.GONE
+            if (notificationDataList.isEmpty()) {
                 ll_no_notifications.visibility = View.VISIBLE
             }
         }
@@ -116,8 +123,9 @@ class NotificationFragment :
                             }
                             "vendor" -> {
                                 Timber.d("Move to the Vendor Profile")
-                               // sharedViewModel.postId = notificationResponseData.path_id.toInt()
-                                sharedViewModel.vendorHomeScreenData = GetHomeScreenData(notificationResponseData.path_id.toInt(),"","","","",
+                                // sharedViewModel.postId = notificationResponseData.path_id.toInt()
+                                sharedViewModel.vendorHomeScreenData = GetHomeScreenData(
+                                    notificationResponseData.path_id.toInt(), "", "", "", "",
                                     arrayListOf<GetHomeScreenPostsData>()
                                 )
                                 Navigation.findNavController(mView)
@@ -138,6 +146,7 @@ class NotificationFragment :
         val intent = Intent(activity, SignupActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         startActivity(intent)
+
 
     }
 
@@ -179,10 +188,8 @@ class NotificationFragment :
         })
 
         mViewModel.onSignInButtonClicked.observe(this, Observer {
-            GlobalScope.launch {
-                dataStoreProvider.guestMode(false)
-                navigateToLoginScreen()
-            }
+
+            navigateToLoginScreen()
 
         })
     }
