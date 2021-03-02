@@ -351,7 +351,23 @@ class PostDetailFragment : BaseFragment<FragmentPostDetailBinding, PostDetailFra
         tv_totalLikes.text =
             it.data.post.total_likes.toString() + " " + getString(R.string.tv_likes)
         tv_time.text = getString(R.string.tv_cooking_time_is) + " : " + it.data.post.cooking_time
+
         mLikeButton.isLiked = it.data.post.is_favourite
+        if (it.data.post.is_save) {
+            img_SavePost.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.icon_savedpost
+                )
+            )
+        } else {
+            img_SavePost.setImageDrawable(
+                ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.img_savepost
+                )
+            )
+        }
 
         sharedViewModel.isCommentsAreOnOrOff.value = it.data.post.allow_comments
     }
