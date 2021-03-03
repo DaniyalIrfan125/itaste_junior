@@ -20,7 +20,7 @@
     <color name="color_darkGrey">#707070</color>
     <color name="mainBackground" >#1a1a1a</color>
     <color name="LoginBackground" >#BE000000</color>
-    <color name="loadingLayoutBackground" >#000000</color>
+    <color name="loadingLayoutBackground" >#303030</color>
 
 
 

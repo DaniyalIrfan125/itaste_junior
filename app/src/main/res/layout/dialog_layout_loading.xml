@@ -13,6 +13,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
-        android:background="@color/LoginBackground"
+        android:background="@color/loadingLayoutBackground"
         app:SpinKit_Color="@color/colorOrange" />
 </androidx.cardview.widget.CardView>
