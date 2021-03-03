@@ -79,6 +79,14 @@ class ProfileFragment : BaseFragment<LayoutProfilefragmentBinding, ProfileViewMo
             } else {
                 ll_update_payment.visibility = View.GONE
                 ll_message_follow_button.visibility = View.VISIBLE
+                /*if(loginSession.data.is_payment_update){
+                    ll_update_payment.visibility = View.GONE
+                    ll_message_follow_button.visibility = View.VISIBLE
+                }else{
+                    ll_update_payment.visibility = View.VISIBLE
+                    ll_message_follow_button.visibility = View.GONE
+                }*/
+
             }
         }
 
